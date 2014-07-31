@@ -16,8 +16,7 @@
     <version>0.6.6-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>contrib-parent</name>
-    <description>Drop-in extensions for artemis-odb. Prefab systems, components, networking, maybe even events!
-    </description>
+    <description>Drop-in extensions for artemis-odb. Prefab systems, components, networking, maybe even events!</description>
     <url>https://github.com/DaanVanYperen/artemis-odb-contrib</url>
 
     <properties>
@@ -70,6 +69,7 @@
 
     <modules>
         <module>contrib-components</module>
+        <module>contrib-components-libgdx</module>
     </modules>
 
     <profiles>

@@ -7,16 +7,21 @@
         <artifactId>contrib-parent</artifactId>
         <version>0.6.6-SNAPSHOT</version>
     </parent>
-    <artifactId>contrib-components</artifactId>
+    <artifactId>contrib-components-libgdx</artifactId>
     <packaging>jar</packaging>
-    <name>contrib-components</name>
-    <description>Generic prefab systems and components.</description>
+    <name>contrib-components-libgdx</name>
+    <description>Libgdx specific prefab systems and components!</description>
 
     <dependencies>
         <dependency>
             <groupId>net.onedaybeard.artemis</groupId>
             <artifactId>artemis-odb</artifactId>
             <version>0.6.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-backend-gwt</artifactId>
+            <version>1.2.0</version>
         </dependency>
     </dependencies>
 
