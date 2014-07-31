@@ -23,6 +23,11 @@
             <artifactId>gdx-backend-gwt</artifactId>
             <version>1.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>net.mostlyoriginal.artemis-odb</groupId>
+            <artifactId>contrib-components</artifactId>
+            <version>0.6.6-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

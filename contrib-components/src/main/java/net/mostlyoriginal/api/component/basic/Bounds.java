@@ -1,7 +1,6 @@
 package net.mostlyoriginal.api.component.basic;
 
 import com.artemis.Component;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.io.Serializable;
 
@@ -33,11 +32,12 @@ public class Bounds extends Component implements Serializable {
         this.maxy = maxy;
     }
 
+    /* @todo port this to libgdx helper.
     public Bounds(TextureRegion region) {
         this.minx = this.maxx =0;
         this.maxx = region.getRegionWidth();
         this.maxy = region.getRegionHeight();
-    }
+    }*/
 
     public Bounds() {
     }
