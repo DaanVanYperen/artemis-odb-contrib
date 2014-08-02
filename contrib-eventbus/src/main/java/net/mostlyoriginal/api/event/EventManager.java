@@ -15,24 +15,39 @@ import java.util.List;
  */
 public class EventManager extends Manager {
 
-    private EventDispatchStrategy dispatcher;
+    private EventDispatchStrategy dispatcherStrategy;
+    private ListenerFinderStrategy listenerFinderStrategy;
+
+    /**
+     * Init EventManager with default strategies.
+     */
+    public EventManager()
+    {
+        this(new BasicEventDispatcher(), new SubscribeAnnotationFinder());
+    }
+
+    /**
+     * Init EventManager with custom strategies.
+     * @param dispatcherStrategy Strategy to use for dispatching events.
+     * @param listenerFinderStrategy Strategy to use for finding listeners on objects.
+     */
+    public EventManager(EventDispatchStrategy dispatcherStrategy, ListenerFinderStrategy listenerFinderStrategy) {
+        this.dispatcherStrategy = dispatcherStrategy;
+        this.listenerFinderStrategy = listenerFinderStrategy;
+    }
 
     @Override
     protected void initialize() {
-        dispatcher = newDispatcher();
         // register events for all systems and managers.
         registerAllSystemEvents();
         registerAllManagerEvents();
     }
 
-    protected EventDispatchStrategy newDispatcher() {
-        return new BasicEventDispatcher();
-    }
-
     /** Resolve all listeners. */
     protected List<EventListener> resolveListeners( Object o )
     {
-        return new SubscribeAnnotationFinder().resolve(o);
+        listenerFinderStrategy = new SubscribeAnnotationFinder();
+        return listenerFinderStrategy.resolve(o);
     }
 
     /** Register all @Subscribe listeners in passed object (typically system, manager). */
@@ -44,7 +59,7 @@ public class EventManager extends Manager {
     /** Synchronously dispatch the event */
     public void dispatch( Event event )
     {
-        dispatcher.dispatch(event);
+        dispatcherStrategy.dispatch(event);
     }
 
 
@@ -52,7 +67,7 @@ public class EventManager extends Manager {
     private void registerAll ( List<EventListener> listeners )
     {
         for (EventListener listener : listeners) {
-            dispatcher.register(listener);
+            dispatcherStrategy.register(listener);
         }
     }
 
