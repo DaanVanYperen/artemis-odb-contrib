@@ -16,7 +16,6 @@
         <dependency>
             <groupId>net.onedaybeard.artemis</groupId>
             <artifactId>artemis-odb</artifactId>
-            <version>0.6.5</version>
         </dependency>
     </dependencies>
 
