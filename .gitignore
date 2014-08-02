@@ -2,3 +2,4 @@
 *.iml
 /contrib-components/target
 /contrib-components-libgdx/target
+/contrib-eventbus/target
