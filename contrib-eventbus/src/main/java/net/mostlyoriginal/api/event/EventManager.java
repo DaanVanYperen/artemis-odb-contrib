@@ -46,7 +46,6 @@ public class EventManager extends Manager {
     /** Resolve all listeners. */
     protected List<EventListener> resolveListeners( Object o )
     {
-        listenerFinderStrategy = new SubscribeAnnotationFinder();
         return listenerFinderStrategy.resolve(o);
     }
 
