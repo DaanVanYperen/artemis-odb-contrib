@@ -54,8 +54,25 @@
             </dependency>
             <dependency>
                 <groupId>net.onedaybeard.artemis</groupId>
+                <artifactId>artemis-odb-gwt</artifactId>
+                <version>0.6.6-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>net.onedaybeard.artemis</groupId>
                 <artifactId>artemis-odb</artifactId>
                 <version>0.6.6-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>net.onedaybeard.artemis</groupId>
+                <artifactId>artemis-odb-gwt</artifactId>
+                <version>0.6.6-SNAPSHOT</version>
+                <classifier>sources</classifier>
+            </dependency>
+            <dependency>
+                <groupId>net.onedaybeard.artemis</groupId>
+                <artifactId>artemis-odb</artifactId>
+                <version>0.6.6-SNAPSHOT</version>
+                <classifier>sources</classifier>
             </dependency>
             <dependency>
                 <groupId>com.badlogicgames.gdx</groupId>
@@ -84,9 +101,16 @@
         <module>contrib-components</module>
         <module>contrib-components-libgdx</module>
         <module>contrib-eventbus</module>
+        <module>contrib-test-gwt</module>
     </modules>
 
     <profiles>
+
+       <profile>
+          <id>contrib-test-gwt</id>
+          <modules><module>contrib-test-gwt</module></modules>
+       </profile>
+
         <profile>
             <id>release</id>
             <build>

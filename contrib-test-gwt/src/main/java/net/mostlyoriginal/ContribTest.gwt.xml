@@ -1,0 +1,11 @@
+<module rename-to='html'>
+
+  <inherits name='com.artemis.backends.artemis_backends_gwt' />
+
+  <source path='gwt'/>
+
+  <!-- This can be used to make CssResource produce human-readable CSS -->
+  <!--<set-configuration-property name="CssResource.style" value="pretty" />-->
+
+  <entry-point class='net.mostlyoriginal.gwt.ContribTest'/>
+</module>
