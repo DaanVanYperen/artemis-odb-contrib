@@ -13,7 +13,7 @@ public class GwtContribTestSuite extends TestCase {
 
     public static Test suite() {
       GWTTestSuite suite = new GWTTestSuite("Tests for artemis-odb-contrib.");
-      suite.addTestSuite(MyTest.class);
+      suite.addTestSuite(BasicArtemisTest.class);
       return suite;
     }
 }

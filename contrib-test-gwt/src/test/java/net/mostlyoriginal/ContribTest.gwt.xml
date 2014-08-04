@@ -1,9 +1,0 @@
-<module rename-to='html'>
-
-  <inherits name="com.google.gwt.junit.JUnit"/>
-  <inherits name='com.artemis.backends.artemis_backends_gwt' />
-
-  <source path='gwt'/>
-
-  <entry-point class='net.mostlyoriginal.gwt.ContribTest'/>
-</module>
