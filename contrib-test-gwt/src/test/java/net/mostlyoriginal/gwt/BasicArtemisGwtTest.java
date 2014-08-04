@@ -8,7 +8,7 @@ import net.mostlyoriginal.gwt.system.CountingTestSystem;
 /**
  * @author Daan van Yperen
  */
-public class BasicArtemisTest extends GWTTestCase {
+public class BasicArtemisGwtTest extends GWTTestCase {
 
     @Override
     public String getModuleName() {
