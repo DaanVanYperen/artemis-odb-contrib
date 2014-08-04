@@ -13,11 +13,25 @@
     <description>Test contrib functionality under gwt.</description>
 
     <properties>
-      <gwt.module>net.mostlyoriginal.ContribTest</gwt.module>
-      <gwt.name>html</gwt.name>
+        <gwt.module>net.mostlyoriginal.ContribTest</gwt.module>
+        <gwt.name>ContribTest</gwt.name>
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <classifier>sources</classifier>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>net.onedaybeard.artemis</groupId>
             <artifactId>artemis-odb</artifactId>
@@ -65,27 +79,26 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <plugins>
+
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>8.0.0.v20110901</version>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.6</version>
                 <configuration>
-                    <webApp>
-                        ${project.basedir}/target/${project.artifactId}-${project.version}
-                    </webApp>
+                    <additionalClasspathElements>
+                        <additionalClasspathElement>${project.build.sourceDirectory}</additionalClasspathElement>
+                        <additionalClasspathElement>${project.build.testSourceDirectory}</additionalClasspathElement>
+                    </additionalClasspathElements>
+                    <useManifestOnlyJar>false</useManifestOnlyJar>
+                    <forkMode>always</forkMode>
+                    <systemProperties>
+                        <property>
+                            <name>gwt.args</name>
+                            <value>-out ${webAppDirectory}</value>
+                        </property>
+                    </systemProperties>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>test-html</id>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>run-exploded</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
@@ -99,9 +112,8 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>prepare-package</phase>
                         <goals>
-                            <goal>compile</goal>
+                            <goal>test</goal>
                         </goals>
                     </execution>
                 </executions>

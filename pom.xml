@@ -53,6 +53,13 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.11</version>
+                <classifier>sources</classifier>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>net.onedaybeard.artemis</groupId>
                 <artifactId>artemis-odb-gwt</artifactId>
                 <version>0.6.6-SNAPSHOT</version>
