@@ -1,5 +1,6 @@
-<module rename-to='html'>
+<module>
 
+  <inherits name="com.google.gwt.user.User" />
   <inherits name="com.google.gwt.junit.JUnit"/>
   <inherits name='com.artemis.backends.artemis_backends_gwt' />
 

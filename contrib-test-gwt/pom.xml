@@ -26,13 +26,6 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <classifier>sources</classifier>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>net.onedaybeard.artemis</groupId>
             <artifactId>artemis-odb</artifactId>
         </dependency>
@@ -42,13 +35,6 @@
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-user</artifactId>
             <version>2.6.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-dev</artifactId>
-            <version>2.6.0</version>
-            <scope>provided</scope>
         </dependency>
         <!-- / Explicitly include GWT 2.6.0 -->
 
@@ -101,6 +87,10 @@
                     <enableClosureCompiler>true</enableClosureCompiler>
                     <disableClassMetadata>false</disableClassMetadata>
                     <disableCastChecking>true</disableCastChecking>
+                    <testTimeOut>1800</testTimeOut>
+                    <productionMode>true</productionMode>
+                    <htmlunit>IE8</htmlunit>
+                    <mode>htmlunit</mode>
                 </configuration>
                 <executions>
                     <execution>
