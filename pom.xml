@@ -101,6 +101,7 @@
         <module>contrib-components-libgdx</module>
         <module>contrib-eventbus</module>
         <module>contrib-test-gwt</module>
+        <module>contrib-network</module>
     </modules>
 
 
