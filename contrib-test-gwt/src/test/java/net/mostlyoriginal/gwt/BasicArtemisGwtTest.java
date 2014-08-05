@@ -7,6 +7,8 @@ import com.google.gwt.junit.client.GWTTestCase;
 import net.mostlyoriginal.gwt.system.CountingTestSystem;
 
 /**
+ * Basic sanity checks. Are these tests running under gwt?
+ *
  * @author Daan van Yperen
  */
 public class BasicArtemisGwtTest extends GWTTestCase {

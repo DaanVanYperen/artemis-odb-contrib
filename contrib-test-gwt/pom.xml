@@ -20,6 +20,19 @@
     <dependencies>
 
         <dependency>
+            <groupId>net.mostlyoriginal.artemis-odb</groupId>
+            <artifactId>contrib-eventbus</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.mostlyoriginal.artemis-odb</groupId>
+            <artifactId>contrib-eventbus</artifactId>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
