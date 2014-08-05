@@ -1,0 +1,6 @@
+<module rename-to="net.mostlyoriginal.ContribComponents">
+    <source path="api"/>
+    <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.api.component" />
+    <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.api.system" />
+    <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.api.utils" />
+</module>

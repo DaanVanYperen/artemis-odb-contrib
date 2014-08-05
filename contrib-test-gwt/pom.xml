@@ -21,8 +21,16 @@
 
         <dependency>
             <groupId>net.mostlyoriginal.artemis-odb</groupId>
-            <artifactId>contrib-eventbus</artifactId>
+            <artifactId>contrib-components</artifactId>
             <version>${project.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>net.mostlyoriginal.artemis-odb</groupId>
+            <artifactId>contrib-components-libgdx</artifactId>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
         </dependency>
 
         <dependency>
@@ -30,6 +38,24 @@
             <artifactId>contrib-eventbus</artifactId>
             <version>${project.version}</version>
             <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>net.mostlyoriginal.artemis-odb</groupId>
+            <artifactId>contrib-components</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.mostlyoriginal.artemis-odb</groupId>
+            <artifactId>contrib-components-libgdx</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.mostlyoriginal.artemis-odb</groupId>
+            <artifactId>contrib-eventbus</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
