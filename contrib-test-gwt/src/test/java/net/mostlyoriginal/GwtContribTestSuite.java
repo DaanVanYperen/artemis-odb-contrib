@@ -4,6 +4,7 @@ import com.google.gwt.junit.tools.GWTTestSuite;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import net.mostlyoriginal.gwt.BasicArtemisGwtTest;
+import net.mostlyoriginal.gwt.InterSystemEventGwtTest;
 import net.mostlyoriginal.gwt.SubscribeAnnotationFinderGwtTest;
 
 /**
@@ -26,7 +27,8 @@ public class GwtContribTestSuite extends TestCase {
     private static Class<? extends TestCase>[] tests = new Class[]{
 
             BasicArtemisGwtTest.class,
-            SubscribeAnnotationFinderGwtTest.class
+            SubscribeAnnotationFinderGwtTest.class,
+            InterSystemEventGwtTest.class
     };
 
     public static Test suite() {
