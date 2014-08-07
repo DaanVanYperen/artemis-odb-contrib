@@ -18,7 +18,7 @@ with gwt support, check out these instead:
 - [playn-artemis-quickstart](https://github.com/DaanVanYperen/playn-artemis-quickstart)
 
 ### Library Versions
-Artemis-ODB 0.6.5-SNAPSHOT
+Artemis-ODB 0.6.6-SNAPSHOT
 
 ### License
 The primary license for this code is CC0.
