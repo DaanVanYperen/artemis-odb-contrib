@@ -45,4 +45,9 @@ public class KryonetServerMarshalStrategy extends KryonetMarshalStrategy {
             state = MarshalState.FAILED_TO_START;
         }
     }
+
+    @Override
+    public void sendToAll(Object o) {
+        ((Server)endpoint).sendToAllTCP(o);
+    }
 }

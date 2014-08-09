@@ -44,4 +44,14 @@ public class KryonetClientMarshalStrategy extends KryonetMarshalStrategy {
     public MarshalState getState() {
         return state;
     }
+
+    /**
+     * Send object to everyone.
+     * Since the client is only connected to the server, this only targets the server.
+     * @todo might want to consider if we want to send from a different perspective. (client > client)
+     */
+    @Override
+    public void sendToAll(Object o) {
+        ((Client)endpoint).sendTCP(o);
+    }
 }

@@ -9,6 +9,11 @@ import java.util.HashMap;
  * ID's in the dictionary must by unique, and match on both client
  * and server.
  *
+ * Please be aware you need to add array and field types
+ * that are part of your components as well.
+ *
+ * All classes need no arg constructors to be marshaled.
+ *
  * @author Daan van Yperen
  */
 public class MarshalDictionary {

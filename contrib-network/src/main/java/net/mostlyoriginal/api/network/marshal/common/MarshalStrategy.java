@@ -25,4 +25,7 @@ public interface MarshalStrategy {
     void stop();
 
     MarshalState getState();
+
+    /** Send objects to all connections. */
+    void sendToAll(Object o);
 }
