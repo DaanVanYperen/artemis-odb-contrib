@@ -18,4 +18,8 @@ public class Pos extends Component implements Serializable {
 
     public Pos() {
     }
+
+    public float distance(float x, float y) {
+        return 0;
+    }
 }

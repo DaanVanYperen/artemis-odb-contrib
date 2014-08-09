@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.network;
+package net.mostlyoriginal.api.network.common;
 
 /**
  * Subscription manager for network connections.

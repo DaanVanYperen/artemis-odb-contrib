@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.network;
+package net.mostlyoriginal.api.network.common;
 
 import com.artemis.Entity;
 import com.artemis.Manager;
@@ -10,8 +10,7 @@ import java.util.Map;
 
 
 /**
- * /**
- * Subscribe entities to subscriber T.
+ * Tracks subscribed entities for T.
  *
  * @param <T> Type of subscriber.
  * @author Daan van Yperen
