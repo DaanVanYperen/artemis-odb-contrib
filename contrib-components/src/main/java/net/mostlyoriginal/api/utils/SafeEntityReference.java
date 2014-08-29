@@ -25,7 +25,7 @@ public class SafeEntityReference implements EntityReference {
 
     @Override
     public boolean isActive() {
-        final boolean active = entity != null && entity.isActive() && entity.getUuid().equals(uuid);
+        final boolean active = entity != null && entity.getUuid().equals(uuid);
         if ( !active ) { entity = null; uuid = null; }
         return active;
     }
