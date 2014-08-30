@@ -1,7 +1,6 @@
 package net.mostlyoriginal.api.component.graphics;
 
 import com.artemis.Component;
-import com.badlogic.gdx.graphics.Color;
 import net.mostlyoriginal.api.Depends;
 import net.mostlyoriginal.api.component.basic.Pos;
 
@@ -19,10 +18,6 @@ public class Anim extends Component {
     /** Scale of animation */
     /* @Todo separate into own component. */
     public float scale = 1;
-
-    /** recolor */
-    /* @Todo separate into own component? */
-    public final Color color = new Color(1, 1, 1, 1);
 
     /** target layer, higher is in front, lower is behind. */
     public int layer = 0;

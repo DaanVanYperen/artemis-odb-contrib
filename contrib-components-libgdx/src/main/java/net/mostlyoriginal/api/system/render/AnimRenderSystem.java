@@ -13,6 +13,7 @@ import com.artemis.utils.ImmutableBag;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.mostlyoriginal.api.component.basic.Angle;
+import net.mostlyoriginal.api.component.graphics.Color;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.graphics.Anim;
 import net.mostlyoriginal.api.manager.AbstractAssetSystem;
@@ -32,20 +33,21 @@ import java.util.List;
 @Wire
 public class AnimRenderSystem extends EntitySystem {
 
-    private ComponentMapper<Pos> pm;
-    private ComponentMapper<Anim> sm;
-    private ComponentMapper<Angle> rm;
-    private CameraSystem cameraSystem;
-    private AbstractAssetSystem abstractAssetSystem;
+    protected ComponentMapper<Pos> mPos;
+    protected ComponentMapper<Anim> mAnim;
+    protected ComponentMapper<Color> mColor;
+    protected ComponentMapper<Angle> mAngle;
+    protected CameraSystem cameraSystem;
+    protected AbstractAssetSystem abstractAssetSystem;
 
-    private SpriteBatch batch;
-    private final List<Entity> sortedEntities = new ArrayList<Entity>();
+    protected SpriteBatch batch;
+    protected final List<Entity> sortedEntities = new ArrayList<Entity>();
     public boolean sortedDirty = false;
 
     public Comparator<Entity> layerSortComperator = new Comparator<Entity>() {
         @Override
         public int compare(Entity e1, Entity e2) {
-            return sm.get(e1).layer - sm.get(e2).layer;
+            return mAnim.get(e1).layer - mAnim.get(e2).layer;
         }
     };
 
@@ -63,7 +65,6 @@ public class AnimRenderSystem extends EntitySystem {
 
         batch.setProjectionMatrix(cameraSystem.camera.combined);
         batch.begin();
-        batch.setColor(1f, 1f, 1f, 1f);
     }
 
     @Override
@@ -86,13 +87,20 @@ public class AnimRenderSystem extends EntitySystem {
 
     protected void process(final Entity entity) {
 
-        final Anim anim = sm.get(entity);
-        final Pos pos = pm.get(entity);
-        final Angle angle = rm.has(entity) ? rm.get(entity) : Angle.NONE;
+        final Anim anim = mAnim.get(entity);
+        final Pos pos = mPos.get(entity);
+        final Angle angle = mAngle.has(entity) ? mAngle.get(entity) : Angle.NONE;
 
         anim.age += world.delta * anim.speed;
 
-        batch.setColor( anim.color );
+        if ( mColor.has(entity) )
+        {
+            final Color color = mColor.get(entity);
+            batch.setColor(color.r, color.g, color.b, color.a);
+        } else {
+            batch.setColor(1f,1f,1f,1f);
+        }
+
         drawAnimation(anim, angle, pos, anim.id);
     }
 
