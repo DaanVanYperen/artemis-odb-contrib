@@ -10,6 +10,7 @@ import com.artemis.Component;
  * @author Daan van Yperen
  */
 public class Color extends Component {
+
     public float r;
     public float g;
     public float b;

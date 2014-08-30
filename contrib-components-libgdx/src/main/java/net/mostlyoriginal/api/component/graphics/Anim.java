@@ -41,6 +41,11 @@ public class Anim extends Component {
         this.layer = layer;
     }
 
+    public Anim(int layer)
+    {
+        this.layer=layer;
+    }
+
     public Anim() {
     }
 }
