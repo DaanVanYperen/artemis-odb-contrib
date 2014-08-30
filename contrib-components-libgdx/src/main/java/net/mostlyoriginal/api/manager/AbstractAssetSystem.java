@@ -55,7 +55,9 @@ public class AbstractAssetSystem extends VoidEntitySystem {
             }
         }
 
-        return sprites.put(identifier, new Animation(frameDuration, regions));
+        final Animation value = new Animation(frameDuration, regions);
+        sprites.put(identifier, value);
+        return value;
     }
 
     @Override
