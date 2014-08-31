@@ -1,16 +1,12 @@
 package net.mostlyoriginal.api.component.graphics;
 
 import com.artemis.Component;
-import net.mostlyoriginal.api.Depends;
-import net.mostlyoriginal.api.component.basic.Pos;
 
 /**
- * Entity displays a depth sorted animation.
+ * Animations.
  *
  * @author Daan van Yperen
- * @see net.mostlyoriginal.api.system.render.AnimRenderSystem
  */
-@Depends(Pos.class)
 public class Anim extends Component {
 
     public boolean flippedX; // flip animation, should not affect rotation.
@@ -19,8 +15,6 @@ public class Anim extends Component {
     /* @Todo separate into own component. */
     public float scale = 1;
 
-    /** target layer, higher is in front, lower is behind. */
-    public int layer = 0;
     /** Playback speed factor. */
     public float speed = 1;
     /** Animation progression */
@@ -31,19 +25,11 @@ public class Anim extends Component {
     /** Animation identifier. */
     /** write asset resolver */
     public String id;
+    // @todo please oh please clean this up!
+    public String id2;
 
     public Anim(String id) {
         this.id = id;
-    }
-
-    public Anim(String id, int layer) {
-        this.id = id;
-        this.layer = layer;
-    }
-
-    public Anim(int layer)
-    {
-        this.layer=layer;
     }
 
     public Anim() {
