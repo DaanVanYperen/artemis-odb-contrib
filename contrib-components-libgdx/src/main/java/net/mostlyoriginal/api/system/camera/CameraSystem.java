@@ -13,11 +13,13 @@ public class CameraSystem extends VoidEntitySystem {
 
     public final OrthographicCamera camera;
     public final OrthographicCamera guiCamera;
+    public final float zoom;
 
     /**
      * @param zoom How much
      */
     public CameraSystem( float zoom ) {
+        this.zoom = zoom;
 
         float zoomFactorInverter = 1f/zoom;
 
