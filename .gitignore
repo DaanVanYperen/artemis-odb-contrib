@@ -1,9 +1,10 @@
 /.idea
 *.iml
-/contrib-components/target
-/contrib-components-libgdx/target
-/contrib-eventbus/target
 /contrib-test-gwt/${webAppDirectory}
 /contrib-test-gwt/gwt-unitCache
-/contrib-test-gwt/target
 /contrib-test-gwt/war
+target/
+.classpath
+.project
+.settings/
+
