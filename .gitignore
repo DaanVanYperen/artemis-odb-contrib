@@ -7,3 +7,5 @@
 /contrib-test-gwt/gwt-unitCache
 /contrib-test-gwt/target
 /contrib-test-gwt/war
+/contrib-network/target
+/target
