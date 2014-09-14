@@ -3,13 +3,12 @@ package net.mostlyoriginal.api.component.physics;
 import com.artemis.Component;
 import net.mostlyoriginal.api.Depends;
 import net.mostlyoriginal.api.component.basic.Pos;
-import net.mostlyoriginal.api.utils.EntityReference;
+import net.mostlyoriginal.api.utils.reference.EntityReference;
 
 /**
  * Entity positions itself somewhere between two target entities.
  *
  * @author Daan van Yperen
- * @see net.mostlyoriginal.api.system.physics.InbetweenSystem
  */
 @Depends(Pos.class)
 public class Inbetween extends Component {

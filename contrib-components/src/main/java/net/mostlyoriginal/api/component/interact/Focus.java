@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.component.interact;
 
 import com.artemis.Component;
-import net.mostlyoriginal.api.utils.EntityReference;
+import net.mostlyoriginal.api.utils.reference.EntityReference;
 
 /**
  * Focus of entity (for example, focus for aggression).

@@ -22,7 +22,6 @@ import com.artemis.utils.ImmutableBag;
  * methods whenever desired.
  *
  * @author Daan van Yperen
- * @see net.mostlyoriginal.api.system.graphics.RenderBatchingSystem
  * @see net.mostlyoriginal.api.system.delegate.EntityProcessAgent
  * @see EntityProcessPrincipal
  */

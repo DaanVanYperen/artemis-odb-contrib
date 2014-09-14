@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.utils;
+package net.mostlyoriginal.api.utils.reference;
 
 import com.artemis.Entity;
 
