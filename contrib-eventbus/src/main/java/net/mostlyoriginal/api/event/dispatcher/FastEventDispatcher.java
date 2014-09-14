@@ -11,7 +11,7 @@ import java.util.IdentityHashMap;
 /**
  * Faster event dispatcher.
  *
- * @Author DaanVanYperen
+ * @author DaanVanYperen
  */
 public class FastEventDispatcher implements EventDispatchStrategy {
 

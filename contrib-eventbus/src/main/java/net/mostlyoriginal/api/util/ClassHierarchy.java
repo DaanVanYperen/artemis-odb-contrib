@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.IdentityHashMap;
 
 /**
- * @Author DaanVanYperen
+ * @author DaanVanYperen
  */
 public class ClassHierarchy {
 
