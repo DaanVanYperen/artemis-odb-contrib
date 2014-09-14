@@ -7,20 +7,15 @@
         <artifactId>contrib-parent</artifactId>
         <version>0.6.6-SNAPSHOT</version>
     </parent>
-    <artifactId>contrib-components</artifactId>
+    <artifactId>contrib-core</artifactId>
     <packaging>jar</packaging>
-    <name>contrib-components</name>
-    <description>Generic prefab systems and components.</description>
+    <name>contrib-core</name>
+    <description>Utilities, abstract systems.</description>
 
     <dependencies>
         <dependency>
             <groupId>net.onedaybeard.artemis</groupId>
             <artifactId>artemis-odb</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>net.mostlyoriginal.artemis-odb</groupId>
-            <artifactId>contrib-core</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

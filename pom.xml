@@ -103,6 +103,7 @@
     </developers>
 
     <modules>
+        <module>contrib-core</module>
         <module>contrib-components</module>
         <module>contrib-components-libgdx</module>
         <module>contrib-eventbus</module>
