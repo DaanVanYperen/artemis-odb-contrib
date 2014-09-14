@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.mostlyoriginal.artemis-odb</groupId>
+    <artifactId>contrib-parent</artifactId>
+    <version>0.6.6-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>contrib-parent</name>
+    <description>Drop-in extensions for artemis-odb. Prefab systems, components, networking, maybe even events!
+    </description>
+    <url>https://github.com/DaanVanYperen/artemis-odb-contrib</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <asm.version>4.1</asm.version>
+    </properties>
+
+    <scm>
+        <url>https://github.com/DaanVanYperen/artemis-odb-contrib</url>
+        <connection>scm:git:git@github.com:DaanVanYperen/artemis-odb-contrib.git</connection>
+        <developerConnection>scm:git:git@github.com:DaanVanYperen/artemis-odb-contrib.git</developerConnection>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Creative Commons Zero (CC0) License (Version 1.0)</name>
+            <url>http://creativecommons.org/publicdomain/zero/1.0/legalcode</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <url>https://github.com/DaanVanYperen/artemis-odb-contrib/issues</url>
+        <system>GitHu+b Issues</system>
+    </issueManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.11</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+              <groupId>org.mockito</groupId>
+              <artifactId>mockito-all</artifactId>
+              <version>1.9.5</version>
+              <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.11</version>
+                <classifier>sources</classifier>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>net.onedaybeard.artemis</groupId>
+                <artifactId>artemis-odb-gwt</artifactId>
+                <version>0.6.6-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>net.onedaybeard.artemis</groupId>
+                <artifactId>artemis-odb</artifactId>
+                <version>0.6.6-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>net.onedaybeard.artemis</groupId>
+                <artifactId>artemis-odb-gwt</artifactId>
+                <version>0.6.6-SNAPSHOT</version>
+                <classifier>sources</classifier>
+            </dependency>
+            <dependency>
+                <groupId>net.onedaybeard.artemis</groupId>
+                <artifactId>artemis-odb</artifactId>
+                <version>0.6.6-SNAPSHOT</version>
+                <classifier>sources</classifier>
+            </dependency>
+            <dependency>
+                <groupId>com.badlogicgames.gdx</groupId>
+                <artifactId>gdx-backend-gwt</artifactId>
+                <version>1.3.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <developers>
+        <developer>
+            <name>Daan van Yperen</name>
+            <email>daan@mostlyoriginal.net</email>
+            <id>DaanVanYperen</id>
+            <timezone>1</timezone>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <properties>
+                <twitter>@DaanRedblade</twitter>
+            </properties>
+        </developer>
+    </developers>
+
+    <modules>
+        <module>contrib-core</module>
+        <module>contrib-components</module>
+        <module>contrib-components-libgdx</module>
+        <module>contrib-eventbus</module>
+        <module>contrib-test-gwt</module>
+    </modules>
+
+    <repositories>
+        <repository>
+            <id>artemis-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <profiles>
+
+        <profile>
+            <id>contrib-test-gwt</id>
+            <modules>
+                <module>contrib-test-gwt</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.4</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+
+        <plugins>
+            <plugin>
+              <groupId>org.sonatype.plugins</groupId>
+              <artifactId>nexus-staging-maven-plugin</artifactId>
+              <version>1.6.2</version>
+              <extensions>true</extensions>
+              <configuration>
+                <serverId>ossrh</serverId>
+                <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                <autoReleaseAfterClose>false</autoReleaseAfterClose>
+              </configuration>
+            </plugin>
+
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-source-plugin</artifactId>
+              <version>2.2.1</version>
+              <executions>
+                <execution>
+                  <id>attach-sources</id>
+                  <goals>
+                    <goal>jar-no-fork</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-javadoc-plugin</artifactId>
+              <version>2.9.1</version>
+              <executions>
+                <execution>
+                  <id>attach-javadocs</id>
+                  <goals>
+                    <goal>jar</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-gpg-plugin</artifactId>
+               <version>1.5</version>
+               <executions>
+                 <execution>
+                   <id>sign-artifacts</id>
+                   <phase>verify</phase>
+                   <goals>
+                     <goal>sign</goal>
+                   </goals>
+                 </execution>
+               </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

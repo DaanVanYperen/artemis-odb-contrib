@@ -1,0 +1,5 @@
+<module rename-to="net.mostlyoriginal.ContribEventBus">
+    <source path="api"/>
+    <inherits name="com.google.gwt.user.User" />
+    <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.api.event" />
+</module>
