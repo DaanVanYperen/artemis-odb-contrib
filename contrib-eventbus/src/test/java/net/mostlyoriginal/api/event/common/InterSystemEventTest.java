@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.event;
+package net.mostlyoriginal.api.event.common;
 
 import com.artemis.World;
 import com.artemis.annotations.Wire;

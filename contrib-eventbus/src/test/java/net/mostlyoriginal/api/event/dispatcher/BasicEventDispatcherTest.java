@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.event;
+package net.mostlyoriginal.api.event.dispatcher;
 
 import com.artemis.utils.reflect.ClassReflection;
 import com.artemis.utils.reflect.Method;
