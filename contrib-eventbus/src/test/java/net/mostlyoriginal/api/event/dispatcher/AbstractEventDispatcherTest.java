@@ -78,6 +78,27 @@ public abstract class AbstractEventDispatcherTest {
 		assertEquals(1, pojo2.calls);
 	}
 
+	@Test
+	public void Dispatch_RegisterListenerTwice_NotCalledTwice() {
+
+		// Create doubled up event listeners.
+		final SingleListenPojo pojo = new SingleListenPojo();
+		for (Method method : ClassReflection.getMethods(SingleListenPojo.class)) {
+
+			// do not register superclass methods.
+			if ( !method.getDeclaringClass().equals(SingleListenPojo.class) )
+				continue;
+
+			// register methods twice.
+			EventListener listener = new EventListener(pojo, method);
+			dispatcher.register(listener);
+			dispatcher.register(listener);
+		}
+
+		dispatcher.dispatch(new ExtendedEvent());
+		assertEquals(1, pojo.calls);
+	}
+
     @Test
     public void Dispatch_MismatchingEvents_ListenerDoesNotReceiveEvent() {
         final SingleListenPojo pojo = setupListenerPojo(SingleListenPojo.class);

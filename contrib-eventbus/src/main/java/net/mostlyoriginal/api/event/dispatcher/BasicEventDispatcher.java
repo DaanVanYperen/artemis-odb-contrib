@@ -25,7 +25,9 @@ public class BasicEventDispatcher implements EventDispatchStrategy {
     @Override
     public void register( EventListener listener )
     {
-        listeners.add(listener);
+        if ( !listeners.contains(listener) ) {
+	        listeners.add(listener);
+        }
     }
 
     /** Dispatch event to registered listeners. */
