@@ -24,6 +24,7 @@ public class EventListener {
         method.setAccessible(true);
         if ( method.getParameterTypes().length != 1 ) throw new IllegalArgumentException("Listener methods must have exactly one parameter.");
 	    this.parameterType = ReflectionHelper.getFirstParameterType(method);
+	    if ( parameterType == Event.class ) throw new IllegalArgumentException("Parameter class cannot be Event, must be subclass.");
 	    if ( !ClassReflection.isAssignableFrom(Event.class, parameterType)) throw new IllegalArgumentException("Invalid parameter class. Listener method parameter must extend "+ Event.class.getName()+".");
         this.object = object;
         this.method = method;

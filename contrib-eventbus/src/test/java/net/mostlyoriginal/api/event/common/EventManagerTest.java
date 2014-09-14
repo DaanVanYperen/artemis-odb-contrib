@@ -30,14 +30,16 @@ public class EventManagerTest {
         // no exception is good!
     }
 
-    public static class SimpleEvent implements Event {
-    }
+	public static class BasicEvent implements Event {
+	}
+	public static class SimpleEvent extends BasicEvent {
+	}
 
     public static class SimplePojo {
         public int count;
 
         @Subscribe
-        public void testListener(Event event) {
+        public void testListener(BasicEvent event) {
             count++;
         }
     }
@@ -46,7 +48,7 @@ public class EventManagerTest {
         public int count;
 
         @Subscribe
-        public void testListener(Event event) {
+        public void testListener(BasicEvent event) {
             count++;
         }
     }
@@ -55,7 +57,7 @@ public class EventManagerTest {
         public int count;
 
         @Subscribe
-        public void testListener(Event event) {
+        public void testListener(BasicEvent event) {
             count++;
         }
 
