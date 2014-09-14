@@ -1,8 +1,11 @@
-package net.mostlyoriginal.api.event;
+package net.mostlyoriginal.api.event.dispatcher;
 
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 import com.artemis.utils.reflect.ClassReflection;
+import net.mostlyoriginal.api.event.common.Event;
+import net.mostlyoriginal.api.event.common.EventDispatchStrategy;
+import net.mostlyoriginal.api.event.common.EventListener;
 import net.mostlyoriginal.api.util.ReflectionHelper;
 
 /**
@@ -22,7 +25,9 @@ public class BasicEventDispatcher implements EventDispatchStrategy {
     @Override
     public void register( EventListener listener )
     {
-        listeners.add(listener);
+        if ( !listeners.contains(listener) ) {
+	        listeners.add(listener);
+        }
     }
 
     /** Dispatch event to registered listeners. */

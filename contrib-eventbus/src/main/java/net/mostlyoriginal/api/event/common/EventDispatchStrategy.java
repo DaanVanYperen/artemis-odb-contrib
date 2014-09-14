@@ -1,10 +1,10 @@
-package net.mostlyoriginal.api.event;
+package net.mostlyoriginal.api.event.common;
 
 /**
  * Listener registration and event dispatch.
  *
  * Wrapper for the complete listener registration and event dispatching
- * strategy used by {@link net.mostlyoriginal.api.event.EventManager}.
+ * strategy used by {@link EventManager}.
  *
  * Make sure your strategy supports multiple instances if you want to run
  * multiple artemis worlds in parallel.

@@ -1,11 +1,10 @@
 package net.mostlyoriginal.gwt;
 
 import com.google.gwt.junit.client.GWTTestCase;
-import net.mostlyoriginal.api.event.EventListener;
-import net.mostlyoriginal.api.event.SubscribeAnnotationFinder;
+import net.mostlyoriginal.api.event.common.EventListener;
+import net.mostlyoriginal.api.event.common.SubscribeAnnotationFinder;
 import net.mostlyoriginal.gwt.system.EmptyTestSystem;
 import net.mostlyoriginal.gwt.system.SubscribeAnnotationTestSystem;
-import org.junit.Test;
 
 import java.util.List;
 

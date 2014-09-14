@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.event;
+package net.mostlyoriginal.api.event.common;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

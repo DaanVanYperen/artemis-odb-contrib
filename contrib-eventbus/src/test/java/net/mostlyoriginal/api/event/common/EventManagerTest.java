@@ -1,8 +1,11 @@
-package net.mostlyoriginal.api.event;
+package net.mostlyoriginal.api.event.common;
 
 import com.artemis.Manager;
 import com.artemis.World;
 import com.artemis.systems.VoidEntitySystem;
+import net.mostlyoriginal.api.event.common.Event;
+import net.mostlyoriginal.api.event.common.EventManager;
+import net.mostlyoriginal.api.event.common.Subscribe;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,14 +30,16 @@ public class EventManagerTest {
         // no exception is good!
     }
 
-    public static class SimpleEvent implements Event {
-    }
+	public static class BasicEvent implements Event {
+	}
+	public static class SimpleEvent extends BasicEvent {
+	}
 
     public static class SimplePojo {
         public int count;
 
         @Subscribe
-        public void testListener(Event event) {
+        public void testListener(BasicEvent event) {
             count++;
         }
     }
@@ -43,7 +48,7 @@ public class EventManagerTest {
         public int count;
 
         @Subscribe
-        public void testListener(Event event) {
+        public void testListener(BasicEvent event) {
             count++;
         }
     }
@@ -52,7 +57,7 @@ public class EventManagerTest {
         public int count;
 
         @Subscribe
-        public void testListener(Event event) {
+        public void testListener(BasicEvent event) {
             count++;
         }
 

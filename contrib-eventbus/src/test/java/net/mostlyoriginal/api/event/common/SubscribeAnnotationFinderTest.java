@@ -1,5 +1,9 @@
-package net.mostlyoriginal.api.event;
+package net.mostlyoriginal.api.event.common;
 
+import net.mostlyoriginal.api.event.common.Event;
+import net.mostlyoriginal.api.event.common.EventListener;
+import net.mostlyoriginal.api.event.common.Subscribe;
+import net.mostlyoriginal.api.event.common.SubscribeAnnotationFinder;
 import org.junit.Test;
 
 import java.util.List;
@@ -9,14 +13,15 @@ import static org.junit.Assert.assertTrue;
 
 public class SubscribeAnnotationFinderTest {
 
-    public static class Event2 implements Event {};
+	public static class BasicEvent implements Event {};
+	public static class Event2 extends  BasicEvent {};
     public static class SimpleEntitySystem {
         public int count;
         @Subscribe
-        public void testListener(Event event) { }
+        public void testListener(BasicEvent event) { }
         @Subscribe
         public void testListener2(Event2 event) { }
-        public void notARegisteredListener(Event event) { }
+        public void notARegisteredListener(BasicEvent event) { }
     }
 
     @Test

@@ -1,22 +1,28 @@
-package net.mostlyoriginal.api.event;
+package net.mostlyoriginal.api.event.dispatcher;
 
 import com.artemis.utils.reflect.ClassReflection;
 import com.artemis.utils.reflect.Method;
+import net.mostlyoriginal.api.event.common.Event;
+import net.mostlyoriginal.api.event.common.EventDispatchStrategy;
+import net.mostlyoriginal.api.event.common.EventListener;
+import net.mostlyoriginal.api.event.dispatcher.BasicEventDispatcher;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class BasicEventDispatcherTest {
+public abstract class AbstractEventDispatcherTest {
 
-    public BasicEventDispatcher dispatcher;
+    public EventDispatchStrategy dispatcher;
 
     @Before
     public void setUp() throws Exception {
-        dispatcher = new BasicEventDispatcher();
+        dispatcher = createDispatcherInstance();
     }
 
-    public static class BaseEvent implements Event {}
+	protected abstract EventDispatchStrategy createDispatcherInstance();
+
+	public static class BaseEvent implements Event {}
     public static class ExtendedEvent extends BaseEvent {}
     public static class MismatchedEvent implements Event {}
 
@@ -60,6 +66,38 @@ public class BasicEventDispatcherTest {
         dispatcher.dispatch(new ExtendedEvent());
         assertEquals(1, pojo.calls);
     }
+
+	@Test
+	public void Dispatch_LateRegisteredListener_NoRegistrationIssues() {
+		// Make sure registering a listener late doesn't break the dispatchers.
+		final SingleListenPojo pojo = setupListenerPojo(SingleListenPojo.class);
+		dispatcher.dispatch(new ExtendedEvent());
+		final SingleListenPojo pojo2 = setupListenerPojo(SingleListenPojo.class);
+		dispatcher.dispatch(new ExtendedEvent());
+		assertEquals(2, pojo.calls);
+		assertEquals(1, pojo2.calls);
+	}
+
+	@Test
+	public void Dispatch_RegisterListenerTwice_NotCalledTwice() {
+
+		// Create doubled up event listeners.
+		final SingleListenPojo pojo = new SingleListenPojo();
+		for (Method method : ClassReflection.getMethods(SingleListenPojo.class)) {
+
+			// do not register superclass methods.
+			if ( !method.getDeclaringClass().equals(SingleListenPojo.class) )
+				continue;
+
+			// register methods twice.
+			EventListener listener = new EventListener(pojo, method);
+			dispatcher.register(listener);
+			dispatcher.register(listener);
+		}
+
+		dispatcher.dispatch(new ExtendedEvent());
+		assertEquals(1, pojo.calls);
+	}
 
     @Test
     public void Dispatch_MismatchingEvents_ListenerDoesNotReceiveEvent() {
