@@ -67,6 +67,17 @@ public abstract class AbstractEventDispatcherTest {
         assertEquals(1, pojo.calls);
     }
 
+	@Test
+	public void Dispatch_LateRegisteredListener_NoRegistrationIssues() {
+		// Make sure registering a listener late doesn't break the dispatchers.
+		final SingleListenPojo pojo = setupListenerPojo(SingleListenPojo.class);
+		dispatcher.dispatch(new ExtendedEvent());
+		final SingleListenPojo pojo2 = setupListenerPojo(SingleListenPojo.class);
+		dispatcher.dispatch(new ExtendedEvent());
+		assertEquals(2, pojo.calls);
+		assertEquals(1, pojo2.calls);
+	}
+
     @Test
     public void Dispatch_MismatchingEvents_ListenerDoesNotReceiveEvent() {
         final SingleListenPojo pojo = setupListenerPojo(SingleListenPojo.class);
