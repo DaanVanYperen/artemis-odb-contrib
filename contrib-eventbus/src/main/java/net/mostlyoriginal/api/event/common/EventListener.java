@@ -12,8 +12,9 @@ public class EventListener {
 
     protected final Object object;
     protected final Method method;
+	protected final Class parameterType;
 
-    /**
+	/**
      * @param object
      * @param method
      */
@@ -22,7 +23,8 @@ public class EventListener {
         if (method == null) throw new NullPointerException("Method cannot be null.");
         method.setAccessible(true);
         if ( method.getParameterTypes().length != 1 ) throw new IllegalArgumentException("Listener methods must have exactly one parameter.");
-        if ( !ClassReflection.isAssignableFrom(Event.class, ReflectionHelper.getFirstParameterType(method))) throw new IllegalArgumentException("Invalid parameter class. Listener method parameter must extend "+ Event.class.getName()+".");
+	    this.parameterType = ReflectionHelper.getFirstParameterType(method);
+	    if ( !ClassReflection.isAssignableFrom(Event.class, parameterType)) throw new IllegalArgumentException("Invalid parameter class. Listener method parameter must extend "+ Event.class.getName()+".");
         this.object = object;
         this.method = method;
     }
@@ -44,4 +46,8 @@ public class EventListener {
     public Method getMethod() {
         return method;
     }
+
+	public Class getParameterType() {
+		return parameterType;
+	}
 }

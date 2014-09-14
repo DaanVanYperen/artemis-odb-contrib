@@ -22,6 +22,11 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>net.mostlyoriginal.artemis-odb</groupId>
+            <artifactId>contrib-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
