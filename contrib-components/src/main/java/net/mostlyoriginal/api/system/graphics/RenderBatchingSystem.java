@@ -129,7 +129,7 @@ public class RenderBatchingSystem extends EntitySystem implements EntityProcessP
     }
 
     /** Rendering job wrapper. */
-    protected class Job implements Comparable<Job> {
+    public class Job implements Comparable<Job> {
         public final Entity entity;
         public final EntityProcessAgent agent;
 
