@@ -3,6 +3,7 @@ package net.mostlyoriginal.api.event.common;
 import com.artemis.EntitySystem;
 import com.artemis.Manager;
 import net.mostlyoriginal.api.event.dispatcher.BasicEventDispatcher;
+import net.mostlyoriginal.api.event.dispatcher.FastEventDispatcher;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class EventManager extends Manager {
      */
     public EventManager()
     {
-        this(new BasicEventDispatcher(), new SubscribeAnnotationFinder());
+        this(new FastEventDispatcher(), new SubscribeAnnotationFinder());
     }
 
     /**
