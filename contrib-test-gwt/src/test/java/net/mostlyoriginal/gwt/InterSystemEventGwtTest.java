@@ -2,7 +2,7 @@ package net.mostlyoriginal.gwt;
 
 import com.artemis.World;
 import com.google.gwt.junit.client.GWTTestCase;
-import net.mostlyoriginal.api.event.EventManager;
+import net.mostlyoriginal.api.event.common.EventManager;
 import net.mostlyoriginal.gwt.system.DispatchTestSystem;
 import net.mostlyoriginal.gwt.system.ReceiveTestSystem;
 

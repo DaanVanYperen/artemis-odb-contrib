@@ -3,6 +3,9 @@ package net.mostlyoriginal.api.event;
 import com.artemis.Manager;
 import com.artemis.World;
 import com.artemis.systems.VoidEntitySystem;
+import net.mostlyoriginal.api.event.common.Event;
+import net.mostlyoriginal.api.event.common.EventManager;
+import net.mostlyoriginal.api.event.common.Subscribe;
 import org.junit.Before;
 import org.junit.Test;
 

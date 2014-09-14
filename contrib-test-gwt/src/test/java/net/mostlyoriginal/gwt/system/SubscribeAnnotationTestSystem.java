@@ -1,6 +1,6 @@
 package net.mostlyoriginal.gwt.system;
 
-import net.mostlyoriginal.api.event.Subscribe;
+import net.mostlyoriginal.api.event.common.Subscribe;
 
 /**
  * @author Daan van Yperen

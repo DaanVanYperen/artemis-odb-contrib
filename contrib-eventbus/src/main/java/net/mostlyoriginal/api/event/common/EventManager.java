@@ -1,7 +1,8 @@
-package net.mostlyoriginal.api.event;
+package net.mostlyoriginal.api.event.common;
 
 import com.artemis.EntitySystem;
 import com.artemis.Manager;
+import net.mostlyoriginal.api.event.dispatcher.BasicEventDispatcher;
 
 import java.util.List;
 

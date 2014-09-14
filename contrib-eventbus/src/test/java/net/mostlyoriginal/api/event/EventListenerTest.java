@@ -3,6 +3,8 @@ package net.mostlyoriginal.api.event;
 import com.artemis.utils.reflect.ClassReflection;
 import com.artemis.utils.reflect.Method;
 import com.artemis.utils.reflect.ReflectionException;
+import net.mostlyoriginal.api.event.common.Event;
+import net.mostlyoriginal.api.event.common.EventListener;
 import org.junit.Test;
 
 public class EventListenerTest {

@@ -2,7 +2,7 @@ package net.mostlyoriginal.gwt.system;
 
 import com.artemis.annotations.Wire;
 import com.artemis.systems.VoidEntitySystem;
-import net.mostlyoriginal.api.event.EventManager;
+import net.mostlyoriginal.api.event.common.EventManager;
 
 /**
 * @author Daan van Yperen

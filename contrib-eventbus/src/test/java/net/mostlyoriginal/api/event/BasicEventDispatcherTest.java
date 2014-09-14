@@ -2,6 +2,9 @@ package net.mostlyoriginal.api.event;
 
 import com.artemis.utils.reflect.ClassReflection;
 import com.artemis.utils.reflect.Method;
+import net.mostlyoriginal.api.event.common.Event;
+import net.mostlyoriginal.api.event.common.EventListener;
+import net.mostlyoriginal.api.event.dispatcher.BasicEventDispatcher;
 import org.junit.Before;
 import org.junit.Test;
 

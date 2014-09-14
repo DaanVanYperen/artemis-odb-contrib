@@ -1,7 +1,7 @@
 package net.mostlyoriginal.gwt.system;
 
 import com.artemis.systems.VoidEntitySystem;
-import net.mostlyoriginal.api.event.Subscribe;
+import net.mostlyoriginal.api.event.common.Subscribe;
 
 /**
 * @author Daan van Yperen

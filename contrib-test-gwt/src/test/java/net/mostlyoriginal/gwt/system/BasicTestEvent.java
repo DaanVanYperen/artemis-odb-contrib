@@ -1,6 +1,6 @@
 package net.mostlyoriginal.gwt.system;
 
-import net.mostlyoriginal.api.event.Event;
+import net.mostlyoriginal.api.event.common.Event;
 
 /**
  * @author Daan van Yperen
