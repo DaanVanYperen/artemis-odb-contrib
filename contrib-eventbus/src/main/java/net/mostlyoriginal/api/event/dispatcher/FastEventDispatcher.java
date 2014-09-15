@@ -12,6 +12,8 @@ import java.util.IdentityHashMap;
 /**
  * Faster event dispatcher.
  *
+ * Should suffice for most prototyping usecases.
+ *
  * @Author DaanVanYperen
  */
 public class FastEventDispatcher implements EventDispatchStrategy {
@@ -113,6 +115,10 @@ public class FastEventDispatcher implements EventDispatchStrategy {
 		return hierarchicalListeners;
 	}
 
+	/**
+	 * Dispatch event to registered listeners.
+	 * Events are called on the call stack, avoid deeply nested or circular event calls.
+	 */
 	@Override
 	public void dispatch(Event event) {
 		if ( event == null ) throw new NullPointerException("Event required.");

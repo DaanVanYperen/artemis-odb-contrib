@@ -33,7 +33,10 @@ public class BasicEventDispatcher implements EventDispatchStrategy {
         }
     }
 
-    /** Dispatch event to registered listeners. */
+    /**
+     * Dispatch event to registered listeners.
+     * Events are called on the call stack, avoid deeply nested or circular event calls.
+     */
     @Override
     public void dispatch( Event event )
     {

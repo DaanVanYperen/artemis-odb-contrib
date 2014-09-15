@@ -57,7 +57,12 @@ public class EventManager extends Manager {
         registerAll(resolveListeners(o));
     }
 
-    /** Synchronously dispatch the event */
+    /**
+     * Dispatch an event synchronously.
+     *
+     * Event is not queued but immediately dispatched synchronously. Waits for the event to return.
+     * Events are called on the call stack, avoid deeply nested or circular event calls.
+     */
     public void dispatch( Event event )
     {
         dispatcherStrategy.dispatch(event);
