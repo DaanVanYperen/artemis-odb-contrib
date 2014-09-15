@@ -19,7 +19,9 @@ public class BagUtils {
      * remove entries.
      */
     public static void sort(Bag bag) {
-        Arrays.sort(bag.getData(),0,bag.size()-1);
+	    if ( !bag.isEmpty() ) {
+		    Arrays.sort(bag.getData(), 0, bag.size());
+	    }
     }
 
 }

@@ -21,6 +21,13 @@
 
         <dependency>
             <groupId>net.mostlyoriginal.artemis-odb</groupId>
+            <artifactId>contrib-core</artifactId>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>net.mostlyoriginal.artemis-odb</groupId>
             <artifactId>contrib-components</artifactId>
             <version>${project.version}</version>
             <classifier>sources</classifier>
