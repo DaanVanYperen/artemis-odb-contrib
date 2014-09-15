@@ -7,9 +7,9 @@ import net.mostlyoriginal.api.event.common.Subscribe;
  */
 public class SubscribeAnnotationTestSystem {
         public int count;
-        @Subscribe
+        @Subscribe(priority = 5)
         public void testListener(ExtendedBasicTestEvent event) { }
-        @Subscribe
+        @Subscribe(priority = 5)
         public void testListener2(BasicTestEvent event) { }
         public void notARegisteredListener(BasicTestEvent event) { }
 }

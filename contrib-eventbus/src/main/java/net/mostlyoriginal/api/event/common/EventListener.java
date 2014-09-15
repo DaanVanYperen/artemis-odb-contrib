@@ -8,18 +8,23 @@ import net.mostlyoriginal.api.util.ReflectionHelper;
  * @author Daan van Yperen
  * @todo GWT provide method support.
  */
-public class EventListener {
+public class EventListener implements Comparable<EventListener> {
 
     protected final Object object;
     protected final Method method;
 	protected final Class parameterType;
+	protected final int priority;
 
+	public EventListener(Object object, Method method) {
+		this(object,method,0);
+	}
 	/**
      * @param object
      * @param method
      */
-    public EventListener(Object object, Method method) {
-        if (object == null) throw new NullPointerException("Object cannot be null.");
+    public EventListener(Object object, Method method, int priority) {
+	    this.priority = priority;
+	    if (object == null) throw new NullPointerException("Object cannot be null.");
         if (method == null) throw new NullPointerException("Method cannot be null.");
         method.setAccessible(true);
         if ( method.getParameterTypes().length != 1 ) throw new IllegalArgumentException("Listener methods must have exactly one parameter.");
@@ -40,15 +45,32 @@ public class EventListener {
         }
     }
 
+	/** Object that contains method. */
     public Object getObject() {
         return object;
     }
 
+	/** Method of listener. */
     public Method getMethod() {
         return method;
     }
 
+	/** Type of method parameter. */
 	public Class getParameterType() {
 		return parameterType;
+	}
+
+	/**
+	 * Priority amongst listeners.
+	 * Higher values are called earlier.
+	 */
+	public int getPriority() {
+		return priority;
+	}
+
+	@Override
+	public int compareTo(EventListener o) {
+		// Sort by priority descending.
+		return o.priority - priority;
 	}
 }

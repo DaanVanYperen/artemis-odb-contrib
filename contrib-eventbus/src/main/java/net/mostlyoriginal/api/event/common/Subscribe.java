@@ -15,4 +15,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface Subscribe {
+
+	/**
+	 * Listeners with higher priority get precedence over listeners with lower priority.
+	 */
+	public int priority() default 0;
 }

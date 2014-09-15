@@ -20,10 +20,15 @@ public class SubscribeAnnotationFinderGwtTest extends GWTTestCase {
         return "net.mostlyoriginal.ContribTest";
     }
 
-    public void test_FindListeners_MultipleListeners_ResolvesAllListeners() {
-        List<EventListener> listeners = new SubscribeAnnotationFinder().resolve(new SubscribeAnnotationTestSystem());
-        assertEquals(2, listeners.size());
-    }
+	public void test_FindListeners_MultipleListeners_ResolvesAllListeners() {
+		List<EventListener> listeners = new SubscribeAnnotationFinder().resolve(new SubscribeAnnotationTestSystem());
+		assertEquals(2, listeners.size());
+	}
+
+	public void test_FindListeners_SubscribeWithPrimitiveParameter_ResolvesParameter() {
+		List<EventListener> listeners = new SubscribeAnnotationFinder().resolve(new SubscribeAnnotationTestSystem());
+		assertEquals(5, listeners.get(0).getPriority());
+	}
 
     public void test_FindListeners_NoListeners_EmptyList() {
         List<EventListener> listeners = new SubscribeAnnotationFinder().resolve(new EmptyTestSystem());

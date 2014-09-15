@@ -20,7 +20,8 @@ public class SubscribeAnnotationFinder implements ListenerFinderStrategy {
         for (Method method : ClassReflection.getDeclaredMethods(o.getClass())) {
             if ( method.hasAnnotation(Subscribe.class))
             {
-                listeners.add(new EventListener(o, method));
+	            Subscribe subscribe = method.getAnnotation(Subscribe.class);
+	            listeners.add(new EventListener(o, method, subscribe.priority()));
             }
         }
 
