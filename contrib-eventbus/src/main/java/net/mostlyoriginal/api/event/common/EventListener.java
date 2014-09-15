@@ -92,6 +92,10 @@ public class EventListener implements Comparable<EventListener> {
 		return priority;
 	}
 
+	public boolean isSkipCancelledEvents() {
+		return skipCancelledEvents;
+	}
+
 	@Override
 	public int compareTo(EventListener o) {
 		// Sort by priority descending.
