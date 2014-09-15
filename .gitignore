@@ -1,0 +1,10 @@
+/.idea
+*.iml
+/contrib-test-gwt/${webAppDirectory}
+/contrib-test-gwt/gwt-unitCache
+/contrib-test-gwt/war
+target/
+.classpath
+.project
+.settings/
+
