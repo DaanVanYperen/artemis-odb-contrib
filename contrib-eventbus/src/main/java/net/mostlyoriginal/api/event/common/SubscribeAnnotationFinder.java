@@ -15,12 +15,13 @@ public class SubscribeAnnotationFinder implements ListenerFinderStrategy {
     /** Find all listeners in o based on @Subscribe annotation and return as EventListeners. */
     public List<EventListener> resolve(Object o) {
 
-        ArrayList<EventListener> listeners = new ArrayList<>();
+        final ArrayList<EventListener> listeners = new ArrayList<>();
 
         for (Method method : ClassReflection.getDeclaredMethods(o.getClass())) {
             if ( method.hasAnnotation(Subscribe.class))
             {
-                listeners.add(new EventListener(o, method));
+	            final Subscribe subscribe = method.getAnnotation(Subscribe.class);
+	            listeners.add(new EventListener(o, method, subscribe.priority(), subscribe.ignoreCancelledEvents()));
             }
         }
 

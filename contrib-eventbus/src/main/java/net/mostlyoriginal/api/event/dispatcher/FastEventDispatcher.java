@@ -5,6 +5,7 @@ import net.mostlyoriginal.api.event.common.Event;
 import net.mostlyoriginal.api.event.common.EventDispatchStrategy;
 import net.mostlyoriginal.api.event.common.EventListener;
 import net.mostlyoriginal.api.util.ClassHierarchy;
+import net.mostlyoriginal.api.utils.BagUtils;
 
 import java.util.IdentityHashMap;
 
@@ -17,7 +18,10 @@ public class FastEventDispatcher implements EventDispatchStrategy {
 
 	final ClassHierarchy classHierarchy = new ClassHierarchy();
 
+	/** Listeners of exact event class. Excludes superclasses. */
 	final IdentityHashMap<Class<?>, Bag<EventListener>> listenerCache = new IdentityHashMap<>();
+
+	/** Listeners flattened to include full hierarchy per calling event. */
 	final IdentityHashMap<Class<?>, Bag<EventListener>> hierarchicalListenerCache = new IdentityHashMap<>();
 
 	@Override
@@ -61,6 +65,8 @@ public class FastEventDispatcher implements EventDispatchStrategy {
 	 * Get listeners for class, including all superclasses.
 	 * Backed by cache.
 	 *
+	 * Not sorted!
+	 *
 	 * @param aClass Class to fetch listeners for.
 	 * @return Bag of listeners, empty if none found.
 	 */
@@ -68,13 +74,20 @@ public class FastEventDispatcher implements EventDispatchStrategy {
 		Bag<EventListener> listeners = hierarchicalListenerCache.get(aClass);
 		if (listeners == null) {
 			listeners = getListenersForHierarchicalUncached(aClass);
+
+			// presort the listeners by priority.
+			// Should speed things up in the case of an oft reused superclass.
+			BagUtils.sort(listeners);
+
 			hierarchicalListenerCache.put(aClass, listeners);
 		}
 		return listeners;
 	}
 
 	/**
-	 * Get listeners for class, including all superclasses.
+	 * Get listeners for class, including all superclasses,
+	 * sorted by priority.
+	 *
 	 * Not backed by cache.
 	 *
 	 * @param aClass Class to fetch listeners for.
@@ -93,6 +106,9 @@ public class FastEventDispatcher implements EventDispatchStrategy {
 				hierarchicalListeners.addAll(listeners);
 			}
 		}
+
+		// sort by priority.
+		BagUtils.sort(hierarchicalListeners);
 
 		return hierarchicalListeners;
 	}

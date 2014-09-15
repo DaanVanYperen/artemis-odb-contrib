@@ -7,6 +7,7 @@ import net.mostlyoriginal.api.event.common.Event;
 import net.mostlyoriginal.api.event.common.EventDispatchStrategy;
 import net.mostlyoriginal.api.event.common.EventListener;
 import net.mostlyoriginal.api.util.ReflectionHelper;
+import net.mostlyoriginal.api.utils.BagUtils;
 
 /**
  * Basic Listener registration and event dispatch.
@@ -20,13 +21,15 @@ import net.mostlyoriginal.api.util.ReflectionHelper;
 public class BasicEventDispatcher implements EventDispatchStrategy {
 
     final Bag<EventListener> listeners = new Bag<>(128);
+	private boolean sortDirty = false;
 
-    /** Subscribe listener to events. */
+	/** Subscribe listener to events. */
     @Override
     public void register( EventListener listener )
     {
         if ( !listeners.contains(listener) ) {
 	        listeners.add(listener);
+	        sortDirty =true;
         }
     }
 
@@ -55,7 +58,13 @@ public class BasicEventDispatcher implements EventDispatchStrategy {
 
         final Bag<EventListener> relevantListeners = new Bag<>();
 
-        // who needs efficiency! not us!
+	    // resort listeners when we need to.
+	    if (sortDirty) {
+		    sortDirty=false;
+		    BagUtils.sort(listeners);
+	    }
+
+	    // who needs efficiency! not us!
         for(int i=0, s=listeners.size(); i<s; i++) {
             final EventListener listener = listeners.get(i);
             if ( listener != null ) {
@@ -66,7 +75,7 @@ public class BasicEventDispatcher implements EventDispatchStrategy {
             }
         }
 
-        return relevantListeners;
+	    return relevantListeners;
     }
 
 
