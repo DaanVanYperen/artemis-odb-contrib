@@ -20,4 +20,10 @@ public @interface Subscribe {
 	 * Listeners with higher priority get precedence over listeners with lower priority.
 	 */
 	public int priority() default 0;
+
+
+	/**
+	 * Do not receive cancelled events?
+	 */
+	boolean ignoreCancelledEvents() default false;
 }
