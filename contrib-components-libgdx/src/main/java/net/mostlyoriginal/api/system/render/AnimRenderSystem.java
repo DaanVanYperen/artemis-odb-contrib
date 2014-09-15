@@ -14,6 +14,7 @@ import net.mostlyoriginal.api.component.basic.Angle;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.graphics.Anim;
 import net.mostlyoriginal.api.component.graphics.Color;
+import net.mostlyoriginal.api.component.graphics.Invisible;
 import net.mostlyoriginal.api.component.graphics.Renderable;
 import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
@@ -40,7 +41,7 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
     protected SpriteBatch batch;
 
     public AnimRenderSystem(EntityProcessPrincipal principal) {
-        super(Aspect.getAspectForAll(Pos.class, Anim.class, Renderable.class), principal);
+        super(Aspect.getAspectForAll(Pos.class, Anim.class, Renderable.class).exclude(Invisible.class), principal);
     }
 
     @Override
