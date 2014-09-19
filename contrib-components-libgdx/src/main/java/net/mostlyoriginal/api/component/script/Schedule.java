@@ -50,7 +50,7 @@ public class Schedule extends Component {
         return this;
     }
 
-    /** Add component to entity. Make sure to chain a call to changedInWorld after all your add/remove chains. */
+    /** Add component to entity. */
     public Schedule add( final Component component ) {
         AddStep step = prepare(AddStep.class, atAge);
         step.component = component;
@@ -58,7 +58,7 @@ public class Schedule extends Component {
         return this;
     }
 
-    /** Remove component from entity. Make sure to chain a call to changedInWorld after all your add/remove chains. */
+    /** Remove component from entity. */
     public Schedule remove( final Class<? extends Component> component ) {
         RemoveStep step = prepare(RemoveStep.class, atAge);
         step.componentClass = component;

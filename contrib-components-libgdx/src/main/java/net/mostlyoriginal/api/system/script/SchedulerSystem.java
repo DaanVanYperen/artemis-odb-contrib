@@ -42,7 +42,7 @@ public class SchedulerSystem extends EntityProcessingSystem {
         }
 
         if (schedule.steps.size == 0 && e.isActive() ) {
-            e.removeComponent(Schedule.class).changedInWorld();
+            e.edit().removeComponent(Schedule.class);
         }
     }
 }
