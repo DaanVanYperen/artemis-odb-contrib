@@ -9,7 +9,7 @@ import net.mostlyoriginal.api.component.physics.Gravity;
 import net.mostlyoriginal.api.component.physics.Physics;
 
 /**
- * Applies gravity to Entity
+ * Applies gravity on Y axis to Entity.
  *
  * @author Daan van Yperen
  * @see net.mostlyoriginal.api.component.physics.Gravity

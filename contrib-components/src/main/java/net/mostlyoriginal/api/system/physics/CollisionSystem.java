@@ -20,10 +20,8 @@ import net.mostlyoriginal.api.component.basic.Pos;
 @Wire
 public class CollisionSystem extends VoidEntitySystem {
 
-
     private ComponentMapper<Bounds> bm;
     private ComponentMapper<Pos> pm;
-
 
     public final boolean overlaps( final Entity a, final Entity b)
     {

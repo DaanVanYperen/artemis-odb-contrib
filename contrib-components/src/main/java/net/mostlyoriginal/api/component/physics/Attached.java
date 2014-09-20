@@ -14,6 +14,7 @@ import net.mostlyoriginal.api.utils.reference.EntityReference;
 public class Attached extends Component {
 
     public EntityReference parent;
+
     // xo + parent x = entity x
     public int xo;
     // yo + parent y = entity y
