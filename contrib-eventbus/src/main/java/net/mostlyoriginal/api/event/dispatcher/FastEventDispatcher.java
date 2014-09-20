@@ -4,7 +4,7 @@ import com.artemis.utils.Bag;
 import net.mostlyoriginal.api.event.common.Event;
 import net.mostlyoriginal.api.event.common.EventDispatchStrategy;
 import net.mostlyoriginal.api.event.common.EventListener;
-import net.mostlyoriginal.api.util.ClassHierarchy;
+import net.mostlyoriginal.api.utils.ClassHierarchy;
 import net.mostlyoriginal.api.utils.BagUtils;
 
 import java.util.IdentityHashMap;
