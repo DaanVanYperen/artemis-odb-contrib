@@ -5,7 +5,7 @@ import com.artemis.Component;
 /**
  * Entity should not be rendered.
  *
- * @author DaanVanYperen
+ * @author Daan van Yperen
  */
 public class Invisible extends Component {
 }
