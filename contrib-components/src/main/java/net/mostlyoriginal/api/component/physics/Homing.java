@@ -1,9 +1,6 @@
 package net.mostlyoriginal.api.component.physics;
 
 import com.artemis.Component;
-import net.mostlyoriginal.api.Depends;
-import net.mostlyoriginal.api.component.basic.Bounds;
-import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.utils.reference.EntityReference;
 
 /**
@@ -11,7 +8,6 @@ import net.mostlyoriginal.api.utils.reference.EntityReference;
  *
  * @author Daan van Yperen
  */
-@Depends(value={Pos.class}, optional = {Bounds.class})
 public class Homing extends Component {
 
     public EntityReference target;

@@ -6,7 +6,6 @@ import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.math.MathUtils;
-import net.mostlyoriginal.api.Depends;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.physics.Clamped;
@@ -23,7 +22,6 @@ import net.mostlyoriginal.api.component.physics.Physics;
  * @see net.mostlyoriginal.api.component.basic.Bounds
  */
 @Wire(injectInherited = true)
-@Depends(value={Pos.class, Clamped.class}, optional={Bounds.class})
 public class ClampedSystem extends EntityProcessingSystem {
 
     private ComponentMapper<Pos> pm;
@@ -35,6 +33,7 @@ public class ClampedSystem extends EntityProcessingSystem {
     /**
      * Creates a new EntityProcessingSystem.
      */
+    @SuppressWarnings("unchecked")
     public ClampedSystem() {
         super(Aspect.getAspectForAll(Pos.class, Clamped.class));
     }

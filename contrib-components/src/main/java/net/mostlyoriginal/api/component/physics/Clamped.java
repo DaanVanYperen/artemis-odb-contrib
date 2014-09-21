@@ -1,9 +1,6 @@
 package net.mostlyoriginal.api.component.physics;
 
 import com.artemis.Component;
-import net.mostlyoriginal.api.Depends;
-import net.mostlyoriginal.api.component.basic.Bounds;
-import net.mostlyoriginal.api.component.basic.Pos;
 
 import java.io.Serializable;
 
@@ -13,7 +10,6 @@ import java.io.Serializable;
  * @author Daan van Yperen
  * @see net.mostlyoriginal.api.system.physics.ClampedSystem
  */
-@Depends({Bounds.class, Pos.class})
 public class Clamped extends Component implements Serializable {
     
     public float minx;
