@@ -20,6 +20,7 @@ public class ColorAnimationSystem extends EntityProcessingSystem {
     protected ComponentMapper<Color> mColor;
     protected ComponentMapper<ColorAnimation> cm;
 
+	@SuppressWarnings("unchecked")
     public ColorAnimationSystem() {
         super(Aspect.getAspectForAll(Color.class, ColorAnimation.class));
     }
@@ -48,7 +49,7 @@ public class ColorAnimationSystem extends EntityProcessingSystem {
             if ( colorAnimation.duration <= 0 )
             {
                 color.set(1f,1f,1f,1f);
-                entity.removeComponent(ColorAnimation.class).changedInWorld();
+                entity.edit().remove(ColorAnimation.class);
             }
 
         }

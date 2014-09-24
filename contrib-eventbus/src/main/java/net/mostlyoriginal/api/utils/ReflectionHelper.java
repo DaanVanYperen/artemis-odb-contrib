@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.util;
+package net.mostlyoriginal.api.utils;
 
 import com.artemis.utils.reflect.Method;
 

@@ -5,7 +5,7 @@ import com.artemis.Component;
 import java.io.Serializable;
 
 /**
- * follows mouse around.
+ * Follows mouse around.
  *
  * @author Daan van Yperen
  */

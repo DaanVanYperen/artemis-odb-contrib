@@ -3,7 +3,7 @@ package net.mostlyoriginal.api.test;
 import com.artemis.Component;
 
 /**
- * @author DaanVanYperen
+ * @author Daan van Yperen
  */
 public class EmptyComponent extends Component {
 }

@@ -2,7 +2,7 @@ package net.mostlyoriginal.api.event.common;
 
 import com.artemis.utils.reflect.ClassReflection;
 import com.artemis.utils.reflect.Method;
-import net.mostlyoriginal.api.util.ReflectionHelper;
+import net.mostlyoriginal.api.utils.ReflectionHelper;
 
 /**
  * @author Daan van Yperen

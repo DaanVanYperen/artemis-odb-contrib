@@ -65,7 +65,7 @@ public class TiledMapSystem extends VoidEntitySystem {
                     if (cell != null) {
                         final MapProperties properties = cell.getTile().getProperties();
                         if (properties.containsKey("entity")) {
-                            entityFactorySystem.createEntity((String)properties.get("entity"), tx * tileWidth, ty * tileHeight, properties).addToWorld();
+                            entityFactorySystem.createEntity((String)properties.get("entity"), tx * tileWidth, ty * tileHeight, properties);
                             layer.setCell(tx, ty, null);
                         }
                     }

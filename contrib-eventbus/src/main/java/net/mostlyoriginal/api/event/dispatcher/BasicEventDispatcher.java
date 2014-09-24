@@ -6,7 +6,7 @@ import com.artemis.utils.reflect.ClassReflection;
 import net.mostlyoriginal.api.event.common.Event;
 import net.mostlyoriginal.api.event.common.EventDispatchStrategy;
 import net.mostlyoriginal.api.event.common.EventListener;
-import net.mostlyoriginal.api.util.ReflectionHelper;
+import net.mostlyoriginal.api.utils.ReflectionHelper;
 import net.mostlyoriginal.api.utils.BagUtils;
 
 /**

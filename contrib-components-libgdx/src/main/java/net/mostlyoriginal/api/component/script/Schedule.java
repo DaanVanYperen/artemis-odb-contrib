@@ -11,7 +11,7 @@ import net.mostlyoriginal.api.step.*;
  *
  * Can be used to schedule things like delayed component addition, entity removal or component removal.
  *
- * entity.addComponent(new Schedule().wait(0.5f).add(new ExampleComponent()).changedInWorld().wait(1.5f).remove(ExampleComponent.class).changedInWorld().wait(5).deleteFromWorld());
+ * entity.addComponent(new Schedule().wait(0.5f).add(new ExampleComponent()).wait(1.5f).remove(ExampleComponent.class).wait(5).deleteFromWorld());
  *
  * @author Daan van Yperen
  * @see net.mostlyoriginal.api.system.script.SchedulerSystem
@@ -50,13 +50,7 @@ public class Schedule extends Component {
         return this;
     }
 
-    /** Activate added components. */
-    public Schedule changedInWorld() {
-        steps.add(prepare(ChangedInWorldStep.class, atAge));
-        return this;
-    }
-
-    /** Add component to entity. Make sure to chain a call to changedInWorld after all your add/remove chains. */
+    /** Add component to entity. */
     public Schedule add( final Component component ) {
         AddStep step = prepare(AddStep.class, atAge);
         step.component = component;
@@ -64,7 +58,7 @@ public class Schedule extends Component {
         return this;
     }
 
-    /** Remove component from entity. Make sure to chain a call to changedInWorld after all your add/remove chains. */
+    /** Remove component from entity. */
     public Schedule remove( final Class<? extends Component> component ) {
         RemoveStep step = prepare(RemoveStep.class, atAge);
         step.componentClass = component;
