@@ -5,7 +5,7 @@
     <parent>
         <groupId>net.mostlyoriginal.artemis-odb</groupId>
         <artifactId>contrib-parent</artifactId>
-        <version>0.7.1</version>
+        <version>0.7.2-SNAPSHOT</version>
     </parent>
     <artifactId>contrib-network</artifactId>
     <packaging>jar</packaging>

@@ -5,7 +5,7 @@
 
     <groupId>net.mostlyoriginal.artemis-odb</groupId>
     <artifactId>contrib-parent</artifactId>
-    <version>0.7.1</version>
+    <version>0.7.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>contrib-parent</name>
     <description>Drop-in extensions for artemis-odb. Prefab systems, components, networking, maybe even events!
