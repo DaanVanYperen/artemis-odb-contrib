@@ -26,6 +26,14 @@ public class Color extends Component {
         this.a = color.a;
     }
 
+	/** Color component by hex, RRGGBBAA. */
+	public Color(String hex) {
+		this((float)Integer.valueOf(hex.substring(0, 2), 16) / 255.0F,
+			 (float)Integer.valueOf(hex.substring(2, 4), 16) / 255.0F,
+			 (float)Integer.valueOf(hex.substring(4, 6), 16) / 255.0F,
+			 (float)(hex.length() != 8 ? 255 : Integer.valueOf(hex.substring(6, 8), 16)) / 255.0F);
+	}
+
     public Color(float r, float g, float b, float a) {
         this.r = r;
         this.g = g;
