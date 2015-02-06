@@ -104,7 +104,7 @@
 
     <modules>
         <module>contrib-core</module>
-        <module>contrib-components-libgdx</module>
+        <module>contrib-jam</module>
         <module>contrib-eventbus</module>
         <module>contrib-test-gwt</module>
     </modules>

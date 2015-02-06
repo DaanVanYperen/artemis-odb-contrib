@@ -7,10 +7,10 @@
         <artifactId>contrib-parent</artifactId>
         <version>0.8.1-SNAPSHOT</version>
     </parent>
-    <artifactId>contrib-components-libgdx</artifactId>
+    <artifactId>contrib-jam</artifactId>
     <packaging>jar</packaging>
-    <name>contrib-components-libgdx</name>
-    <description>Libgdx specific prefab systems and components!</description>
+    <name>contrib-jam</name>
+    <description>Daan's jam bundle of systems and components!</description>
 
     <dependencies>
         <dependency>

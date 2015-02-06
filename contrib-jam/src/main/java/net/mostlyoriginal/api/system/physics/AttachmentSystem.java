@@ -62,7 +62,7 @@ public class AttachmentSystem extends EntityProcessingSystem {
     /**
      * Apply force on joint, pushing the attached entity out of place.
      *
-     * @param Attached Attached component of entity to push
+     * @param attached Attached component of entity to push
      * @param rotation Direction of force
      * @param force strength of force (don't factor in delta).
      */

@@ -28,7 +28,7 @@
 
         <dependency>
             <groupId>net.mostlyoriginal.artemis-odb</groupId>
-            <artifactId>contrib-components-libgdx</artifactId>
+            <artifactId>contrib-jam</artifactId>
             <version>${project.version}</version>
             <classifier>sources</classifier>
         </dependency>
@@ -42,7 +42,7 @@
 
         <dependency>
             <groupId>net.mostlyoriginal.artemis-odb</groupId>
-            <artifactId>contrib-components-libgdx</artifactId>
+            <artifactId>contrib-jam</artifactId>
             <version>${project.version}</version>
         </dependency>
 
