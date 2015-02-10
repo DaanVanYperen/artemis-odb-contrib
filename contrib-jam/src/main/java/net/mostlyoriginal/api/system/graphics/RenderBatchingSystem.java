@@ -10,7 +10,7 @@ import com.artemis.Entity;
 import com.artemis.EntitySystem;
 import com.artemis.annotations.Wire;
 import com.artemis.utils.Bag;
-import com.artemis.utils.ImmutableBag;
+import com.artemis.utils.IntBag;
 import net.mostlyoriginal.api.component.graphics.Renderable;
 import net.mostlyoriginal.api.system.delegate.EntityProcessAgent;
 import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
@@ -85,7 +85,7 @@ public class RenderBatchingSystem extends EntitySystem implements EntityProcessP
      * Process list of entities to delegate.
      */
     @Override
-    protected void processEntities(ImmutableBag<Entity> entities) {
+    protected void processEntities(IntBag entities) {
 
         if (sortedDirty) {
             // sort our jobs (by layer).

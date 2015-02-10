@@ -3,7 +3,7 @@ package net.mostlyoriginal.api.system.delegate;
 import com.artemis.Aspect;
 import com.artemis.Entity;
 import com.artemis.EntitySystem;
-import com.artemis.utils.ImmutableBag;
+import com.artemis.utils.IntBag;
 
 /**
  * Actor for a principal system.
@@ -70,7 +70,7 @@ public abstract class DeferredEntityProcessingSystem extends EntitySystem {
     }
 
     @Override
-    protected void processEntities(ImmutableBag<Entity> entities) {
+    protected void processEntities(IntBag entities) {
         // do nothing.
     }
 
