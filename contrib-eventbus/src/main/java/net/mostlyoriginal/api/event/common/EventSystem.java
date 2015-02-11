@@ -2,8 +2,12 @@ package net.mostlyoriginal.api.event.common;
 
 import com.artemis.EntitySystem;
 import com.artemis.Manager;
+import com.artemis.systems.VoidEntitySystem;
+import com.artemis.utils.Bag;
+
 import net.mostlyoriginal.api.event.dispatcher.BasicEventDispatcher;
 import net.mostlyoriginal.api.event.dispatcher.FastEventDispatcher;
+import net.mostlyoriginal.api.utils.ReflectionPools;
 
 import java.util.List;
 
@@ -15,25 +19,26 @@ import java.util.List;
  *
  * @author Daan van Yperen
  */
-public class EventManager extends Manager {
+public class EventSystem extends VoidEntitySystem {
 
     private EventDispatchStrategy dispatcherStrategy;
     private ListenerFinderStrategy listenerFinderStrategy;
+    private final Bag<Event> eventQueue = new Bag<Event>();
 
     /**
-     * Init EventManager with default strategies.
+     * Init EventSystem with default strategies.
      */
-    public EventManager()
+    public EventSystem()
     {
         this(new FastEventDispatcher(), new SubscribeAnnotationFinder());
     }
 
     /**
-     * Init EventManager with custom strategies.
+     * Init EventSystem with custom strategies.
      * @param dispatcherStrategy Strategy to use for dispatching events.
      * @param listenerFinderStrategy Strategy to use for finding listeners on objects.
      */
-    public EventManager(EventDispatchStrategy dispatcherStrategy, ListenerFinderStrategy listenerFinderStrategy) {
+    public EventSystem(EventDispatchStrategy dispatcherStrategy, ListenerFinderStrategy listenerFinderStrategy) {
         this.dispatcherStrategy = dispatcherStrategy;
         this.listenerFinderStrategy = listenerFinderStrategy;
     }
@@ -58,18 +63,32 @@ public class EventManager extends Manager {
     }
 
     /**
-     * Dispatch an event synchronously.
-     *
-     * Event is not queued but immediately dispatched synchronously. Waits for the event to return.
-     * Events are called on the call stack, avoid deeply nested or circular event calls.
+     * Queue an event to dispatch synchronously.
      */
-    public void dispatch( Event event )
-    {
-        dispatcherStrategy.dispatch(event);
-    }
+	public <T extends Event> T dispatch( Class<T> eventClass )
+	{
+		T event = ReflectionPools.obtain(eventClass);
+		eventQueue.add(event);
 
+		return event;
+	}
 
-    /** Register all listeners with the handler. */
+	@Override
+	protected void processSystem()
+	{
+		Object[] eventsToDispatch = eventQueue.getData();
+		
+		for (int i = 0, s = eventQueue.size(); i < s; i++) {
+			Event event = (Event) eventsToDispatch[i];
+
+			dispatcherStrategy.dispatch(event);
+			ReflectionPools.free(event);
+		}
+		
+		eventQueue.clear();
+	}
+
+	/** Register all listeners with the handler. */
     private void registerAll ( List<EventListener> listeners )
     {
         for (EventListener listener : listeners) {
