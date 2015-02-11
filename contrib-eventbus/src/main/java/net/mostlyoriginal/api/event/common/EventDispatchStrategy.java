@@ -4,7 +4,7 @@ package net.mostlyoriginal.api.event.common;
  * Listener registration and event dispatch.
  *
  * Wrapper for the complete listener registration and event dispatching
- * strategy used by {@link EventManager}.
+ * strategy used by {@link EventSystem}.
  *
  * Make sure your strategy supports multiple instances if you want to run
  * multiple artemis worlds in parallel.
