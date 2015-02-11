@@ -27,7 +27,7 @@ public class InterSystemEventTest {
 
         @Override
         protected void processSystem() {
-            eventManager.dispatch(new MyEvent());
+            eventManager.dispatch(MyEvent.class);
         }
     }
 

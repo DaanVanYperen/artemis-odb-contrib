@@ -7,6 +7,7 @@ import com.artemis.utils.Bag;
 
 import net.mostlyoriginal.api.event.dispatcher.BasicEventDispatcher;
 import net.mostlyoriginal.api.event.dispatcher.FastEventDispatcher;
+import net.mostlyoriginal.api.utils.ReflectionPools;
 
 import java.util.List;
 
@@ -64,13 +65,30 @@ public class EventSystem extends VoidEntitySystem {
     /**
      * Queue an event to dispatch synchronously.
      */
-    public void dispatch( Event event )
-    {
-    	eventQueue.add(event);
-    }
+	public <T extends Event> T dispatch( Class<T> eventClass )
+	{
+		T event = ReflectionPools.obtain(eventClass);
+		eventQueue.add(event);
 
+		return event;
+	}
 
-    /** Register all listeners with the handler. */
+	@Override
+	protected void processSystem()
+	{
+		Object[] eventsToDispatch = eventQueue.getData();
+		
+		for (int i = 0, s = eventQueue.size(); i < s; i++) {
+			Event event = (Event) eventsToDispatch[i];
+
+			dispatcherStrategy.dispatch(event);
+			ReflectionPools.free(event);
+		}
+		
+		eventQueue.clear();
+	}
+
+	/** Register all listeners with the handler. */
     private void registerAll ( List<EventListener> listeners )
     {
         for (EventListener listener : listeners) {
@@ -93,18 +111,5 @@ public class EventSystem extends VoidEntitySystem {
             registerEvents(manager);
         }
     }
-
-	@Override
-	protected void processSystem()
-	{
-		Object[] eventsToDispatch = eventQueue.getData();
-		
-		for (int i = 0, s = eventQueue.size(); i < s; i++) {
-			Event event = (Event) eventsToDispatch[i];
-			dispatcherStrategy.dispatch(event);
-		}
-		
-		eventQueue.clear();
-	}
 
 }

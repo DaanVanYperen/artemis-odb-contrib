@@ -73,7 +73,7 @@ public class EventManagerTest {
         w.setManager(m1);
         w.setManager(m2);
         w.initialize();
-        w.getSystem(EventSystem.class).dispatch(new SimpleEvent());
+        w.getSystem(EventSystem.class).dispatch(SimpleEvent.class);
 
         assertEquals(1, m1.count);
         assertEquals(1, m2.count);
@@ -86,7 +86,7 @@ public class EventManagerTest {
         w.setSystem(es1);
         w.setSystem(es2);
         w.initialize();
-        w.getSystem(EventSystem.class).dispatch(new SimpleEvent());
+        w.getSystem(EventSystem.class).dispatch(SimpleEvent.class);
 
         assertEquals(1, es1.count);
         assertEquals(1, es2.count);
@@ -103,7 +103,7 @@ public class EventManagerTest {
         });
         w.initialize();
         w.getSystem(EventSystem.class).registerEvents(new Object() {});
-        w.getSystem(EventSystem.class).dispatch(new SimpleEvent());
+        w.getSystem(EventSystem.class).dispatch(SimpleEvent.class);
         // no exception? happy!
     }
 
@@ -112,7 +112,7 @@ public class EventManagerTest {
         w.initialize();
         SimplePojo pojo = new SimplePojo();
         w.getSystem(EventSystem.class).registerEvents(pojo);
-        w.getSystem(EventSystem.class).dispatch(new SimpleEvent());
+        w.getSystem(EventSystem.class).dispatch(SimpleEvent.class);
         assertEquals(1, pojo.count);
     }
 }
