@@ -4,7 +4,7 @@ import com.artemis.World;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.VoidEntitySystem;
 import net.mostlyoriginal.api.event.common.Event;
-import net.mostlyoriginal.api.event.common.EventManager;
+import net.mostlyoriginal.api.event.common.EventSystem;
 import net.mostlyoriginal.api.event.common.Subscribe;
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class InterSystemEventTest {
     @Wire
     public static class DispatchSystem extends VoidEntitySystem {
 
-        EventManager eventManager;
+        EventSystem eventManager;
 
         @Override
         protected void processSystem() {
@@ -48,8 +48,8 @@ public class InterSystemEventTest {
     @Test
     public void Dispatch_OneListeningSystem_SystemReceivesEvent() {
         World w = new World();
-        final EventManager eventManager = new EventManager();
-        w.setManager(eventManager);
+        final EventSystem eventManager = new EventSystem();
+        w.setSystem(eventManager);
         ReceiveSystem s1 = new ReceiveSystem();
         w.setSystem(s1);
         w.setSystem(new DispatchSystem());
@@ -61,8 +61,8 @@ public class InterSystemEventTest {
     @Test
     public void Dispatch_NoListeningSystem_NoExceptions() {
         World w = new World();
-        final EventManager eventManager = new EventManager();
-        w.setManager(eventManager);
+        final EventSystem eventManager = new EventSystem();
+        w.setSystem(eventManager);
         w.setSystem(new DispatchSystem());
         w.initialize();
         w.process();
@@ -72,8 +72,8 @@ public class InterSystemEventTest {
     @Test
     public void Dispatch_TwoListeningSystem_BothCalled() {
         World w = new World();
-        final EventManager eventManager = new EventManager();
-        w.setManager(eventManager);
+        final EventSystem eventManager = new EventSystem();
+        w.setSystem(eventManager);
         ReceiveSystem s1 = new ReceiveSystem();
         w.setSystem(s1);
         ReceiveSystem s2 = new ReceiveSystem();
