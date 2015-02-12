@@ -3,9 +3,6 @@ package net.mostlyoriginal.api.event.common;
 import com.artemis.Manager;
 import com.artemis.World;
 import com.artemis.systems.VoidEntitySystem;
-import net.mostlyoriginal.api.event.common.Event;
-import net.mostlyoriginal.api.event.common.EventSystem;
-import net.mostlyoriginal.api.event.common.Subscribe;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -73,7 +70,7 @@ public class EventManagerTest {
         w.setManager(m1);
         w.setManager(m2);
         w.initialize();
-        w.getSystem(EventSystem.class).dispatch(SimpleEvent.class);
+        w.getSystem(EventSystem.class).dispatch(new SimpleEvent());
 
         assertEquals(1, m1.count);
         assertEquals(1, m2.count);
@@ -86,7 +83,7 @@ public class EventManagerTest {
         w.setSystem(es1);
         w.setSystem(es2);
         w.initialize();
-        w.getSystem(EventSystem.class).dispatch(SimpleEvent.class);
+        w.getSystem(EventSystem.class).dispatch(new SimpleEvent());
 
         assertEquals(1, es1.count);
         assertEquals(1, es2.count);
@@ -103,7 +100,7 @@ public class EventManagerTest {
         });
         w.initialize();
         w.getSystem(EventSystem.class).registerEvents(new Object() {});
-        w.getSystem(EventSystem.class).dispatch(SimpleEvent.class);
+        w.getSystem(EventSystem.class).dispatch(new SimpleEvent());
         // no exception? happy!
     }
 
@@ -112,7 +109,7 @@ public class EventManagerTest {
         w.initialize();
         SimplePojo pojo = new SimplePojo();
         w.getSystem(EventSystem.class).registerEvents(pojo);
-        w.getSystem(EventSystem.class).dispatch(SimpleEvent.class);
+        w.getSystem(EventSystem.class).dispatch(new SimpleEvent());
         assertEquals(1, pojo.count);
     }
 }
