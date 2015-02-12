@@ -14,6 +14,8 @@ public class PollingPooledEventDispatcherTest extends AbstractEventDispatcherTes
 	protected void dispatch(Event event) {
 		try {
 			dispatcher.dispatch(event.getClass());
+			// this dispatcher processes after a world tick.
+			dispatcher.process();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
