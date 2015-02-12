@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author Daan van Yperen
  */
-public class EventManagerTest {
+public class EventSystemTest {
 
     public World w;
 
