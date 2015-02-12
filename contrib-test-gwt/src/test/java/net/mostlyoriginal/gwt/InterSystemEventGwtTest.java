@@ -2,7 +2,7 @@ package net.mostlyoriginal.gwt;
 
 import com.artemis.World;
 import com.google.gwt.junit.client.GWTTestCase;
-import net.mostlyoriginal.api.event.common.EventManager;
+import net.mostlyoriginal.api.event.common.EventSystem;
 import net.mostlyoriginal.gwt.system.DispatchTestSystem;
 import net.mostlyoriginal.gwt.system.ReceiveTestSystem;
 
@@ -20,8 +20,8 @@ public class InterSystemEventGwtTest  extends GWTTestCase {
 
     public void test_Dispatch_OneListeningSystem_SystemReceivesEvent() {
         World w = new World();
-        final EventManager eventManager = new EventManager();
-        w.setManager(eventManager);
+        final EventSystem eventManager = new EventSystem();
+        w.setSystem(eventManager);
         ReceiveTestSystem s1 = new ReceiveTestSystem();
         w.setSystem(s1);
         w.setSystem(new DispatchTestSystem());
@@ -32,8 +32,8 @@ public class InterSystemEventGwtTest  extends GWTTestCase {
 
     public void test_Dispatch_NoListeningSystem_NoExceptions() {
         World w = new World();
-        final EventManager eventManager = new EventManager();
-        w.setManager(eventManager);
+        final EventSystem eventManager = new EventSystem();
+        w.setSystem(eventManager);
         w.setSystem(new DispatchTestSystem());
         w.initialize();
         w.process();
@@ -42,8 +42,8 @@ public class InterSystemEventGwtTest  extends GWTTestCase {
 
     public void test_Dispatch_TwoListeningSystem_BothCalled() {
         World w = new World();
-        final EventManager eventManager = new EventManager();
-        w.setManager(eventManager);
+        final EventSystem eventManager = new EventSystem();
+        w.setSystem(eventManager);
         ReceiveTestSystem s1 = new ReceiveTestSystem();
         w.setSystem(s1);
         ReceiveTestSystem s2 = new ReceiveTestSystem();
