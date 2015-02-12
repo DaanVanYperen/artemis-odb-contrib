@@ -107,6 +107,7 @@
         <module>contrib-jam</module>
         <module>contrib-eventbus</module>
         <module>contrib-test-gwt</module>
+        <module>contrib-benchmark</module>
     </modules>
 
     <repositories>
