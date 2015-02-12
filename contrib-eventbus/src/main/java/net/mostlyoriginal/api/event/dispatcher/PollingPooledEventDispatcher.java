@@ -1,7 +1,6 @@
 package net.mostlyoriginal.api.event.dispatcher;
 
 import com.artemis.utils.Bag;
-
 import net.mostlyoriginal.api.event.common.Event;
 import net.mostlyoriginal.api.utils.pooling.PoolsCollection;
 
@@ -27,6 +26,11 @@ public class PollingPooledEventDispatcher extends FastEventDispatcher {
 		}
 		
 		eventQueue.clear();
+	}
+
+
+	public void dispatch(Event event) {
+		throw new UnsupportedOperationException("This dispatcher manages its own events. Use dispatch(Class<T> type) instead!");
 	}
 
 	@Override

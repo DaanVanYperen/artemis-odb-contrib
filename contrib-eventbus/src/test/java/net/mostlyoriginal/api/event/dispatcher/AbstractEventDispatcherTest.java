@@ -70,14 +70,19 @@ public abstract class AbstractEventDispatcherTest {
     public void Dispatch_EventWithExactClassListener_ListenerReceivesEvent() {
         final SingleListenPojo pojo = setupListenerPojo(SingleListenPojo.class);
         // match on exact listener class.
-        dispatcher.dispatch(new BaseEvent());
-        assertEquals(1, pojo.calls);
+	    dispatch(new BaseEvent());
+	    assertEquals(1, pojo.calls);
     }
 
-    @Test
+	/** Dispatch wrapper. */
+	protected void dispatch(Event event) {
+		dispatcher.dispatch(event);
+	}
+
+	@Test
     public void Dispatch_EventWithSuperclassListener_ListenerReceivesEvent() {
         final SingleListenPojo pojo = setupListenerPojo(SingleListenPojo.class);
-        dispatcher.dispatch(new ExtendedEvent());
+		dispatch(new ExtendedEvent());
         assertEquals(1, pojo.calls);
     }
 
@@ -85,9 +90,9 @@ public abstract class AbstractEventDispatcherTest {
 	public void Dispatch_LateRegisteredListener_NoRegistrationIssues() {
 		// Make sure registering a listener late doesn't break the dispatchers.
 		final SingleListenPojo pojo = setupListenerPojo(SingleListenPojo.class);
-		dispatcher.dispatch(new ExtendedEvent());
+		dispatch(new ExtendedEvent());
 		final SingleListenPojo pojo2 = setupListenerPojo(SingleListenPojo.class);
-		dispatcher.dispatch(new ExtendedEvent());
+		dispatch(new ExtendedEvent());
 		assertEquals(2, pojo.calls);
 		assertEquals(1, pojo2.calls);
 	}
@@ -109,7 +114,7 @@ public abstract class AbstractEventDispatcherTest {
 			dispatcher.register(listener);
 		}
 
-		dispatcher.dispatch(new ExtendedEvent());
+		dispatch(new ExtendedEvent());
 		assertEquals(1, pojo.calls);
 	}
 
@@ -117,7 +122,7 @@ public abstract class AbstractEventDispatcherTest {
     public void Dispatch_MismatchingEvents_ListenerDoesNotReceiveEvent() {
         final SingleListenPojo pojo = setupListenerPojo(SingleListenPojo.class);
         // mismatched event has no listeners.
-        dispatcher.dispatch(new MismatchedEvent());
+	    dispatch(new MismatchedEvent());
         assertEquals(0, pojo.calls);
     }
 
@@ -139,7 +144,7 @@ public abstract class AbstractEventDispatcherTest {
     @Test
     public void Dispatch_SeveralMatchingListeners_AllListenersCalled() {
         final MultiListenPojo pojo = setupListenerPojo(MultiListenPojo.class);
-	    dispatcher.dispatch(new ExtendedEvent());
+	    dispatch(new ExtendedEvent());
         // all listeners should be hit, even superclass ones.
         assertEquals(1, pojo.calls1);
         assertEquals(1, pojo.calls2);
@@ -183,7 +188,7 @@ public abstract class AbstractEventDispatcherTest {
 			dispatcher.register(listener);
 		}
 
-		dispatcher.dispatch(new BaseEvent());
+		dispatch(new BaseEvent());
 
 		// asserts are run in the SequenceListen class.
 		// we just have to make sure the final class has also been called.
@@ -212,7 +217,7 @@ public abstract class AbstractEventDispatcherTest {
 		for (EventListener listener : listeners) {
 			dispatcher.register(listener);
 		}
-		dispatcher.dispatch(new CancellableEvent());
+		dispatch(new CancellableEvent());
 
 		// expect cancelled events to be properly called.
 		assertEquals(1, pojo.calledCancelled);
