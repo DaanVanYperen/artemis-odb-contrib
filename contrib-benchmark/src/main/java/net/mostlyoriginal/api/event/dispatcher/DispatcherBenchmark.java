@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 @Measurement(iterations = 20, time = 1, timeUnit = TimeUnit.SECONDS)
 public abstract class DispatcherBenchmark extends MyBenchmark {
 
-	protected EventManager em;
+	protected EventSystem em;
 	private ActiveEventHandlers activeEventHandlers;
 
 	/**
@@ -217,8 +217,8 @@ public abstract class DispatcherBenchmark extends MyBenchmark {
 	public void setup()
 	{
 		World w = new World();
-		em = new EventManager(instanceDispatcher(), new SubscribeAnnotationFinder());
-		w.setManager(em);
+		em = new EventSystem(instanceDispatcher(), new SubscribeAnnotationFinder());
+		w.setSystem(em);
 		activeEventHandlers = new ActiveEventHandlers();
 		w.setManager(activeEventHandlers);
 		w.setManager(new PaddingHandlers());
@@ -231,14 +231,18 @@ public abstract class DispatcherBenchmark extends MyBenchmark {
 	public void eventWithNoHierarchyAndOneHandler()
 	{
 		// eventNest0 events apply only to handle0 listener.
-		em.dispatch(new EventNest0());
+		dispatch(new EventNest0());
+	}
+
+	protected void dispatch(Event event) {
+		em.dispatch(event);
 	}
 
 	@Benchmark
 	public void eventWithHierarchyAndOneHandler()
 	{
 		//
-		em.dispatch(new EventNest2NoImmediateHandler());
+		dispatch(new EventNest2NoImmediateHandler());
 	}
 
 	@Benchmark
@@ -246,7 +250,7 @@ public abstract class DispatcherBenchmark extends MyBenchmark {
 	{
 		// eventNest0 events applies to handle0-8 listeners.
 		// Also has a deep hierarchy.
-		em.dispatch(new EventNest8());
+		dispatch(new EventNest8());
 	}
 
 
@@ -255,14 +259,14 @@ public abstract class DispatcherBenchmark extends MyBenchmark {
 	public void eventWithMixedCalls()
 	{
 		// mix up calls, just to see how it works.
-		em.dispatch(new EventNest0());
-		em.dispatch(new EventNest0v2());
+		dispatch(new EventNest0());
+		dispatch(new EventNest0v2());
 	}
 
 	@Benchmark
 	public void eventWithFiftyListeners()
 	{
 		// has many listeners.
-		em.dispatch(new MassiveListenerEvent());
+		dispatch(new MassiveListenerEvent());
 	}
 }

@@ -23,5 +23,15 @@ public class BaselineDispatcherBenchmark extends DispatcherBenchmark {
 		@Override
 		public void dispatch(Event event) {
 		}
+
+		@Override
+		public <T extends Event> T dispatch(Class<T> type) {
+			return null;
+		}
+
+		@Override
+		public void process() {
+
+		}
 	}
 }
