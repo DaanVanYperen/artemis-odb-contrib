@@ -48,7 +48,7 @@ public abstract class AbstractEventDispatcherTest {
     }
 
     /** Setup a listener pojo, registering all methods as listeners. */
-    private <T> T setupListenerPojo( Class<T> pojoClass )  {
+    protected <T> T setupListenerPojo(Class<T> pojoClass)  {
         try {
             final T pojo = pojoClass.newInstance();
 
