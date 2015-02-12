@@ -12,14 +12,17 @@ import java.util.concurrent.TimeUnit;
 /**
  * Benchmark the dispatching of events, dispatch including event listeners.
  *
+ * Intended for class based dispatchers, like the PollingPooledDispatcher.
+ *
  * @author DaanVanYperen
  */
 @BenchmarkMode(Mode.Throughput)
 @OutputTimeUnit(TimeUnit.SECONDS)
 @Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 20, time = 1, timeUnit = TimeUnit.SECONDS)
-public abstract class DispatcherBenchmark extends MyBenchmark {
+public abstract class ClassBasedDispatcherBenchmark extends MyBenchmark {
 
+	public static final int DISPATCH_BATCH_SIZE = 1000;
 	protected EventSystem em;
 	private ActiveEventHandlers activeEventHandlers;
 
@@ -228,41 +231,64 @@ public abstract class DispatcherBenchmark extends MyBenchmark {
 	protected abstract EventDispatchStrategy  instanceDispatcher();
 
 	@Benchmark
+	@OperationsPerInvocation(DISPATCH_BATCH_SIZE)
 	public void eventWithNoHierarchyAndOneHandler()
 	{
 		// eventNest0 events apply only to handle0 listener.
-		em.dispatch(new EventNest0());
+		for (int i = 0; i < DISPATCH_BATCH_SIZE; i++) {
+			em.dispatch(EventNest0.class);
+		}
+		em.process();
+	}
+
+	protected void dispatch(Event event) {
+		em.dispatch(event);
 	}
 
 	@Benchmark
+	@OperationsPerInvocation(DISPATCH_BATCH_SIZE)
 	public void eventWithHierarchyAndOneHandler()
 	{
 		//
-		em.dispatch(new EventNest2NoImmediateHandler());
+		for (int i = 0; i < DISPATCH_BATCH_SIZE; i++) {
+			em.dispatch(EventNest2NoImmediateHandler.class);
+		}
+		em.process();
 	}
 
 	@Benchmark
+	@OperationsPerInvocation(DISPATCH_BATCH_SIZE)
 	public void eventWithManySubclassListeners()
 	{
 		// eventNest0 events applies to handle0-8 listeners.
 		// Also has a deep hierarchy.
-		em.dispatch(new EventNest8());
+		for (int i = 0; i < DISPATCH_BATCH_SIZE; i++){
+			em.dispatch(EventNest8.class);
+		}
+		em.process();
 	}
 
 
 	@Benchmark
-	@OperationsPerInvocation(2)
+	@OperationsPerInvocation(DISPATCH_BATCH_SIZE*2)
 	public void eventWithMixedCalls()
 	{
 		// mix up calls, just to see how it works.
-		em.dispatch(new EventNest0());
-		em.dispatch(new EventNest0v2());
+		for (int i = 0; i < DISPATCH_BATCH_SIZE; i++) {
+			em.dispatch(EventNest0.class);
+			em.dispatch(EventNest0v2.class);
+		}
+		em.process();
 	}
 
 	@Benchmark
+	@OperationsPerInvocation(DISPATCH_BATCH_SIZE)
 	public void eventWithFiftyListeners()
 	{
 		// has many listeners.
-		em.dispatch(new MassiveListenerEvent());
+		for (int i = 0; i < DISPATCH_BATCH_SIZE; i++) {
+			em.dispatch(MassiveListenerEvent.class);
+		}
+		em.process();
 	}
 }
