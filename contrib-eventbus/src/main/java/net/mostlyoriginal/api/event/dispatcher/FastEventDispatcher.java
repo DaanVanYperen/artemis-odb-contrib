@@ -1,6 +1,7 @@
 package net.mostlyoriginal.api.event.dispatcher;
 
 import com.artemis.utils.Bag;
+
 import net.mostlyoriginal.api.event.common.Event;
 import net.mostlyoriginal.api.event.common.EventDispatchStrategy;
 import net.mostlyoriginal.api.event.common.EventListener;
@@ -134,4 +135,15 @@ public class FastEventDispatcher implements EventDispatchStrategy {
 			}
 		}
 	}
+
+	@Override
+	public void process() {
+		// not interested in this stuff
+	}
+
+	@Override
+	public <T extends Event> T dispatch(Class<T> type) {
+		throw new UnsupportedOperationException("This dispatcher doesn't dispatch events by type!");
+	}
+
 }

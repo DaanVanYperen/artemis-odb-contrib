@@ -3,6 +3,7 @@ package net.mostlyoriginal.api.event.dispatcher;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 import com.artemis.utils.reflect.ClassReflection;
+
 import net.mostlyoriginal.api.event.common.Event;
 import net.mostlyoriginal.api.event.common.EventDispatchStrategy;
 import net.mostlyoriginal.api.event.common.EventListener;
@@ -55,6 +56,16 @@ public class BasicEventDispatcher implements EventDispatchStrategy {
         }
 
     }
+
+	@Override
+	public <T extends Event> T dispatch(Class<T> type) {
+		throw new UnsupportedOperationException("This dispatcher doesn't dispatch events by type!");
+	}
+
+	@Override
+	public void process() {
+		// not interested in this stuff
+	}
 
     /** Get listeners that are subscribed to the event. */
     protected ImmutableBag<EventListener> getRelevantListeners(Event event) {
