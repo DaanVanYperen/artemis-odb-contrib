@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * <p>Collection of object pools mapped to their object types.</p>
- * <p>Constructor-less usage is available through {@link Pools} which handles <code>PoolCollection</code> statically.</p>
+ * <p>Constructor-less usage is available through {@link Pools} which handles <code>PoolsCollection</code> statically.</p>
  * 
  * @author Namek
  * @see Pools

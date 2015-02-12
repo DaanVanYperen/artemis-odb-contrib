@@ -1,12 +1,12 @@
 package net.mostlyoriginal.api.utils.pooling;
 
 /**
- * <p>Handles {@link PoolCollection} statically for constructor-less shorthand usage.</p>
+ * <p>Handles {@link PoolsCollection} statically for constructor-less shorthand usage.</p>
  * <p><b>Usage:</p>
  * <pre>   Event event = Pools.obtain(ExplosionEvent.class);
  *   Pools.free(event);</pre>
  * @author Namek
- * @see PoolCollection
+ * @see PoolsCollection
  */
 public final class Pools {
 	private static final PoolsCollection pools = new PoolsCollection();
