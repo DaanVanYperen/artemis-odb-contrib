@@ -1,13 +1,9 @@
 package net.mostlyoriginal.api.event.common;
 
-import com.artemis.EntitySystem;
+import com.artemis.BaseSystem;
 import com.artemis.Manager;
 import com.artemis.systems.VoidEntitySystem;
-import com.artemis.utils.Bag;
-
-import net.mostlyoriginal.api.event.dispatcher.BasicEventDispatcher;
 import net.mostlyoriginal.api.event.dispatcher.FastEventDispatcher;
-import net.mostlyoriginal.api.utils.pooling.PoolsCollection;
 
 import java.util.List;
 
@@ -92,7 +88,7 @@ public class EventSystem extends VoidEntitySystem {
     /** Register all systems in this world. */
     private void registerAllSystemEvents( )
     {
-        for (EntitySystem entitySystem : world.getSystems()) {
+        for (BaseSystem entitySystem : world.getSystems()) {
             registerEvents(entitySystem);
         }
     }

@@ -4,13 +4,11 @@ package net.mostlyoriginal.api.system.graphics;
  * @author Daan van Yperen
  */
 
-import com.artemis.Aspect;
+import com.artemis.BaseSystem;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
-import com.artemis.EntitySystem;
 import com.artemis.annotations.Wire;
 import com.artemis.utils.Bag;
-import com.artemis.utils.IntBag;
 import net.mostlyoriginal.api.component.graphics.Renderable;
 import net.mostlyoriginal.api.system.delegate.EntityProcessAgent;
 import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
@@ -29,17 +27,12 @@ import net.mostlyoriginal.api.utils.BagUtils;
  * @see net.mostlyoriginal.api.component.graphics.Anim
  */
 @Wire
-public class RenderBatchingSystem extends EntitySystem implements EntityProcessPrincipal {
+public class RenderBatchingSystem extends BaseSystem implements EntityProcessPrincipal {
 
     protected ComponentMapper<Renderable> mRenderable;
 
     protected final Bag<Job> sortedJobs = new Bag<>();
     public boolean sortedDirty = false;
-
-    public RenderBatchingSystem() {
-         // we let the agents track entities.
-        super(Aspect.getEmpty());
-    }
 
     /**
        * Declare entity relevant for agent.
@@ -81,11 +74,8 @@ public class RenderBatchingSystem extends EntitySystem implements EntityProcessP
         }
     }
 
-    /**
-     * Process list of entities to delegate.
-     */
-    @Override
-    protected void processEntities(IntBag entities) {
+	@Override
+	protected void processSystem() {
 
         if (sortedDirty) {
             // sort our jobs (by layer).
