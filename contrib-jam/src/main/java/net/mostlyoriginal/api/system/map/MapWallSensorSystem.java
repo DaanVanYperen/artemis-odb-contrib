@@ -36,7 +36,7 @@ public class MapWallSensorSystem extends EntityProcessingSystem {
     private ComponentMapper<MapWallSensor> ws;
 
     public MapWallSensorSystem() {
-        super(Aspect.getAspectForAll(MapWallSensor.class, Pos.class, Bounds.class));
+        super(Aspect.all(MapWallSensor.class, Pos.class, Bounds.class));
     }
 
     @Override

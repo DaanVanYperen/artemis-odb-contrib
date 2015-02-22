@@ -35,7 +35,7 @@ public class PhysicsSystem extends EntityProcessingSystem {
     private ComponentMapper<MapWallSensor> wm;
 
     public PhysicsSystem() {
-        super(Aspect.getAspectForAll(Physics.class, Pos.class));
+        super(Aspect.all(Physics.class, Pos.class));
     }
 
     private Vector2 vTmp = new Vector2();

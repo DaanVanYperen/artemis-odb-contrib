@@ -41,7 +41,7 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
     protected SpriteBatch batch;
 
     public AnimRenderSystem(EntityProcessPrincipal principal) {
-        super(Aspect.getAspectForAll(Pos.class, Anim.class, Renderable.class).exclude(Invisible.class), principal);
+        super(Aspect.all(Pos.class, Anim.class, Renderable.class).exclude(Invisible.class), principal);
     }
 
     @Override

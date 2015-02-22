@@ -21,7 +21,7 @@ public class EntityCameraSystem extends EntityProcessingSystem {
     private CameraSystem cameraSystem;
 
     public EntityCameraSystem() {
-        super(Aspect.getAspectForAll(Pos.class, Camera.class));
+        super(Aspect.all(Pos.class, Camera.class));
     }
 
     @Override

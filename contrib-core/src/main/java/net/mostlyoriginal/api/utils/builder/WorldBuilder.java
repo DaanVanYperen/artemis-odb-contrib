@@ -1,6 +1,6 @@
 package net.mostlyoriginal.api.utils.builder;
 
-import com.artemis.EntitySystem;
+import com.artemis.BaseSystem;
 import com.artemis.Manager;
 import com.artemis.World;
 import com.artemis.utils.Bag;
@@ -69,7 +69,7 @@ public class WorldBuilder {
 	 * Register active system(s).
 	 * Order is preserved.
 	 */
-	public WorldBuilder with(EntitySystem ... systems) {
+	public WorldBuilder with(BaseSystem... systems) {
 		addSystems(systems, false);
 		return this;
 	}
@@ -78,22 +78,22 @@ public class WorldBuilder {
 	 * Register passive systems.
 	 * Order is preserved.
 	 */
-	public WorldBuilder withPassive(EntitySystem ... systems) {
+	public WorldBuilder withPassive(BaseSystem ... systems) {
 		addSystems(systems, true);
 		return this;
 	}
 
-	private void addSystems(EntitySystem[] systems, boolean passive) {
-		for (EntitySystem system : systems) {
+	private void addSystems(BaseSystem[] systems, boolean passive) {
+		for (BaseSystem system : systems) {
 			this.systems.add(new SystemRegistration(system, passive));
 		}
 	}
 
 	public static class SystemRegistration {
-		public final EntitySystem system;
+		public final BaseSystem system;
 		public final boolean passive;
 
-		public SystemRegistration(EntitySystem system, boolean passive) {
+		public SystemRegistration(BaseSystem system, boolean passive) {
 			this.system = system;
 			this.passive = passive;
 		}

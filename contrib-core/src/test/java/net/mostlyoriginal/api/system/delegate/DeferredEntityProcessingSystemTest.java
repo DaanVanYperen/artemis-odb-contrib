@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 public class DeferredEntityProcessingSystemTest {
 
 	static class TestDeferredSystem extends DeferredEntityProcessingSystem {
-		public TestDeferredSystem(Aspect aspect, EntityProcessPrincipal principal) {
+		public TestDeferredSystem(Aspect.Builder aspect, EntityProcessPrincipal principal) {
 			super(aspect, principal);
 		}
 
@@ -33,7 +33,7 @@ public class DeferredEntityProcessingSystemTest {
 
 		// setup world and single entity.
 		World w = new World();
-		w.setSystem(new TestDeferredSystem(Aspect.getAspectForAll(EmptyComponent.class), principal), true);
+		w.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal), true);
 		w.initialize();
 		Entity myEntity = new EntityBuilder(w).with(EmptyComponent.class).build();
 		w.process();
@@ -49,7 +49,7 @@ public class DeferredEntityProcessingSystemTest {
 
 		// setup world and single entity.
 		World w = new World();
-		w.setSystem(new TestDeferredSystem(Aspect.getAspectForAll(EmptyComponent.class), principal), true);
+		w.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal), true);
 		w.initialize();
 		Entity myEntity = new EntityBuilder(w).with(EmptyComponent.class).build();
 		w.process();

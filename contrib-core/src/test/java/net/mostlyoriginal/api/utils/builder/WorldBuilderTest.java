@@ -1,6 +1,6 @@
 package net.mostlyoriginal.api.utils.builder;
 
-import com.artemis.EntitySystem;
+import com.artemis.BaseSystem;
 import com.artemis.Manager;
 import com.artemis.World;
 import com.artemis.systems.VoidEntitySystem;
@@ -24,9 +24,9 @@ public class WorldBuilderTest {
 
 	@Test
 	public void should_create_systems_in_order() {
-		EntitySystem system1 = new TestEntitySystem();
-		EntitySystem system2 = new TestEntitySystem();
-		EntitySystem system3 = new TestEntitySystem();
+		BaseSystem system1 = new TestEntitySystem();
+		BaseSystem system2 = new TestEntitySystem();
+		BaseSystem system3 = new TestEntitySystem();
 
 		World world = new WorldBuilder()
 				.with(system1, system2)

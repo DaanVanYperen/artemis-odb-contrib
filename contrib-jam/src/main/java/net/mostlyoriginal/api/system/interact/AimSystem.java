@@ -27,7 +27,7 @@ public class AimSystem extends EntityProcessingSystem {
     private ComponentMapper<Angle> anm;
 
     public AimSystem() {
-        super(Aspect.getAspectForAll(Aim.class, Pos.class, Anim.class));
+        super(Aspect.all(Aim.class, Pos.class, Anim.class));
     }
 
     Vector2 vTmp = new Vector2();

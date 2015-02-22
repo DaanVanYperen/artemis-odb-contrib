@@ -27,7 +27,7 @@ public class HomingSystem extends EntityProcessingSystem {
     ComponentMapper<Attached> am;
 
     public HomingSystem() {
-        super(Aspect.getAspectForAll(Homing.class, Pos.class));
+        super(Aspect.all(Homing.class, Pos.class));
     }
 
     private static final Vector2 tmp = new Vector2();

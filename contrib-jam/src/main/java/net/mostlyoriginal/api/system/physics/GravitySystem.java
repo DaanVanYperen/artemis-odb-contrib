@@ -23,7 +23,7 @@ public class GravitySystem extends EntityProcessingSystem {
     ComponentMapper<Gravity> gm;
 
     public GravitySystem() {
-        super(Aspect.getAspectForAll(Gravity.class, Physics.class));
+        super(Aspect.all(Gravity.class, Physics.class));
     }
 
     @Override

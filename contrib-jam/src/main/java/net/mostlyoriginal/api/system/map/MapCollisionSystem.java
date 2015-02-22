@@ -39,7 +39,7 @@ public class MapCollisionSystem extends EntityProcessingSystem {
     private ComponentMapper<Bounds> bm;
 
     public MapCollisionSystem() {
-        super(Aspect.getAspectForAll(Physics.class, Pos.class, Bounds.class, MapSolid.class));
+        super(Aspect.all(Physics.class, Pos.class, Bounds.class, MapSolid.class));
     }
 
     @Override

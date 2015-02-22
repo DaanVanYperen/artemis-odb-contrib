@@ -22,7 +22,7 @@ public class ColorAnimationSystem extends EntityProcessingSystem {
 
 	@SuppressWarnings("unchecked")
     public ColorAnimationSystem() {
-        super(Aspect.getAspectForAll(Color.class, ColorAnimation.class));
+        super(Aspect.all(Color.class, ColorAnimation.class));
     }
 
     @Override

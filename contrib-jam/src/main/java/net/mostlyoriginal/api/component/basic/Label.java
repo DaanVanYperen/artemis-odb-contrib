@@ -7,6 +7,7 @@ import com.artemis.Component;
  *
  * @author Daan van Yperen
  */
+@Deprecated
 public class Label extends Component {
     public String label;
 

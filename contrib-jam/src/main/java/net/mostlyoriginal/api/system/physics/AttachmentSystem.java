@@ -23,7 +23,7 @@ public class AttachmentSystem extends EntityProcessingSystem {
     private ComponentMapper<Attached> am;
 
     public AttachmentSystem() {
-        super(Aspect.getAspectForAll(Pos.class, Attached.class));
+        super(Aspect.all(Pos.class, Attached.class));
     }
 
     Vector2 vTmp = new Vector2();

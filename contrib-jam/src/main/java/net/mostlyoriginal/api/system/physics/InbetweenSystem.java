@@ -22,7 +22,7 @@ public class InbetweenSystem extends EntityProcessingSystem {
     ComponentMapper<Pos> pm;
 
     public InbetweenSystem() {
-        super(Aspect.getAspectForAll(Inbetween.class, Pos.class));
+        super(Aspect.all(Inbetween.class, Pos.class));
     }
 
 

@@ -21,7 +21,7 @@ public class SchedulerSystem extends EntityProcessingSystem {
     private ComponentMapper<Schedule> sm;
 
     public SchedulerSystem() {
-        super(Aspect.getAspectForAll(Schedule.class));
+        super(Aspect.all(Schedule.class));
     }
 
     @Override

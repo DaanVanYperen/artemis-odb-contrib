@@ -26,7 +26,7 @@ public class MouseCursorSystem extends EntityProcessingSystem {
     private CameraSystem cameraSystem;
 
     public MouseCursorSystem() {
-        super(Aspect.getAspectForAll(Pos.class, MouseCursor.class));
+        super(Aspect.all(Pos.class, MouseCursor.class));
     }
 
     private Vector3 aimAtTmp = new Vector3();
