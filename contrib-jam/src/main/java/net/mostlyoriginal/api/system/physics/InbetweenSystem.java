@@ -32,7 +32,7 @@ public class InbetweenSystem extends EntityProcessingSystem {
     protected void process(Entity e) {
 
         final Inbetween inbetween = dm.get(e);
-        if ( !inbetween.a.isActive() || !inbetween.b.isActive() ) return;
+        if ( !inbetween.a.valid() || !inbetween.b.valid() ) return;
 
         Pos pos1 = pm.get(inbetween.a.get());
         Pos pos2 = pm.get(inbetween.b.get());

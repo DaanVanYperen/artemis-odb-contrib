@@ -36,7 +36,7 @@ public class HomingSystem extends EntityProcessingSystem {
     protected void process(Entity e) {
 
         final Homing homing = hm.get(e);
-        if (homing.target != null && homing.target.isActive()) {
+        if (homing.target != null && homing.target.valid()) {
 
             final float distance = EntityUtil.distance(e, homing.target.get());
             if (distance < homing.maxDistance) {

@@ -4,7 +4,7 @@ import com.artemis.Entity;
 import com.artemis.managers.TagManager;
 
 /**
- * Refer to entity by tag.
+ * Resolve entity by tag.
  *
  * @author Daan van Yperen
  */
@@ -19,7 +19,7 @@ public class TagEntityReference implements EntityReference {
     }
 
     @Override
-    public boolean isActive() {
+    public boolean valid() {
         return get() != null;
     }
 

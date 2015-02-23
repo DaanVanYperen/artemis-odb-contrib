@@ -36,7 +36,7 @@ public class AimSystem extends EntityProcessingSystem {
     protected void process(Entity e) {
         final Aim aim = am.get(e);
 
-        if (aim.at.isActive()) {
+        if (aim.at.valid()) {
             aimAt(e, aim.at.get());
         }
     }

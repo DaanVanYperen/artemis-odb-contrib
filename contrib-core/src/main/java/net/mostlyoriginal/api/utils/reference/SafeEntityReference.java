@@ -24,14 +24,12 @@ public class SafeEntityReference implements EntityReference {
     }
 
     @Override
-    public boolean isActive() {
-        final boolean active = entity != null && entity.getUuid().equals(uuid);
-        if ( !active ) { entity = null; uuid = null; }
-        return active;
+    public boolean valid() {
+        return entity != null && entity.getUuid().equals(uuid);
     }
 
     @Override
     public Entity get() {
-        return isActive() ? entity : null;
+        return valid() ? entity : null;
     }
 }
