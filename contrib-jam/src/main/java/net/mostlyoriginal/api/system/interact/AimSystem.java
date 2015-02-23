@@ -8,7 +8,6 @@ import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.component.basic.Angle;
 import net.mostlyoriginal.api.component.basic.Pos;
-import net.mostlyoriginal.api.component.graphics.Anim;
 import net.mostlyoriginal.api.component.interact.Aim;
 import net.mostlyoriginal.api.utils.EntityUtil;
 
@@ -27,7 +26,7 @@ public class AimSystem extends EntityProcessingSystem {
     private ComponentMapper<Angle> anm;
 
     public AimSystem() {
-        super(Aspect.all(Aim.class, Pos.class, Anim.class));
+        super(Aspect.all(Aim.class, Pos.class, Angle.class));
     }
 
     Vector2 vTmp = new Vector2();

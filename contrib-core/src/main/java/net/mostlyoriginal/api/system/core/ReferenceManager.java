@@ -69,7 +69,7 @@ public class ReferenceManager extends PassiveSystem {
 	}
 
 	/** Tag based entity reference. */
-	public static class TagEntityReference implements EntityReference {
+	private static class TagEntityReference implements EntityReference {
 
 	    private transient TagManager tagManager;
 	    private String tag;

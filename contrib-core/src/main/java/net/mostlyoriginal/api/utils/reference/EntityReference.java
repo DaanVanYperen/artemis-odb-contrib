@@ -11,4 +11,5 @@ public interface EntityReference {
 
 	/** Return entity from reference, or <code>null</code> if none. */
     public Entity get();
+
 }
