@@ -31,11 +31,13 @@ public class AttachmentSystem extends EntityProcessingSystem {
     @Override
     protected void process(Entity e) {
         final Attached attached = am.get(e);
-        if (attached.parent.valid()) {
+
+	    final Entity parent = attached.parent.get();
+	    if (parent != null) {
 
             // move attachment to absolute position, adjusted with slack.
             Pos pos = pm.get(e);
-            Pos parPos = pm.get(attached.parent.get());
+            Pos parPos = pm.get(parent);
             pos.x = parPos.x + attached.xo + attached.slackX;
             pos.y = parPos.y + attached.yo + attached.slackY;
 

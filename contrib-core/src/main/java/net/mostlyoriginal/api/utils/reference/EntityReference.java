@@ -9,9 +9,6 @@ import com.artemis.Entity;
  */
 public interface EntityReference {
 
-	/** True if reference is available. */
-    public boolean valid();
-
-	/** Return entity from reference. */
+	/** Return entity from reference, or <code>null</code> if none. */
     public Entity get();
 }

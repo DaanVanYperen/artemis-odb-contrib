@@ -36,13 +36,14 @@ public class HomingSystem extends EntityProcessingSystem {
     protected void process(Entity e) {
 
         final Homing homing = hm.get(e);
-        if (homing.target != null && homing.target.valid()) {
+	    final Entity homingTarget = homing.target.get();
+	    if (homingTarget != null) {
 
-            final float distance = EntityUtil.distance(e, homing.target.get());
+            final float distance = EntityUtil.distance(e, homingTarget);
             if (distance < homing.maxDistance) {
 
                 final Pos myPos = pm.get(e);
-                final Pos tPos = pm.get(homing.target.get());
+                final Pos tPos = pm.get(homingTarget);
 
                 // vector of required traversal
                 tmp.set(tPos.x, tPos.y).sub(myPos.x, myPos.y).scl(homing.speedFactor);

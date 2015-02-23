@@ -32,10 +32,13 @@ public class InbetweenSystem extends EntityProcessingSystem {
     protected void process(Entity e) {
 
         final Inbetween inbetween = dm.get(e);
-        if ( !inbetween.a.valid() || !inbetween.b.valid() ) return;
 
-        Pos pos1 = pm.get(inbetween.a.get());
-        Pos pos2 = pm.get(inbetween.b.get());
+	    final Entity entityA = inbetween.a.get();
+	    final Entity entityB = inbetween.b.get();
+	    if ( entityA == null || entityB == null ) return;
+
+        Pos pos1 = pm.get(entityA);
+        Pos pos2 = pm.get(entityB);
 
         tmp.set(pos2.x + inbetween.bx, pos2.y + inbetween.by).sub(pos1.x + inbetween.ax, pos1.y + inbetween.ay).scl(inbetween.tween).clamp(0,inbetween.maxDistance).add(pos1.x + inbetween.ax,pos1.y + inbetween.ay);
 

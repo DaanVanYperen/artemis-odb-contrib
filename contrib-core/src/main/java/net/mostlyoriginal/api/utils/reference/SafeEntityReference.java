@@ -23,13 +23,8 @@ public class SafeEntityReference implements EntityReference {
     public SafeEntityReference() {
     }
 
-    @Override
-    public boolean valid() {
-        return entity != null && entity.getUuid().equals(uuid);
-    }
-
-    @Override
+	@Override
     public Entity get() {
-        return valid() ? entity : null;
+		return entity != null && entity.getUuid().equals(uuid) ? entity : null;
     }
 }

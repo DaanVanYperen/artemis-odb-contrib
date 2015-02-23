@@ -19,11 +19,6 @@ public class TagEntityReference implements EntityReference {
     }
 
     @Override
-    public boolean valid() {
-        return get() != null;
-    }
-
-    @Override
     public Entity get() {
         return tagManager.getEntity(tag);
     }
