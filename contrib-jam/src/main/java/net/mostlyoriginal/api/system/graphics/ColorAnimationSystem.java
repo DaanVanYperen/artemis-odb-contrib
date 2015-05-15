@@ -48,7 +48,8 @@ public class ColorAnimationSystem extends EntityProcessingSystem {
             colorAnimation.duration -= world.delta;
             if ( colorAnimation.duration <= 0 )
             {
-                color.set(1f,1f,1f,1f);
+                // always end on the end color.
+                color.set(colorAnimation.endColor);
                 entity.edit().remove(ColorAnimation.class);
             }
 
