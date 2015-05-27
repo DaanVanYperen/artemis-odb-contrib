@@ -1,5 +1,12 @@
 # Changelog
 
+## Version: 0.9.1
+
+- New polling event dispatcher.
+- Upgraded to artemis-odb 0.9.1-SNAPSHOT, libGDX-1.6.1
+- Event benchmarking.
+- Moved all example components and systems to contrib-jam module.
+
 ## Version: 0.7
 
 - Drop in Eventbus.

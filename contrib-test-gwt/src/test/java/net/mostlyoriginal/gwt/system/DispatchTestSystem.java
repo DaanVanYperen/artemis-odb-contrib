@@ -2,7 +2,7 @@ package net.mostlyoriginal.gwt.system;
 
 import com.artemis.annotations.Wire;
 import com.artemis.systems.VoidEntitySystem;
-import net.mostlyoriginal.api.event.common.EventManager;
+import net.mostlyoriginal.api.event.common.EventSystem;
 
 /**
 * @author Daan van Yperen
@@ -10,10 +10,10 @@ import net.mostlyoriginal.api.event.common.EventManager;
 @Wire
 public class DispatchTestSystem extends VoidEntitySystem {
 
-    EventManager eventManager;
+    EventSystem eventSystem;
 
     @Override
     protected void processSystem() {
-        eventManager.dispatch(new BasicTestEvent());
+        eventSystem.dispatch(new BasicTestEvent());
     }
 }

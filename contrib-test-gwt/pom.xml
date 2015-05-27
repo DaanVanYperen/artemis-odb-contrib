@@ -5,7 +5,7 @@
     <parent>
         <groupId>net.mostlyoriginal.artemis-odb</groupId>
         <artifactId>contrib-parent</artifactId>
-        <version>0.7.1</version>
+        <version>0.9.1</version>
     </parent>
     <artifactId>contrib-test-gwt</artifactId>
     <packaging>war</packaging>
@@ -28,14 +28,7 @@
 
         <dependency>
             <groupId>net.mostlyoriginal.artemis-odb</groupId>
-            <artifactId>contrib-components</artifactId>
-            <version>${project.version}</version>
-            <classifier>sources</classifier>
-        </dependency>
-
-        <dependency>
-            <groupId>net.mostlyoriginal.artemis-odb</groupId>
-            <artifactId>contrib-components-libgdx</artifactId>
+            <artifactId>contrib-jam</artifactId>
             <version>${project.version}</version>
             <classifier>sources</classifier>
         </dependency>
@@ -49,13 +42,7 @@
 
         <dependency>
             <groupId>net.mostlyoriginal.artemis-odb</groupId>
-            <artifactId>contrib-components</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.mostlyoriginal.artemis-odb</groupId>
-            <artifactId>contrib-components-libgdx</artifactId>
+            <artifactId>contrib-jam</artifactId>
             <version>${project.version}</version>
         </dependency>
 

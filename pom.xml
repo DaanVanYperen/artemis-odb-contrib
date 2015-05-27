@@ -5,10 +5,10 @@
 
     <groupId>net.mostlyoriginal.artemis-odb</groupId>
     <artifactId>contrib-parent</artifactId>
-    <version>0.7.1</version>
+    <version>0.9.1</version>
     <packaging>pom</packaging>
     <name>contrib-parent</name>
-    <description>Drop-in extensions for artemis-odb. Prefab systems, components, networking, maybe even events!
+    <description>Drop-in extensions for artemis-odb. Prefab systems, components, networking, events!
     </description>
     <url>https://github.com/DaanVanYperen/artemis-odb-contrib</url>
 
@@ -60,29 +60,29 @@
             <dependency>
                 <groupId>net.onedaybeard.artemis</groupId>
                 <artifactId>artemis-odb-gwt</artifactId>
-                <version>0.7.1</version>
+                <version>0.9.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.onedaybeard.artemis</groupId>
                 <artifactId>artemis-odb</artifactId>
-                <version>0.7.1</version>
+                <version>0.9.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>net.onedaybeard.artemis</groupId>
                 <artifactId>artemis-odb-gwt</artifactId>
-                <version>0.7.1</version>
+                <version>0.9.1-SNAPSHOT</version>
                 <classifier>sources</classifier>
             </dependency>
             <dependency>
                 <groupId>net.onedaybeard.artemis</groupId>
                 <artifactId>artemis-odb</artifactId>
-                <version>0.7.1</version>
+                <version>0.9.1-SNAPSHOT</version>
                 <classifier>sources</classifier>
             </dependency>
             <dependency>
                 <groupId>com.badlogicgames.gdx</groupId>
                 <artifactId>gdx-backend-gwt</artifactId>
-                <version>1.3.1</version>
+                <version>1.6.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -104,10 +104,10 @@
 
     <modules>
         <module>contrib-core</module>
-        <module>contrib-components</module>
-        <module>contrib-components-libgdx</module>
+        <module>contrib-jam</module>
         <module>contrib-eventbus</module>
         <module>contrib-test-gwt</module>
+        <module>contrib-benchmark</module>
     </modules>
 
     <repositories>

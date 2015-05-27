@@ -5,7 +5,7 @@
     <parent>
         <groupId>net.mostlyoriginal.artemis-odb</groupId>
         <artifactId>contrib-parent</artifactId>
-        <version>0.7.1</version>
+        <version>0.8.1-SNAPSHOT</version>
     </parent>
     <artifactId>contrib-network</artifactId>
     <packaging>jar</packaging>
@@ -25,13 +25,7 @@
 
         <dependency>
             <groupId>net.mostlyoriginal.artemis-odb</groupId>
-            <artifactId>contrib-components</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>net.mostlyoriginal.artemis-odb</groupId>
-            <artifactId>contrib-components-libgdx</artifactId>
+            <artifactId>contrib-jam</artifactId>
             <version>${project.version}</version>
         </dependency>
 

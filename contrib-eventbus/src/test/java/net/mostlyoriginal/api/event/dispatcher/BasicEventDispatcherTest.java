@@ -1,5 +1,7 @@
 package net.mostlyoriginal.api.event.dispatcher;
 
+import org.junit.Test;
+
 /**
  * Test basic event dispatcher.
  *
@@ -8,5 +10,11 @@ package net.mostlyoriginal.api.event.dispatcher;
 public class BasicEventDispatcherTest extends AbstractEventDispatcherTest {
 	protected BasicEventDispatcher createDispatcherInstance() {
 		return new BasicEventDispatcher();
+	}
+
+	@Test(expected = UnsupportedOperationException.class)
+	public void Dispatch_ShouldNotDispatchInstancedEvents()
+	{
+		dispatcher.dispatch(BaseEvent.class);
 	}
 }

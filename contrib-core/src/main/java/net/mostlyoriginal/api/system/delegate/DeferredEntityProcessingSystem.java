@@ -3,7 +3,6 @@ package net.mostlyoriginal.api.system.delegate;
 import com.artemis.Aspect;
 import com.artemis.Entity;
 import com.artemis.EntitySystem;
-import com.artemis.utils.ImmutableBag;
 
 /**
  * Actor for a principal system.
@@ -27,7 +26,7 @@ import com.artemis.utils.ImmutableBag;
  */
 public abstract class DeferredEntityProcessingSystem extends EntitySystem {
 
-    private final Aspect aspect;
+    private final Aspect.Builder aspect;
     private final EntityProcessPrincipal principal;
 
     /**
@@ -37,7 +36,7 @@ public abstract class DeferredEntityProcessingSystem extends EntitySystem {
      * @param aspect to match against entities
      * @param principal principal that will organize process calls to this system.
      */
-    public DeferredEntityProcessingSystem(Aspect aspect, EntityProcessPrincipal principal) {
+    public DeferredEntityProcessingSystem(Aspect.Builder aspect, EntityProcessPrincipal principal) {
         super(aspect);
         this.aspect = aspect;
         this.principal = principal;
@@ -69,12 +68,11 @@ public abstract class DeferredEntityProcessingSystem extends EntitySystem {
         principal.registerAgent(e, localProcessingAgent);
     }
 
-    @Override
-    protected void processEntities(ImmutableBag<Entity> entities) {
-        // do nothing.
-    }
+	@Override
+	protected void processSystem() {
+	}
 
-    /**
+	/**
      * Simple processing agent that delegates to this system.
      * Workaround for naming collisions, so the all callers
      * can use the methods they are used to.
