@@ -11,6 +11,8 @@ import com.badlogic.gdx.math.MathUtils;
 import java.util.HashMap;
 
 /**
+ * Basic asset system for serving images from a single texture.
+ *
  * @author Daan van Yperen
  */
 public class AbstractAssetSystem extends VoidEntitySystem {
@@ -20,7 +22,11 @@ public class AbstractAssetSystem extends VoidEntitySystem {
     protected float sfxVolume = 0.2f;
 
     public AbstractAssetSystem() {
-        tileset = new Texture("tiles.png");
+        this("tiles.png");
+    }
+
+    public AbstractAssetSystem(String filename) {
+        tileset = new Texture(filename);
     }
 
     public Animation get(final String identifier) {
