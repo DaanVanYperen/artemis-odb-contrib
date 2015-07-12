@@ -1,6 +1,8 @@
 artemis-odb-contrib
 ===================
 
+[![Build Status](https://travis-ci.org/DaanVanYperen/artemis-odb-contrib.svg)](https://travis-ci.org/DaanVanYperen/artemis-odb-contrib)
+
 Drop-in extensions for artemis-odb. Event bus, deferred systems, prefab
 systems, components and networking. Well, eventually anyway.
 
