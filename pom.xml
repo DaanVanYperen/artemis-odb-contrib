@@ -81,7 +81,7 @@
             </dependency>
             <dependency>
                 <groupId>com.badlogicgames.gdx</groupId>
-                <artifactId>gdx-backend-gwt</artifactId>
+                <artifactId>gdx</artifactId>
                 <version>1.6.1</version>
             </dependency>
         </dependencies>
