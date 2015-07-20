@@ -1,9 +1,9 @@
 package net.mostlyoriginal.api.event.common;
 
+import com.artemis.BaseSystem;
 import com.artemis.World;
 import com.artemis.WorldConfiguration;
 import com.artemis.annotations.Wire;
-import com.artemis.systems.VoidEntitySystem;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -19,7 +19,7 @@ public class InterSystemEventTest {
     }
 
     @Wire
-    public static class DispatchSystem extends VoidEntitySystem {
+    public static class DispatchSystem extends BaseSystem {
 
         EventSystem eventManager;
 
@@ -30,7 +30,7 @@ public class InterSystemEventTest {
     }
 
 
-    public static class ReceiveSystem extends VoidEntitySystem {
+    public static class ReceiveSystem extends BaseSystem {
         public int count = 0;
 
         @Override

@@ -4,8 +4,8 @@ package net.mostlyoriginal.api.system.camera;
  * @author Daan van Yperen
  */
 
+import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
-import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Vector2;
  * @author Daan van Yperen
  */
 @Wire
-public class CameraShakeSystem extends VoidEntitySystem {
+public class CameraShakeSystem extends BaseSystem {
 
 
     public CameraSystem cameraSystem;

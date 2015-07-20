@@ -1,14 +1,14 @@
 package net.mostlyoriginal.gwt.system;
 
+import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
-import com.artemis.systems.VoidEntitySystem;
 import net.mostlyoriginal.api.event.common.EventSystem;
 
 /**
 * @author Daan van Yperen
 */
 @Wire
-public class DispatchTestSystem extends VoidEntitySystem {
+public class DispatchTestSystem extends BaseSystem {
 
     EventSystem eventSystem;
 

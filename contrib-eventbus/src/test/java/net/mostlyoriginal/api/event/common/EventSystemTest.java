@@ -1,5 +1,6 @@
 package net.mostlyoriginal.api.event.common;
 
+import com.artemis.BaseSystem;
 import com.artemis.Manager;
 import com.artemis.World;
 import com.artemis.WorldConfiguration;
@@ -51,7 +52,7 @@ public class EventSystemTest {
         }
     }
 
-    public static class SimpleEntitySystem extends VoidEntitySystem {
+    public static class SimpleEntitySystem extends BaseSystem {
         public int count;
 
         @Subscribe

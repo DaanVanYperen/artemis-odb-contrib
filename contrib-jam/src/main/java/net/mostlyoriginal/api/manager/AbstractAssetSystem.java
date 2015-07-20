@@ -1,6 +1,6 @@
 package net.mostlyoriginal.api.manager;
 
-import com.artemis.systems.VoidEntitySystem;
+import com.artemis.BaseSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,7 +15,7 @@ import java.util.HashMap;
  *
  * @author Daan van Yperen
  */
-public class AbstractAssetSystem extends VoidEntitySystem {
+public class AbstractAssetSystem extends BaseSystem {
     public Texture tileset;
     public HashMap<String, Animation> sprites = new HashMap<String, Animation>();
     public HashMap<String, Sound> sounds = new HashMap<String, Sound>();

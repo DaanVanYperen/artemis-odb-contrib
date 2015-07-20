@@ -4,7 +4,6 @@ import com.artemis.BaseSystem;
 import com.artemis.Manager;
 import com.artemis.World;
 import com.artemis.WorldConfiguration;
-import com.artemis.systems.VoidEntitySystem;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -64,7 +63,7 @@ public class WorldConfigurationBuilderTest {
 		Assert.assertEquals(0, world2.getSystems().size());
 	}
 
-	private static final class TestEntitySystem extends VoidEntitySystem {
+	private static final class TestEntitySystem extends BaseSystem {
 		@Override
 		protected void processSystem() {
 		}

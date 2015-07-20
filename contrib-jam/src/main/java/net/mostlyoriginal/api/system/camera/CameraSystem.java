@@ -1,6 +1,6 @@
 package net.mostlyoriginal.api.system.camera;
 
-import com.artemis.systems.VoidEntitySystem;
+import com.artemis.BaseSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
  *
  * @author Daan van Yperen
  */
-public class CameraSystem extends VoidEntitySystem {
+public class CameraSystem extends BaseSystem {
 
     public final OrthographicCamera camera;
     public final OrthographicCamera guiCamera;

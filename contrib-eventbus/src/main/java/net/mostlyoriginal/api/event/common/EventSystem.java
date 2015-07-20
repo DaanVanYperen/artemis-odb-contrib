@@ -2,7 +2,6 @@ package net.mostlyoriginal.api.event.common;
 
 import com.artemis.BaseSystem;
 import com.artemis.Manager;
-import com.artemis.systems.VoidEntitySystem;
 import net.mostlyoriginal.api.event.dispatcher.FastEventDispatcher;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
  *
  * @author Daan van Yperen
  */
-public class EventSystem extends VoidEntitySystem {
+public class EventSystem extends BaseSystem {
 
     private EventDispatchStrategy dispatcherStrategy;
     private ListenerFinderStrategy listenerFinderStrategy;

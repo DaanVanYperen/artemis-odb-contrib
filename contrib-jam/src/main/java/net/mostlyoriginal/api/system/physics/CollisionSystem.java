@@ -4,10 +4,10 @@ package net.mostlyoriginal.api.system.physics;
  * @author Daan van Yperen
  */
 
+import com.artemis.BaseSystem;
 import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
-import com.artemis.systems.VoidEntitySystem;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
 
@@ -18,7 +18,7 @@ import net.mostlyoriginal.api.component.basic.Pos;
  * @todo generalize, daan! this is crap.
  */
 @Wire
-public class CollisionSystem extends VoidEntitySystem {
+public class CollisionSystem extends BaseSystem {
 
     private ComponentMapper<Bounds> bm;
     private ComponentMapper<Pos> pm;

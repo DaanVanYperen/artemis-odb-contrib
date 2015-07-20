@@ -4,8 +4,8 @@ package net.mostlyoriginal.api.system.map;
  * @author Daan van Yperen
  */
 
+import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
-import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -20,7 +20,7 @@ import net.mostlyoriginal.api.utils.MapMask;
  * @author Daan van Yperen
  */
 @Wire
-public class TiledMapSystem extends VoidEntitySystem {
+public class TiledMapSystem extends BaseSystem {
 
     private final String mapFilename;
 

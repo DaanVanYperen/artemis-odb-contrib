@@ -1,16 +1,16 @@
 package net.mostlyoriginal.api.system.render;
 
-import com.artemis.systems.VoidEntitySystem;
+import com.artemis.BaseSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;import java.lang.Override;
+import com.badlogic.gdx.graphics.GL20;
 
 /**
  * Clearing the screenc color buffer with GL.
  *
  * @author Daan van Yperen
  */
-public class ClearScreenSystem extends VoidEntitySystem {
+public class ClearScreenSystem extends BaseSystem {
 
 	private final Color color;
 

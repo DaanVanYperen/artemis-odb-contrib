@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.manager;
 
+import com.artemis.BaseSystem;
 import com.artemis.Entity;
-import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.maps.MapProperties;
 
 /**
@@ -9,7 +9,7 @@ import com.badlogic.gdx.maps.MapProperties;
  *
  * @author Daan van Yperen
  */
-public abstract class AbstractEntityFactorySystem extends VoidEntitySystem {
+public abstract class AbstractEntityFactorySystem extends BaseSystem {
 
     /**
      * Instance entity archetype.

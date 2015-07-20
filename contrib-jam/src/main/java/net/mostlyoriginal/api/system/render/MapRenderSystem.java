@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.system.render;
 
+import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
-import com.artemis.systems.VoidEntitySystem;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -15,7 +15,7 @@ import net.mostlyoriginal.api.system.map.TiledMapSystem;
  * @author Daan van Yperen
  */
 @Wire
-public class MapRenderSystem extends VoidEntitySystem {
+public class MapRenderSystem extends BaseSystem {
 
     public final String layer = "infront";
     private TiledMapSystem mapSystem;

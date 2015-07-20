@@ -1,12 +1,12 @@
 package net.mostlyoriginal.gwt.system;
 
-import com.artemis.systems.VoidEntitySystem;
+import com.artemis.BaseSystem;
 import net.mostlyoriginal.api.event.common.Subscribe;
 
 /**
 * @author Daan van Yperen
 */
-public class ReceiveTestSystem extends VoidEntitySystem {
+public class ReceiveTestSystem extends BaseSystem {
     public int count = 0;
 
     @Override
