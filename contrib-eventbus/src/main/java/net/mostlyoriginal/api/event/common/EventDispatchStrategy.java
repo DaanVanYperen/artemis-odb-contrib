@@ -18,10 +18,7 @@ public interface EventDispatchStrategy {
 
     /**
      * Dispatch event to registered listeners.
-     *
-     * Deprecated in favor of dispatching by class (managed events).
      */
-    @Deprecated
     public void dispatch( Event event );
     
     /** 

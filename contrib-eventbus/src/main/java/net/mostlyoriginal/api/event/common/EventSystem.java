@@ -58,11 +58,7 @@ public class EventSystem extends BaseSystem {
 
     /**
      * Dispatch event to registered listeners.
-     *
-     * Deprecated in favor of dispatching by class (managed events).
-     * @see EventDispatchStrategy#dispatch(Event)
      */
-    @Deprecated
 	public void dispatch( Event event )
 	{
 		dispatcherStrategy.dispatch(event);
