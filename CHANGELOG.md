@@ -1,5 +1,9 @@
 # Changelog
 
+## Version: 0.10.1
+
+- Upgraded to artemis-odb 0.10.1
+
 ## Version: 0.9.1
 
 - New polling event dispatcher.
