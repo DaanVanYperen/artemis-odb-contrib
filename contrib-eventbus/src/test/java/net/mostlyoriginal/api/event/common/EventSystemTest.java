@@ -4,7 +4,6 @@ import com.artemis.BaseSystem;
 import com.artemis.Manager;
 import com.artemis.World;
 import com.artemis.WorldConfiguration;
-import com.artemis.systems.VoidEntitySystem;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -93,7 +92,7 @@ public class EventSystemTest {
 
     @Test
     public void Registration_AllTypesWithNoListeners_NoExceptions() {
-        config.setSystem(new VoidEntitySystem() {
+        config.setSystem(new BaseSystem() {
             @Override
             protected void processSystem() {
             }
