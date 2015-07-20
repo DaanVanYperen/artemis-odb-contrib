@@ -3,6 +3,7 @@ package net.mostlyoriginal.api.utils.builder;
 import com.artemis.BaseSystem;
 import com.artemis.Manager;
 import com.artemis.World;
+import com.artemis.WorldConfiguration;
 import com.artemis.utils.Bag;
 
 /**
@@ -10,33 +11,36 @@ import com.artemis.utils.Bag;
  *
  * @author Daan van Yperen
  */
-public class WorldBuilder {
+public class WorldConfigurationBuilder {
 
 	private Bag<Manager> managers;
 	private Bag<SystemRegistration> systems;
 
-	public WorldBuilder() {
+	public WorldConfigurationBuilder() {
 		reset();
 	}
 
-	/** Assemble world with managers and systems. */
-	public World build() {
-		World world = new World();
-		registerManagers(world);
-		registerSystems(world);
+	/** Assemble world with managers and systems.
+	 *
+	 * Deprecated: World Configuration
+	 */
+	public WorldConfiguration build() {
+		final WorldConfiguration config = new WorldConfiguration();
+		registerManagers(config);
+		registerSystems(config);
 		reset();
-		return world;
+		return config;
 	}
 
-	private void registerManagers(World world) {
+	private void registerManagers(WorldConfiguration config) {
 		for (Manager manager : managers) {
-			world.setManager(manager);
+			config.setManager(manager);
 		}
 	}
 
-	private void registerSystems(World world) {
+	private void registerSystems(WorldConfiguration config) {
 		for (SystemRegistration system : systems) {
-			world.setSystem(system.system, system.passive);
+			config.setSystem(system.system, system.passive);
 		}
 	}
 
@@ -46,19 +50,11 @@ public class WorldBuilder {
 		systems = new Bag<>();
 	}
 
-	/** Return world, built and initialized */
-	public World initialize()
-	{
-		World world = build();
-		world.initialize();
-		return world;
-	}
-
 	/**
 	 * Add one or more managers to the world.
 	 * Managers are always added before systems.
 	 */
-	public WorldBuilder with(Manager ... managers) {
+	public WorldConfigurationBuilder with(Manager ... managers) {
 		for (Manager manager : managers) {
 			this.managers.add(manager);
 		}
@@ -69,7 +65,7 @@ public class WorldBuilder {
 	 * Register active system(s).
 	 * Order is preserved.
 	 */
-	public WorldBuilder with(BaseSystem... systems) {
+	public WorldConfigurationBuilder with(BaseSystem... systems) {
 		addSystems(systems, false);
 		return this;
 	}
@@ -78,7 +74,7 @@ public class WorldBuilder {
 	 * Register passive systems.
 	 * Order is preserved.
 	 */
-	public WorldBuilder withPassive(BaseSystem ... systems) {
+	public WorldConfigurationBuilder withPassive(BaseSystem ... systems) {
 		addSystems(systems, true);
 		return this;
 	}

@@ -1,6 +1,7 @@
 package net.mostlyoriginal.api.event.common;
 
 import com.artemis.World;
+import com.artemis.WorldConfiguration;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.VoidEntitySystem;
 import org.junit.Test;
@@ -44,40 +45,42 @@ public class InterSystemEventTest {
 
     @Test
     public void Dispatch_OneListeningSystem_SystemReceivesEvent() {
-        World w = new World();
+        WorldConfiguration config = new WorldConfiguration();
         final EventSystem eventManager = new EventSystem();
-        w.setSystem(eventManager);
+        config.setSystem(eventManager);
         ReceiveSystem s1 = new ReceiveSystem();
-        w.setSystem(s1);
-        w.setSystem(new DispatchSystem());
-        w.initialize();
+        config.setSystem(s1);
+        config.setSystem(new DispatchSystem());
+        World w = new World(config);
         w.process();
         assertEquals(1, s1.count);
     }
 
     @Test
     public void Dispatch_NoListeningSystem_NoExceptions() {
-        World w = new World();
+        WorldConfiguration config = new WorldConfiguration();
         final EventSystem eventManager = new EventSystem();
-        w.setSystem(eventManager);
-        w.setSystem(new DispatchSystem());
-        w.initialize();
+        config.setSystem(eventManager);
+        config.setSystem(new DispatchSystem());
+        World w = new World(config);
         w.process();
         // no exception = success
     }
 
     @Test
     public void Dispatch_TwoListeningSystem_BothCalled() {
-        World w = new World();
+        WorldConfiguration config = new WorldConfiguration();
         final EventSystem eventManager = new EventSystem();
-        w.setSystem(eventManager);
+        config.setSystem(eventManager);
         ReceiveSystem s1 = new ReceiveSystem();
-        w.setSystem(s1);
+        config.setSystem(s1);
         ReceiveSystem s2 = new ReceiveSystem();
-        w.setSystem(s2);
-        w.setSystem(new DispatchSystem());
-        w.initialize();
+        config.setSystem(s2);
+        config.setSystem(new DispatchSystem());
+
+        World w = new World(config);
         w.process();
+
         // no exception = success
         assertEquals(1, s1.count);
         assertEquals(1, s2.count);

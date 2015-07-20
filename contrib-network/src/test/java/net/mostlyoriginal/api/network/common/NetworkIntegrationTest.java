@@ -1,6 +1,7 @@
 package net.mostlyoriginal.api.network.common;
 
 import com.artemis.World;
+import com.artemis.WorldConfiguration;
 import net.mostlyoriginal.api.network.marshal.common.MarshalDictionary;
 import net.mostlyoriginal.api.network.marshal.kryonet.KryonetClientMarshalStrategy;
 import net.mostlyoriginal.api.network.marshal.kryonet.KryonetServerMarshalStrategy;
@@ -38,10 +39,12 @@ public abstract class NetworkIntegrationTest {
     }
 
     protected World initializeDefaultServer(MarshalDictionary marshalDictionary, boolean start) {
-        final World result = new World();
+
+        final WorldConfiguration config = new WorldConfiguration();
         serverNetworkSystem = new MarshalSystem(marshalDictionary, new KryonetServerMarshalStrategy(TEST_HOST, TEST_PORT));
-        result.setSystem(serverNetworkSystem);
-        result.initialize();
+        config.setSystem(serverNetworkSystem);
+
+        final World result = new World(config);
         if ( start ) serverNetworkSystem.start();
         return result;
     }
@@ -51,10 +54,12 @@ public abstract class NetworkIntegrationTest {
     }
 
     protected World initializeDefaultClient(MarshalDictionary marshalDictionary, boolean start) {
-        World c = new World();
+
+        final WorldConfiguration config = new WorldConfiguration();
         clientNetworkSystem = new MarshalSystem(marshalDictionary, new KryonetClientMarshalStrategy(TEST_HOST, TEST_PORT));
-        c.setSystem(clientNetworkSystem);
-        c.initialize();
+        config.setSystem(clientNetworkSystem);
+
+        World c = new World(config);
         if ( start ) clientNetworkSystem.start();
 
         return c;

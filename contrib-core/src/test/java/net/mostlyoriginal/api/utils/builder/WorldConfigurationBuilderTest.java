@@ -3,11 +3,12 @@ package net.mostlyoriginal.api.utils.builder;
 import com.artemis.BaseSystem;
 import com.artemis.Manager;
 import com.artemis.World;
+import com.artemis.WorldConfiguration;
 import com.artemis.systems.VoidEntitySystem;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class WorldBuilderTest {
+public class WorldConfigurationBuilderTest {
 
 	@Test
 	public void should_create_managers_on_build() {
@@ -15,8 +16,10 @@ public class WorldBuilderTest {
 		Manager manager2 = new TestManager();
 		Manager manager3 = new TestManager();
 
-		World world = new WorldBuilder()
+		WorldConfiguration config = new WorldConfigurationBuilder()
 				.with(manager1, manager2).build();
+
+		World world = new World(config);
 
 		Assert.assertTrue(world.getManagers().contains(manager1));
 		Assert.assertTrue(world.getManagers().contains(manager2));
@@ -28,9 +31,9 @@ public class WorldBuilderTest {
 		BaseSystem system2 = new TestEntitySystem();
 		BaseSystem system3 = new TestEntitySystem();
 
-		World world = new WorldBuilder()
+		World world = new World(new WorldConfigurationBuilder()
 				.with(system1, system2)
-				.with(system3).initialize();
+				.with(system3).build());
 
 		Assert.assertEquals(system1, world.getSystems().get(0));
 		Assert.assertEquals(system2, world.getSystems().get(1));
@@ -39,25 +42,25 @@ public class WorldBuilderTest {
 
 	@Test
 	public void should_add_systems_as_active_by_default() {
-		World world = new WorldBuilder()
-				.with(new TestEntitySystem()).initialize();
+		World world = new World(new WorldConfigurationBuilder()
+				.with(new TestEntitySystem()).build());
 
 		Assert.assertFalse(world.getSystems().get(0).isPassive());
 	}
 
 	@Test
 	public void should_add_passive_systems_as_passive() {
-		World world = new WorldBuilder()
-				.withPassive(new TestEntitySystem()).initialize();
+		World world =  new World(new WorldConfigurationBuilder()
+				.withPassive(new TestEntitySystem()).build());
 
 		Assert.assertTrue(world.getSystems().get(0).isPassive());
 	}
 
 	@Test
 	public void should_not_carry_over_old_systems_to_new_world() {
-		WorldBuilder builder = new WorldBuilder();
-		World world1 = builder.withPassive(new TestEntitySystem()).initialize();
-		World world2 = builder.initialize();
+		WorldConfigurationBuilder builder = new WorldConfigurationBuilder();
+		World world1 = new World(builder.withPassive(new TestEntitySystem()).build());
+		World world2 = new World(builder.build());
 		Assert.assertEquals(0, world2.getSystems().size());
 	}
 

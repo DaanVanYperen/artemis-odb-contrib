@@ -2,6 +2,7 @@ package net.mostlyoriginal.api.event.dispatcher;
 
 import com.artemis.Manager;
 import com.artemis.World;
+import com.artemis.WorldConfiguration;
 import com.artemis.annotations.Wire;
 import net.mostlyoriginal.api.MyBenchmark;
 import net.mostlyoriginal.api.event.common.*;
@@ -219,13 +220,15 @@ public abstract class ClassBasedDispatcherBenchmark extends MyBenchmark {
 	@Setup
 	public void setup()
 	{
-		World w = new World();
+		final WorldConfiguration config = new WorldConfiguration();
+
 		em = new EventSystem(instanceDispatcher(), new SubscribeAnnotationFinder());
-		w.setSystem(em);
+		config.setSystem(em);
 		activeEventHandlers = new ActiveEventHandlers();
-		w.setManager(activeEventHandlers);
-		w.setManager(new PaddingHandlers());
-		w.initialize();
+		config.setManager(activeEventHandlers);
+		config.setManager(new PaddingHandlers());
+
+		World w = new World(config);
 	}
 
 	protected abstract EventDispatchStrategy  instanceDispatcher();

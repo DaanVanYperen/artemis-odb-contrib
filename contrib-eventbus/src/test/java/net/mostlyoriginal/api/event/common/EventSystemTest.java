@@ -2,6 +2,7 @@ package net.mostlyoriginal.api.event.common;
 
 import com.artemis.Manager;
 import com.artemis.World;
+import com.artemis.WorldConfiguration;
 import com.artemis.systems.VoidEntitySystem;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,17 +14,17 @@ import static org.junit.Assert.assertEquals;
  */
 public class EventSystemTest {
 
-    public World w;
+    public WorldConfiguration config;
 
     @Before
     public void setUp() throws Exception {
-        w = new World();
-        w.setSystem(new EventSystem());
+        config = new WorldConfiguration();
+        config.setSystem(new EventSystem());
     }
 
     @Test
     public void Initialization_NoManagersNoSystems_NoExceptions() {
-        w.initialize();
+        new World(config);
         // no exception is good!
     }
 
@@ -67,9 +68,9 @@ public class EventSystemTest {
     public void Initialization_ManagerListeners_AllListenersAutoRegistered() {
         SimpleManager m1 = new SimpleManager();
         SimpleManager m2 = new SimpleManager();
-        w.setManager(m1);
-        w.setManager(m2);
-        w.initialize();
+        config.setManager(m1);
+        config.setManager(m2);
+        final World w = new World(config);
         w.getSystem(EventSystem.class).dispatch(new SimpleEvent());
 
         assertEquals(1, m1.count);
@@ -80,9 +81,9 @@ public class EventSystemTest {
     public void Initialization_SystemListeners_AllListenersAutoRegistered() {
         SimpleEntitySystem es1 = new SimpleEntitySystem();
         SimpleEntitySystem es2 = new SimpleEntitySystem();
-        w.setSystem(es1);
-        w.setSystem(es2);
-        w.initialize();
+        config.setSystem(es1);
+        config.setSystem(es2);
+        final World w = new World(config);
         w.getSystem(EventSystem.class).dispatch(new SimpleEvent());
 
         assertEquals(1, es1.count);
@@ -91,14 +92,14 @@ public class EventSystemTest {
 
     @Test
     public void Registration_AllTypesWithNoListeners_NoExceptions() {
-        w.setSystem(new VoidEntitySystem() {
+        config.setSystem(new VoidEntitySystem() {
             @Override
             protected void processSystem() {
             }
         });
-        w.setManager(new Manager() {
+        config.setManager(new Manager() {
         });
-        w.initialize();
+        final World w = new World(config);
         w.getSystem(EventSystem.class).registerEvents(new Object() {});
         w.getSystem(EventSystem.class).dispatch(new SimpleEvent());
         // no exception? happy!
@@ -106,7 +107,7 @@ public class EventSystemTest {
 
     @Test
     public void PojoRegistration_PojoWithListeners_ListenersRegistered() {
-        w.initialize();
+        final World w = new World(config);
         SimplePojo pojo = new SimplePojo();
         w.getSystem(EventSystem.class).registerEvents(pojo);
         w.getSystem(EventSystem.class).dispatch(new SimpleEvent());

@@ -3,6 +3,7 @@ package net.mostlyoriginal.api.system.delegate;
 import com.artemis.Aspect;
 import com.artemis.Entity;
 import com.artemis.World;
+import com.artemis.WorldConfiguration;
 import com.artemis.utils.EntityBuilder;
 import net.mostlyoriginal.api.test.EmptyComponent;
 import org.junit.Test;
@@ -31,10 +32,11 @@ public class DeferredEntityProcessingSystemTest {
 
 		EntityProcessPrincipal principal = mock(EntityProcessPrincipal.class);
 
+		final WorldConfiguration config = new WorldConfiguration();
+		config.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal), true);
 		// setup world and single entity.
-		World w = new World();
-		w.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal), true);
-		w.initialize();
+		World w = new World(config);
+
 		Entity myEntity = new EntityBuilder(w).with(EmptyComponent.class).build();
 		w.process();
 
@@ -48,9 +50,9 @@ public class DeferredEntityProcessingSystemTest {
 		EntityProcessPrincipal principal = mock(EntityProcessPrincipal.class);
 
 		// setup world and single entity.
-		World w = new World();
-		w.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal), true);
-		w.initialize();
+		WorldConfiguration config = new WorldConfiguration();
+		config.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal), true);
+		World w = new World(config);
 		Entity myEntity = new EntityBuilder(w).with(EmptyComponent.class).build();
 		w.process();
 		myEntity.edit().deleteEntity();

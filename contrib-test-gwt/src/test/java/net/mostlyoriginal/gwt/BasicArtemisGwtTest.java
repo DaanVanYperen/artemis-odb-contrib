@@ -1,6 +1,7 @@
 package net.mostlyoriginal.gwt;
 
 import com.artemis.World;
+import com.artemis.WorldConfiguration;
 import com.artemis.managers.TagManager;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.junit.client.GWTTestCase;
@@ -24,12 +25,13 @@ public class BasicArtemisGwtTest extends GWTTestCase {
     }
 
     public void test_runartemis_processsimplesystem_noexceptions() throws Exception {
-        World w = new World();
-        w.setManager(new TagManager());
+        WorldConfiguration config = new WorldConfiguration();
+        config.setManager(new TagManager());
 
         CountingTestSystem s = new CountingTestSystem();
-        w.setSystem(s);
-        w.initialize();
+        config.setSystem(s);
+
+        World w = new World(config);
         w.process();
 
         assertEquals(1, s.count);
