@@ -55,7 +55,13 @@ public class EventSystem extends BaseSystem {
     {
         registerAll(resolveListeners(o));
     }
-	
+
+    /**
+     * Dispatch event to registered listeners.
+     *
+     * Deprecated in favor of dispatching by class (managed events).
+     * @see EventDispatchStrategy#dispatch(Event)
+     */
     @Deprecated
 	public void dispatch( Event event )
 	{
