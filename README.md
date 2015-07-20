@@ -31,13 +31,13 @@ The primary license for this code is CC0.
 <dependency>
   <groupId>net.mostlyoriginal.artemis-odb</groupId>
   <artifactId>contrib-core</artifactId>
-  <version>0.9.1</version>
+  <version>0.10.1</version>
 </dependency>
 
 <dependency>
   <groupId>net.mostlyoriginal.artemis-odb</groupId>
   <artifactId>contrib-eventbus</artifactId>
-  <version>0.9.1</version>
+  <version>0.10.1</version>
 </dependency>
 ```
 
@@ -45,7 +45,7 @@ The primary license for this code is CC0.
 
 ```groovy
 dependencies { 
-    compile "net.mostlyoriginal.artemis-odb:contrib-core:0.9.1"
-    compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:0.9.1"
+    compile "net.mostlyoriginal.artemis-odb:contrib-core:0.10.1"
+    compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:0.10.1"
 }
 ```
