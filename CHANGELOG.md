@@ -2,7 +2,7 @@
 
 ## Version: 0.10.1
 
-- Upgraded to artemis-odb 0.10.1
+- Upgraded to artemis-odb 0.10.1, LibGDX 1.6.4
 
 ## Version: 0.9.1
 
