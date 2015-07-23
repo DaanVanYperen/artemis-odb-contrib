@@ -15,7 +15,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <asm.version>4.1</asm.version>
-        <artemis-odb.version>0.10.2</artemis-odb.version>
+        <artemis-odb.version>0.10.3-SNAPSHOT</artemis-odb.version>
     </properties>
 
     <scm>
