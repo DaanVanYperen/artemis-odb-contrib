@@ -10,16 +10,19 @@ import com.badlogic.gdx.math.MathUtils;
 public abstract class WorldScreen implements Screen {
 
 	public static final float MIN_DELTA = 1 / 15f;
-	protected final World world;
+	protected World world;
 
 	public WorldScreen() {
-		world = createWorld();
 	}
 
 	protected abstract World createWorld();
 
 	@Override
 	public void show() {
+		if ( world == null )
+		{
+			world = createWorld();
+		}
 	}
 
 	@Override
