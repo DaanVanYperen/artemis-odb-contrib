@@ -129,8 +129,12 @@ public class WorldConfigurationBuilder {
 	 * <p/>
 	 * Managers track priority separate from system priority, and are always added before systems.
 	 *
+	 * Only one instance of each class is allowed.
+	 * Use {@see #dependsOn} from within plugins whenever possible.
+	 *
 	 * @param managers Managers to add. Will be added in passed order.
 	 * @return this
+	 * @throws WorldConfigurationException if registering the same class twice.
 	 */
 	public WorldConfigurationBuilder with(Manager... managers) {
 		return with(Priority.NORMAL, managers);
@@ -140,6 +144,9 @@ public class WorldConfigurationBuilder {
 	 * Add one or more managers to the world.
 	 * <p/>
 	 * Managers track priority separate from system priority, and are always added before systems.
+	 *
+	 * Only one instance of each class is allowed.
+	 * Use {@see #dependsOn} from within plugins whenever possible.
 	 *
 	 * @param priority Priority of managers. Higher priority managers are registered before lower priority managers.
 	 * @param managers Managers to add. Will be added in passed order.
@@ -232,9 +239,13 @@ public class WorldConfigurationBuilder {
 	 * <p/>
 	 * Systems track priority separate from manager priority, and are always added after managers.
 	 *
+	 * Only one instance of each class is allowed.
+	 * Use {@see #dependsOn} from within plugins whenever possible.
+	 *
 	 * @param systems  systems to add, order is preserved.
 	 * @param priority priority of added systems, higher priority are added before lower priority.
 	 * @return this
+	 * @throws WorldConfigurationException if registering the same class twice.
 	 */
 	public WorldConfigurationBuilder with(int priority, BaseSystem... systems) {
 		addSystems(priority, systems, false);
@@ -246,8 +257,12 @@ public class WorldConfigurationBuilder {
 	 * <p/>
 	 * Systems track priority separate from manager priority, and are always added after managers.
 	 *
+	 * Only one instance of each class is allowed.
+	 * Use {@see #dependsOn} from within plugins whenever possible.
+	 *
 	 * @param systems systems to add, order is preserved.
 	 * @return this
+	 * @throws WorldConfigurationException if registering the same class twice.
 	 */
 	public WorldConfigurationBuilder with(BaseSystem... systems) {
 		addSystems(Priority.NORMAL, systems, false);
@@ -260,8 +275,12 @@ public class WorldConfigurationBuilder {
 	 * <p/>
 	 * Upon build plugins will be called to register dependencies.
 	 *
+	 * Only one instance of each class is allowed.
+	 * Use {@see #dependsOn} from within plugins whenever possible.
+	 *
 	 * @param plugins Plugins to add.
 	 * @return this
+	 * @throws WorldConfigurationException if type is added more than once.
 	 */
 	public WorldConfigurationBuilder with(ArtemisPlugin... plugins) {
 		addPlugins(plugins);
@@ -273,9 +292,13 @@ public class WorldConfigurationBuilder {
 	 * <p/>
 	 * Systems track priority separate from manager priority, and are always added after managers.
 	 *
+	 * Only one instance of each class is allowed.
+	 * Use {@see #dependsOn} from within plugins.
+	 *
 	 * @param systems  systems to add, order is preserved.
 	 * @param priority priority of added systems, higher priority are added before lower priority.
 	 * @return this
+	 * @throws WorldConfigurationException if type is added more than once.
 	 */
 	public WorldConfigurationBuilder withPassive(int priority, BaseSystem... systems) {
 		addSystems(priority, systems, true);
@@ -287,8 +310,12 @@ public class WorldConfigurationBuilder {
 	 * <p/>
 	 * Systems track priority separate from manager priority, and are always added after managers.
 	 *
+	 * Only one instance of each class is allowed.
+	 * Use {@see #dependsOn} from within plugins whenever possible.
+	 *
 	 * @param systems systems to add, order is preserved.
 	 * @return this
+	 * @throws WorldConfigurationException if type is added more than once.
 	 */
 	public WorldConfigurationBuilder withPassive(BaseSystem... systems) {
 		addSystems(Priority.NORMAL, systems, true);
