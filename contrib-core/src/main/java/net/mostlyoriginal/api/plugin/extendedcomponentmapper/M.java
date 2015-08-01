@@ -29,7 +29,7 @@ public class M<A extends Component> {
 	 * If the entity does not have this component then fallback is returned.
 	 *
 	 * @param entityId Entity that should possess the component
-	 * @param fallback fallback component to return.
+	 * @param fallback fallback component to return, or {@code null} to return null.
 	 * @return the instance of the component
 	 */
 	public A getSafe(int entityId, A fallback) {
@@ -42,7 +42,7 @@ public class M<A extends Component> {
 	 * If the entity does not have this component then fallback is returned.
 	 *
 	 * @param entity   Entity that should possess the component
-	 * @param fallback fallback component to return.
+	 * @param fallback fallback component to return, or {@code null} to return null.
 	 * @return the instance of the component
 	 */
 	public A getSafe(Entity entity, A fallback) {
@@ -76,6 +76,16 @@ public class M<A extends Component> {
 		{
 			removeTransmuter.transmute(world.getEntity(entityId));
 		}
+	}
+
+	/**
+	 * Remove component from entity.
+	 * Does nothing if already removed.
+	 *
+	 * @param entity entity to remove.
+	 */
+	public void remove(Entity entity) {
+		remove(entity.getId());
 	}
 
 	/**
