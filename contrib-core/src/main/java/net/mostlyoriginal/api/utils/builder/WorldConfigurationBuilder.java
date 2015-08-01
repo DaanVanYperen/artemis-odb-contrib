@@ -24,7 +24,7 @@ public class WorldConfigurationBuilder {
 	private Bag<Registerable<BaseSystem>> systems;
 	private Bag<Registerable<FieldResolver>> fieldResolvers;
 
-	private Bag<ArtemisPlugin> plugins;
+	private Bag<Registerable<ArtemisPlugin>> plugins;
 	private ArtemisPlugin activePlugin;
 	private final InjectionCache cache;
 
@@ -54,15 +54,18 @@ public class WorldConfigurationBuilder {
 	 */
 	private void appendPlugins() {
 		int i = 0;
+
 		while (i < plugins.size()) {
-			activePlugin = plugins.get(i);
+			activePlugin = plugins.get(i).item;
 			activePlugin.setup(this);
 			i++;
 		}
 		activePlugin = null;
 	}
 
-	/** add custom field handler with resolvers. */
+	/**
+	 * add custom field handler with resolvers.
+	 */
 	protected void registerFieldResolvers(WorldConfiguration config) {
 
 		if (fieldResolvers.size() > 0) {
@@ -78,7 +81,9 @@ public class WorldConfigurationBuilder {
 		}
 	}
 
-	/** add managers to config. */
+	/**
+	 * add managers to config.
+	 */
 	private void registerManagers(WorldConfiguration config) {
 		Sort.instance().sort(managers);
 		for (Registerable<Manager> registerable : managers) {
@@ -86,7 +91,9 @@ public class WorldConfigurationBuilder {
 		}
 	}
 
-	/** add systems to config. */
+	/**
+	 * add systems to config.
+	 */
 	private void registerSystems(WorldConfiguration config) {
 		Sort.instance().sort(systems);
 		for (Registerable<BaseSystem> registerable : systems) {
@@ -119,11 +126,10 @@ public class WorldConfigurationBuilder {
 
 	/**
 	 * Add one or more managers to the world with default priority.
-	 *
+	 * <p/>
 	 * Managers track priority separate from system priority, and are always added before systems.
 	 *
-	 * @param managers
-	 *              Managers to add. Will be added in passed order.
+	 * @param managers Managers to add. Will be added in passed order.
 	 * @return this
 	 */
 	public WorldConfigurationBuilder with(Manager... managers) {
@@ -132,15 +138,13 @@ public class WorldConfigurationBuilder {
 
 	/**
 	 * Add one or more managers to the world.
-	 *
+	 * <p/>
 	 * Managers track priority separate from system priority, and are always added before systems.
 	 *
-	 * @param priority
-	 *              Priority of managers. Higher priority managers are registered before lower priority managers.
-	 * @param managers
-	 *              Managers to add. Will be added in passed order.
-	 * @throws WorldConfigurationException if registering the same class twice.
+	 * @param priority Priority of managers. Higher priority managers are registered before lower priority managers.
+	 * @param managers Managers to add. Will be added in passed order.
 	 * @return this
+	 * @throws WorldConfigurationException if registering the same class twice.
 	 */
 	public WorldConfigurationBuilder with(int priority, Manager... managers) {
 		for (Manager manager : managers) {
@@ -155,12 +159,11 @@ public class WorldConfigurationBuilder {
 	}
 
 	/**
-	 * Ensure managers/systems are added to the world at normal priority.
-	 *
+	 * Specify dependency on managers/systems/plugins.
+	 * <p/>
 	 * Managers track priority separate from system priority, and are always added before systems.
 	 *
-	 * @param types
-	 *              required managers and/or systems.
+	 * @param types required managers and/or systems.
 	 * @return this
 	 */
 	public final WorldConfigurationBuilder dependsOn(Class... types) {
@@ -168,20 +171,20 @@ public class WorldConfigurationBuilder {
 	}
 
 	/**
-	 * Ensure managers/systems are added to the world.
-	 *
+	 * Specify dependency on managers/systems/plugins.
+	 * <p/>
 	 * Managers track priority separate from system priority, and are always added before systems.
+	 * Plugins do not support priority.
 	 *
-	 * @param types
-	 *              required managers and/or systems.
-	 * @param priority
-	 *              Higher priority are registered first.
+	 * @param types    required managers and/or systems.
+	 * @param priority Higher priority are registered first. Not supported for plugins.
 	 * @return this
+	 * @throws WorldConfigurationException if unsupported classes are passed or plugins are given a priority.
 	 */
 	@SuppressWarnings("unchecked")
 	public final WorldConfigurationBuilder dependsOn(int priority, Class... types) {
-		try {
-			for (Class type : types) {
+		for (Class type : types) {
+			try {
 				switch (cache.getFieldClassType(type)) {
 					case SYSTEM:
 						dependsOnSystem(priority, type);
@@ -190,11 +193,18 @@ public class WorldConfigurationBuilder {
 						dependsOnManager(priority, type);
 						break;
 					default:
-						throw new WorldConfigurationException("Unsupported type. Only supports managers and systems.");
+						if (ClassReflection.isAssignableFrom(ArtemisPlugin.class, type)) {
+							if (priority != Priority.NORMAL) {
+								throw new WorldConfigurationException("Priority not supported on plugins.");
+							}
+							dependsOnPlugin(type);
+						} else {
+							throw new WorldConfigurationException("Unsupported type. Only supports managers and systems.");
+						}
 				}
+			} catch (ReflectionException e) {
+				throw new WorldConfigurationException("Unable to instance " + type + " via reflection.", e);
 			}
-		} catch (ReflectionException e) {
-			throw new WorldConfigurationException("Unable to instance manager via reflection.", e);
 		}
 		return this;
 	}
@@ -206,17 +216,23 @@ public class WorldConfigurationBuilder {
 	}
 
 	protected void dependsOnSystem(int priority, Class<? extends BaseSystem> type) throws ReflectionException {
-		if (!containsType(systems,type)) {
+		if (!containsType(systems, type)) {
 			this.systems.add(Registerable.of(ClassReflection.newInstance(type), priority));
+		}
+	}
+
+	private void dependsOnPlugin(Class<? extends ArtemisPlugin> type) throws ReflectionException {
+		if (!containsType(plugins, type)) {
+			this.plugins.add(Registerable.of(ClassReflection.newInstance(type)));
 		}
 	}
 
 	/**
 	 * Register active system(s).
-	 *
+	 * <p/>
 	 * Systems track priority separate from manager priority, and are always added after managers.
 	 *
-	 * @param systems systems to add, order is preserved.
+	 * @param systems  systems to add, order is preserved.
 	 * @param priority priority of added systems, higher priority are added before lower priority.
 	 * @return this
 	 */
@@ -227,7 +243,7 @@ public class WorldConfigurationBuilder {
 
 	/**
 	 * Register active system(s).
-	 *
+	 * <p/>
 	 * Systems track priority separate from manager priority, and are always added after managers.
 	 *
 	 * @param systems systems to add, order is preserved.
@@ -241,7 +257,7 @@ public class WorldConfigurationBuilder {
 
 	/**
 	 * Add plugins to world.
-	 *
+	 * <p/>
 	 * Upon build plugins will be called to register dependencies.
 	 *
 	 * @param plugins Plugins to add.
@@ -254,10 +270,10 @@ public class WorldConfigurationBuilder {
 
 	/**
 	 * Register passive systems.
-	 *
+	 * <p/>
 	 * Systems track priority separate from manager priority, and are always added after managers.
 	 *
-	 * @param systems systems to add, order is preserved.
+	 * @param systems  systems to add, order is preserved.
 	 * @param priority priority of added systems, higher priority are added before lower priority.
 	 * @return this
 	 */
@@ -268,7 +284,7 @@ public class WorldConfigurationBuilder {
 
 	/**
 	 * Register passive systems with normal priority.
-	 *
+	 * <p/>
 	 * Systems track priority separate from manager priority, and are always added after managers.
 	 *
 	 * @param systems systems to add, order is preserved.
@@ -279,7 +295,9 @@ public class WorldConfigurationBuilder {
 		return this;
 	}
 
-	/** helper to queue systems for registration. */
+	/**
+	 * helper to queue systems for registration.
+	 */
 	private void addSystems(int priority, BaseSystem[] systems, boolean passive) {
 		for (BaseSystem system : systems) {
 
@@ -295,12 +313,12 @@ public class WorldConfigurationBuilder {
 	 * Check if bag of registerables contains any of passed type.
 	 *
 	 * @param items bag of registerables.
-	 * @param type type to check for.
+	 * @param type  type to check for.
 	 * @return {@code true} if found {@code false} if none.
 	 */
 	@SuppressWarnings("unchecked")
 	private boolean containsType(Bag items, Class type) {
-		for (Registerable<?> registration : (Bag<Registerable<?>>)items) {
+		for (Registerable<?> registration : (Bag<Registerable<?>>) items) {
 			if (registration.itemType == type) {
 				return true;
 			}
@@ -308,19 +326,24 @@ public class WorldConfigurationBuilder {
 		return false;
 	}
 
-	/** Add new plugins. */
+	/**
+	 * Add new plugins.
+	 */
 	private void addPlugins(ArtemisPlugin[] plugins) {
 		for (ArtemisPlugin plugin : plugins) {
-			if (!this.plugins.contains(plugin)) {
-				this.plugins.add(plugin);
+
+			if (containsType(this.plugins, plugin.getClass())) {
+				throw new WorldConfigurationException("Plugin of type " + plugin.getClass() + " registered twice. Only once allowed.");
 			}
+
+			this.plugins.add(Registerable.of(plugin));
 		}
 	}
 
 	public static abstract class Priority {
-		public static final int LOWEST  = Integer.MIN_VALUE;
+		public static final int LOWEST = Integer.MIN_VALUE;
 		public static final int LOW = -10000;
-		public static final int NORMAL  = 0;
+		public static final int NORMAL = 0;
 		public static final int HIGH = 10000;
 		public static final int HIGHEST = Integer.MAX_VALUE;
 	}
