@@ -10,7 +10,7 @@ import com.badlogic.gdx.utils.ObjectMap;
  */
 public class FontManager extends Manager {
 
-	private final ObjectMap<String, BitmapFont> font = new ObjectMap<>();
+	private final ObjectMap<String, BitmapFont> fonts = new ObjectMap<>();
 
 	@Override
 	protected void initialize() {
@@ -19,5 +19,16 @@ public class FontManager extends Manager {
 
 	private BitmapFont loadFont(final String fontName) {
 		return new BitmapFont(Gdx.files.internal(fontName + ".fnt"), false);
+	}
+
+	/** loads font. */
+	public BitmapFont getFont(String fontName) {
+		BitmapFont font = this.fonts.get(fontName);
+		if ( font == null )
+		{
+			font = loadFont(fontName);
+			fonts.put(fontName, font);
+		}
+		return font;
 	}
 }
