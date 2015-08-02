@@ -159,5 +159,63 @@ public class ExtendedComponentMapperPluginTest {
 		world.process();
 	}
 
+	@Test
+	public void create_right_after_entity_creation_should_not_throw_exception() {
+		@Wire(injectInherited = true)
+		class TestSystem extends BasicSystem {
+			@Override
+			protected void process(Entity e) {
+				final Entity t1 = world.createEntity();
+				Pos c1 = mPos.create(t1);
+				Assert.assertNotNull(c1);
+			}
+		}
+		createAndProcessWorld(new TestSystem());
+	}
+
+
+	@Test
+	public void remove_right_after_entity_creation_should_not_throw_exception() {
+		@Wire(injectInherited = true)
+		class TestSystem extends BasicSystem {
+			@Override
+			protected void process(Entity e) {
+				final Entity t1 = world.createEntity();
+				mPos.remove(t1);
+			}
+		}
+		createAndProcessWorld(new TestSystem());
+	}
+
+
+	@Test
+	public void create_by_id_right_after_entity_creation_should_not_throw_exception() {
+		@Wire(injectInherited = true)
+		class TestSystem extends BasicSystem {
+			@Override
+			protected void process(Entity e) {
+				final Entity t1 = world.createEntity();
+				Pos c1 = mPos.create(t1.id);
+				Assert.assertNotNull(c1);
+			}
+		}
+		createAndProcessWorld(new TestSystem());
+	}
+
+
+	@Test
+	public void remove_by_id_right_after_entity_creation_should_not_throw_exception() {
+		@Wire(injectInherited = true)
+		class TestSystem extends BasicSystem {
+			@Override
+			protected void process(Entity e) {
+				final Entity t1 = world.createEntity();
+				mPos.remove(t1.id);
+			}
+		}
+		createAndProcessWorld(new TestSystem());
+	}
+
+
 
 }

@@ -11,15 +11,15 @@ import com.artemis.*;
  */
 public class M<A extends Component> {
 
-	private final World world;
 	private final ComponentMapper<A> mapper;
 	private final EntityTransmuter createTransmuter;
 	private final EntityTransmuter removeTransmuter;
+	private final Entity flyweight;
 
 	@SuppressWarnings("unchecked")
 	public M( Class<? extends Component> type, World world) {
-		this.world = world;
 		this.mapper = (ComponentMapper<A>) world.getMapper(type);
+		flyweight = Entity.createFlyweight(world);
 		createTransmuter = new EntityTransmuterFactory(world).add(type).build();
 		removeTransmuter = new EntityTransmuterFactory(world).remove(type).build();
 	}
@@ -59,10 +59,20 @@ public class M<A extends Component> {
 	public A create(int entityId) {
 		A component = getSafe(entityId);
 		if (component == null) {
-			createTransmuter.transmute(world.getEntity(entityId));
+			createTransmuter.transmute(asFlyweight(entityId));
 			component = get(entityId);
 		}
 		return component;
+	}
+
+	/**
+	 * Setup flyweight with ID and return.
+	 * Cannot count on just created entities being resolvable
+	 * in world, which can break transmuters.
+	 */
+	private Entity asFlyweight(int entityId) {
+		flyweight.id = entityId;
+		return flyweight;
 	}
 
 	/**
@@ -74,7 +84,7 @@ public class M<A extends Component> {
 	public void remove(int entityId) {
 		if ( has(entityId) )
 		{
-			removeTransmuter.transmute(world.getEntity(entityId));
+			removeTransmuter.transmute(asFlyweight(entityId));
 		}
 	}
 
