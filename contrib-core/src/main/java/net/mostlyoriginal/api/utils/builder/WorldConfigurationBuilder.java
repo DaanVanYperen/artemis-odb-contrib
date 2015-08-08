@@ -19,12 +19,11 @@ import net.mostlyoriginal.api.plugin.common.ArtemisPlugin;
  * @author Daan van Yperen
  */
 public class WorldConfigurationBuilder {
+	private Bag<Registerable<? extends Manager>> managers;
+	private Bag<Registerable<? extends BaseSystem>> systems;
+	private Bag<Registerable<? extends FieldResolver>> fieldResolvers;
+	private Bag<Registerable<? extends ArtemisPlugin>> plugins;
 
-	private Bag<Registerable<Manager>> managers;
-	private Bag<Registerable<BaseSystem>> systems;
-	private Bag<Registerable<FieldResolver>> fieldResolvers;
-
-	private Bag<Registerable<ArtemisPlugin>> plugins;
 	private ArtemisPlugin activePlugin;
 	private final InjectionCache cache;
 
@@ -73,7 +72,7 @@ public class WorldConfigurationBuilder {
 			// instance default field handler
 			final FieldHandler fieldHandler = new FieldHandler(new InjectionCache());
 
-			for (Registerable<FieldResolver> registerable : fieldResolvers) {
+			for (Registerable<? extends FieldResolver> registerable : fieldResolvers) {
 				fieldHandler.addFieldResolver(registerable.item);
 			}
 
@@ -86,7 +85,7 @@ public class WorldConfigurationBuilder {
 	 */
 	private void registerManagers(WorldConfiguration config) {
 		Sort.instance().sort(managers);
-		for (Registerable<Manager> registerable : managers) {
+		for (Registerable<? extends Manager> registerable : managers) {
 			config.setManager(registerable.item);
 		}
 	}
@@ -96,7 +95,7 @@ public class WorldConfigurationBuilder {
 	 */
 	private void registerSystems(WorldConfiguration config) {
 		Sort.instance().sort(systems);
-		for (Registerable<BaseSystem> registerable : systems) {
+		for (Registerable<? extends BaseSystem> registerable : systems) {
 			config.setSystem(registerable.item, registerable.passive);
 		}
 	}
