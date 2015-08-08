@@ -66,9 +66,7 @@ public abstract class SpreadProcessingSystem extends EntitySystem {
 		// Depending on subscription size invocation could potentially require less than
 		// one invocation. Keep track of 'partial' invocations until we can invoke.
 		entitiesToProcess += processedPerSecond * world.delta;
-		System.out.println("Entities to process: " + entitiesToProcess);
 		if ( entitiesToProcess >= 1f ) {
-			System.out.println("Processing " + (int)entitiesToProcess);
 			processEntities((int) entitiesToProcess, entities.getData(), entities.size());
 
 			// keep remainder.
@@ -84,7 +82,6 @@ public abstract class SpreadProcessingSystem extends EntitySystem {
 		int lastIndex = index + entitiesToProcess;
 		for (int s = Math.min(size, lastIndex); s > index; index++) {
 			flyweight.id = entities[index];
-			System.out.println("Processing E" + flyweight.id);
 			process(flyweight);
 		}
 
@@ -98,7 +95,6 @@ public abstract class SpreadProcessingSystem extends EntitySystem {
 		lastIndex = lastIndex % size;
 		for (int s = Math.min(size, lastIndex); s > index; index++) {
 			flyweight.id = entities[index];
-			System.out.println("Processing X" + flyweight.id);
 			process(flyweight);
 		}
 
