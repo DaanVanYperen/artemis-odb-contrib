@@ -65,13 +65,17 @@ public abstract class SpreadProcessingSystem extends EntitySystem {
 
 		// Depending on subscription size invocation could potentially require less than
 		// one invocation. Keep track of 'partial' invocations until we can invoke.
-		entitiesToProcess += processedPerSecond * world.delta;
+		entitiesToProcess += processedPerSecond * getWorldDelta();
 		if ( entitiesToProcess >= 1f ) {
 			processEntities((int) entitiesToProcess, entities.getData(), entities.size());
 
 			// keep remainder.
 			entitiesToProcess-=(int)entitiesToProcess;
 		}
+	}
+
+	protected float getWorldDelta() {
+		return world.delta;
 	}
 
 	protected void processEntities(int entitiesToProcess, int[] entities, int size) {
