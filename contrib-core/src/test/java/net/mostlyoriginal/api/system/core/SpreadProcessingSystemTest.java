@@ -12,12 +12,12 @@ import org.junit.Test;
 /**
  * @author Daan van Yperen
  */
-public class PacedProcessingSystemTest extends PenguinTest {
+public class SpreadProcessingSystemTest extends PenguinTest {
 
 	@Test
 	public void Should_run_full_cycle_within_period() {
 
-		final World world = bakeWorld(new MyPacedProcessingSystem(10, 1));
+		final World world = bakeWorld(new MySpreadProcessingSystem(10, 1));
 		world.delta=1;
 		world.process();
 
@@ -27,7 +27,7 @@ public class PacedProcessingSystemTest extends PenguinTest {
 	@Test
 	public void Should_never_run_more_than_full_cycle_per_invocation() {
 
-		final World world = bakeWorld(new MyPacedProcessingSystem(10, 1));
+		final World world = bakeWorld(new MySpreadProcessingSystem(10, 1));
 		world.delta=10;
 		world.process();
 
@@ -36,7 +36,7 @@ public class PacedProcessingSystemTest extends PenguinTest {
 
 	@Test
 	public void Should_run_half_cycle_within_half_period() {
-		final World world = bakeWorld(new MyPacedProcessingSystem(10, 1));
+		final World world = bakeWorld(new MySpreadProcessingSystem(10, 1));
 		world.delta=0.5f;
 		world.process();
 
@@ -51,7 +51,7 @@ public class PacedProcessingSystemTest extends PenguinTest {
 	@Test
 	public void Should_process_no_entities_When_delta_smaller_than_single_invocation() {
 
-		final World world = bakeWorld(new MyPacedProcessingSystem(10, 1));
+		final World world = bakeWorld(new MySpreadProcessingSystem(10, 1));
 		world.delta=0.09f;
 		world.process();
 
@@ -60,7 +60,7 @@ public class PacedProcessingSystemTest extends PenguinTest {
 
 	@Test
 	public void Should_process_entity_When_sufficient_small_deltas_combine() {
-		final World world = bakeWorld(new MyPacedProcessingSystem(10, 1));
+		final World world = bakeWorld(new MySpreadProcessingSystem(10, 1));
 		world.delta=0.025f;
 		world.process();
 		world.process();
@@ -75,7 +75,7 @@ public class PacedProcessingSystemTest extends PenguinTest {
 
 	@Test
 	public void Should_not_step_over_entities_when_subscription_list_shrinks() {
-		final World world = bakeWorld(new MyPacedProcessingSystem(10, 1));
+		final World world = bakeWorld(new MySpreadProcessingSystem(10, 1));
 		world.delta=0.5f;
 		world.process();
 
@@ -105,7 +105,7 @@ public class PacedProcessingSystemTest extends PenguinTest {
 
 	@Test
 	public void Should_be_unaffected_by_deletion_of_entities_not_processed_yet() {
-		final World world = bakeWorld(new MyPacedProcessingSystem(10, 1));
+		final World world = bakeWorld(new MySpreadProcessingSystem(10, 1));
 		world.delta=0.5f;
 		world.process();
 
@@ -133,17 +133,17 @@ public class PacedProcessingSystemTest extends PenguinTest {
 		Assert.assertEquals("Should continue at the new index.", 1, penguins[lastPokedIndex + 3].pokes);
 	}
 
-	private World bakeWorld(MyPacedProcessingSystem system) {
+	private World bakeWorld(MySpreadProcessingSystem system) {
 		return new World(new WorldConfiguration().setSystem(
 				system));
 	}
 
 
-	private class MyPacedProcessingSystem extends PacedProcessingSystem {
+	private class MySpreadProcessingSystem extends SpreadProcessingSystem {
 
 		private int penguins;
 
-		public MyPacedProcessingSystem(int penguins, float roundTripTime ) {
+		public MySpreadProcessingSystem(int penguins, float roundTripTime) {
 			super(Aspect.all(Penguin.class), roundTripTime);
 
 			this.penguins = penguins;
@@ -160,10 +160,10 @@ public class PacedProcessingSystemTest extends PenguinTest {
 		}
 
 		private void addPenguins(int count, World world) {
-			PacedProcessingSystemTest.this.penguins = new Penguin[count];
+			SpreadProcessingSystemTest.this.penguins = new Penguin[count];
 			for (int i = 0; i < count; i++) {
-				PacedProcessingSystemTest.this.penguins[i] = new Penguin(i);
-				world.createEntity().edit().add(PacedProcessingSystemTest.this.penguins[i]);
+				SpreadProcessingSystemTest.this.penguins[i] = new Penguin(i);
+				world.createEntity().edit().add(SpreadProcessingSystemTest.this.penguins[i]);
 			}
 		}
 

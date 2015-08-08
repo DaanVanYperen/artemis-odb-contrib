@@ -9,22 +9,22 @@ import com.artemis.utils.IntBag;
 
 
 /**
- * Paces entity processing by world delta.
+ * Spread entity processing.
  * <p/>
  *
- * The system attempts to spread out or compact entity
- * invocations to cycle over all the entities within
- * the specified  time period.
+ * The system spreads out invocations while maintaining
+ * a fixed processing interval per entity.
+ *
+ * Use to spread out work over multiple frames.
  *
  * The more entities are added, the smaller the interval
  * between {@see #process(Entity)} invocations.
  *
- * Developer is responsible for providing a sustainable pace.
- *
  * @author Adrian Papari
  * @author Daan van Yperen
  */
-public abstract class PacedProcessingSystem extends EntitySystem {
+public abstract class SpreadProcessingSystem extends EntitySystem {
+
 
 	protected int index;
 	protected float roundTripTime;
@@ -33,19 +33,14 @@ public abstract class PacedProcessingSystem extends EntitySystem {
 	protected Entity flyweight;
 
 	/**
-	 * Creates a new PacedProcessingSystem.
+	 * Creates a new SpreadProcessingSystem.
 	 *
 	 * @param aspect        the aspect to match entites
 	 * @param roundTripTime time required to cycle through all entities.
 	 */
-	public PacedProcessingSystem(Aspect.Builder aspect, float roundTripTime) {
+	public SpreadProcessingSystem(Aspect.Builder aspect, float roundTripTime) {
 		super(aspect);
 		setRoundTripTime(roundTripTime);
-	}
-
-	public PacedProcessingSystem(Aspect.Builder aspect, float roundTripTime, int startIndex) {
-		this(aspect,roundTripTime);
-		index = startIndex;
 	}
 
 	@Override
