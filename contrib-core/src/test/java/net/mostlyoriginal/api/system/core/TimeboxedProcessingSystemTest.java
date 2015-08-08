@@ -3,27 +3,24 @@ package net.mostlyoriginal.api.system.core;
 import com.artemis.Aspect;
 import com.artemis.Entity;
 import com.artemis.World;
-import com.artemis.WorldConfiguration;
-import net.mostlyoriginal.api.common.Pokeable;
+import net.mostlyoriginal.api.common.Penguin;
+import net.mostlyoriginal.api.common.PenguinTest;
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author Daan van Yperen
  */
-public class TimeboxedProcessingSystemTest {
-
-	public static final int INVALID_POKE_COUNT = 999;
-	public Pokeable[] pokables;
+public class TimeboxedProcessingSystemTest extends PenguinTest {
 
 	@Test
 	public void Should_stop_processing_after_allotted_time() {
 
 		bakeWorld(new MyTimeboxedProcessingSystem(10, 0.01f, 0.05f,0)).process();
 
-		Assert.assertEquals(1, pokables[0].pokes);
-		Assert.assertEquals(1, pokables[3].pokes);
-		Assert.assertEquals("Should've stopped poking.", 0, pokables[7].pokes);
+		Assert.assertEquals(1, penguins[0].pokes);
+		Assert.assertEquals(1, penguins[3].pokes);
+		Assert.assertEquals("Should've stopped poking.", 0, penguins[7].pokes);
 	}
 
 	@Test
@@ -36,37 +33,26 @@ public class TimeboxedProcessingSystemTest {
 		final int lastPokedIndex = getLastPokedIndex();
 
 		// check preconditions.
-		Assert.assertEquals("Expected last poked to have been poked!", 1, pokables[lastPokedIndex].pokes);
-		Assert.assertEquals("Expected next penguin to poke to not be poked.", 0, pokables[lastPokedIndex + 1].pokes);
+		Assert.assertEquals("Expected last poked to have been poked!", 1, penguins[lastPokedIndex].pokes);
+		Assert.assertEquals("Expected next penguin to poke to not be poked.", 0, penguins[lastPokedIndex + 1].pokes);
 
 		world.process();
 
-		Assert.assertEquals("Expected not to reach previously poked penguin.", 1, pokables[lastPokedIndex].pokes);
-		Assert.assertEquals("Expected to continue next penguin in line.", 1, pokables[lastPokedIndex + 1].pokes);
-	}
-
-	private int getLastPokedIndex() {
-		int highestPokes = 0;
-		for (int i = 0; i < pokables.length; i++) {
-			if (pokables[i].pokes < highestPokes) {
-				return i - 1;
-			}
-			highestPokes = pokables[i].pokes;
-		}
-		return -1;
+		Assert.assertEquals("Expected not to reach previously poked penguin.", 1, penguins[lastPokedIndex].pokes);
+		Assert.assertEquals("Expected to continue next penguin in line.", 1, penguins[lastPokedIndex + 1].pokes);
 	}
 
 	@Test
 	public void Should_wrap_around_when_subscription_list_end_reached() {
 		bakeWorld(new MyTimeboxedProcessingSystem(10, 0.01f, 0.02f,9)).process();
-		Assert.assertEquals("Expected to wrap around to first penguin.", 1, pokables[0].pokes);
+		Assert.assertEquals("Expected to wrap around to first penguin.", 1, penguins[0].pokes);
 	}
 
 	@Test
 	public void Should_stop_after_one_full_cycle_even_if_time_remaining() {
 		bakeWorld(new MyTimeboxedProcessingSystem(10, 0.01f, 9f,5)).process();
-		Assert.assertEquals("Should run no more than 1 cycle.", 1, pokables[4].pokes);
-		Assert.assertEquals("Should run no more than 1 cycle.", 1, pokables[5].pokes);
+		Assert.assertEquals("Should run no more than 1 cycle.", 1, penguins[4].pokes);
+		Assert.assertEquals("Should run no more than 1 cycle.", 1, penguins[5].pokes);
 	}
 
 	@Test
@@ -86,15 +72,15 @@ public class TimeboxedProcessingSystemTest {
 
 		// set all poked entries to an easily observable Value.
 		for (int i = 0; i <= lastPokedIndex; i++) {
-			pokables[i].pokes = INVALID_POKE_COUNT;
+			penguins[i].pokes = INVALID_POKE_COUNT;
 		}
 
 		world.process();
 
 		for (int i = 0; i <= lastPokedIndex; i++) {
-			Assert.assertEquals("Should continue at the new index.", INVALID_POKE_COUNT, pokables[i].pokes);
+			Assert.assertEquals("Should continue at the new index.", INVALID_POKE_COUNT, penguins[i].pokes);
 		}
-		Assert.assertEquals("Should continue at the new index.", 1, pokables[lastPokedIndex + 1].pokes);
+		Assert.assertEquals("Should continue at the new index.", 1, penguins[lastPokedIndex + 1].pokes);
 	}
 
 
@@ -107,23 +93,24 @@ public class TimeboxedProcessingSystemTest {
 		final int lastPokedIndex = getLastPokedIndex();
 
 		// take out two entities that have been poked in this pass. This should shift the list.
+		world.getEntity(lastPokedIndex+1).deleteFromWorld();
 		world.getEntity(lastPokedIndex+2).deleteFromWorld();
-		world.getEntity(lastPokedIndex+3).deleteFromWorld();
 
 		// since entity has been deleted the subscription list shrunk, moving the target index back one.
 		// if the system does not compensate we could accidentally skip one or more pokes.
 
 		// set all poked entries to an easily observable Value.
-		for (int i = 0; i <= lastPokedIndex; i++) {
-			pokables[i].pokes = INVALID_POKE_COUNT;
+		for (int i = 0; i <= lastPokedIndex+2; i++) {
+			penguins[i].pokes = INVALID_POKE_COUNT;
 		}
 
 		world.process();
 
-		for (int i = 0; i <= lastPokedIndex; i++) {
-			Assert.assertEquals("Should continue at the new index.", INVALID_POKE_COUNT, pokables[i].pokes);
+		for (int i = 0; i <= lastPokedIndex+2; i++) {
+			Assert.assertEquals("Should continue at the new index.", INVALID_POKE_COUNT, penguins[i].pokes);
 		}
-		Assert.assertEquals("Should continue at the new index.", 1, pokables[lastPokedIndex + 1].pokes);
+
+		Assert.assertEquals("Should continue at the new index.", 1, penguins[lastPokedIndex + 3].pokes);
 	}
 
 	@Test
@@ -143,11 +130,6 @@ public class TimeboxedProcessingSystemTest {
 		world.process();
 	}
 
-	private World bakeWorld(MyTimeboxedProcessingSystem system) {
-		return new World(new WorldConfiguration().setSystem(
-				system));
-	}
-
 	private class MyTimeboxedProcessingSystem extends TimeboxedProcessingSystem {
 
 		private int penguins;
@@ -158,7 +140,7 @@ public class TimeboxedProcessingSystemTest {
 		private long fakeTime;
 
 		public MyTimeboxedProcessingSystem(int penguins, float pokeSpeed, float allottedTime, int startIndex) {
-			super(Aspect.all(Pokeable.class));
+			super(Aspect.all(Penguin.class));
 			this.penguins = penguins;
 			this.pokeSpeed = pokeSpeed;
 			this.allottedTime = allottedTime;
@@ -172,7 +154,7 @@ public class TimeboxedProcessingSystemTest {
 
 		@Override
 		protected void process(Entity e) {
-			e.getComponent(Pokeable.class).pokes++;
+			e.getComponent(Penguin.class).pokes++;
 			fakeTime += pokeSpeed * NANOSECONDS_PER_SECOND;
 		}
 
@@ -187,10 +169,10 @@ public class TimeboxedProcessingSystemTest {
 		}
 
 		private void addPenguins(int count, World world) {
-			pokables = new Pokeable[count];
+			TimeboxedProcessingSystemTest.this.penguins = new Penguin[count];
 			for (int i = 0; i < count; i++) {
-				pokables[i] = new Pokeable(i);
-				world.createEntity().edit().add(pokables[i]);
+				TimeboxedProcessingSystemTest.this.penguins[i] = new Penguin(i);
+				world.createEntity().edit().add(TimeboxedProcessingSystemTest.this.penguins[i]);
 			}
 		}
 

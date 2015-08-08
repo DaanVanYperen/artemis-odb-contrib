@@ -5,14 +5,14 @@ import com.artemis.Component;
 /**
  * @author Daan van Yperen
  */
-public class Pokeable extends Component {
+public class Penguin extends Component {
 	public int id;
 	public int pokes;
 
-	public Pokeable() {
+	public Penguin() {
 	}
 
-	public Pokeable(int id) {
+	public Penguin(int id) {
 		this.id = id;
 	}
 }
