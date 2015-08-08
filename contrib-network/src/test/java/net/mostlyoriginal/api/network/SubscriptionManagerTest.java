@@ -128,12 +128,8 @@ public class SubscriptionManagerTest {
 
         assertEquals(expected, matchingSubscribers);
 
-        int matchingEntities=0;
-        for (Entity e : subscriptionManager.getEntitiesOf(connectionId)) {
-            if ( e == entity ) {
-                matchingEntities++;
-            }
-        }
+        int matchingEntities=
+                subscriptionManager.getEntitiesOf(connectionId).contains(entity.getId()) ? 1 : 0;
 
         assertEquals(expected, matchingEntities);
     }

@@ -52,20 +52,20 @@ public abstract class DeferredEntityProcessingSystem extends EntitySystem {
    	protected abstract void process(Entity e);
 
     @Override
-    protected void removed(Entity e) {
+    protected void removed(int entityId) {
 
         // inform delegation handler
-        principal.unregisterAgent(e, localProcessingAgent);
+        principal.unregisterAgent(entityId, localProcessingAgent);
 
-        super.removed(e);
+        super.removed(entityId);
     }
 
     @Override
-    protected void inserted(Entity e) {
-        super.inserted(e);
+    protected void inserted(int entityId) {
+        super.inserted(entityId);
 
         // warn delegation handler we've lost interest in this entity.
-        principal.registerAgent(e, localProcessingAgent);
+        principal.registerAgent(entityId, localProcessingAgent);
     }
 
 	@Override

@@ -1,8 +1,7 @@
 package net.mostlyoriginal.api.system.core;
 
 import com.artemis.*;
-import com.artemis.utils.Bag;
-import com.artemis.utils.ImmutableBag;
+import com.artemis.utils.IntBag;
 
 /**
  * Entity system for processing two sets of entities each matching their
@@ -53,18 +52,18 @@ public abstract class DualEntitySystem extends BaseSystem implements EntitySubsc
 	}
 
 	@Override
-	public void inserted(ImmutableBag<Entity> entities) {
-		final Object[] data = ((Bag<Entity>) entities).getData();
+	public void inserted(IntBag entities) {
+		int[] ids = entities.getData();
 		for (int i = 0, s = entities.size(); s > i; i++) {
-			inserted((Entity) data[i]);
+			inserted(ids[i]);
 		}
 	}
 
 	@Override
-	public void removed(ImmutableBag<Entity> entities) {
-		final Object[] data = ((Bag<Entity>) entities).getData();
+	public void removed(IntBag entities) {
+		int[] ids = entities.getData();
 		for (int i = 0, s = entities.size(); s > i; i++) {
-			removed((Entity) data[i]);
+			removed(ids[i]);
 		}
 	}
 
@@ -72,17 +71,17 @@ public abstract class DualEntitySystem extends BaseSystem implements EntitySubsc
 	 * Called if the system has received a entity it is interested in, e.g
 	 * created or a component was added to it.
 	 *
-	 * @param e the entity that was added to this system
+	 * @param entityId the entity that was added to this system
 	 */
-	protected void inserted(Entity e) {
+	protected void inserted(int entityId) {
 	}
 
 	/**
 	 * Called if a entity was removed from this system, e.g deleted or had one
 	 * of it's components removed.
 	 *
-	 * @param e the entity that was removed from this system
+	 * @param entityId the entity that was removed from this system
 	 */
-	protected void removed(Entity e) {
+	protected void removed(int entityId) {
 	}
 }

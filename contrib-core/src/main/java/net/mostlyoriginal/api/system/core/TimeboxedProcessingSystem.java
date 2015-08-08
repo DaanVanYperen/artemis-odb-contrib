@@ -102,11 +102,11 @@ public abstract class TimeboxedProcessingSystem extends EntitySystem {
 	}
 
 	@Override
-	protected void removed(Entity e) {
+	protected void removed(int id) {
 
 		// because subscriptions are always sorted by id,
 		// we can assume smaller ids mean the index has shifted.
-		if ( (e.getId() <= lastProcessedEntityId) && index > 0 ) {
+		if ( (id <= lastProcessedEntityId) && index > 0 ) {
 			// re-align the index.
 			index--;
 		}

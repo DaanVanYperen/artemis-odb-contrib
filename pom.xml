@@ -104,6 +104,7 @@
     </developers>
 
     <modules>
+        <module>contrib-fallback</module>
         <module>contrib-core</module>
         <module>contrib-jam</module>
         <module>contrib-eventbus</module>

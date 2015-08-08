@@ -41,7 +41,7 @@ public class DeferredEntityProcessingSystemTest {
 		w.process();
 
 		// ensure it gets registered with the principal
-		verify(principal, times(1)).registerAgent(eq(myEntity), any(EntityProcessAgent.class));
+		verify(principal, times(1)).registerAgent(eq(myEntity.id), any(EntityProcessAgent.class));
 	}
 
 	@Test
@@ -59,6 +59,6 @@ public class DeferredEntityProcessingSystemTest {
 		w.process();
 
 		// ensure it gets registered with the principal
-		verify(principal, times(1)).unregisterAgent(eq(myEntity), any(EntityProcessAgent.class));
+		verify(principal, times(1)).unregisterAgent(eq(myEntity.id), any(EntityProcessAgent.class));
 	}
 }
