@@ -8,6 +8,7 @@ import com.artemis.Component;
 public class Label extends Component {
 
     public String text;
+    public String fontName;
     public Align align = Align.LEFT;
 
     public float scale = 1f;
@@ -15,6 +16,12 @@ public class Label extends Component {
     public Label(String text) {
         this.text = text;
     }
+
+    public Label(String text, String fontName) {
+        this.text = text;
+        this.fontName = fontName;
+    }
+
 
     public enum Align {
         LEFT, RIGHT

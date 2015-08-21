@@ -1,6 +1,7 @@
 package net.mostlyoriginal.api.network.integration;
 
 import net.mostlyoriginal.api.network.common.NetworkIntegrationTest;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.fail;
@@ -10,6 +11,7 @@ import static org.junit.Assert.fail;
  *
  * @author Daan van Yperen
  */
+@Ignore
 public class NetworkSanityTest extends NetworkIntegrationTest {
 
     @Test

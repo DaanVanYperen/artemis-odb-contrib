@@ -5,7 +5,7 @@
     <parent>
         <groupId>net.mostlyoriginal.artemis-odb</groupId>
         <artifactId>contrib-parent</artifactId>
-        <version>0.10.2</version>
+        <version>0.11.4</version>
     </parent>
     <artifactId>contrib-test-gwt</artifactId>
     <packaging>war</packaging>
@@ -120,6 +120,7 @@
                     <enableClosureCompiler>true</enableClosureCompiler>
                     <disableClassMetadata>false</disableClassMetadata>
                     <disableCastChecking>true</disableCastChecking>
+                    <sourceLevel>1.7</sourceLevel>
                     <testTimeOut>1800</testTimeOut>
                     <productionMode>true</productionMode>
                     <htmlunit>IE8</htmlunit>

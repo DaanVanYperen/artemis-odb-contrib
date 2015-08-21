@@ -8,7 +8,6 @@ import net.mostlyoriginal.api.network.marshal.common.MarshalObserver;
 import net.mostlyoriginal.api.network.marshal.common.MarshalState;
 import net.mostlyoriginal.api.network.marshal.common.MarshalStrategy;
 
-import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -46,12 +45,7 @@ public abstract class KryonetMarshalStrategy implements MarshalStrategy {
 
     @Override
     public void update() {
-        try {
-            // listener will be called synchronously.
-            endpoint.update(0);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        // handled by kryo threads.
     }
 
     /** Disconnect our endpoint. */

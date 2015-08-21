@@ -1,5 +1,7 @@
 # Changelog
 
+## Version: 0.11-SNAPSHOT
+
 ## Version: 0.10.2
 
 - artemis-odb 0.10.2

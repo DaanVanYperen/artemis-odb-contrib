@@ -4,6 +4,7 @@ import com.artemis.Entity;
 import com.artemis.Manager;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
+import com.artemis.utils.IntBag;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,12 +18,12 @@ import java.util.Map;
  */
 public class SubscriptionManager<T> extends Manager {
 
-    private final Map<Entity, Bag<T>> entitySubscribers;
-    private final Map<T, Bag<Entity>> subscriberEntities;
+    private final Bag<Bag<T>> entitySubscribers;
+    private final Map<T, IntBag> subscriberEntities;
 
     public SubscriptionManager() {
         subscriberEntities = new HashMap<>();
-        entitySubscribers = new HashMap<>();
+        entitySubscribers = new Bag<>();
     }
 
     /**
@@ -31,25 +32,37 @@ public class SubscriptionManager<T> extends Manager {
      * Does nothing if already subscribed.
      *
      * @param subscriber subscriber
-     * @param e          entity to subscribe.
+     * @param entity   entity to subscribe.
      */
-    public void subscribe(T subscriber, Entity e) {
+    public void subscribe(T subscriber, Entity entity) {
+        subscribe(subscriber, entity.getId());
+    }
+
+    /**
+     * Subscribe T to entity.
+     * <p/>
+     * Does nothing if already subscribed.
+     *
+     * @param subscriber subscriber
+     * @param entityId   entity to subscribe.
+     */
+    public void subscribe(T subscriber, int entityId) {
 
         // hook subscriber to entity.
-        Bag<Entity> entities = subscriberEntities.get(subscriber);
+        IntBag entities = subscriberEntities.get(subscriber);
         if (entities == null) {
-            entities = new Bag<>();
+            entities = new IntBag();
             subscriberEntities.put(subscriber, entities);
         }
-        if (!entities.contains(e)) {
-            entities.add(e);
+        if (!entities.contains(entityId)) {
+            entities.add(entityId);
         }
 
         // hook entity to subscriber.
-        Bag<T> subscribers = entitySubscribers.get(e);
+        Bag<T> subscribers = entitySubscribers.get(entityId);
         if (subscribers == null) {
             subscribers = new Bag<>();
-            entitySubscribers.put(e, subscribers);
+            entitySubscribers.set(entityId, subscribers);
         }
         if (!subscribers.contains(subscriber)) {
             subscribers.add(subscriber);
@@ -60,33 +73,59 @@ public class SubscriptionManager<T> extends Manager {
      * Unsubscribe T from entity.
      *
      * @param subscriber subscriber
-     * @param e          entity to subscribe
+     * @param entityId   entity to subscribe
      */
-    public void unsubscribe(T subscriber, Entity e) {
+    public void unsubscribe(T subscriber, int entityId) {
 
         // unhook entity from subscriber
-        Bag<Entity> entities = subscriberEntities.get(subscriber);
+        IntBag entities = subscriberEntities.get(subscriber);
         if (entities != null) {
-            entities.remove(e);
+            int index = entities.indexOf(entityId);
+            if ( index != -1 ) {
+                entities.remove(index);
+            }
         }
 
         // unhook subscriber from entity.
-        Bag<T> subscribers = entitySubscribers.get(e);
+        Bag<T> subscribers = entitySubscribers.get(entityId);
         if (subscribers != null) {
             subscribers.remove(subscriber);
         }
     }
 
     /**
+     * Unsubscribe T from entity.
+     *
+     * @param subscriber subscriber
+     * @param entity     entity to subscribe
+     */
+    public void unsubscribe(T subscriber, Entity entity) {
+        unsubscribe(subscriber,entity.getId());
+    }
+
+    /**
      * Unsubscribe e from all subscribers.
      *
-     * @param e entity to unsubscribe
+     * @param entityId entity to unsubscribe
      */
-    public void unsubscribeFromAll(Entity e) {
+    public void unsubscribeFromAll(int entityId) {
         for (T subscriber : subscriberEntities.keySet()) {
-            unsubscribe(subscriber, e);
+            unsubscribe(subscriber, entityId);
         }
     }
+
+    /**
+     * Unsubscribe e from all subscribers.
+     *
+     * @param entity entity to unsubscribe
+     */
+    public void unsubscribeFromAll(Entity entity) {
+        final int id = entity.getId();
+        for (T subscriber : subscriberEntities.keySet()) {
+            unsubscribe(subscriber, id);
+        }
+    }
+
 
     /**
      * Get all subscribed entities of a subscriber.
@@ -94,10 +133,10 @@ public class SubscriptionManager<T> extends Manager {
      * @param subscriber subscriber
      * @return all subscribed entities of a subscriber.
      */
-    public ImmutableBag<Entity> getEntitiesOf(T subscriber) {
-        Bag<Entity> entities = subscriberEntities.get(subscriber);
+    public IntBag getEntitiesOf(T subscriber) {
+        IntBag entities = subscriberEntities.get(subscriber);
         if (entities == null) {
-            entities = new Bag<>();
+            entities = new IntBag();
         }
         return entities;
     }
@@ -105,11 +144,11 @@ public class SubscriptionManager<T> extends Manager {
     /**
      * Get all subscribers of an entity.
      *
-     * @param e subscribed entity.
+     * @param entityId subscribed entity.
      * @return all subscribers of an entity.
      */
-    public ImmutableBag<T> getSubscribersOf(Entity e) {
-        Bag<T> subscribers = entitySubscribers.get(e);
+    public ImmutableBag<T> getSubscribersOf(int entityId) {
+        Bag<T> subscribers = entitySubscribers.get(entityId);
         if (subscribers == null) {
             subscribers = new Bag<>();
         }
@@ -117,11 +156,21 @@ public class SubscriptionManager<T> extends Manager {
     }
 
     /**
+     * Get all subscribers of an entity.
+     *
+     * @param entity subscribed entity.
+     * @return all subscribers of an entity.
+     */
+    public ImmutableBag<T> getSubscribersOf(Entity entity) {
+        return getSubscribersOf(entity.getId());
+    }
+
+    /**
      * Unsubscribe deleted entities from manager.
      */
     @Override
-    public void deleted(Entity e) {
-        unsubscribeFromAll(e);
+    public void deleted(int entityId) {
+        unsubscribeFromAll(entityId);
     }
 
 }

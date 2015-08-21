@@ -38,7 +38,7 @@ public class KryonetServerMarshalStrategy extends KryonetMarshalStrategy {
     @Override
     protected void connectEndpoint() {
         try {
-            ((Server)endpoint).bind(new InetSocketAddress(host, port), new InetSocketAddress(host, port));
+            ((Server)endpoint).bind(new InetSocketAddress(host, port), new InetSocketAddress(host, port+1));
             state = MarshalState.STARTED;
         } catch (IOException e) {
             e.printStackTrace();

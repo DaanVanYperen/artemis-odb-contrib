@@ -6,6 +6,7 @@ import net.mostlyoriginal.api.network.marshal.common.MarshalDictionary;
 import net.mostlyoriginal.api.network.marshal.common.MarshalObserver;
 import net.mostlyoriginal.api.network.marshal.common.MarshalStrategy;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.fail;
@@ -20,6 +21,7 @@ import static org.mockito.Mockito.verify;
  * @todo better to make this a kryonet strategy dispatch test.
  * @author Daan van Yperen
  */
+@Ignore
 public class MarshalDispatchTest extends MarshalIntegrationTest {
 
     public MarshalObserver clientObserver;

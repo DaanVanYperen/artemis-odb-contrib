@@ -32,7 +32,7 @@ public class KryonetClientMarshalStrategy extends KryonetMarshalStrategy {
     @Override
     protected void connectEndpoint() {
         try {
-            ((Client)endpoint).connect(CONNECTION_TIMEOUT, host, port,port);
+            ((Client)endpoint).connect(CONNECTION_TIMEOUT, host, port,port+1);
             state = MarshalState.STARTED;
         } catch (IOException e) {
             state = MarshalState.FAILED_TO_START;

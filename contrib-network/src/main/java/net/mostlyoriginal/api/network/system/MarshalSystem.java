@@ -75,4 +75,8 @@ public class MarshalSystem extends VoidEntitySystem implements MarshalObserver {
     {
         return marshal.getState();
     }
+
+    public MarshalStrategy getMarshal() {
+        return marshal;
+    }
 }

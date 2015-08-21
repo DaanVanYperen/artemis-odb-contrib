@@ -2,6 +2,7 @@ package net.mostlyoriginal.api.network;
 
 import com.artemis.Entity;
 import com.artemis.World;
+import com.artemis.WorldConfiguration;
 import com.artemis.utils.EntityBuilder;
 import net.mostlyoriginal.api.network.common.DeltaSubscriptionManager;
 import org.junit.Before;
@@ -25,10 +26,8 @@ public class SubscriptionManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        world = new World();
         subscriptionManager = new DeltaSubscriptionManager();
-        world.setManager(subscriptionManager);
-        world.initialize();
+        world = new World(new WorldConfiguration().setManager(subscriptionManager));
         entity = new EntityBuilder(world).build();
         entity2 = new EntityBuilder(world).build();
     }
@@ -129,12 +128,8 @@ public class SubscriptionManagerTest {
 
         assertEquals(expected, matchingSubscribers);
 
-        int matchingEntities=0;
-        for (Entity e : subscriptionManager.getEntitiesOf(connectionId)) {
-            if ( e == entity ) {
-                matchingEntities++;
-            }
-        }
+        int matchingEntities=
+                subscriptionManager.getEntitiesOf(connectionId).contains(entity.getId()) ? 1 : 0;
 
         assertEquals(expected, matchingEntities);
     }
