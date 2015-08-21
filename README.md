@@ -18,7 +18,7 @@ with gwt support, check out these instead:
 - [playn-artemis-quickstart](https://github.com/DaanVanYperen/playn-artemis-quickstart)
 
 ### Library Versions
-Artemis-odb 0.10.2, (Optional) LibGDX 1.6.4
+Artemis-odb 0.11.4, (Optional) LibGDX 1.6.4
 
 ### License
 The primary license for this code is CC0.
@@ -31,13 +31,13 @@ The primary license for this code is CC0.
 <dependency>
   <groupId>net.mostlyoriginal.artemis-odb</groupId>
   <artifactId>contrib-core</artifactId>
-  <version>0.10.2</version>
+  <version>0.11.4</version>
 </dependency>
 
 <dependency>
   <groupId>net.mostlyoriginal.artemis-odb</groupId>
   <artifactId>contrib-eventbus</artifactId>
-  <version>0.10.2</version>
+  <version>0.11.4</version>
 </dependency>
 ```
 
@@ -45,7 +45,7 @@ The primary license for this code is CC0.
 
 ```groovy
 dependencies { 
-    compile "net.mostlyoriginal.artemis-odb:contrib-core:0.10.2"
-    compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:0.10.2"
+    compile "net.mostlyoriginal.artemis-odb:contrib-core:0.11.4"
+    compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:0.11.4"
 }
 ```
