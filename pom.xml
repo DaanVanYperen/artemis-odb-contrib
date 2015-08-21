@@ -15,7 +15,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <asm.version>4.1</asm.version>
-        <artemis-odb.version>0.10.3-SNAPSHOT</artemis-odb.version>
+        <artemis-odb.version>0.11.4</artemis-odb.version>
     </properties>
 
     <scm>
@@ -104,7 +104,6 @@
     </developers>
 
     <modules>
-        <module>contrib-fallback</module>
         <module>contrib-core</module>
         <module>contrib-jam</module>
         <module>contrib-eventbus</module>
