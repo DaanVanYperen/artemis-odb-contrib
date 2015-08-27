@@ -66,6 +66,37 @@ public class M<A extends Component> {
 	}
 
 	/**
+	 * Create or remove a component from an entity.
+	 *
+	 * Does nothing if already removed or created respectively.
+	 *
+	 * @param entityId Entity id to change.
+	 * @param value {@code true} to create component (if missing), {@code false} to remove (if exists).
+	 * @return the instance of the component, or {@code null} if removed.
+	 */
+	public A set(int entityId, boolean value) {
+		if ( value ) {
+			return create(entityId);
+		} else {
+			remove(entityId);
+			return null;
+		}
+	}
+
+	/**
+	 * Create or remove a component from an entity.
+	 *
+	 * Does nothing if already removed or created respectively.
+	 *
+	 * @param entity Entity to change.
+	 * @param value {@code true} to create component (if missing), {@code false} to remove (if exists).
+	 * @return the instance of the component, or {@code null} if removed.
+	 */
+	public A set(Entity entity, boolean value) {
+		return set(entity.getId(), value);
+	}
+
+	/**
 	 * Setup flyweight with ID and return.
 	 * Cannot count on just created entities being resolvable
 	 * in world, which can break transmuters.
