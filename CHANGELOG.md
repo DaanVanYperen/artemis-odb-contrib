@@ -2,6 +2,8 @@
 
 ## Version: 0.11-SNAPSHOT
 
+- artemis-odb 0.10.4, LibGDX 1.6.5
+
 ## Version: 0.10.2
 
 - artemis-odb 0.10.2
