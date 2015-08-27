@@ -155,7 +155,7 @@ public class TimeboxedProcessingSystemTest extends PenguinTest {
 		@Override
 		protected void process(Entity e) {
 			e.getComponent(Penguin.class).pokes++;
-			fakeTime += pokeSpeed * NANOSECONDS_PER_SECOND;
+			fakeTime += pokeSpeed * MILLISECONDS_PER_SECOND;
 		}
 
 		@Override

@@ -29,7 +29,7 @@ import com.artemis.utils.IntBag;
  */
 public abstract class TimeboxedProcessingSystem extends EntitySystem {
 
-	public static final float NANOSECONDS_PER_SECOND = 1000000000;
+	public static final float MILLISECONDS_PER_SECOND = 1000;
 	private Entity flyweight;
 
 	/** Last index processed */
@@ -85,7 +85,7 @@ public abstract class TimeboxedProcessingSystem extends EntitySystem {
 		if ( size > 0 ) {
 
 			long time = getTime();
-			final long deadline = time + (long) (getAllottedTime() * NANOSECONDS_PER_SECOND);
+			final long deadline = time + (long) (getAllottedTime() * MILLISECONDS_PER_SECOND);
 
 			index = index % size; // avoid breakage upon subscription changes.
 			while ((processed < size) && (time < deadline)) {
@@ -115,10 +115,10 @@ public abstract class TimeboxedProcessingSystem extends EntitySystem {
 	/**
 	 * Determine elapsed time.
 	 *
-	 * @return Current time in nanoseconds.
+	 * @return Current time in milliseconds.
 	 */
 	protected long getTime() {
-		return System.nanoTime();
+		return System.currentTimeMillis();
 	}
 
 	/**
