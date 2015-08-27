@@ -234,13 +234,16 @@ public class SystemProfilerGUI extends Window {
 			float sampleLen = width / profiler.times.length;
 
 			int current = profiler.getCurrentSampleIndex();
+			int skip = current;
 			long[] times = profiler.getSampleData();
 			float currentPoint = getPoint(times[current] * NANO_MULTI);
 
 			for (int i = times.length - 1; i >= 1; i--) {
 				int prev = current == 0 ? times.length - 1 : current - 1;
 				float prevPoint = getPoint(times[prev] * NANO_MULTI);
-				renderer.line(x + (i - 1) * sampleLen, y + prevPoint * height / 6, x + i * sampleLen, y + currentPoint * height / 6);
+				// we want do skip line between actaul first and last points, as that may result in ugly line at the edge
+				if (current != skip && currentPoint > 0)
+					renderer.line(x + (i - 1) * sampleLen, y + prevPoint * height / 6, x + i * sampleLen, y + currentPoint * height / 6);
 				current = prev;
 				currentPoint = prevPoint;
 			}
@@ -273,7 +276,6 @@ public class SystemProfilerGUI extends Window {
 			max = label("", skin, Align.right);
 			localMax = label("", skin, Align.right);
 			avg = label("", skin, Align.right);
-			debugAll();
 			add(draw);
 			add(name).expandX().fillX();;
 			add(max).minWidth(MIN_LABEL_WIDTH);
