@@ -16,6 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <asm.version>4.1</asm.version>
         <artemis-odb.version>0.11.4</artemis-odb.version>
+        <libgdx.version>1.6.5</libgdx.version>
     </properties>
 
     <scm>
@@ -83,7 +84,7 @@
             <dependency>
                 <groupId>com.badlogicgames.gdx</groupId>
                 <artifactId>gdx</artifactId>
-                <version>1.6.4</version>
+                <version>${libgdx.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
