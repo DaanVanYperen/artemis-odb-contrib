@@ -138,7 +138,7 @@ public class ExtendedComponentMapperPluginTest {
 		class TestSystem extends BasicSystem {
 			@Override
 			protected void process(Entity e) {
-				mPos.set(e,false);
+				mPos.set(e, false);
 				Assert.assertFalse(mPos.has(e));
 			}
 		}
@@ -260,5 +260,54 @@ public class ExtendedComponentMapperPluginTest {
 	}
 
 
+	@Test
+	public void mirror_existing_to_missing_should_create_and_copy_properties() {
+
+		@Wire(injectInherited = true)
+		class TestSystem extends BasicSystem {
+			@Override
+			protected void process(Entity e) {
+				mPos.create(e).x = 99;
+				final Entity e2 = world.createEntity();
+
+				mPos.mirror(e2, e);
+				Assert.assertEquals(99, mPos.get(e2).x);
+			}
+		}
+		createAndProcessWorld(new TestSystem());
+	}
+
+	@Test
+	public void mirror_existing_to_existing_should_override_properties() {
+
+		@Wire(injectInherited = true)
+		class TestSystem extends BasicSystem {
+			@Override
+			protected void process(Entity e) {
+				mPos.create(e).x = 99;
+				final Entity e2 = world.createEntity();
+				mPos.create(e2).x = 80;
+				mPos.mirror(e2, e);
+				Assert.assertEquals(99,mPos.get(e2).x);
+			}
+		}
+		createAndProcessWorld(new TestSystem());
+	}
+
+	@Test
+	public void mirror_null_to_existing_should_remove_existing() {
+
+		@Wire(injectInherited = true)
+		class TestSystem extends BasicSystem {
+			@Override
+			protected void process(Entity e) {
+				final Entity e2 = world.createEntity();
+				mPos.create(e2).x = 80;
+				mPos.mirror(e2, e);
+				Assert.assertFalse(mPos.has(e2));
+			}
+		}
+		createAndProcessWorld(new TestSystem());
+	}
 
 }

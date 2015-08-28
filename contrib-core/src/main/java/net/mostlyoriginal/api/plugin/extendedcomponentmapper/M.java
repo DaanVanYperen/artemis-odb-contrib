@@ -1,6 +1,8 @@
 package net.mostlyoriginal.api.plugin.extendedcomponentmapper;
 
 import com.artemis.*;
+import com.artemis.utils.reflect.ClassReflection;
+import net.mostlyoriginal.api.component.common.ExtendedComponent;
 
 /**
  * Extended Component Mapper.
@@ -15,6 +17,7 @@ public class M<A extends Component> {
 	private final EntityTransmuter createTransmuter;
 	private final EntityTransmuter removeTransmuter;
 	private final Entity flyweight;
+	private final boolean isExtendedComponent;
 
 	@SuppressWarnings("unchecked")
 	public M( Class<? extends Component> type, World world) {
@@ -22,6 +25,12 @@ public class M<A extends Component> {
 		flyweight = Entity.createFlyweight(world);
 		createTransmuter = new EntityTransmuterFactory(world).add(type).build();
 		removeTransmuter = new EntityTransmuterFactory(world).remove(type).build();
+
+		isExtendedComponent = ClassReflection.isAssignableFrom(net.mostlyoriginal.api.component.common.ExtendedComponent.class, type);
+	}
+
+	public boolean isExtendedComponent() {
+		return isExtendedComponent;
 	}
 
 	/**
@@ -81,6 +90,49 @@ public class M<A extends Component> {
 			remove(entityId);
 			return null;
 		}
+	}
+
+	/**
+	 * Mirror component between entities.
+	 *
+	 * 1. calls target#set(source) if source exists.
+	 * 2. removes target if source is missing.
+	 *
+	 * Requires component to extend from {@code ExtendedComponent}.
+	 *
+	 * @param targetId target entity id
+	 * @param sourceId source entity id
+	 * @return the instance of the component, or {@code null} if removed.
+	 */
+	@SuppressWarnings("unchecked")
+	public A mirror(int targetId, int sourceId) {
+		if ( !isExtendedComponent ) {
+			throw new RuntimeException("Component does not extend ExtendedComponent<T>, required for #set.");
+		}
+
+		final A source = getSafe(sourceId);
+		if ( source != null ) {
+			return ((ExtendedComponent<A>)create(targetId)).set(source);
+		} else {
+			remove(targetId);
+			return null;
+		}
+	}
+
+	/**
+	 * Mirror component between entities.
+	 *
+	 * 1. calls target#set(source) if source exists.
+	 * 2. removes target if source is missing.
+	 *
+	 * Requires component to extend from {@code ExtendedComponent}.
+	 *
+	 * @param target target entity
+	 * @param source source entity
+	 * @return the instance of the component, or {@code null} if removed.
+	 */
+	public A mirror(Entity target, Entity source) {
+		return mirror(target.getId(), source.getId());
 	}
 
 	/**
