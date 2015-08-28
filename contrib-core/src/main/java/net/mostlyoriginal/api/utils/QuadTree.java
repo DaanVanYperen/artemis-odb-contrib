@@ -156,7 +156,7 @@ public class QuadTree implements Poolable {
 			if (nodes[0] != null) {
 				int index = indexOf(x, y, 0, 0);
 				if (index != OUTSIDE) {
-					nodes[index].get(fill, x, y, 0, 0);
+					nodes[index].getExact(fill, x, y, 0, 0);
 				}
 			}
 			for (int i = 0; i < containers.size(); i++) {
@@ -203,11 +203,11 @@ public class QuadTree implements Poolable {
 			if (nodes[0] != null) {
 				int index = indexOf(x, y, width, height);
 				if (index != OUTSIDE) {
-					nodes[index].get(fill, x, y, width, height);
+					nodes[index].getExact(fill, x, y, width, height);
 				} else {
 					// if test bounds don't fully fit inside a node, we need to check them all
 					for (int i = 0; i < nodes.length; i++) {
-						nodes[i].get(fill, x, y, width, height);
+						nodes[i].getExact(fill, x, y, width, height);
 					}
 				}
 			}
