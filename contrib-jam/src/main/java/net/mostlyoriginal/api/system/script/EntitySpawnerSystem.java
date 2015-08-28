@@ -66,8 +66,8 @@ public class EntitySpawnerSystem extends EntityProcessingSystem {
             for (int i = 0, s = MathUtils.random(spawner.minCount, spawner.maxCount); i < s; i++) {
                 entityFactorySystem.createEntity(
                         spawner.entityIds[MathUtils.random(0, spawner.entityIds.length - 1)],
-                        (int) (pos.x + bounds.cx()),
-                        (int) (pos.y + bounds.cy()), EMPTY_MAP_PROPERTIES);
+                        (int) (pos.xy.x + bounds.cx()),
+                        (int) (pos.xy.y + bounds.cy()), EMPTY_MAP_PROPERTIES);
             }
         }
     }

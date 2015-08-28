@@ -101,8 +101,8 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
         {
             // mirror
             batch.draw(frame.getTexture(),
-                    roundToPixels(position.x),
-                    roundToPixels(position.y),
+                    roundToPixels(position.xy.x),
+                    roundToPixels(position.xy.y),
                     angle.ox == Angle.ORIGIN_AUTO ? frame.getRegionWidth() * animation.scale * 0.5f : angle.ox,
                     angle.oy == Angle.ORIGIN_AUTO ? frame.getRegionHeight() * animation.scale * 0.5f : angle.oy,
                     frame.getRegionWidth() * animation.scale,
@@ -120,8 +120,8 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
         } else if ( angle.rotation != 0 )
         {
             batch.draw(frame,
-                    roundToPixels(position.x),
-                    roundToPixels(position.y),
+                    roundToPixels(position.xy.x),
+                    roundToPixels(position.xy.y),
                     angle.ox == Angle.ORIGIN_AUTO ? frame.getRegionWidth() * animation.scale * 0.5f : angle.ox,
                     angle.oy == Angle.ORIGIN_AUTO ? frame.getRegionHeight() * animation.scale * 0.5f : angle.oy,
                     frame.getRegionWidth() * animation.scale,
@@ -129,8 +129,8 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
                     angle.rotation);
         } else {
             batch.draw(frame,
-                    roundToPixels(position.x),
-                    roundToPixels(position.y),
+                    roundToPixels(position.xy.x),
+                    roundToPixels(position.xy.y),
                     frame.getRegionWidth() * animation.scale,
                     frame.getRegionHeight() * animation.scale);
         }

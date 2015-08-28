@@ -40,7 +40,7 @@ public class MouseCursorSystem extends EntityProcessingSystem {
 
         final Vector3 unproject = cameraSystem.camera.unproject(aimAtTmp);
 
-        pos.x = unproject.x;
-        pos.y = unproject.y;
+        pos.xy.x = unproject.x;
+        pos.xy.y = unproject.y;
     }
 }

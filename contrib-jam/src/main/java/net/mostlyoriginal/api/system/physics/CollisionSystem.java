@@ -33,15 +33,15 @@ public class CollisionSystem extends BaseSystem {
         if ( b1==null || p1 ==null || b2==null || p2==null)
             return false;
 
-        final float minx = p1.x + b1.minx;
-        final float miny = p1.y + b1.miny;
-        final float maxx = p1.x + b1.maxx;
-        final float maxy = p1.y + b1.maxy;
+        final float minx = p1.xy.x + b1.minx;
+        final float miny = p1.xy.y + b1.miny;
+        final float maxx = p1.xy.x + b1.maxx;
+        final float maxy = p1.xy.y + b1.maxy;
 
-        final float bminx = p2.x + b2.minx;
-        final float bminy = p2.y + b2.miny;
-        final float bmaxx = p2.x + b2.maxx;
-        final float bmaxy = p2.y + b2.maxy;
+        final float bminx = p2.xy.x + b2.minx;
+        final float bminy = p2.xy.y + b2.miny;
+        final float bmaxx = p2.xy.x + b2.maxx;
+        final float bmaxy = p2.xy.y + b2.maxy;
 
         return
                 !(minx > bmaxx || maxx < bminx ||

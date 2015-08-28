@@ -81,11 +81,11 @@ public class LabelRenderSystem extends DeferredEntityProcessingSystem {
 
             switch ( label.align ) {
                 case LEFT:
-                    font.draw(batch, label.text, pos.x, pos.y);
+                    font.draw(batch, label.text, pos.xy.x, pos.xy.y);
                     break;
                 case RIGHT:
                     glyphLayout.setText(font,label.text);
-                    font.draw(batch, label.text, pos.x - glyphLayout.width, pos.y);
+                    font.draw(batch, label.text, pos.xy.x - glyphLayout.width, pos.xy.y);
                     break;
             }
         }

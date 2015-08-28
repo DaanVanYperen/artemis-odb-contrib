@@ -38,8 +38,8 @@ public class AttachmentSystem extends EntityProcessingSystem {
             // move attachment to absolute position, adjusted with slack.
             Pos pos = pm.get(e);
             Pos parPos = pm.get(parent);
-            pos.x = parPos.x + attached.xo + attached.slackX;
-            pos.y = parPos.y + attached.yo + attached.slackY;
+            pos.xy.x = parPos.xy.x + attached.xo + attached.slackX;
+            pos.xy.y = parPos.xy.y + attached.yo + attached.slackY;
 
             updateSlack(attached);
         } else {

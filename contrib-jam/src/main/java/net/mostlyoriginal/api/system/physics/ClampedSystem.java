@@ -54,14 +54,14 @@ public class ClampedSystem extends EntityProcessingSystem {
         if ( ym.has(e))
         {
             Physics physics = ym.get(e);
-            if ( physics.vx < 0 && pos.x + physics.vx* world.delta <= wx1 ) physics.vx =0;
-            if ( physics.vx > 0 && pos.x + physics.vx* world.delta >= wx2 ) physics.vx =0;
-            if ( physics.vy < 0 && pos.y + physics.vy* world.delta <= wy1 ) physics.vy =0;
-            if ( physics.vy > 0 && pos.y + physics.vy* world.delta >= wy2 ) physics.vy =0;
+            if ( physics.vx < 0 && pos.xy.x + physics.vx* world.delta <= wx1 ) physics.vx =0;
+            if ( physics.vx > 0 && pos.xy.x + physics.vx* world.delta >= wx2 ) physics.vx =0;
+            if ( physics.vy < 0 && pos.xy.y + physics.vy* world.delta <= wy1 ) physics.vy =0;
+            if ( physics.vy > 0 && pos.xy.y + physics.vy* world.delta >= wy2 ) physics.vy =0;
         }
 
         // clamp coords
-        pos.x = MathUtils.clamp( pos.x, wx1, wx2);
-        pos.y = MathUtils.clamp( pos.y, wy1, wy2);
+        pos.xy.x = MathUtils.clamp( pos.xy.x, wx1, wx2);
+        pos.xy.y = MathUtils.clamp( pos.xy.y, wy1, wy2);
     }
 }

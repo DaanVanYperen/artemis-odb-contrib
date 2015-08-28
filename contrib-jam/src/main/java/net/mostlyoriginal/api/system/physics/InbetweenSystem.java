@@ -40,10 +40,10 @@ public class InbetweenSystem extends EntityProcessingSystem {
         Pos pos1 = pm.get(entityA);
         Pos pos2 = pm.get(entityB);
 
-        tmp.set(pos2.x + inbetween.bx, pos2.y + inbetween.by).sub(pos1.x + inbetween.ax, pos1.y + inbetween.ay).scl(inbetween.tween).clamp(0,inbetween.maxDistance).add(pos1.x + inbetween.ax,pos1.y + inbetween.ay);
+        tmp.set(pos2.xy.x + inbetween.bx, pos2.xy.y + inbetween.by).sub(pos1.xy.x + inbetween.ax, pos1.xy.y + inbetween.ay).scl(inbetween.tween).clamp(0,inbetween.maxDistance).add(pos1.xy.x + inbetween.ax,pos1.xy.y + inbetween.ay);
 
         Pos pos = pm.get(e);
-        pos.x = tmp.x;
-        pos.y = tmp.y;
+        pos.xy.x = tmp.x;
+        pos.xy.y = tmp.y;
     }
 }

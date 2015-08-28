@@ -18,7 +18,7 @@ public class EntityUtil {
         final Pos pa = (Pos)a.getComponent(Pos.class);
         final Pos pb = (Pos)b.getComponent(Pos.class);
 
-        return tmp.set(pa.x, pa.y).dst2(pb.x, pb.y);
+        return tmp.set(pa.xy.x, pa.xy.y).dst2(pb.xy.x, pb.xy.y);
     }
 
     public static float angle( final Entity a, final Entity b)
@@ -26,7 +26,7 @@ public class EntityUtil {
         final Pos pa = (Pos)a.getComponent(Pos.class);
         final Pos pb = (Pos)b.getComponent(Pos.class);
 
-        return tmp.set(pb.x, pb.y).sub(pa.x, pa.y).angle();
+        return tmp.set(pb.xy.x, pb.xy.y).sub(pa.xy.x, pa.xy.y).angle();
    }
 
     public static float distance( final Entity a, final Entity b)
@@ -34,7 +34,7 @@ public class EntityUtil {
         final Pos pa = (Pos)a.getComponent(Pos.class);
         final Pos pb = (Pos)b.getComponent(Pos.class);
 
-        return tmp.set(pa.x, pa.y).dst(pb.x, pb.y);
+        return tmp.set(pa.xy.x, pa.xy.y).dst(pb.xy.x, pb.xy.y);
     }
 
     /** Safely delete all entities from bag, regardless if the bag changes. */

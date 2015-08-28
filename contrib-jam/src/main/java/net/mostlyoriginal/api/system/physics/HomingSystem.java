@@ -46,7 +46,7 @@ public class HomingSystem extends EntityProcessingSystem {
                 final Pos tPos = pm.get(homingTarget);
 
                 // vector of required traversal
-                tmp.set(tPos.x, tPos.y).sub(myPos.x, myPos.y).scl(homing.speedFactor);
+                tmp.set(tPos.xy.x, tPos.xy.y).sub(myPos.xy.x, myPos.xy.y).scl(homing.speedFactor);
 
                 if (ym.has(e)) {
                     Physics physics = ym.get(e);

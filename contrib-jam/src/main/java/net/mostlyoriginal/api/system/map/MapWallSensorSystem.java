@@ -56,8 +56,8 @@ public class MapWallSensorSystem extends EntityProcessingSystem {
         final Pos pos = pm.get(e);
         final Bounds bounds = bm.get(e);
 
-        float px = pos.x;
-        float py = pos.y;
+        float px = pos.xy.x;
+        float py = pos.xy.y;
 
         final MapWallSensor mapWallSensor = ws.get(e);
 

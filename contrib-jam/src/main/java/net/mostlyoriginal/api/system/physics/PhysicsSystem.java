@@ -73,8 +73,8 @@ public class PhysicsSystem extends EntityProcessingSystem {
         if ( physics.maxVelocity < Float.MAX_VALUE)
             clampVelocity(e, 0, physics.maxVelocity);
 
-        pos.x += physics.vx * world.getDelta();
-        pos.y += physics.vy * world.getDelta();
+        pos.xy.x += physics.vx * world.getDelta();
+        pos.xy.y += physics.vy * world.getDelta();
 
         if ( physics.vr != 0 && am.has(e))
         {
