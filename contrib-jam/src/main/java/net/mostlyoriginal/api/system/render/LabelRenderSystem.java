@@ -5,7 +5,6 @@ package net.mostlyoriginal.api.system.render;
  */
 
 import com.artemis.Aspect;
-import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,8 +14,9 @@ import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.graphics.Color;
 import net.mostlyoriginal.api.component.graphics.Invisible;
 import net.mostlyoriginal.api.component.graphics.Renderable;
+import net.mostlyoriginal.api.component.ui.BitmapFontAsset;
 import net.mostlyoriginal.api.component.ui.Label;
-import net.mostlyoriginal.api.manager.FontManager;
+import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.system.delegate.DeferredEntityProcessingSystem;
 import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
@@ -30,18 +30,18 @@ import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
 @Wire
 public class LabelRenderSystem extends DeferredEntityProcessingSystem {
 
-    protected ComponentMapper<Pos> mPos;
-    protected ComponentMapper<Label> mLabel;
-    protected ComponentMapper<Color> mColor;
+    protected M<Pos> mPos;
+    protected M<Label> mLabel;
+    protected M<Color> mColor;
+    protected M<BitmapFontAsset> mBitmapFontAsset;
 
     protected CameraSystem cameraSystem;
-    protected FontManager fontManager;
 
     protected SpriteBatch batch;
     private GlyphLayout glyphLayout = new GlyphLayout();
 
     public LabelRenderSystem(EntityProcessPrincipal principal) {
-        super(Aspect.all(Pos.class, Label.class, Renderable.class).exclude(Invisible.class), principal);
+        super(Aspect.all(Pos.class, Label.class, Renderable.class, BitmapFontAsset.class).exclude(Invisible.class), principal);
         batch = new SpriteBatch(1000);
     }
 
@@ -69,7 +69,7 @@ public class LabelRenderSystem extends DeferredEntityProcessingSystem {
 
         if (label.text != null) {
 
-            final BitmapFont font = fontManager.getFont(label.fontName);
+            final BitmapFont font = mBitmapFontAsset.get(entity).bitmapFont;
 
             if ( mColor.has(entity) )
             {

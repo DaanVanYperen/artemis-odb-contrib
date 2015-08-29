@@ -1,29 +1,33 @@
 package net.mostlyoriginal.api.component.ui;
 
-import com.artemis.Component;
+import net.mostlyoriginal.api.component.common.ExtendedComponent;
 
 /**
  * @author Daan van Yperen
  */
-public class Label extends Component {
+public class Label extends ExtendedComponent<Label> {
 
-    public String text;
-    public String fontName;
-    public Align align = Align.LEFT;
+	public String text;
+	public Align align = Align.LEFT;
 
-    public float scale = 1f;
+	public Label(String text) {
+		this.text = text;
+	}
 
-    public Label(String text) {
-        this.text = text;
-    }
+	@Override
+	protected void reset() {
+		text = null;
+		align = Align.LEFT;
+	}
 
-    public Label(String text, String fontName) {
-        this.text = text;
-        this.fontName = fontName;
-    }
+	@Override
+	public Label set(Label label) {
+		text = label.text;
+		align = label.align;
+		return this;
+	}
 
-
-    public enum Align {
-        LEFT, RIGHT
-    }
+	public enum Align {
+		LEFT, RIGHT
+	}
 }
