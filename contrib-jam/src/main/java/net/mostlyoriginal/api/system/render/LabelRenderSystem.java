@@ -11,9 +11,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.mostlyoriginal.api.component.basic.Pos;
-import net.mostlyoriginal.api.component.graphics.Color;
 import net.mostlyoriginal.api.component.graphics.Invisible;
 import net.mostlyoriginal.api.component.graphics.Renderable;
+import net.mostlyoriginal.api.component.graphics.Tint;
 import net.mostlyoriginal.api.component.ui.BitmapFontAsset;
 import net.mostlyoriginal.api.component.ui.Label;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
@@ -32,7 +32,7 @@ public class LabelRenderSystem extends DeferredEntityProcessingSystem {
 
     protected M<Pos> mPos;
     protected M<Label> mLabel;
-    protected M<Color> mColor;
+    protected M<Tint> mColor;
     protected M<BitmapFontAsset> mBitmapFontAsset;
 
     protected CameraSystem cameraSystem;
@@ -73,8 +73,8 @@ public class LabelRenderSystem extends DeferredEntityProcessingSystem {
 
             if ( mColor.has(entity) )
             {
-                final Color color = mColor.get(entity);
-                font.setColor(color.r, color.g, color.b, color.a);
+                final Tint tint = mColor.get(entity);
+                font.setColor(tint.r, tint.g, tint.b, tint.a);
             } else {
                 font.setColor(1f,1f,1f,1f);
             }

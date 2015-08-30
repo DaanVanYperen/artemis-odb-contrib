@@ -7,24 +7,24 @@ import com.artemis.Component;
  */
 public class ColorAnimation extends Component {
 
-    public Color startColor;
-    public Color endColor;
+    public Tint startTint;
+    public Tint endTint;
     public InterpolationStrategy tween;
     public float duration = -1;
-    public Color speed = new Color(1, 1, 1, 1);
-    public Color age = new Color(0, 0, 0, 0);
+    public Tint speed = new Tint(1, 1, 1, 1);
+    public Tint age = new Tint(0, 0, 0, 0);
 
     /**
      *
-     * @param startColor
-     * @param endColor
+     * @param startTint
+     * @param endTint
      * @param tween
      * @param speed
      * @param duration duration until this ends, or -1 if unending.
      */
-    public ColorAnimation(Color startColor, Color endColor, InterpolationStrategy tween, float speed, float duration) {
-        this.startColor = startColor;
-        this.endColor = endColor;
+    public ColorAnimation(Tint startTint, Tint endTint, InterpolationStrategy tween, float speed, float duration) {
+        this.startTint = startTint;
+        this.endTint = endTint;
         this.tween = tween;
         this.duration = duration;
         this.speed.r = this.speed.g = this.speed.b = this.speed.a = speed;

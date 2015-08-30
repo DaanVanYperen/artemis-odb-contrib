@@ -13,9 +13,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.mostlyoriginal.api.component.basic.Angle;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.graphics.Anim;
-import net.mostlyoriginal.api.component.graphics.Color;
 import net.mostlyoriginal.api.component.graphics.Invisible;
 import net.mostlyoriginal.api.component.graphics.Renderable;
+import net.mostlyoriginal.api.component.graphics.Tint;
 import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.system.delegate.DeferredEntityProcessingSystem;
@@ -32,7 +32,7 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
 
     protected ComponentMapper<Pos> mPos;
     protected ComponentMapper<Anim> mAnim;
-    protected ComponentMapper<Color> mColor;
+    protected ComponentMapper<Tint> mColor;
     protected ComponentMapper<Angle> mAngle;
 
     protected CameraSystem cameraSystem;
@@ -71,8 +71,8 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
 
         if ( mColor.has(entity) )
         {
-            final Color color = mColor.get(entity);
-            batch.setColor(color.r, color.g, color.b, color.a);
+            final Tint tint = mColor.get(entity);
+            batch.setColor(tint.r, tint.g, tint.b, tint.a);
         } else {
             batch.setColor(1f,1f,1f,1f);
         }

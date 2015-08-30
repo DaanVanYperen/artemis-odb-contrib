@@ -1,33 +1,38 @@
 package net.mostlyoriginal.api.component.graphics;
 
-import com.artemis.Component;
+import net.mostlyoriginal.api.component.common.ExtendedComponent;
 
 /**
- * Color for animations, labels.
+ * Tint for animations, labels.
  *
  * Optional, convention is to assume white if not set.
  *
  * @author Daan van Yperen
  */
-public class Color extends Component {
+public class Tint extends ExtendedComponent<Tint> {
 
     public float r;
     public float g;
     public float b;
     public float a;
 
-    public Color() {
+    public Tint() {
     }
 
-    public Color(Color color) {
-        this.r = color.r;
-        this.g = color.g;
-        this.b = color.b;
-        this.a = color.a;
+    @Override
+    protected void reset() {
+
     }
 
-	/** Create Color by hex, RRGGBBAA. */
-	public Color(String hex) {
+    public Tint(Tint tint) {
+        this.r = tint.r;
+        this.g = tint.g;
+        this.b = tint.b;
+        this.a = tint.a;
+    }
+
+	/** Create Tint by hex, RRGGBBAA. */
+	public Tint(String hex) {
 		setHex(hex);
 	}
 
@@ -39,7 +44,7 @@ public class Color extends Component {
 				(float) (hex.length() != 8 ? 255 : Integer.valueOf(hex.substring(6, 8), 16)) / 255.0F);
 	}
 
-	public Color(float r, float g, float b, float a) {
+	public Tint(float r, float g, float b, float a) {
         this.r = r;
         this.g = g;
         this.b = b;
@@ -53,11 +58,11 @@ public class Color extends Component {
         this.a = a;
     }
 
-    public void set(Color color)
+    public void set(Tint tint)
     {
-        this.r = color.r;
-        this.g = color.g;
-        this.b = color.b;
-        this.a = color.a;
+        this.r = tint.r;
+        this.g = tint.g;
+        this.b = tint.b;
+        this.a = tint.a;
     }
 }
