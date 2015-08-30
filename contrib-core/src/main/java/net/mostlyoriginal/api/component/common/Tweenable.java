@@ -7,7 +7,7 @@ import com.artemis.Component;
  *
  * @author Daan van Yperen
  */
-public interface Tweenable<T extends Component & Tweenable> {
+public interface Tweenable<T extends Component & Tweenable<T>> {
 
 	/**
 	 * Set to tween of two component states. Uses linear tween.

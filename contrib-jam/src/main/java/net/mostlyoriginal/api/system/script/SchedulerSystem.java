@@ -33,7 +33,7 @@ public class SchedulerSystem extends EntityProcessingSystem {
         final Array<Step> steps = schedule.steps;
         for (int i = 0; i < steps.size; i++) {
             final Step step = steps.get(i);
-            if (schedule.age >= step.atAge && step.act(world.delta, e) && i < steps.size) {
+            if (schedule.age >= step.getAtAge() && step.act(world.delta, e) && i < steps.size) {
                 steps.removeIndex(i);
                 step.release();
                 i--;

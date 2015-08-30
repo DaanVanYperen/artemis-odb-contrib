@@ -1,9 +1,11 @@
 package net.mostlyoriginal.api.component.script;
 
 import com.artemis.Component;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
+import net.mostlyoriginal.api.component.common.Tweenable;
 import net.mostlyoriginal.api.step.*;
 
 /**
@@ -18,13 +20,14 @@ import net.mostlyoriginal.api.step.*;
  */
 public class Schedule extends Component {
 
-    public Array<Step> steps = new Array<Step>(1);
+    public Array<Step> steps = new Array<>(4);
 
     public float age;
     private float atAge;
 
     public Schedule() {
     }
+
 
     /**
      * Returns a new or pooled action of the specified type.
@@ -33,7 +36,7 @@ public class Schedule extends Component {
         Pool<T> pool = Pools.get(type);
         T node = pool.obtain();
         node.setPool(pool);
-        node.atAge = atAge;
+        node.setAtAge(atAge);
         return node;
     }
 
@@ -47,6 +50,37 @@ public class Schedule extends Component {
     /** Delete entity from world. */
     public Schedule deleteFromWorld() {
         steps.add(prepare(DeleteFromWorldStep.class, atAge));
+        return this;
+    }
+
+    /**
+     * Tween between two component states.
+     *
+     * @todo lifecycle management of components.
+     * @param a component a starting state. Tweening does not release pooled components after use.
+     * @param b component b starting state. Tweening does not release pooled components after use.
+     * @param duration duration of tween, in seconds.
+     * @param interpolation method of interpolation.
+     * @return {@code this}
+     */
+    public <T extends Component & Tweenable> Schedule tween(T a, T b, float duration, Interpolation interpolation) {
+        TweenStep tween = prepare(TweenStep.class, atAge);
+        tween.setup(a, b, interpolation, duration );
+        steps.add(tween);
+        return this;
+    }
+
+    /**
+     * Tween between two component states using linear interpolation.
+     *
+     * @todo lifecycle management of components.
+     * @param a component a starting state. Tweening does not release pooled components after use.
+     * @param b component b starting state. Tweening does not release pooled components after use.
+     * @param duration duration of tween, in seconds.
+     * @return {@code this}
+     */
+    public <T extends Component & Tweenable> Schedule tween(T a, T b, float duration) {
+        tween(a,b, duration, Interpolation.linear);
         return this;
     }
 

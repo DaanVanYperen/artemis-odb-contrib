@@ -1,6 +1,7 @@
 package net.mostlyoriginal.api.step;
 
 import com.artemis.Entity;
+import com.artemis.World;
 import com.badlogic.gdx.utils.Pool;
 
 /**
@@ -11,12 +12,18 @@ import com.badlogic.gdx.utils.Pool;
  */
 public abstract class Step implements Pool.Poolable {
 
-    public float atAge;
+    protected float atAge;
+    protected World world;
     private Pool pool;
 
     protected Step() {}
 
     abstract public boolean act(float delta, Entity e);
+
+    public void setWorld(World world)
+    {
+        this.world = world;
+    }
 
     public void release() {
         if (pool != null) {
@@ -31,5 +38,13 @@ public abstract class Step implements Pool.Poolable {
 
     public void setPool(Pool pool) {
         this.pool = pool;
+    }
+
+    public float getAtAge() {
+        return atAge;
+    }
+
+    public void setAtAge(float atAge) {
+        this.atAge = atAge;
     }
 }
