@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.step;
+package net.mostlyoriginal.api.operation;
 
 import com.artemis.Entity;
 
@@ -8,9 +8,9 @@ import com.artemis.Entity;
  * @author Daan van Yperen
  * @see net.mostlyoriginal.api.component.script.Schedule
  */
-public class DeleteFromWorldStep extends Step {
+public class DeleteFromWorldOperation extends Operation {
 
-    public DeleteFromWorldStep() {}
+    public DeleteFromWorldOperation() {}
 
     @Override
     public boolean act(float delta, Entity e) {

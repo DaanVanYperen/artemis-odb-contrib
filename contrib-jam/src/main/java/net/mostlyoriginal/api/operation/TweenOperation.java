@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.step;
+package net.mostlyoriginal.api.operation;
 
 import com.artemis.Component;
 import com.artemis.Entity;
@@ -15,7 +15,7 @@ import net.mostlyoriginal.api.utils.Preconditions;
  * @see Tweenable
  * @see net.mostlyoriginal.api.component.script.Schedule
  */
-public class TweenStep extends Step {
+public class TweenOperation extends Operation {
 
 	protected Tweenable a;
 	protected Tweenable b;

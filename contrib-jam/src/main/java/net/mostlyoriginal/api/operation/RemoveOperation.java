@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.step;
+package net.mostlyoriginal.api.operation;
 
 import com.artemis.Component;
 import com.artemis.Entity;
@@ -9,11 +9,11 @@ import com.artemis.Entity;
  * @author Daan van Yperen
  * @see net.mostlyoriginal.api.component.script.Schedule
  */
-public class RemoveStep extends Step {
+public class RemoveOperation extends Operation {
 
     public Class<? extends Component> componentClass;
 
-    public RemoveStep() {
+    public RemoveOperation() {
     }
 
     @Override

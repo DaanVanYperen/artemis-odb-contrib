@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import net.mostlyoriginal.api.component.common.Tweenable;
-import net.mostlyoriginal.api.step.*;
+import net.mostlyoriginal.api.operation.*;
 
 /**
  * Schedules basic entity transformations.
@@ -20,7 +20,7 @@ import net.mostlyoriginal.api.step.*;
  */
 public class Schedule extends Component {
 
-    public Array<Step> steps = new Array<>(4);
+    public Array<Operation> steps = new Array<>(4);
 
     public float age;
     private float atAge;
@@ -32,7 +32,7 @@ public class Schedule extends Component {
     /**
      * Returns a new or pooled action of the specified type.
      */
-    static public <T extends Step> T prepare(Class<T> type, float atAge) {
+    static public <T extends Operation> T prepare(Class<T> type, float atAge) {
         Pool<T> pool = Pools.get(type);
         T node = pool.obtain();
         node.setPool(pool);
@@ -49,7 +49,7 @@ public class Schedule extends Component {
 
     /** Delete entity from world. */
     public Schedule deleteFromWorld() {
-        steps.add(prepare(DeleteFromWorldStep.class, atAge));
+        steps.add(prepare(DeleteFromWorldOperation.class, atAge));
         return this;
     }
 
@@ -64,7 +64,7 @@ public class Schedule extends Component {
      * @return {@code this}
      */
     public <T extends Component & Tweenable> Schedule tween(T a, T b, float duration, Interpolation interpolation) {
-        TweenStep tween = prepare(TweenStep.class, atAge);
+        TweenOperation tween = prepare(TweenOperation.class, atAge);
         tween.setup(a, b, interpolation, duration );
         steps.add(tween);
         return this;
@@ -86,7 +86,7 @@ public class Schedule extends Component {
 
     /** Add component to entity. */
     public Schedule add( final Component component ) {
-        AddStep step = prepare(AddStep.class, atAge);
+        AddOperation step = prepare(AddOperation.class, atAge);
         step.component = component;
         steps.add(step);
         return this;
@@ -94,7 +94,7 @@ public class Schedule extends Component {
 
     /** Remove component from entity. */
     public Schedule remove( final Class<? extends Component> component ) {
-        RemoveStep step = prepare(RemoveStep.class, atAge);
+        RemoveOperation step = prepare(RemoveOperation.class, atAge);
         step.componentClass = component;
         steps.add(step);
         return this;

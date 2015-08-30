@@ -7,7 +7,7 @@ import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
 import com.badlogic.gdx.utils.Array;
 import net.mostlyoriginal.api.component.script.Schedule;
-import net.mostlyoriginal.api.step.Step;
+import net.mostlyoriginal.api.operation.Operation;
 
 /**
  * Perform scheduled actions.
@@ -30,12 +30,12 @@ public class SchedulerSystem extends EntityProcessingSystem {
         Schedule schedule = sm.get(e);
         schedule.age += world.delta;
 
-        final Array<Step> steps = schedule.steps;
-        for (int i = 0; i < steps.size; i++) {
-            final Step step = steps.get(i);
-            if (schedule.age >= step.getAtAge() && step.act(world.delta, e) && i < steps.size) {
-                steps.removeIndex(i);
-                step.release();
+        final Array<Operation> operations = schedule.steps;
+        for (int i = 0; i < operations.size; i++) {
+            final Operation operation = operations.get(i);
+            if (schedule.age >= operation.getAtAge() && operation.act(world.delta, e) && i < operations.size) {
+                operations.removeIndex(i);
+                operation.release();
                 i--;
                 if ( !e.isActive() ) return;
             }

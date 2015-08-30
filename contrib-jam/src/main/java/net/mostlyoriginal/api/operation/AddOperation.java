@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.step;
+package net.mostlyoriginal.api.operation;
 
 import com.artemis.Component;
 import com.artemis.Entity;
@@ -9,10 +9,10 @@ import com.artemis.Entity;
  * @author Daan van Yperen
  * @see net.mostlyoriginal.api.component.script.Schedule
  */
-public class AddStep extends Step {
+public class AddOperation extends Operation {
 
     public Component component;
-    public AddStep() {}
+    public AddOperation() {}
 
     @Override
     public boolean act(float delta, Entity e) {

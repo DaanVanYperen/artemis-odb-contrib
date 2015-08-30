@@ -1,22 +1,22 @@
-package net.mostlyoriginal.api.step;
+package net.mostlyoriginal.api.operation;
 
 import com.artemis.Entity;
 import com.artemis.World;
 import com.badlogic.gdx.utils.Pool;
 
 /**
- * Scriptable step.
+ * Scriptable operation.
  *
  * @author Daan van Yperen
  * @see net.mostlyoriginal.api.component.script.Schedule
  */
-public abstract class Step implements Pool.Poolable {
+public abstract class Operation implements Pool.Poolable {
 
     protected float atAge;
     protected World world;
     private Pool pool;
 
-    protected Step() {}
+    protected Operation() {}
 
     abstract public boolean act(float delta, Entity e);
 

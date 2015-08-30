@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.step;
+package net.mostlyoriginal.api.operation;
 
 import com.artemis.Entity;
 import com.artemis.World;
@@ -12,7 +12,7 @@ import org.junit.Test;
 /**
  * @author Daan van Yperen
  */
-public class TweenStepTest {
+public class TweenOperationTest {
 
 	public static final float FLOAT_MAX_DELTA = 0.02f;
 	private Entity entity;
@@ -20,7 +20,7 @@ public class TweenStepTest {
 
 	@Test
 	public void ensure_tweening_at_start_time_matches_starting_tween() {
-		TweenStep step = new TweenStep();
+		TweenOperation step = new TweenOperation();
 		step.setup(new TweenableTestComponent(-10), new TweenableTestComponent(10), Interpolation.linear, 1f);
 		step.act(0, entity);
 		Assert.assertEquals(-10f, component.val,  FLOAT_MAX_DELTA);
@@ -28,7 +28,7 @@ public class TweenStepTest {
 
 	@Test
 	public void ensure_tweening_at_end_time_matches_ending_tween() {
-		TweenStep step = new TweenStep();
+		TweenOperation step = new TweenOperation();
 		step.setup(new TweenableTestComponent(-10), new TweenableTestComponent(10), Interpolation.linear, 1f);
 		step.act(1f,entity);
 		Assert.assertEquals(10f, component.val,  FLOAT_MAX_DELTA);
@@ -36,7 +36,7 @@ public class TweenStepTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void illegal_duration_exception() {
-		TweenStep step = new TweenStep();
+		TweenOperation step = new TweenOperation();
 		step.setup(new TweenableTestComponent(0), new TweenableTestComponent(0), Interpolation.linear, 0);
 	}
 
