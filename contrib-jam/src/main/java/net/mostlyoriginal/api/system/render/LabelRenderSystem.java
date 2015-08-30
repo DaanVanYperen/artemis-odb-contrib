@@ -32,7 +32,7 @@ public class LabelRenderSystem extends DeferredEntityProcessingSystem {
 
     protected M<Pos> mPos;
     protected M<Label> mLabel;
-    protected M<Tint> mColor;
+    protected M<Tint> mTint;
     protected M<BitmapFontAsset> mBitmapFontAsset;
 
     protected CameraSystem cameraSystem;
@@ -71,13 +71,7 @@ public class LabelRenderSystem extends DeferredEntityProcessingSystem {
 
             final BitmapFont font = mBitmapFontAsset.get(entity).bitmapFont;
 
-            if ( mColor.has(entity) )
-            {
-                final Tint tint = mColor.get(entity);
-                font.setColor(tint.color);
-            } else {
-                font.setColor(1f,1f,1f,1f);
-            }
+            batch.setColor(mTint.getSafe(entity, Tint.WHITE).color);
 
             switch ( label.align ) {
                 case LEFT:
