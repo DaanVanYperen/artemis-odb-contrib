@@ -2,7 +2,7 @@ package net.mostlyoriginal.api.plugin.extendedcomponentmapper;
 
 import com.artemis.*;
 import com.artemis.utils.reflect.ClassReflection;
-import net.mostlyoriginal.api.component.common.ExtendedComponent;
+import net.mostlyoriginal.api.component.common.Mirrorable;
 
 /**
  * Extended Component Mapper.
@@ -17,7 +17,7 @@ public class M<A extends Component> {
 	private final EntityTransmuter createTransmuter;
 	private final EntityTransmuter removeTransmuter;
 	private final Entity flyweight;
-	private final boolean isExtendedComponent;
+	private final boolean isMirrorable;
 
 	@SuppressWarnings("unchecked")
 	public M( Class<? extends Component> type, World world) {
@@ -26,11 +26,11 @@ public class M<A extends Component> {
 		createTransmuter = new EntityTransmuterFactory(world).add(type).build();
 		removeTransmuter = new EntityTransmuterFactory(world).remove(type).build();
 
-		isExtendedComponent = ClassReflection.isAssignableFrom(net.mostlyoriginal.api.component.common.ExtendedComponent.class, type);
+		isMirrorable = ClassReflection.isAssignableFrom(net.mostlyoriginal.api.component.common.Mirrorable.class, type);
 	}
 
-	public boolean isExtendedComponent() {
-		return isExtendedComponent;
+	public boolean isMirrorable() {
+		return isMirrorable;
 	}
 
 	/**
@@ -106,13 +106,13 @@ public class M<A extends Component> {
 	 */
 	@SuppressWarnings("unchecked")
 	public A mirror(int targetId, int sourceId) {
-		if ( !isExtendedComponent ) {
-			throw new RuntimeException("Component does not extend ExtendedComponent<T>, required for #set.");
+		if ( !isMirrorable) {
+			throw new RuntimeException("Component does not extend ExtendedComponent<T> or just Mirrorable<T>, required for #set.");
 		}
 
 		final A source = getSafe(sourceId);
 		if ( source != null ) {
-			return ((ExtendedComponent<A>)create(targetId)).set(source);
+			return (A) ((Mirrorable)create(targetId)).set(source);
 		} else {
 			remove(targetId);
 			return null;
