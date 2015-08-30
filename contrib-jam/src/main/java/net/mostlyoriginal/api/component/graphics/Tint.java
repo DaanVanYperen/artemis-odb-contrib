@@ -1,7 +1,9 @@
 package net.mostlyoriginal.api.component.graphics;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Interpolation;
 import net.mostlyoriginal.api.component.common.ExtendedComponent;
+import net.mostlyoriginal.api.component.common.Tweenable;
 
 /**
  * Colorize for animations, labels.
@@ -11,7 +13,7 @@ import net.mostlyoriginal.api.component.common.ExtendedComponent;
  * @see Color
  * @author Daan van Yperen
  */
-public class Tint extends ExtendedComponent<Tint> {
+public class Tint extends ExtendedComponent<Tint> implements Tweenable<Tint> {
 
 	public static final Tint WHITE = new Tint(Color.WHITE);
 
@@ -74,6 +76,22 @@ public class Tint extends ExtendedComponent<Tint> {
 		this.color.g = tint.color.g;
 		this.color.b = tint.color.b;
 		this.color.a = tint.color.a;
+		return this;
+	}
+
+	@Override
+	public Tint tween(Tint a, Tint b, float value) {
+
+		final Interpolation linear = Interpolation.linear;
+
+		final Color colorA = a.color;
+		final Color colorB = b.color;
+
+		color.r = linear.apply(colorA.r, colorB.r, value);
+		color.g = linear.apply(colorA.g, colorB.g, value);
+		color.b = linear.apply(colorA.b, colorB.b, value);
+		color.a = linear.apply(colorA.a, colorB.a, value);
+
 		return this;
 	}
 }
