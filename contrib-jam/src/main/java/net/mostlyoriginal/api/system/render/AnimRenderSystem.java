@@ -5,7 +5,6 @@ package net.mostlyoriginal.api.system.render;
  */
 
 import com.artemis.Aspect;
-import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,6 +16,7 @@ import net.mostlyoriginal.api.component.graphics.Invisible;
 import net.mostlyoriginal.api.component.graphics.Renderable;
 import net.mostlyoriginal.api.component.graphics.Tint;
 import net.mostlyoriginal.api.manager.AbstractAssetSystem;
+import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.system.delegate.DeferredEntityProcessingSystem;
 import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
@@ -30,10 +30,10 @@ import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
 @Wire
 public class AnimRenderSystem extends DeferredEntityProcessingSystem {
 
-    protected ComponentMapper<Pos> mPos;
-    protected ComponentMapper<Anim> mAnim;
-    protected ComponentMapper<Tint> mColor;
-    protected ComponentMapper<Angle> mAngle;
+    protected M<Pos> mPos;
+    protected M<Anim> mAnim;
+    protected M<Tint> mTint;
+    protected M<Angle> mAngle;
 
     protected CameraSystem cameraSystem;
     protected AbstractAssetSystem abstractAssetSystem;
@@ -69,13 +69,7 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
 
         anim.age += world.delta * anim.speed;
 
-        if ( mColor.has(entity) )
-        {
-            final Tint tint = mColor.get(entity);
-            batch.setColor(tint.color);
-        } else {
-            batch.setColor(1f,1f,1f,1f);
-        }
+        batch.setColor(mTint.getSafe(entity, Tint.WHITE).color);
 
         if ( anim.id != null ) drawAnimation(anim, angle, pos, anim.id);
         if ( anim.id2 != null ) drawAnimation(anim, angle, pos, anim.id2);

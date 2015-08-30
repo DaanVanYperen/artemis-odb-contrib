@@ -34,9 +34,9 @@ public class TintTest {
 	}
 
 	protected void assertColor(Tint tint, float r, float g, float b, float a) {
-		Assert.assertEquals(r, tint.r, 0.01f);
-		Assert.assertEquals(g, tint.g, 0.01f);
-		Assert.assertEquals(b, tint.b, 0.01f);
-		Assert.assertEquals(a, tint.a, 0.01f);
+		Assert.assertEquals(r, tint.color.r, 0.01f);
+		Assert.assertEquals(g, tint.color.g, 0.01f);
+		Assert.assertEquals(b, tint.color.b, 0.01f);
+		Assert.assertEquals(a, tint.color.a, 0.01f);
 	}
 }

@@ -13,9 +13,15 @@ import net.mostlyoriginal.api.component.common.ExtendedComponent;
  */
 public class Tint extends ExtendedComponent<Tint> {
 
+	public static final Tint WHITE = new Tint(Color.WHITE);
+
 	public Color color = new Color();
 
 	public Tint() {
+	}
+
+	public Tint(Color color) {
+		set(color);
 	}
 
 	public Tint(Tint tint) {
