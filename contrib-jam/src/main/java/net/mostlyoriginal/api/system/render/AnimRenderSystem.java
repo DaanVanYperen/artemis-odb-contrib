@@ -72,7 +72,7 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
         if ( mColor.has(entity) )
         {
             final Tint tint = mColor.get(entity);
-            batch.setColor(tint.r, tint.g, tint.b, tint.a);
+            batch.setColor(tint.color);
         } else {
             batch.setColor(1f,1f,1f,1f);
         }

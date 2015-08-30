@@ -32,16 +32,17 @@ public class ColorAnimationSystem extends EntityProcessingSystem {
         final Tint tint = mColor.get(entity);
 
         // age colors individually.
-        colorAnimation.age.r += colorAnimation.speed.r * world.delta;
-        colorAnimation.age.g += colorAnimation.speed.g * world.delta;
-        colorAnimation.age.b += colorAnimation.speed.b * world.delta;
-        colorAnimation.age.a += colorAnimation.speed.a * world.delta;
+
+        colorAnimation.age.color.r += colorAnimation.speed.color.r * world.delta;
+        colorAnimation.age.color.g += colorAnimation.speed.color.g * world.delta;
+        colorAnimation.age.color.b += colorAnimation.speed.color.b * world.delta;
+        colorAnimation.age.color.a += colorAnimation.speed.color.a * world.delta;
 
         // tween colors individually.
-        tint.r = colorAnimation.tween.apply( colorAnimation.startTint.r, colorAnimation.endTint.r, 1- Math.abs(colorAnimation.age.r % 2f - 1));
-        tint.g = colorAnimation.tween.apply( colorAnimation.startTint.g, colorAnimation.endTint.g, 1- Math.abs(colorAnimation.age.g % 2f - 1));
-        tint.b = colorAnimation.tween.apply( colorAnimation.startTint.b, colorAnimation.endTint.b, 1- Math.abs(colorAnimation.age.b % 2f - 1));
-        tint.a = colorAnimation.tween.apply( colorAnimation.startTint.a, colorAnimation.endTint.a, 1- Math.abs(colorAnimation.age.a % 2f - 1));
+        tint.color.r = colorAnimation.tween.apply( colorAnimation.startTint.color.r, colorAnimation.endTint.color.r, 1- Math.abs(colorAnimation.age.color.r % 2f - 1));
+        tint.color.g = colorAnimation.tween.apply( colorAnimation.startTint.color.g, colorAnimation.endTint.color.g, 1- Math.abs(colorAnimation.age.color.g % 2f - 1));
+        tint.color.b = colorAnimation.tween.apply( colorAnimation.startTint.color.b, colorAnimation.endTint.color.b, 1- Math.abs(colorAnimation.age.color.b % 2f - 1));
+        tint.color.a = colorAnimation.tween.apply( colorAnimation.startTint.color.a, colorAnimation.endTint.color.a, 1- Math.abs(colorAnimation.age.color.a % 2f - 1));
 
         if ( colorAnimation.duration != -1 )
         {

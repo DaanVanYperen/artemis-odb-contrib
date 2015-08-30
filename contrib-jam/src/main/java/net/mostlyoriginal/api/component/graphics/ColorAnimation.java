@@ -27,6 +27,6 @@ public class ColorAnimation extends Component {
         this.endTint = endTint;
         this.tween = tween;
         this.duration = duration;
-        this.speed.r = this.speed.g = this.speed.b = this.speed.a = speed;
+        this.speed.set(speed,speed,speed,speed);
     }
 }

@@ -74,7 +74,7 @@ public class LabelRenderSystem extends DeferredEntityProcessingSystem {
             if ( mColor.has(entity) )
             {
                 final Tint tint = mColor.get(entity);
-                font.setColor(tint.r, tint.g, tint.b, tint.a);
+                font.setColor(tint.color);
             } else {
                 font.setColor(1f,1f,1f,1f);
             }

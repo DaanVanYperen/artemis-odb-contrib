@@ -1,68 +1,73 @@
 package net.mostlyoriginal.api.component.graphics;
 
+import com.badlogic.gdx.graphics.Color;
 import net.mostlyoriginal.api.component.common.ExtendedComponent;
 
 /**
- * Tint for animations, labels.
- *
+ * Colorize for animations, labels.
+ * <p/>
  * Optional, convention is to assume white if not set.
  *
+ * @see Color
  * @author Daan van Yperen
  */
 public class Tint extends ExtendedComponent<Tint> {
 
-    public float r;
-    public float g;
-    public float b;
-    public float a;
+	public Color color = new Color();
 
-    public Tint() {
-    }
+	public Tint() {
+	}
 
-    @Override
-    protected void reset() {
+	public Tint(Tint tint) {
+		set(tint);
+	}
 
-    }
+	public Tint(float r, float g, float b, float a) {
+		set(r, g, b, a);
+	}
 
-    public Tint(Tint tint) {
-        this.r = tint.r;
-        this.g = tint.g;
-        this.b = tint.b;
-        this.a = tint.a;
-    }
+	@Override
+	protected void reset() {
+		color.set(0, 0, 0, 0);
+	}
 
-	/** Create Tint by hex, RRGGBBAA. */
+	/**
+	 * Create Tint by hex, RRGGBBAA.
+	 */
 	public Tint(String hex) {
 		setHex(hex);
 	}
 
-	/** Set color to hex, RRGGBBAA. */
-	public void setHex(String hex) {
+	/**
+	 * Set color to hex, RRGGBBAA.
+	 */
+	public Tint setHex(String hex) {
 		set((float) Integer.valueOf(hex.substring(0, 2), 16) / 255.0F,
 				(float) Integer.valueOf(hex.substring(2, 4), 16) / 255.0F,
 				(float) Integer.valueOf(hex.substring(4, 6), 16) / 255.0F,
 				(float) (hex.length() != 8 ? 255 : Integer.valueOf(hex.substring(6, 8), 16)) / 255.0F);
+		return this;
 	}
 
-	public Tint(float r, float g, float b, float a) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.a = a;
-    }
+	public Tint set(Color color) {
+		this.color.set(color);
+		return this;
+	}
 
-    public void set(float r, float g, float b, float a) {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.a = a;
-    }
+	public Tint set(float r, float g, float b, float a) {
+		this.color.r = r;
+		this.color.g = g;
+		this.color.b = b;
+		this.color.a = a;
+		return this;
+	}
 
-    public void set(Tint tint)
-    {
-        this.r = tint.r;
-        this.g = tint.g;
-        this.b = tint.b;
-        this.a = tint.a;
-    }
+	@Override
+	public Tint set(Tint tint) {
+		this.color.r = tint.color.r;
+		this.color.g = tint.color.g;
+		this.color.b = tint.color.b;
+		this.color.a = tint.color.a;
+		return this;
+	}
 }
