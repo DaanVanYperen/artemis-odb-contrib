@@ -10,6 +10,7 @@ public class Label extends ExtendedComponent<Label> {
 	public String text;
 	public Align align = Align.LEFT;
 
+	public Label() {}
 	public Label(String text) {
 		this.text = text;
 	}

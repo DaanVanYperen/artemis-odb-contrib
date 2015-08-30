@@ -10,6 +10,7 @@ public class Font extends ExtendedComponent<Font> {
 	public String fontName;
 	public float scale = 1f;
 
+	public Font() {}
 	public Font(String fontName) {
 		this.fontName = fontName;
 	}
