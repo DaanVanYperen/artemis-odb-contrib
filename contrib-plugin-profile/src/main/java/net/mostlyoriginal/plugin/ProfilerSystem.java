@@ -27,6 +27,7 @@ public class ProfilerSystem extends BaseSystem {
 	Skin skin;
 
 	SystemProfilerGUI gui;
+	private boolean f3ButtonDown;
 
 	@Override
 	protected void initialize() {
@@ -39,8 +40,6 @@ public class ProfilerSystem extends BaseSystem {
 		stage.getBatch().setProjectionMatrix(camera.combined);
 		skin = new Skin(Gdx.files.internal("profiler/uiskin.json"));
 
-		// resume profiling
-		SystemProfiler.resume();
 		// setup some static config like colors etc
 		SystemProfilerGUI.GRAPH_H_LINE.set(Color.ORANGE);
 		gui = new SystemProfilerGUI(skin, "default");
@@ -51,11 +50,23 @@ public class ProfilerSystem extends BaseSystem {
 
 	@Override
 	protected void processSystem() {
-		if (!isEnabled() || gui.getParent() == null) {
+		if (!isEnabled() || !isConfigured()) {
 			return;
 		}
 
-		updateStageInput();
+		checkActivationButton();
+
+		if ( SystemProfiler.isRunning()) {
+			processInput();
+			render();
+		}
+	}
+
+	private boolean isConfigured() {
+		return gui.getParent() != null;
+	}
+
+	private void render() {
 		stage.act(world.delta);
 		stage.draw();
 		renderer.setProjectionMatrix(camera.combined);
@@ -64,9 +75,25 @@ public class ProfilerSystem extends BaseSystem {
 		renderer.end();
 	}
 
+	private void checkActivationButton() {
+		if ( Gdx.input.isKeyPressed(Input.Keys.F3) ) {
+			if ( !f3ButtonDown ) {
+				if (!SystemProfiler.isRunning()) {
+					gui.setHeight(Gdx.graphics.getHeight()/2);
+					SystemProfiler.resume();
+				} else if ( gui.getHeight() != Gdx.graphics.getHeight() ) {
+					gui.setHeight(Gdx.graphics.getHeight());
+				} else {
+					SystemProfiler.pause();
+				}
+			}
+			f3ButtonDown = true;
+		} else f3ButtonDown = false;
+	}
+
 	private boolean leftMouseDown;
 	/** Emulate stage input to maintain pre-existing input processor. */
-	private void updateStageInput() {
+	private void processInput() {
 		if ( Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
 			if ( !leftMouseDown) {
 				leftMouseDown = true;
