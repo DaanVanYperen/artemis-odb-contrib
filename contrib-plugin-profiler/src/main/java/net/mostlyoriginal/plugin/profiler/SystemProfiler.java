@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api;
+package net.mostlyoriginal.plugin.profiler;
 
 import com.artemis.BaseSystem;
 import com.artemis.World;
@@ -7,6 +7,7 @@ import com.artemis.utils.Bag;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.TimeUtils;
 
 /**
  * {@link ArtemisProfiler} implementation, {@link SystemProfiler#dispose()} should be called to clean static references as needed
@@ -195,15 +196,13 @@ public class SystemProfiler implements ArtemisProfiler {
 
 	@Override
 	public void start() {
-		if (!RUNNING) return;
-		startTime = System.nanoTime();
+		startTime = TimeUtils.nanoTime();
 	}
 
 	@Override
 	public void stop() {
-		if (!RUNNING) return;
-		long time = System.nanoTime() - startTime;
-		sample(time);
+		long time = TimeUtils.nanoTime() - startTime;
+		if (RUNNING) sample(time);
 	}
 
 	public long getAverage() {

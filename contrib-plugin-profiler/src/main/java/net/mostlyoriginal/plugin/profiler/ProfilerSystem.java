@@ -1,4 +1,4 @@
-package net.mostlyoriginal.plugin;
+package net.mostlyoriginal.plugin.profiler;
 
 import com.artemis.BaseSystem;
 import com.artemis.annotations.Wire;
@@ -9,8 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import net.mostlyoriginal.api.SystemProfiler;
-import net.mostlyoriginal.api.SystemProfilerGUI;
+import net.mostlyoriginal.plugin.ProfilerPlugin;
 
 /**
  * Example profiling system.
@@ -41,7 +40,7 @@ public class ProfilerSystem extends BaseSystem {
 		renderer = new ShapeRenderer();
 		stage = new Stage();
 		stage.getBatch().setProjectionMatrix(camera.combined);
-		skin = new Skin(Gdx.files.internal("profiler/uiskin.json"));
+		skin = new Skin(Gdx.files.classpath("net/mostlyoriginal/plugin/profiler/skin/uiskin.json"));
 
 		// setup some static config like colors etc
 		SystemProfilerGUI.GRAPH_H_LINE.set(Color.ORANGE);

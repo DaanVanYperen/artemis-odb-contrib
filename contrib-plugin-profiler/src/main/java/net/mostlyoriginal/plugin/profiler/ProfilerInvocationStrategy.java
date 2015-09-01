@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api;
+package net.mostlyoriginal.plugin.profiler;
 
 import com.artemis.BaseSystem;
 import com.artemis.SystemInvocationStrategy;

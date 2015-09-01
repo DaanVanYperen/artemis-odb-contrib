@@ -7,7 +7,8 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
-import net.mostlyoriginal.plugin.ProfilerSystem;
+import net.mostlyoriginal.plugin.profiler.ProfilerSystem;
+import net.mostlyoriginal.plugin.profiler.SystemProfiler;
 
 /**
  * Basic integration test for {@link SystemProfiler}

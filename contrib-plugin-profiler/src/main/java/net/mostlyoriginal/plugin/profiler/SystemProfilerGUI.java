@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api;
+package net.mostlyoriginal.plugin.profiler;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -317,16 +317,21 @@ public class SystemProfilerGUI extends Window {
 			// we don't want to update if the change wont affect the representation
 			if (!MathUtils.isEqual(lastMax, profiler.getMax(), PRECISION)) {
 				lastMax = profiler.getMax();
-				max.setText(String.format(FORMAT, lastMax));
+				max.setText(timingToString(lastMax));
 			}
 			if (!MathUtils.isEqual(lastLocalMax, profiler.getLocalMax(), PRECISION)) {
 				lastLocalMax = profiler.getLocalMax();
-				localMax.setText(String.format(FORMAT, lastLocalMax));
+				localMax.setText(timingToString(lastLocalMax));
 			}
 			if (!MathUtils.isEqual(lastAvg, profiler.getMovingAvg(), PRECISION)) {
 				lastAvg = profiler.getMovingAvg();
-				avg.setText(String.format(FORMAT, lastAvg));
+				avg.setText(timingToString(lastAvg));
 			}
+		}
+
+		private String timingToString(float var) {
+			int decimals = (int) (var * 100) % 100;
+			return Integer.toString((int)(var)) + (decimals < 10 ? ".0" : ".") + Integer.toString(decimals);
 		}
 
 		public float getAverage () {

@@ -1,5 +1,12 @@
 <module rename-to="net.mostlyoriginal.ContribPluginProfiler">
     <source path="api"/>
     <source path="plugin"/>
-    <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.plugin.ProfilerSystem" />
+    <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.plugin.ProfilerPlugin" />
+    <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.plugin.profiler" />
+
+    <extend-configuration-property name="gdx.files.classpath" value="net/mostlyoriginal/plugin/profiler/skin/default.fnt" />
+    <extend-configuration-property name="gdx.files.classpath" value="net/mostlyoriginal/plugin/profiler/skin/default.png" />
+    <extend-configuration-property name="gdx.files.classpath" value="net/mostlyoriginal/plugin/profiler/skin/uiskin.atlas" />
+    <extend-configuration-property name="gdx.files.classpath" value="net/mostlyoriginal/plugin/profiler/skin/uiskin.json" />
+    <extend-configuration-property name="gdx.files.classpath" value="net/mostlyoriginal/plugin/profiler/skin/uiskin.png" />
 </module>
