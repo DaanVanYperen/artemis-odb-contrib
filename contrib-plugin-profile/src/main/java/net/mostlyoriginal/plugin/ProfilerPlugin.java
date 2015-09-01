@@ -6,9 +6,16 @@ import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
 
 /**
  * Artemis system profiler.
+ * 
+ * Tracks performance of artemis systems and displays it in a line graph.
+ * Overhead is insignificant while closed.
  *
- * @author piotr-j
- * @author Daan van Yperen
+ * Does not require {@see @com.artemis.annotations.Profile} on systems.
+ *
+ * Open/Close with F3.
+ *
+ * @author piotr-j (Plugin)
+ * @author Daan van Yperen (Integration)
  */
 public class ProfilerPlugin implements ArtemisPlugin {
 

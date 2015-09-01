@@ -13,13 +13,16 @@ import net.mostlyoriginal.api.SystemProfiler;
 import net.mostlyoriginal.api.SystemProfilerGUI;
 
 /**
- * Renders profiler.
+ * Example profiling system.
  *
  * @author piotr-j
  * @author Daan van Yperen
+ * @see ProfilerPlugin
  */
 @Wire
 public class ProfilerSystem extends BaseSystem {
+
+	public static final int TOGGLE_PROFILER_KEY = Input.Keys.F3;
 
 	OrthographicCamera camera;
 	ShapeRenderer renderer;
@@ -76,7 +79,7 @@ public class ProfilerSystem extends BaseSystem {
 	}
 
 	private void checkActivationButton() {
-		if ( Gdx.input.isKeyPressed(Input.Keys.F3) ) {
+		if ( Gdx.input.isKeyPressed(TOGGLE_PROFILER_KEY) ) {
 			if ( !f3ButtonDown ) {
 				if (!SystemProfiler.isRunning()) {
 					gui.setHeight(Gdx.graphics.getHeight()/2);
