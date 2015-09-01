@@ -1,4 +1,0 @@
-<module rename-to="net.mostlyoriginal.ContribPluginProfile">
-    <source path="api"/>
-    <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.api" />
-</module>

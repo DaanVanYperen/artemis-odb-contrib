@@ -8,9 +8,9 @@
         <version>0.11.5-SNAPSHOT</version>
     </parent>
 
-    <artifactId>contrib-plugin-profile</artifactId>
+    <artifactId>contrib-plugin-profiler</artifactId>
     <packaging>jar</packaging>
-    <name>contrib-plugin-profile</name>
+    <name>contrib-plugin-profiler</name>
     <description>Daan's profiler for systems!</description>
 
     <dependencies>

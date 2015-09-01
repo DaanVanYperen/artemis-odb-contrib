@@ -107,7 +107,7 @@
     <modules>
         <module>contrib-core</module>
         <module>contrib-jam</module>
-        <module>contrib-plugin-profile</module>
+        <module>contrib-plugin-profiler</module>
         <module>contrib-eventbus</module>
         <module>contrib-test-gwt</module>
         <module>contrib-benchmark</module>
