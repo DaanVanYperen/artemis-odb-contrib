@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.operation;
+    package net.mostlyoriginal.api.operation;
 
 import com.artemis.Component;
 import com.badlogic.gdx.math.Interpolation;
