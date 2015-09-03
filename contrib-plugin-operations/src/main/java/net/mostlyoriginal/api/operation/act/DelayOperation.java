@@ -1,29 +1,35 @@
 package net.mostlyoriginal.api.operation.act;
 
-import com.artemis.Component;
 import com.artemis.Entity;
 import net.mostlyoriginal.api.component.Schedule;
 import net.mostlyoriginal.api.operation.common.Operation;
 
 /**
- * Add component to aen
+ * Delay.
  *
  * @author Daan van Yperen
  * @see Schedule
  */
-public class AddOperation extends Operation {
+public class DelayOperation extends Operation {
 
-    public Component component;
-    public AddOperation() {}
+    private float age;
+    private float delay;
+
+    public DelayOperation() {}
+
+    public void setDelay(float delay) {
+        this.delay = delay;
+    }
 
     @Override
     public boolean process(float delta, Entity e) {
-        e.edit().add(component);
-        return true;
+        age += delta;
+        return age >= delay;
     }
 
     @Override
     public void reset() {
-        component = null;
+        age=0;
+        delay=0;
     }
 }

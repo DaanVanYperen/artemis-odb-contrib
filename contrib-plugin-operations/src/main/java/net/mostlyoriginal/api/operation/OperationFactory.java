@@ -1,9 +1,11 @@
 package net.mostlyoriginal.api.operation;
 
+import net.mostlyoriginal.api.operation.act.DelayOperation;
 import net.mostlyoriginal.api.operation.act.DeleteFromWorldOperation;
 import net.mostlyoriginal.api.operation.common.Operation;
 import net.mostlyoriginal.api.operation.flow.ParallelOperation;
 import net.mostlyoriginal.api.operation.flow.SerialOperation;
+import net.mostlyoriginal.api.utils.Preconditions;
 
 /**
  * @author Daan van Yperen
@@ -74,5 +76,13 @@ public class OperationFactory {
 
 	public static Operation deleteFromWorld() {
 		return Operation.prepare(DeleteFromWorldOperation.class);
+	}
+
+	public static DelayOperation delay( float delay )
+	{
+		Preconditions.checkArgument(delay >= 0, "Delay must be >= 0.");
+		DelayOperation operation = Operation.prepare(DelayOperation.class);
+		operation.setDelay(delay);
+		return operation;
 	}
 }

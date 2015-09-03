@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static net.mostlyoriginal.api.operation.OperationFactory.*;
+import static net.mostlyoriginal.api.utils.Duration.seconds;
 
 /**
  * @author Daan van Yperen
@@ -113,7 +114,17 @@ public class OperationFactoryTest {
 								deleteFromWorld()
 						));
 
-		Assert.assertTrue(((OperationFlow)operation.operations.get(0)).operations.get(0) instanceof DeleteFromWorldOperation);
+		Assert.assertTrue(((OperationFlow) operation.operations.get(0)).operations.get(0) instanceof DeleteFromWorldOperation);
 
+	}
+
+	@Test
+	public void valid_delay_should_create_delay() {
+		Assert.assertNotNull(delay(seconds(1)));
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void invalid_delay_should_throw_exception() {
+		delay(seconds(-1));
 	}
 }

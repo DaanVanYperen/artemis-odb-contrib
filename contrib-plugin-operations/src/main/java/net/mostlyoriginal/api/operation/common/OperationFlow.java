@@ -1,6 +1,7 @@
 package net.mostlyoriginal.api.operation.common;
 
 import com.badlogic.gdx.utils.Array;
+import net.mostlyoriginal.api.utils.Preconditions;
 
 /**
  * Operation that handles flow of child operations.
@@ -26,6 +27,7 @@ public abstract class OperationFlow extends Operation {
 
 	/** Add operation to end of flow. */
 	public void add(Operation value) {
+		Preconditions.checkNotNull(value);
 		operations.add(value);
 	}
 
@@ -38,41 +40,41 @@ public abstract class OperationFlow extends Operation {
 
 	public void addAll(Operation o1)
 	{
-		operations.ensureCapacity(5);
-		operations.add(o1);
+		operations.ensureCapacity(1);
+		add(o1);
 	}
 
 	public void addAll(Operation o1, Operation o2)
 	{
-		operations.ensureCapacity(5);
-		operations.add(o1);
-		operations.add(o2);
+		operations.ensureCapacity(2);
+		add(o1);
+		add(o2);
 	}
 
 	public void addAll(Operation o1, Operation o2, Operation o3)
 	{
-		operations.ensureCapacity(5);
-		operations.add(o1);
-		operations.add(o2);
-		operations.add(o3);
+		operations.ensureCapacity(3);
+		add(o1);
+		add(o2);
+		add(o3);
 	}
 
 	public void addAll(Operation o1, Operation o2, Operation o3, Operation o4)
 	{
-		operations.ensureCapacity(5);
-		operations.add(o1);
-		operations.add(o2);
-		operations.add(o3);
-		operations.add(o4);
+		operations.ensureCapacity(4);
+		add(o1);
+		add(o2);
+		add(o3);
+		add(o4);
 	}
 
 	public void addAll(Operation o1, Operation o2, Operation o3, Operation o4, Operation o5)
 	{
 		operations.ensureCapacity(5);
-		operations.add(o1);
-		operations.add(o2);
-		operations.add(o3);
-		operations.add(o4);
-		operations.add(o5);
+		add(o1);
+		add(o2);
+		add(o3);
+		add(o4);
+		add(o5);
 	}
 }
