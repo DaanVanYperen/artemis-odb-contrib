@@ -56,7 +56,7 @@ public class TweenOperation extends Operation {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public boolean act(float delta, Entity e) {
+	public boolean process(float delta, Entity e) {
 		runtime += delta;
 
 		if (m == null) {

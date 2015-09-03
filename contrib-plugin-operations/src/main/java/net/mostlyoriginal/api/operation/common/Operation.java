@@ -1,9 +1,10 @@
 package net.mostlyoriginal.api.operation.common;
 
 import com.artemis.Entity;
-import com.artemis.World;
 import com.badlogic.gdx.utils.Pool;
 import net.mostlyoriginal.api.component.Schedule;
+
+import java.io.Serializable;
 
 /**
  * Scriptable operation.
@@ -11,19 +12,13 @@ import net.mostlyoriginal.api.component.Schedule;
  * @author Daan van Yperen
  * @see Schedule
  */
-public abstract class Operation implements Pool.Poolable {
+public abstract class Operation implements Pool.Poolable, Serializable {
 
-    protected World world;
-    private Pool pool;
+    private transient Pool pool;
 
     protected Operation() {}
 
-    abstract public boolean act(float delta, Entity e);
-
-    public void setWorld(World world)
-    {
-        this.world = world;
-    }
+    abstract public boolean process(float delta, Entity e);
 
     @SuppressWarnings("unchecked")
     public void release() {

@@ -19,7 +19,7 @@ public class RemoveOperation extends Operation {
     }
 
     @Override
-    public boolean act(float delta, Entity e) {
+    public boolean process(float delta, Entity e) {
         e.edit().remove(componentClass);
         return true;
     }

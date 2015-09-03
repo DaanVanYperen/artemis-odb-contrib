@@ -15,7 +15,7 @@ public class DeleteFromWorldOperation extends Operation {
     public DeleteFromWorldOperation() {}
 
     @Override
-    public boolean act(float delta, Entity e) {
+    public boolean process(float delta, Entity e) {
         e.deleteFromWorld();
         return true;
     }

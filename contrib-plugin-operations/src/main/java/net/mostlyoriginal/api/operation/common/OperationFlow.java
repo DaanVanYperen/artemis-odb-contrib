@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Array;
  */
 public abstract class OperationFlow extends Operation {
 
-	protected Array<Operation> operations = new Array<>(true, 4);
+	public Array<Operation> operations = new Array<>(true, 4);
 
 	protected void releaseChildren() {
 		for (int i = 0, s = operations.size; i < s; i++) {
@@ -24,10 +24,15 @@ public abstract class OperationFlow extends Operation {
 		releaseChildren();
 	}
 
+	/** Add operation to end of flow. */
+	public void add(Operation value) {
+		operations.add(value);
+	}
+
 	/**
 	 * @return {@code true} if no operations remaining, {@code false} if otherwise.
 	 */
-	protected boolean isFinished() {
+	public boolean isFinished() {
 		return operations.size == 0;
 	}
 }

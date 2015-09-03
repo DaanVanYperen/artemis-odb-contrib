@@ -12,12 +12,12 @@ import net.mostlyoriginal.api.operation.common.OperationFlow;
 public class ParallelOperation extends OperationFlow {
 
 	@Override
-	public boolean act(float delta, Entity e) {
+	public boolean process(float delta, Entity e) {
 
-		for (int i = 0, s = operations.size; i < s; i++) {
+		for (int i = 0; i <  operations.size; i++) {
 			final Operation operation = operations.get(i);
 
-			if ( operation.act(world.delta, e) ) {
+			if ( operation.process(delta, e) ) {
 				operations.removeIndex(i);
 				operation.release();
 				i--;

@@ -6,7 +6,7 @@ import net.mostlyoriginal.api.operation.common.OperationFlow;
 
 /**
  * Fires operations serially, waiting for each to finish before starting the next.
- *
+ * <p/>
  * Preserves and calls in order.
  *
  * @author Daan van Yperen
@@ -14,15 +14,14 @@ import net.mostlyoriginal.api.operation.common.OperationFlow;
 public class SerialOperation extends OperationFlow {
 
 	@Override
-	public boolean act(float delta, Entity e) {
+	public boolean process(float delta, Entity e) {
 
-		for (int i = 0, s = operations.size; i < s; i++) {
-			final Operation operation = operations.get(i);
+		if (operations.size > 0) {
+			final Operation operation = operations.first();
 
-			if ( operation.act(world.delta, e) ) {
-				operations.removeIndex(i);
+			if (operation.process(delta, e)) {
+				operations.removeIndex(0);
 				operation.release();
-				return isFinished();
 			}
 		}
 		return isFinished();

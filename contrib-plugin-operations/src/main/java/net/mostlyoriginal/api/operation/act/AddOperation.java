@@ -17,7 +17,7 @@ public class AddOperation extends Operation {
     public AddOperation() {}
 
     @Override
-    public boolean act(float delta, Entity e) {
+    public boolean process(float delta, Entity e) {
         e.edit().add(component);
         return true;
     }

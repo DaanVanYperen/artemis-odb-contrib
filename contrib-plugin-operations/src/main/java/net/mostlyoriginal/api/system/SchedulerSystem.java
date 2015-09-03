@@ -26,7 +26,7 @@ public class SchedulerSystem extends EntityProcessingSystem {
     @Override
     protected void process(Entity e) {
         ParallelOperation operation = mSchedule.get(e).operation;
-        if ( operation.act(world.delta, e) ) {
+        if ( operation.process(world.delta, e) ) {
 
             // reset root container but keep the instance.
             operation.reset();
