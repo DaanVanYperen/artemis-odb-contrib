@@ -6,7 +6,7 @@ import net.mostlyoriginal.api.component.Schedule;
 import net.mostlyoriginal.api.operation.common.Operation;
 
 /**
- * Script Add component to actor.
+ * Add component to entity.
  *
  * @author Daan van Yperen
  * @see Schedule

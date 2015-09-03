@@ -6,7 +6,7 @@ import net.mostlyoriginal.api.component.Schedule;
 import net.mostlyoriginal.api.operation.common.Operation;
 
 /**
- * Script Remove component from entity by class.
+ * Remove component from entity.
  *
  * @author Daan van Yperen
  * @see Schedule

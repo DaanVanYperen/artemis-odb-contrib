@@ -5,7 +5,7 @@ import net.mostlyoriginal.api.component.Schedule;
 import net.mostlyoriginal.api.operation.common.Operation;
 
 /**
- * Script Delete Entity from world.
+ * Delete Entity from world.
  *
  * @author Daan van Yperen
  * @see Schedule

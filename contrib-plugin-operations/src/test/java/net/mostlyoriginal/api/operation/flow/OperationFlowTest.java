@@ -1,6 +1,8 @@
 package net.mostlyoriginal.api.operation.flow;
 
 import net.mostlyoriginal.api.operation.common.OperationFlow;
+import net.mostlyoriginal.api.operation.common.OperationTest;
+import net.mostlyoriginal.api.operation.common.TestOperation;
 import org.junit.Assert;
 import org.junit.Test;
 
