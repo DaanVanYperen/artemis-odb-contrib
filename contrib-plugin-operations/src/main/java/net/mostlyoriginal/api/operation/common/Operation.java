@@ -2,6 +2,7 @@ package net.mostlyoriginal.api.operation.common;
 
 import com.artemis.Entity;
 import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.Pools;
 import net.mostlyoriginal.api.component.Schedule;
 
 import java.io.Serializable;
@@ -26,6 +27,16 @@ public abstract class Operation implements Pool.Poolable, Serializable {
             pool.free(this);
             pool = null;
         }
+    }
+
+    /**
+     * Returns a new or pooled action of the specified type.
+     */
+    public static <T extends Operation> T prepare(Class<T> type) {
+        final Pool<T> pool = Pools.get(type);
+        T node = pool.obtain();
+        node.setPool(pool);
+        return node;
     }
 
     public Pool getPool() {

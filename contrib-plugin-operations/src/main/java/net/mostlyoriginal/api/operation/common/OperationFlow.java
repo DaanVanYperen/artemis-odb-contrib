@@ -35,4 +35,44 @@ public abstract class OperationFlow extends Operation {
 	public boolean isFinished() {
 		return operations.size == 0;
 	}
+
+	public void addAll(Operation o1)
+	{
+		operations.ensureCapacity(5);
+		operations.add(o1);
+	}
+
+	public void addAll(Operation o1, Operation o2)
+	{
+		operations.ensureCapacity(5);
+		operations.add(o1);
+		operations.add(o2);
+	}
+
+	public void addAll(Operation o1, Operation o2, Operation o3)
+	{
+		operations.ensureCapacity(5);
+		operations.add(o1);
+		operations.add(o2);
+		operations.add(o3);
+	}
+
+	public void addAll(Operation o1, Operation o2, Operation o3, Operation o4)
+	{
+		operations.ensureCapacity(5);
+		operations.add(o1);
+		operations.add(o2);
+		operations.add(o3);
+		operations.add(o4);
+	}
+
+	public void addAll(Operation o1, Operation o2, Operation o3, Operation o4, Operation o5)
+	{
+		operations.ensureCapacity(5);
+		operations.add(o1);
+		operations.add(o2);
+		operations.add(o3);
+		operations.add(o4);
+		operations.add(o5);
+	}
 }
