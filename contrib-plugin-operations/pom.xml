@@ -7,10 +7,11 @@
         <artifactId>contrib-parent</artifactId>
         <version>0.11.5-SNAPSHOT</version>
     </parent>
-    <artifactId>contrib-jam</artifactId>
+
+    <artifactId>contrib-plugin-operations</artifactId>
     <packaging>jar</packaging>
-    <name>contrib-jam</name>
-    <description>Daan's jam bundle of systems and components!</description>
+    <name>contrib-plugin-operations</name>
+    <description>Scheduled operations on entities and components.</description>
 
     <dependencies>
         <dependency>
@@ -23,14 +24,14 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx</artifactId>
-            <version>${libgdx.version}</version>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx</artifactId>
+            <version>${libgdx.version}</version>
         </dependency>
     </dependencies>
 

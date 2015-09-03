@@ -1,10 +1,12 @@
-package net.mostlyoriginal.api.operation;
+package net.mostlyoriginal.api.operation.act;
 
 import com.artemis.Component;
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import net.mostlyoriginal.api.component.Schedule;
 import net.mostlyoriginal.api.component.common.Tweenable;
+import net.mostlyoriginal.api.operation.common.Operation;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.mostlyoriginal.api.utils.Preconditions;
 
@@ -13,7 +15,7 @@ import net.mostlyoriginal.api.utils.Preconditions;
  *
  * @author Daan van Yperen
  * @see Tweenable
- * @see net.mostlyoriginal.api.component.script.Schedule
+ * @see Schedule
  */
 public class TweenOperation extends Operation {
 

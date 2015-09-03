@@ -1,18 +1,18 @@
-package net.mostlyoriginal.api.operation;
+package net.mostlyoriginal.api.operation.common;
 
 import com.artemis.Entity;
 import com.artemis.World;
 import com.badlogic.gdx.utils.Pool;
+import net.mostlyoriginal.api.component.Schedule;
 
 /**
  * Scriptable operation.
  *
  * @author Daan van Yperen
- * @see net.mostlyoriginal.api.component.script.Schedule
+ * @see Schedule
  */
 public abstract class Operation implements Pool.Poolable {
 
-    protected float atAge;
     protected World world;
     private Pool pool;
 
@@ -25,6 +25,7 @@ public abstract class Operation implements Pool.Poolable {
         this.world = world;
     }
 
+    @SuppressWarnings("unchecked")
     public void release() {
         if (pool != null) {
             pool.free(this);
@@ -38,13 +39,5 @@ public abstract class Operation implements Pool.Poolable {
 
     public void setPool(Pool pool) {
         this.pool = pool;
-    }
-
-    public float getAtAge() {
-        return atAge;
-    }
-
-    public void setAtAge(float atAge) {
-        this.atAge = atAge;
     }
 }

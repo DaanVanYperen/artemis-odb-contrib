@@ -1,13 +1,15 @@
-package net.mostlyoriginal.api.operation;
+package net.mostlyoriginal.api.operation.act;
 
 import com.artemis.Component;
 import com.artemis.Entity;
+import net.mostlyoriginal.api.component.Schedule;
+import net.mostlyoriginal.api.operation.common.Operation;
 
 /**
  * Script Add component to actor.
  *
  * @author Daan van Yperen
- * @see net.mostlyoriginal.api.component.script.Schedule
+ * @see Schedule
  */
 public class AddOperation extends Operation {
 
