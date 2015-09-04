@@ -1,7 +1,9 @@
 package net.mostlyoriginal.api.operation;
 
-import net.mostlyoriginal.api.operation.act.DelayOperation;
-import net.mostlyoriginal.api.operation.act.DeleteFromWorldOperation;
+import com.artemis.Component;
+import com.badlogic.gdx.math.Interpolation;
+import net.mostlyoriginal.api.component.common.Tweenable;
+import net.mostlyoriginal.api.operation.act.*;
 import net.mostlyoriginal.api.operation.common.Operation;
 import net.mostlyoriginal.api.operation.flow.ParallelOperation;
 import net.mostlyoriginal.api.operation.flow.SerialOperation;
@@ -83,6 +85,49 @@ public class OperationFactory {
 		Preconditions.checkArgument(delay >= 0, "Delay must be >= 0.");
 		DelayOperation operation = Operation.prepare(DelayOperation.class);
 		operation.setDelay(delay);
+		return operation;
+	}
+
+	public static AddOperation add(Component component)
+	{
+		Preconditions.checkNotNull(component);
+		AddOperation operation = Operation.prepare(AddOperation.class);
+		operation.component = component;
+		return operation;
+	}
+
+	public static RemoveOperation remove(Class<? extends Component> componentClass)
+	{
+		Preconditions.checkNotNull(componentClass);
+		RemoveOperation operation = Operation.prepare(RemoveOperation.class);
+		operation.componentClass = componentClass;
+		return operation;
+	}
+
+	/**
+	 * Setup linear tween between two component states.
+	 *
+	 * @param a component a starting state. Tweening does not release pooled components after use.
+	 * @param b component b starting state. Tweening does not release pooled components after use.
+	 * @param duration duration of tween, in seconds.
+	 */
+	public static <T extends Component & Tweenable<T>> TweenOperation tween(T a, T b, float duration)
+	{
+		return tween(a,b,duration,Interpolation.linear);
+	}
+
+	/**
+	 * Setup tween between two component states.
+	 *
+	 * @param a component a starting state. Tweening does not release pooled components after use.
+	 * @param b component b starting state. Tweening does not release pooled components after use.
+	 * @param duration duration of tween, in seconds.
+	 * @param interpolation method of interpolation.
+	 */
+	public static <T extends Component & Tweenable<T>> TweenOperation tween(T a, T b, float duration, Interpolation interpolation)
+	{
+		final TweenOperation operation = Operation.prepare(TweenOperation.class);
+		operation.setup(a,b,interpolation,duration);
 		return operation;
 	}
 }
