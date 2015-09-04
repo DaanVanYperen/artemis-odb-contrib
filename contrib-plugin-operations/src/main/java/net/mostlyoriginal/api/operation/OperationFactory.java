@@ -46,31 +46,31 @@ public class OperationFactory {
 	}
 
 
-	public static SerialOperation chain( Operation o1 ) {
+	public static SerialOperation sequence(Operation o1) {
 		final SerialOperation operation = Operation.prepare(SerialOperation.class);
 		operation.add(o1);
 		return operation;
 	}
 
-	public static SerialOperation chain( Operation o1, Operation o2 ) {
+	public static SerialOperation sequence(Operation o1, Operation o2) {
 		final SerialOperation operation = Operation.prepare(SerialOperation.class);
 		operation.addAll(o1, o2);
 		return operation;
 	}
 
-	public static SerialOperation chain( Operation o1, Operation o2, Operation o3 ) {
+	public static SerialOperation sequence(Operation o1, Operation o2, Operation o3) {
 		final SerialOperation operation = Operation.prepare(SerialOperation.class);
 		operation.addAll(o1, o2, o3);
 		return operation;
 	}
 
-	public static SerialOperation chain( Operation o1, Operation o2, Operation o3, Operation o4 ) {
+	public static SerialOperation sequence(Operation o1, Operation o2, Operation o3, Operation o4) {
 		final SerialOperation operation = Operation.prepare(SerialOperation.class);
 		operation.addAll(o1, o2, o3, o4);
 		return operation;
 	}
 
-	public static SerialOperation chain( Operation o1, Operation o2, Operation o3, Operation o4, Operation o5 ) {
+	public static SerialOperation sequence(Operation o1, Operation o2, Operation o3, Operation o4, Operation o5) {
 		final SerialOperation operation = Operation.prepare(SerialOperation.class);
 		operation.addAll(o1, o2, o3, o4, o5);
 		return operation;

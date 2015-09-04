@@ -15,14 +15,14 @@ public class OperationFactoryTest {
 
 	@Test
 	public void chain_should_assemble_serial_of_1() {
-		OperationFlow operation = chain(
+		OperationFlow operation = sequence(
 				new TestOperation()
 		);
 		Assert.assertEquals(1, operation.operations.size);
 	}
 	@Test
 	public void chain_should_assemble_serial_of_2() {
-		OperationFlow operation = chain(
+		OperationFlow operation = sequence(
 				new TestOperation(),
 				new TestOperation()
 		);
@@ -30,7 +30,7 @@ public class OperationFactoryTest {
 	}
 	@Test
 	public void chain_should_assemble_serial_of_3() {
-		OperationFlow operation = chain(
+		OperationFlow operation = sequence(
 				new TestOperation(),
 				new TestOperation(),
 				new TestOperation()
@@ -39,7 +39,7 @@ public class OperationFactoryTest {
 	}
 	@Test
 	public void chain_should_assemble_serial_of_4() {
-		OperationFlow operation = chain(
+		OperationFlow operation = sequence(
 				new TestOperation(),
 				new TestOperation(),
 				new TestOperation(),
@@ -50,7 +50,7 @@ public class OperationFactoryTest {
 	
 	@Test
 	public void chain_should_assemble_serial_of_5() {
-		SerialOperation operation = chain(
+		SerialOperation operation = sequence(
 				new TestOperation(),
 				new TestOperation(),
 				new TestOperation(),
@@ -110,7 +110,7 @@ public class OperationFactoryTest {
 	public void nesting_should_assemble_nested_operation() {
 		OperationFlow operation =
 				parallel(
-						chain(
+						sequence(
 								deleteFromWorld()
 						));
 
