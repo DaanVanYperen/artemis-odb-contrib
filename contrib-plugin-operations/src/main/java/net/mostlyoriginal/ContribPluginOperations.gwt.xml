@@ -5,4 +5,6 @@
     <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.api.operation" />
     <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.api.component.Schedule" />
     <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.api.system.SchedulerSystem" />
+
+    <extend-configuration-property name="gdx.reflect.include" value="net.mostlyoriginal.api.operation" />
 </module>
