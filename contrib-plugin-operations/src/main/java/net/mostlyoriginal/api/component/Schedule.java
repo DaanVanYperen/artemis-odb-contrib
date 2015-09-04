@@ -1,6 +1,7 @@
 package net.mostlyoriginal.api.component;
 
 import com.artemis.Component;
+import net.mostlyoriginal.api.operation.common.Operation;
 import net.mostlyoriginal.api.operation.flow.ParallelOperation;
 import net.mostlyoriginal.api.system.SchedulerSystem;
 
@@ -10,8 +11,12 @@ import net.mostlyoriginal.api.system.SchedulerSystem;
  */
 public class Schedule extends Component {
 
-    public ParallelOperation operation = new ParallelOperation();
+	public ParallelOperation operation = new ParallelOperation();
 
-    public Schedule() {
-    }
+	public Schedule() {
+	}
+
+	public Schedule(Operation operation) {
+		this.operation.add(operation);
+	}
 }
