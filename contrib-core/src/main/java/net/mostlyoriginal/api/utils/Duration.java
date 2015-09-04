@@ -21,7 +21,7 @@ public class Duration {
 	 * @return seconds
 	 */
 	public static float ms(float ms) {
-		return ms * 1000;
+		return ms / 1000;
 	}
 
 	/**
@@ -29,7 +29,7 @@ public class Duration {
 	 * @return seconds.
 	 */
 	public static float milliseconds(float ms) {
-		return ms * 1000;
+		return ms / 1000;
 	}
 
 }
