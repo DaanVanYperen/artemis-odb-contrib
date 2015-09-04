@@ -390,6 +390,7 @@ public class WorldConfigurationBuilder {
 	public static abstract class Priority {
 		public static final int LOWEST = Integer.MIN_VALUE;
 		public static final int LOW = -10000;
+		public static final int OPERATIONS = -1000;
 		public static final int NORMAL = 0;
 		public static final int HIGH = 10000;
 		public static final int HIGHEST = Integer.MAX_VALUE;

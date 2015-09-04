@@ -1,0 +1,8 @@
+<module rename-to="net.mostlyoriginal.ContribPluginOperations">
+    <source path="api"/>
+    <source path="plugin"/>
+    <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.plugin.OperationsPlugin" />
+    <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.api.operation" />
+    <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.api.component.Schedule" />
+    <extend-configuration-property name="artemis.reflect.include" value="net.mostlyoriginal.api.system.SchedulerSystem" />
+</module>
