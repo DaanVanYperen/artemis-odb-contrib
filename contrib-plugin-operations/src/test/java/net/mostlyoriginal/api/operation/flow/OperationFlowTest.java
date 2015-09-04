@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * @author Daan van Yperen
  */
-public class OperationFlowTest extends OperationTest {
+public abstract class OperationFlowTest extends OperationTest {
 
 	protected OperationFlow operation;
 	protected TestOperation[] op;
