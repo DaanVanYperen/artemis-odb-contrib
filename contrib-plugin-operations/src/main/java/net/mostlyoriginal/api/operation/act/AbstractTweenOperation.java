@@ -33,11 +33,6 @@ public abstract class AbstractTweenOperation extends Operation {
 	public boolean process(float delta, Entity e) {
 		runtime += delta;
 
-		if (m == null) {
-			m = new M(a.getClass(), e.getWorld());
-			System.out.println("Allocated new mapper, prob want to pool this.");
-		}
-
 		float tween = interpolation.apply(runtime / duration);
 		applyTween(e, tween);
 
@@ -47,6 +42,12 @@ public abstract class AbstractTweenOperation extends Operation {
 	@SuppressWarnings("unchecked")
 	protected final void applyTween(Entity e, float tween) {
 
+		if ( m == null ) {
+			// resolve component mapper if not set yet.
+			// gets cleared every reset for non managed tweens.
+			m = M.getFor(((Component)a).getClass(),e.getWorld());
+		}
+
 		// apply tween to component, create if missing.
 		((Tweenable) m.create(e))
 				.tween((Component) a, (Component) b, MathUtils.clamp(tween, 0, 1));
@@ -54,7 +55,6 @@ public abstract class AbstractTweenOperation extends Operation {
 
 	@Override
 	public void reset() {
-		m = null;
 		interpolation = null;
 		duration = 0;
 		runtime = 0;

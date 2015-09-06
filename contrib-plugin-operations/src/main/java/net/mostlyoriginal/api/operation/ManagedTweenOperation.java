@@ -28,6 +28,7 @@ public class ManagedTweenOperation<T extends Tweenable> extends AbstractTweenOpe
 
 	public ManagedTweenOperation<T> setup(Interpolation interpolation, float duration )
 	{
+		Preconditions.checkArgument(duration != 0, "Duration cannot be zero.");
 		this.interpolation = Preconditions.checkNotNull(interpolation);
 		this.duration = duration;
 		return this;

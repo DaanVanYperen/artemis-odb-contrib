@@ -26,19 +26,15 @@ public abstract class AbstractMirrorOperation extends Operation {
 	@SuppressWarnings("unchecked")
 	public boolean process(float delta, Entity e) {
 
-		if (m == null) {
-			m = new M(a.getClass(), e.getWorld());
-			System.out.println("Allocated new mapper, prob want to pool this.");
+		if ( m == null ) {
+			// resolve component mapper if not set yet.
+			// gets cleared every reset for non managed mirrors.
+			m = M.getFor(((Component)a).getClass(),e.getWorld());
 		}
 
 		// mirror or create component.
 		((Mirrorable) m.create(e)).set((Component) a);
 
 		return true;
-	}
-
-	@Override
-	public void reset() {
-		m = null;
 	}
 }

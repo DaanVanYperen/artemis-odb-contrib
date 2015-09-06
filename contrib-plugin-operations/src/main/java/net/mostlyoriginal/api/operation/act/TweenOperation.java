@@ -40,7 +40,7 @@ public final class TweenOperation extends AbstractTweenOperation {
 			throw new IllegalArgumentException("Can't tween between different types " + typeA + " and " + typeB + ".");
 		}
 
-		Preconditions.checkArgument(duration != 0, "Duration cannot be zero.");
+ 		Preconditions.checkArgument(duration != 0, "Duration cannot be zero.");
 
 		this.a = Preconditions.checkNotNull(a);
 		this.b = Preconditions.checkNotNull(b);
@@ -54,5 +54,6 @@ public final class TweenOperation extends AbstractTweenOperation {
 		super.reset();
 		a = null;
 		b = null;
+		m = null;
 	}
 }

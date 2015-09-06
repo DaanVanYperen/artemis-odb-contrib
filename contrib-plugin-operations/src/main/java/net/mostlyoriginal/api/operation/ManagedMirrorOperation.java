@@ -30,4 +30,7 @@ public class ManagedMirrorOperation<T extends Mirrorable> extends AbstractMirror
 		return (T)a;
 	}
 
+	@Override
+	public void reset() {
+	}
 }

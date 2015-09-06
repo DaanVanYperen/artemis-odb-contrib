@@ -11,6 +11,9 @@ public class TweenableTestComponent extends Component implements Tweenable<Tween
 
 	public float val;
 
+	public TweenableTestComponent() {
+	}
+
 	public TweenableTestComponent(float val) {
 		this.val = val;
 	}
