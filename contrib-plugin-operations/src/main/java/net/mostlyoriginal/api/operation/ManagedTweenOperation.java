@@ -8,16 +8,21 @@ import net.mostlyoriginal.api.operation.act.AbstractTweenOperation;
 import net.mostlyoriginal.api.utils.Preconditions;
 
 /**
+ * Tween between two managed component states.
+ *
+ * From/to states are owned by this class, safe from garbage collection.
+ *
  * @author Daan van Yperen
  */
 public class ManagedTweenOperation<T extends Tweenable> extends AbstractTweenOperation {
 
-	public ManagedTweenOperation(Class<T> c) {
+	public ManagedTweenOperation(Class<T> type) {
 		try {
-			a = ClassReflection.newInstance(c);
-			b = ClassReflection.newInstance(c);
+			a = ClassReflection.newInstance(type);
+			b = ClassReflection.newInstance(type);
 		} catch (ReflectionException e) {
-			throw new RuntimeException("Could not instance c.");
+			String error = "Couldn't instantiate object of type " + type.getName();
+			throw new RuntimeException(error, e);
 		}
 	}
 

@@ -12,7 +12,8 @@ import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 /**
  * Tween between two component states.
  *
- * Subclass to manage the from/to states yourself.
+ * Subclass {@see net.mostlyoriginal.api.operation.ManagedTweenOperation}
+ * to manage concrete types and avoid GC.
  *
  * @author Daan van Yperen
  * @see Tweenable

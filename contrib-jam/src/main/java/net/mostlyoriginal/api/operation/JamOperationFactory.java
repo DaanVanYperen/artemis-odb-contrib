@@ -95,4 +95,31 @@ public class JamOperationFactory {
 		return moveBetween(from.xy.x, from.xy.y, to.xy.x, to.xy.y, duration, interpolation);
 	}
 
+	/**
+	 * Set Pos.
+	 */
+	public static MirrorPosOperation moveTo(float x, float y)
+	{
+		final MirrorPosOperation operation = Operation.prepare(MirrorPosOperation.class);
+		operation.get().set(x,y);
+		return operation;
+	}
+
+	/**
+	 * Set pos by {@see Pos}.
+	 */
+	public static MirrorPosOperation moveTo(Pos pos)
+	{
+		return moveTo(pos.xy.x,pos.xy.y);
+	}
+
+	/**
+	 * Set pos by {@see com.badlogic.gdx.math.Vector2}.
+	 */
+	public static MirrorPosOperation moveTo(Vector2 v)
+	{
+		return moveTo(v.x,v.y);
+	}
+
+
 }

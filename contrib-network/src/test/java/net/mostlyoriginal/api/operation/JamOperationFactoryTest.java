@@ -55,4 +55,25 @@ public class JamOperationFactoryTest {
 		Assert.assertEquals(2f,tweenPos.getTo().xy.x,0.001f);
 		Assert.assertEquals(3f, tweenPos.getTo().xy.y, 0.001f);
 	}
+
+	@Test
+	public void valid_moveTo_xy_setup_properly() {
+		assertValidPos(JamOperationFactory.moveTo(0,1));
+	}
+
+	@Test
+	public void valid_moveTo_pos_setup_properly() {
+		assertValidPos(JamOperationFactory.moveTo(new Pos(0,1)));
+	}
+
+	@Test
+	public void valid_moveTo_vector2_setup_properly() {
+		assertValidPos(JamOperationFactory.moveTo(new Vector2(0,1)));
+	}
+
+	protected void assertValidPos(MirrorPosOperation pos) {
+		Assert.assertEquals(0f, pos.get().xy.x, 0.001f);
+		Assert.assertEquals(1f, pos.get().xy.y, 0.001f);
+	}
+
 }

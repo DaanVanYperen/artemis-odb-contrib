@@ -12,7 +12,7 @@ import net.mostlyoriginal.api.utils.Preconditions;
  *
  * From/to states are not pool managed, and will be garbage collected.
  *
- * For common components it is best to subclass {@see AbstractTweenOperation}
+ * For common components it is best to subclass {@see net.mostlyoriginal.api.operation.ManagedTweenOperation}
  * and manage the from/to states yourself.
  *
  * @author Daan van Yperen
