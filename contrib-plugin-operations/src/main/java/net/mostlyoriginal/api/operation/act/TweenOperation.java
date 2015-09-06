@@ -1,39 +1,34 @@
 package net.mostlyoriginal.api.operation.act;
 
 import com.artemis.Component;
-import com.artemis.Entity;
 import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.Schedule;
 import net.mostlyoriginal.api.component.common.Tweenable;
-import net.mostlyoriginal.api.operation.common.Operation;
-import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.mostlyoriginal.api.utils.Preconditions;
 
 /**
  * Tween between two component states.
+ * <p/>
+ *
+ * From/to states are not pool managed, and will be garbage collected.
+ *
+ * For common components it is best to subclass {@see AbstractTweenOperation}
+ * and manage the from/to states yourself.
  *
  * @author Daan van Yperen
  * @see Tweenable
  * @see Schedule
  */
-public class TweenOperation extends Operation {
-
-	protected Tweenable a;
-	protected Tweenable b;
-	protected Interpolation interpolation;
-	protected M m;
-
-	protected float duration;
-	protected float runtime;
+public final class TweenOperation extends AbstractTweenOperation {
 
 	/**
 	 * Setup tween between two component states.
 	 *
-	 * @todo lifecycle management of components.
-	 * @param a component a starting state. Tweening does not release pooled components after use.
-	 * @param b component b starting state. Tweening does not release pooled components after use.
-	 * @param duration duration of tween, in seconds.
+	 * From/to states are not pool managed, and will be garbage collected.
+	 *
+	 * @param a             component a starting state.
+	 * @param b             component b starting state.
+	 * @param duration      duration of tween, in seconds.
 	 * @param interpolation method of interpolation.
 	 */
 	public <T extends Component & Tweenable<T>> void setup(T a, T b, Interpolation interpolation, float duration) {
@@ -41,7 +36,7 @@ public class TweenOperation extends Operation {
 		final Class<?> typeA = a.getClass();
 		final Class<?> typeB = b.getClass();
 
-		if ( typeA != typeB ) {
+		if (typeA != typeB) {
 			throw new IllegalArgumentException("Can't tween between different types " + typeA + " and " + typeB + ".");
 		}
 
@@ -55,36 +50,9 @@ public class TweenOperation extends Operation {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public boolean process(float delta, Entity e) {
-		runtime += delta;
-
-		if (m == null) {
-			m = new M(a.getClass(), e.getWorld());
-			System.out.println("Allocated new mapper, prob want to pool this.");
-		}
-
-		float tween = interpolation.apply(runtime / duration);
-		applyTween(e, tween);
-
-		return runtime > duration;
-	}
-
-	@SuppressWarnings("unchecked")
-	protected final void applyTween(Entity e, float tween) {
-
-		// apply tween to component, create if missing.
-		((Tweenable) m.create(e))
-				.tween((Component) a, (Component) b, MathUtils.clamp(tween, 0, 1));
-	}
-
-	@Override
 	public void reset() {
+		super.reset();
 		a = null;
 		b = null;
-		m = null;
-		interpolation = null;
-		duration = 0;
-		runtime = 0;
 	}
 }

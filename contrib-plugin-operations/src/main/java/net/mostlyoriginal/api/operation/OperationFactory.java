@@ -107,8 +107,10 @@ public class OperationFactory {
 	/**
 	 * Setup linear tween between two component states.
 	 *
-	 * @param a component a starting state. Tweening does not release pooled components after use.
-	 * @param b component b starting state. Tweening does not release pooled components after use.
+	 * From/to states are not pool managed, and will be garbage collected.
+	 *
+	 * @param a component a starting state.
+	 * @param b component b starting state.
 	 * @param duration duration of tween, in seconds.
 	 */
 	public static <T extends Component & Tweenable<T>> TweenOperation tween(T a, T b, float duration)
@@ -119,8 +121,10 @@ public class OperationFactory {
 	/**
 	 * Setup tween between two component states.
 	 *
-	 * @param a component a starting state. Tweening does not release pooled components after use.
-	 * @param b component b starting state. Tweening does not release pooled components after use.
+	 * From/to states are not pool managed, and will be garbage collected.
+	 *
+	 * @param a component a starting state.
+	 * @param b component b starting state.
 	 * @param duration duration of tween, in seconds.
 	 * @param interpolation method of interpolation.
 	 */
