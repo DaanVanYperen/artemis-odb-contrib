@@ -11,10 +11,6 @@ public class Anim extends Component {
 
     public boolean flippedX; // flip animation, should not affect rotation.
 
-    /** Scale of animation */
-    /* @Todo separate into own component. */
-    public float scale = 1;
-
     /** Playback speed factor. */
     public float speed = 1;
     /** Animation progression */
