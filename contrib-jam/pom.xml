@@ -10,7 +10,7 @@
     <artifactId>contrib-jam</artifactId>
     <packaging>jar</packaging>
     <name>contrib-jam</name>
-    <description>Daan's jam bundle of systems and components!</description>
+    <description>Jam bundle of systems and components!</description>
 
     <dependencies>
         <dependency>
@@ -20,6 +20,11 @@
         <dependency>
             <groupId>net.mostlyoriginal.artemis-odb</groupId>
             <artifactId>contrib-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.mostlyoriginal.artemis-odb</groupId>
+            <artifactId>contrib-plugin-operations</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

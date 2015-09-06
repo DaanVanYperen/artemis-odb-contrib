@@ -1,14 +1,16 @@
 package net.mostlyoriginal.api.component.basic;
 
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.component.common.ExtendedComponent;
+import net.mostlyoriginal.api.component.common.Tweenable;
 
 /**
  * Position component.
  *
  * @author Daan van Yperen
  */
-public class Pos extends ExtendedComponent<Pos> {
+public class Pos extends ExtendedComponent<Pos> implements Tweenable<Pos> {
     public Vector2 xy = new Vector2();
 
     public Pos(float x, float y) {
@@ -49,5 +51,16 @@ public class Pos extends ExtendedComponent<Pos> {
     public float getY()
     {
         return xy.y;
+    }
+
+    @Override
+    public Pos tween(Pos a, Pos b, float value) {
+
+        final Interpolation linear = Interpolation.linear;
+
+        xy.x = linear.apply(a.xy.x, b.xy.x, value);
+        xy.y = linear.apply(a.xy.y, b.xy.y, value);
+
+        return this;
     }
 }
