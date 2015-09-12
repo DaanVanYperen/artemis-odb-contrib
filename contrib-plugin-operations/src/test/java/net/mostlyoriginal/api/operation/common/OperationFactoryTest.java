@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.operation.common;
 
 import net.mostlyoriginal.api.operation.act.DeleteFromWorldOperation;
-import net.mostlyoriginal.api.operation.flow.SerialOperation;
+import net.mostlyoriginal.api.operation.flow.SequenceOperation;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -50,7 +50,7 @@ public class OperationFactoryTest {
 	
 	@Test
 	public void chain_should_assemble_serial_of_5() {
-		SerialOperation operation = sequence(
+		SequenceOperation operation = sequence(
 				new TestOperation(),
 				new TestOperation(),
 				new TestOperation(),

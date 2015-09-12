@@ -4,7 +4,6 @@ import com.artemis.Component;
 import com.artemis.Entity;
 import net.mostlyoriginal.api.component.Schedule;
 import net.mostlyoriginal.api.component.common.Mirrorable;
-import net.mostlyoriginal.api.operation.common.Operation;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 
 /**
@@ -18,13 +17,13 @@ import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
  * @author Daan van Yperen
  * @see Schedule
  */
-public abstract class AbstractMirrorOperation extends Operation {
+public abstract class AbstractMirrorOperation extends BasicOperation {
 	protected Mirrorable a;
 	protected M m;
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public boolean process(float delta, Entity e) {
+	public void process(Entity e) {
 
 		if ( m == null ) {
 			// resolve component mapper if not set yet.
@@ -34,7 +33,5 @@ public abstract class AbstractMirrorOperation extends Operation {
 
 		// mirror or create component.
 		((Mirrorable) m.create(e)).set((Component) a);
-
-		return true;
 	}
 }

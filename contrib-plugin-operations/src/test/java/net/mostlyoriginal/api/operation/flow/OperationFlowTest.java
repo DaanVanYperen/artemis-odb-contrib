@@ -36,20 +36,9 @@ public abstract class OperationFlowTest extends OperationTest {
 	}
 
 	@Test
-	public void ensure_retains_order_after_operation_completion() {
-		createOps(1, 9, 9, 9);
-
-		processOperation();
-
-		Assert.assertEquals(op[1], operation.operations.get(0));
-		Assert.assertEquals(op[2], operation.operations.get(1));
-		Assert.assertEquals(op[3], operation.operations.get(2));
-	}
-
-	@Test
 	public void ensure_not_finished_when_operations_remain() {
 		createOps(1);
-		Assert.assertFalse(operation.isFinished());
+		Assert.assertFalse(operation.isCompleted());
 	}
 
 	@Test
@@ -58,7 +47,15 @@ public abstract class OperationFlowTest extends OperationTest {
 
 		processOperation();
 
-		Assert.assertTrue(operation.isFinished());
+		Assert.assertTrue(operation.isCompleted());
+	}
+
+	@Test
+	public void ensure_restart_causes_child_operation_restart() {
+		createOps(1);
+		processOperation();
+		operation.rewind();
+		Assert.assertFalse(op[0].isCompleted());
 	}
 
 }

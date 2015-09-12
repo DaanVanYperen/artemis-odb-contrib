@@ -3,7 +3,6 @@ package net.mostlyoriginal.api.operation.act;
 import com.artemis.Component;
 import com.artemis.Entity;
 import net.mostlyoriginal.api.component.Schedule;
-import net.mostlyoriginal.api.operation.common.Operation;
 
 /**
  * Add component to aen
@@ -11,15 +10,14 @@ import net.mostlyoriginal.api.operation.common.Operation;
  * @author Daan van Yperen
  * @see Schedule
  */
-public class AddOperation extends Operation {
+public class AddOperation extends BasicOperation {
 
     public Component component;
     public AddOperation() {}
 
     @Override
-    public boolean process(float delta, Entity e) {
+    public void process(Entity e) {
         e.edit().add(component);
-        return true;
     }
 
     @Override

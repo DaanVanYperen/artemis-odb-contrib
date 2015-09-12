@@ -19,12 +19,20 @@ public class TestOperation extends Operation {
 
 	@Override
 	public boolean process(float delta, Entity e) {
+		if ( isCompleted() ) return true;
 		calls++;
-		return calls >= maxCalls;
+		completed = calls >= maxCalls;
+		return completed;
+	}
+
+	@Override
+	public void rewind() {
+		super.rewind();
+		calls=0;
 	}
 
 	@Override
 	public void reset() {
-		resets++;
+		resets++; calls=0;
 	}
 }

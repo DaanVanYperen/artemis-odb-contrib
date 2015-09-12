@@ -2,7 +2,6 @@ package net.mostlyoriginal.api.operation.act;
 
 import com.artemis.Entity;
 import net.mostlyoriginal.api.component.Schedule;
-import net.mostlyoriginal.api.operation.common.Operation;
 
 /**
  * Delay.
@@ -10,26 +9,12 @@ import net.mostlyoriginal.api.operation.common.Operation;
  * @author Daan van Yperen
  * @see Schedule
  */
-public class DelayOperation extends Operation {
-
-    private float age;
-    private float delay;
+public class DelayOperation extends TemporalOperation {
 
     public DelayOperation() {}
 
-    public void setDelay(float delay) {
-        this.delay = delay;
-    }
-
     @Override
-    public boolean process(float delta, Entity e) {
-        age += delta;
-        return age >= delay;
-    }
-
-    @Override
-    public void reset() {
-        age=0;
-        delay=0;
+    public void act(float percentage, Entity e) {
+        // do nothing.
     }
 }

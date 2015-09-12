@@ -6,7 +6,7 @@ import net.mostlyoriginal.api.component.common.Tweenable;
 import net.mostlyoriginal.api.operation.act.*;
 import net.mostlyoriginal.api.operation.common.Operation;
 import net.mostlyoriginal.api.operation.flow.ParallelOperation;
-import net.mostlyoriginal.api.operation.flow.SerialOperation;
+import net.mostlyoriginal.api.operation.flow.SequenceOperation;
 import net.mostlyoriginal.api.utils.Preconditions;
 
 /**
@@ -46,32 +46,32 @@ public class OperationFactory {
 	}
 
 
-	public static SerialOperation sequence(Operation o1) {
-		final SerialOperation operation = Operation.prepare(SerialOperation.class);
+	public static SequenceOperation sequence(Operation o1) {
+		final SequenceOperation operation = Operation.prepare(SequenceOperation.class);
 		operation.add(o1);
 		return operation;
 	}
 
-	public static SerialOperation sequence(Operation o1, Operation o2) {
-		final SerialOperation operation = Operation.prepare(SerialOperation.class);
+	public static SequenceOperation sequence(Operation o1, Operation o2) {
+		final SequenceOperation operation = Operation.prepare(SequenceOperation.class);
 		operation.addAll(o1, o2);
 		return operation;
 	}
 
-	public static SerialOperation sequence(Operation o1, Operation o2, Operation o3) {
-		final SerialOperation operation = Operation.prepare(SerialOperation.class);
+	public static SequenceOperation sequence(Operation o1, Operation o2, Operation o3) {
+		final SequenceOperation operation = Operation.prepare(SequenceOperation.class);
 		operation.addAll(o1, o2, o3);
 		return operation;
 	}
 
-	public static SerialOperation sequence(Operation o1, Operation o2, Operation o3, Operation o4) {
-		final SerialOperation operation = Operation.prepare(SerialOperation.class);
+	public static SequenceOperation sequence(Operation o1, Operation o2, Operation o3, Operation o4) {
+		final SequenceOperation operation = Operation.prepare(SequenceOperation.class);
 		operation.addAll(o1, o2, o3, o4);
 		return operation;
 	}
 
-	public static SerialOperation sequence(Operation o1, Operation o2, Operation o3, Operation o4, Operation o5) {
-		final SerialOperation operation = Operation.prepare(SerialOperation.class);
+	public static SequenceOperation sequence(Operation o1, Operation o2, Operation o3, Operation o4, Operation o5) {
+		final SequenceOperation operation = Operation.prepare(SequenceOperation.class);
 		operation.addAll(o1, o2, o3, o4, o5);
 		return operation;
 	}
@@ -84,7 +84,7 @@ public class OperationFactory {
 	{
 		Preconditions.checkArgument(delay >= 0, "Delay must be >= 0.");
 		DelayOperation operation = Operation.prepare(DelayOperation.class);
-		operation.setDelay(delay);
+		operation.setDuration(delay);
 		return operation;
 	}
 
@@ -96,7 +96,7 @@ public class OperationFactory {
 		return operation;
 	}
 
-	public static RemoveOperation remove(Class<? extends Component> componentClass)
+	public static BasicOperation remove(Class<? extends Component> componentClass)
 	{
 		Preconditions.checkNotNull(componentClass);
 		RemoveOperation operation = Operation.prepare(RemoveOperation.class);

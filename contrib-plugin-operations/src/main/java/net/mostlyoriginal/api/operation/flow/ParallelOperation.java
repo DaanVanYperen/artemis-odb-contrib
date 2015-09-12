@@ -13,18 +13,21 @@ public class ParallelOperation extends OperationFlow {
 
 	@Override
 	public boolean process(float delta, Entity e) {
+		if ( isCompleted() ) return true;
 
-		for (int i = 0; i <  operations.size; i++) {
+		boolean operationsRemain = false;
+		for (int i = 0; i < operations.size; i++) {
+
 			final Operation operation = operations.get(i);
-
-			if ( operation.process(delta, e) ) {
-				operations.removeIndex(i);
-				operation.release();
-				i--;
-				if ( !e.isActive() ) return true;
+			if (!operation.process(delta, e)) {
+				operationsRemain = true;
 			}
+
+			if (!e.isActive()) break;
 		}
 
-		return isFinished();
+		completed = !operationsRemain;
+
+		return completed;
 	}
 }

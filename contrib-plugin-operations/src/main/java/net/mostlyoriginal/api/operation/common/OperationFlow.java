@@ -20,6 +20,14 @@ public abstract class OperationFlow extends Operation {
 	}
 
 	@Override
+	public void rewind() {
+		super.rewind();
+		for (int i = 0, s = operations.size; i < s; i++) {
+			operations.get(i).rewind();
+		}
+	}
+
+	@Override
 	public void reset() {
 		// will be called immediately upon pool release.
 		releaseChildren();
@@ -27,15 +35,9 @@ public abstract class OperationFlow extends Operation {
 
 	/** Add operation to end of flow. */
 	public void add(Operation value) {
+		completed=false;
 		Preconditions.checkNotNull(value);
 		operations.add(value);
-	}
-
-	/**
-	 * @return {@code true} if no operations remaining, {@code false} if otherwise.
-	 */
-	public boolean isFinished() {
-		return operations.size == 0;
 	}
 
 	public void addAll(Operation o1)

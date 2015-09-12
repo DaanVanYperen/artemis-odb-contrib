@@ -3,7 +3,6 @@ package net.mostlyoriginal.api.operation.act;
 import com.artemis.Component;
 import com.artemis.Entity;
 import net.mostlyoriginal.api.component.Schedule;
-import net.mostlyoriginal.api.operation.common.Operation;
 
 /**
  * Remove component from entity.
@@ -11,7 +10,7 @@ import net.mostlyoriginal.api.operation.common.Operation;
  * @author Daan van Yperen
  * @see Schedule
  */
-public class RemoveOperation extends Operation {
+public class RemoveOperation extends BasicOperation {
 
     public Class<? extends Component> componentClass;
 
@@ -19,9 +18,8 @@ public class RemoveOperation extends Operation {
     }
 
     @Override
-    public boolean process(float delta, Entity e) {
+    public void process(Entity e) {
         e.edit().remove(componentClass);
-        return true;
     }
 
     @Override
