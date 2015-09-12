@@ -9,6 +9,7 @@ import net.mostlyoriginal.api.operation.basic.RemoveOperation;
 import net.mostlyoriginal.api.operation.common.BasicOperation;
 import net.mostlyoriginal.api.operation.common.Operation;
 import net.mostlyoriginal.api.operation.flow.ParallelOperation;
+import net.mostlyoriginal.api.operation.flow.RepeatOperation;
 import net.mostlyoriginal.api.operation.flow.SequenceOperation;
 import net.mostlyoriginal.api.operation.temporal.DelayOperation;
 import net.mostlyoriginal.api.operation.temporal.TweenOperation;
@@ -138,5 +139,33 @@ public class OperationFactory {
 		final TweenOperation operation = Operation.prepare(TweenOperation.class);
 		operation.setup(a,b,interpolation,duration);
 		return operation;
+	}
+
+	/**
+	 * Repeat nested operation one or more times.
+	 *
+	 * @param operation operation to repeat.
+	 * @param repetitions number of times to repeat.
+	 * @return {@see RepeatOperation}
+	 */
+	public static RepeatOperation repeat(int repetitions, Operation operation) {
+		RepeatOperation repeatOperation = Operation.prepare(RepeatOperation.class);
+		repeatOperation.setup(operation, repetitions);
+		return repeatOperation;
+	}
+
+	/**
+	 * Repeat nested operation forever.
+	 *
+	 * Note that indefinitely repeated operations will block parent {@see #sequence}
+	 * from reaching the next step.
+	 *
+	 * @param operation operation to repeat.
+	 * @return {@see RepeatOperation}
+	 */
+	public static RepeatOperation repeat(Operation operation) {
+		RepeatOperation repeatOperation = Operation.prepare(RepeatOperation.class);
+		repeatOperation.setup(operation);
+		return repeatOperation;
 	}
 }
