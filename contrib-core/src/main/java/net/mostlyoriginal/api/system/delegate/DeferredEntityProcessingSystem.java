@@ -17,7 +17,7 @@ import com.artemis.EntitySystem;
  *
  * Upon entity insertion/removal, the system registers the entity
  * and itself with the principal. The principal can then register
- * and act upon this information, and call begin/process(entity)/end
+ * and basic upon this information, and call begin/process(entity)/end
  * methods whenever desired.
  *
  * @author Daan van Yperen

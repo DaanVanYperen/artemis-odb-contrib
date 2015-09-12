@@ -8,7 +8,7 @@ import net.mostlyoriginal.api.utils.Preconditions;
 /**
  * Fire operations one at a time.
  * <p/>
- * Preserves and calls in order.
+ * Calls in order. Will fire at most 1 operation per process.
  *
  * @author Daan van Yperen
  */

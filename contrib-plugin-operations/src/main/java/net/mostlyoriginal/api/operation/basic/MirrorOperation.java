@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.operation.act;
+package net.mostlyoriginal.api.operation.basic;
 
 import com.artemis.Component;
 import net.mostlyoriginal.api.component.Schedule;

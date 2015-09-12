@@ -1,16 +1,17 @@
-package net.mostlyoriginal.api.operation.act;
+package net.mostlyoriginal.api.operation.temporal;
 
 import com.artemis.Component;
 import com.artemis.Entity;
 import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.Schedule;
 import net.mostlyoriginal.api.component.common.Tweenable;
+import net.mostlyoriginal.api.operation.common.TemporalOperation;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 
 /**
  * Tween between two component states.
  *
- * Subclass {@see net.mostlyoriginal.api.operation.ManagedTweenOperation}
+ * Subclass {@see net.mostlyoriginal.api.operation.temporal.ManagedTweenOperation}
  * to manage concrete types and avoid GC.
  *
  * @author Daan van Yperen

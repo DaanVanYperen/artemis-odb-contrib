@@ -1,9 +1,8 @@
-package net.mostlyoriginal.api.operation;
+package net.mostlyoriginal.api.operation.basic;
 
 import com.artemis.utils.reflect.ClassReflection;
 import com.artemis.utils.reflect.ReflectionException;
 import net.mostlyoriginal.api.component.common.Mirrorable;
-import net.mostlyoriginal.api.operation.act.AbstractMirrorOperation;
 
 /**
  * Set component state.

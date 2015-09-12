@@ -1,7 +1,8 @@
-package net.mostlyoriginal.api.operation.act;
+package net.mostlyoriginal.api.operation.temporal;
 
 import com.artemis.Entity;
 import net.mostlyoriginal.api.component.Schedule;
+import net.mostlyoriginal.api.operation.common.TemporalOperation;
 
 /**
  * Delay.

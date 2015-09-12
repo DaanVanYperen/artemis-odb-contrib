@@ -1,6 +1,7 @@
 package net.mostlyoriginal.api.operation;
 
 import net.mostlyoriginal.api.component.basic.Pos;
+import net.mostlyoriginal.api.operation.temporal.ManagedTweenOperation;
 
 /**
  * Tween between pos.

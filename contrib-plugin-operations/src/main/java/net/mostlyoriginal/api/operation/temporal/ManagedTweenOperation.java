@@ -1,10 +1,9 @@
-package net.mostlyoriginal.api.operation;
+package net.mostlyoriginal.api.operation.temporal;
 
 import com.artemis.utils.reflect.ClassReflection;
 import com.artemis.utils.reflect.ReflectionException;
 import com.badlogic.gdx.math.Interpolation;
 import net.mostlyoriginal.api.component.common.Tweenable;
-import net.mostlyoriginal.api.operation.act.AbstractTweenOperation;
 import net.mostlyoriginal.api.utils.Preconditions;
 
 /**

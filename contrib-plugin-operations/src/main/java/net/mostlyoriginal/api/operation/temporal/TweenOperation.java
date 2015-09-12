@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.operation.act;
+package net.mostlyoriginal.api.operation.temporal;
 
 import com.artemis.Component;
 import com.badlogic.gdx.math.Interpolation;
@@ -12,7 +12,7 @@ import net.mostlyoriginal.api.utils.Preconditions;
  *
  * From/to states are not pool managed, and will be garbage collected.
  *
- * For common components it is best to subclass {@see net.mostlyoriginal.api.operation.ManagedTweenOperation}
+ * For common components it is best to subclass {@see net.mostlyoriginal.api.operation.temporal.ManagedTweenOperation}
  * and manage the from/to states yourself.
  *
  * @author Daan van Yperen

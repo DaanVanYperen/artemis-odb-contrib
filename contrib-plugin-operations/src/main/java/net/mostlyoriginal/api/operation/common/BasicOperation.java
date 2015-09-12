@@ -1,7 +1,6 @@
-package net.mostlyoriginal.api.operation.act;
+package net.mostlyoriginal.api.operation.common;
 
 import com.artemis.Entity;
-import net.mostlyoriginal.api.operation.common.Operation;
 
 /**
  * @author Daan van Yperen

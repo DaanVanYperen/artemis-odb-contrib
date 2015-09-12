@@ -3,10 +3,15 @@ package net.mostlyoriginal.api.operation;
 import com.artemis.Component;
 import com.badlogic.gdx.math.Interpolation;
 import net.mostlyoriginal.api.component.common.Tweenable;
-import net.mostlyoriginal.api.operation.act.*;
+import net.mostlyoriginal.api.operation.basic.AddOperation;
+import net.mostlyoriginal.api.operation.basic.DeleteFromWorldOperation;
+import net.mostlyoriginal.api.operation.basic.RemoveOperation;
+import net.mostlyoriginal.api.operation.common.BasicOperation;
 import net.mostlyoriginal.api.operation.common.Operation;
 import net.mostlyoriginal.api.operation.flow.ParallelOperation;
 import net.mostlyoriginal.api.operation.flow.SequenceOperation;
+import net.mostlyoriginal.api.operation.temporal.DelayOperation;
+import net.mostlyoriginal.api.operation.temporal.TweenOperation;
 import net.mostlyoriginal.api.utils.Preconditions;
 
 /**

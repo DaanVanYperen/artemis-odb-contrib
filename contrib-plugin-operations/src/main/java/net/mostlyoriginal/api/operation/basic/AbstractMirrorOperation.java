@@ -1,9 +1,10 @@
-package net.mostlyoriginal.api.operation.act;
+package net.mostlyoriginal.api.operation.basic;
 
 import com.artemis.Component;
 import com.artemis.Entity;
 import net.mostlyoriginal.api.component.Schedule;
 import net.mostlyoriginal.api.component.common.Mirrorable;
+import net.mostlyoriginal.api.operation.common.BasicOperation;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 
 /**
@@ -11,7 +12,7 @@ import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
  *
  * Will create component if missing. Calls {@see Mirrorable#set} on target component.
  *
- * Subclass {@see net.mostlyoriginal.api.operation.ManagedMirrorOperation}
+ * Subclass {@see net.mostlyoriginal.api.operation.basic.ManagedMirrorOperation}
  * to manage concrete types and avoid GC.
  *
  * @author Daan van Yperen

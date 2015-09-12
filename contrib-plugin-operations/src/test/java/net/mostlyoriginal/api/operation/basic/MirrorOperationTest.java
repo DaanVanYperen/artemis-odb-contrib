@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.operation.act;
+package net.mostlyoriginal.api.operation.basic;
 
 import com.artemis.Entity;
 import com.artemis.World;

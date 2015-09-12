@@ -3,6 +3,7 @@ package net.mostlyoriginal.api.operation;
 import com.artemis.Entity;
 import com.artemis.World;
 import com.badlogic.gdx.math.Interpolation;
+import net.mostlyoriginal.api.operation.temporal.ManagedTweenOperation;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin;
 import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
 import org.junit.Assert;

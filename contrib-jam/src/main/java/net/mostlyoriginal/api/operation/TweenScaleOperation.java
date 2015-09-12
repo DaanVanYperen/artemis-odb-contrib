@@ -1,6 +1,7 @@
 package net.mostlyoriginal.api.operation;
 
 import net.mostlyoriginal.api.component.basic.Scale;
+import net.mostlyoriginal.api.operation.temporal.ManagedTweenOperation;
 
 /**
  * @author Daan van Yperen

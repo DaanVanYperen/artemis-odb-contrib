@@ -1,6 +1,6 @@
 package net.mostlyoriginal.api.operation.common;
 
-import net.mostlyoriginal.api.operation.act.DeleteFromWorldOperation;
+import net.mostlyoriginal.api.operation.basic.DeleteFromWorldOperation;
 import net.mostlyoriginal.api.operation.flow.SequenceOperation;
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.system.delegate;
 
 /**
- * Ability to act as a principal is achieved
+ * Ability to basic as a principal is achieved
  * by implementing the EntityProcessPrincipal interface.
  *
  * @author Daan van Yperen

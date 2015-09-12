@@ -1,8 +1,7 @@
-package net.mostlyoriginal.api.operation.act;
+package net.mostlyoriginal.api.operation.common;
 
 import com.artemis.Entity;
 import com.badlogic.gdx.math.Interpolation;
-import net.mostlyoriginal.api.operation.common.Operation;
 
 /**
  * @author Daan van Yperen

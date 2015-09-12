@@ -95,7 +95,7 @@ public class SystemProfilerGUI extends Window {
 			rows.add(new ProfilerRow(profiler, skin));
 		}
 		profilersTable = new Table();
-		// act once so we can get all profilers and can pack nicely
+		// basic once so we can get all profilers and can pack nicely
 		act(0);
 
 		ScrollPane pane = new ScrollPane(profilersTable);
