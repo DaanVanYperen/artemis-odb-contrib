@@ -12,7 +12,7 @@ public abstract class OperationFlow extends Operation {
 
 	public Array<Operation> operations = new Array<>(true, 4);
 
-	protected void releaseChildren() {
+	public void clear() {
 		for (int i = 0, s = operations.size; i < s; i++) {
 			operations.get(i).release();
 		}
@@ -29,8 +29,9 @@ public abstract class OperationFlow extends Operation {
 
 	@Override
 	public void reset() {
+		super.reset();
 		// will be called immediately upon pool release.
-		releaseChildren();
+		clear();
 	}
 
 	/** Add operation to end of flow. */

@@ -1,9 +1,14 @@
 package net.mostlyoriginal.api.operation;
 
+import com.artemis.Component;
+import net.mostlyoriginal.api.operation.basic.AddOperation;
 import net.mostlyoriginal.api.operation.common.Operation;
 import net.mostlyoriginal.api.operation.common.TestOperation;
 import net.mostlyoriginal.api.operation.flow.OperationTest;
+import net.mostlyoriginal.api.operation.flow.ParallelOperation;
 import net.mostlyoriginal.api.operation.flow.RepeatOperation;
+import net.mostlyoriginal.api.operation.flow.SequenceOperation;
+import net.mostlyoriginal.api.operation.temporal.DelayOperation;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,6 +20,35 @@ import static net.mostlyoriginal.api.operation.OperationFactory.*;
  * @author Daan van Yperen
  */
 public class OperationIntegrationTest extends OperationTest {
+
+
+	public static class TestComponent extends Component {};
+
+	@Test
+	public void ensure_operations_chain_released() {
+
+		DelayOperation delayOperation = delay(1);
+		Operation deleteFromWorldOperation = deleteFromWorld();
+		AddOperation addOperation = add(new TestComponent());
+
+		SequenceOperation sequenceOperation = sequence(delayOperation, deleteFromWorldOperation, addOperation);
+		ParallelOperation parallelOperation = parallel(sequenceOperation);
+
+		// set all completed as an easy test to see if reset.
+		delayOperation.setCompleted(true);
+		deleteFromWorldOperation.setCompleted(true);
+		addOperation.setCompleted(true);
+		sequenceOperation.setCompleted(true);
+		parallelOperation.setCompleted(true);
+
+		parallelOperation.reset();
+
+		Assert.assertFalse(delayOperation.isCompleted());
+		Assert.assertFalse(deleteFromWorldOperation.isCompleted());
+		Assert.assertFalse(addOperation.isCompleted());
+		Assert.assertFalse(sequenceOperation.isCompleted());
+		Assert.assertFalse(parallelOperation.isCompleted());
+	}
 
 	@Test
 	public void ensure_nested_repeats_work() {

@@ -59,6 +59,7 @@ public class RepeatOperation extends Operation {
 
 	@Override
 	public void reset() {
+		super.reset();
 		// will be called immediately upon pool release.
 
 		repetition = 0;

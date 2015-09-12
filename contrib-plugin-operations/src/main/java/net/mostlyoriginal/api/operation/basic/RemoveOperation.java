@@ -25,6 +25,7 @@ public class RemoveOperation extends BasicOperation {
 
     @Override
     public void reset() {
+        super.reset();
         componentClass = null;
     }
 }

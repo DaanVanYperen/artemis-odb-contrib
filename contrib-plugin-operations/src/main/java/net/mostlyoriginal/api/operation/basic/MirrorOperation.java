@@ -33,6 +33,7 @@ public final class MirrorOperation extends AbstractMirrorOperation {
 
 	@Override
 	public void reset() {
+		super.reset();
 		m = null;
 		a = null;
 	}

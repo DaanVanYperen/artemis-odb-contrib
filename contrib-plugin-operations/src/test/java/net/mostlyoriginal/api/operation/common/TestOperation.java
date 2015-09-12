@@ -33,6 +33,7 @@ public class TestOperation extends Operation {
 
 	@Override
 	public void reset() {
+		super.reset();
 		resets++; calls=0;
 	}
 }

@@ -59,7 +59,8 @@ public abstract class TemporalOperation extends Operation {
 
 	@Override
 	public void reset() {
-		duration =0;
+		super.reset();
+		duration=0;
 		runtime=0;
 		interpolation=Interpolation.linear;
 	}

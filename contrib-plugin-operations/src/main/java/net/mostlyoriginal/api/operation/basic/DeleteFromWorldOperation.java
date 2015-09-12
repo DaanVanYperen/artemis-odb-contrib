@@ -18,8 +18,4 @@ public class DeleteFromWorldOperation extends BasicOperation {
     public void process(Entity e) {
         e.deleteFromWorld();
     }
-
-    @Override
-    public void reset() {
-    }
 }

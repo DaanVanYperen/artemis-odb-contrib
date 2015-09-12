@@ -47,6 +47,7 @@ public class SequenceOperation extends OperationFlow {
 
 	@Override
 	public void reset() {
+		super.reset();
 		index = 0;
 	}
 }

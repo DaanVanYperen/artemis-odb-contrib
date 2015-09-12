@@ -23,6 +23,7 @@ public class AddOperation extends BasicOperation {
 
     @Override
     public void reset() {
+        super.reset();
         component = null;
     }
 }

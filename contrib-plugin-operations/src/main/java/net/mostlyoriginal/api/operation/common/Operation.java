@@ -29,6 +29,10 @@ public abstract class Operation implements Pool.Poolable, Serializable {
 		completed = false;
 	}
 
+	public void reset() {
+		completed=false;
+	}
+
 	/**
 	 * Perform operation.
 	 *
@@ -71,5 +75,9 @@ public abstract class Operation implements Pool.Poolable, Serializable {
 
 	public final void setPool(Pool pool) {
 		this.pool = pool;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
 	}
 }
