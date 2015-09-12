@@ -9,6 +9,7 @@ import net.mostlyoriginal.api.component.common.Tweenable;
 import net.mostlyoriginal.api.operation.basic.DeleteFromWorldOperation;
 import net.mostlyoriginal.api.operation.basic.LegacyAddOperation;
 import net.mostlyoriginal.api.operation.basic.RemoveOperation;
+import net.mostlyoriginal.api.operation.basic.UnpooledMirrorOperation;
 import net.mostlyoriginal.api.operation.common.Operation;
 import net.mostlyoriginal.api.operation.flow.ParallelOperation;
 import net.mostlyoriginal.api.operation.flow.RepeatOperation;
@@ -208,7 +209,7 @@ public class OperationFactory {
 	 *
 	 * Not compatible with pooled components. Do not use this if you want to avoid GC!
 	 *
-	 * @see net.mostlyoriginal.api.operation.basic.MirrorOperation for a poolable solution.
+	 * @see UnpooledMirrorOperation for a poolable solution.
 	 * @param component
 	 * @return {@see LegacyAddOperation}
 	 */

@@ -11,16 +11,15 @@ import org.junit.Test;
 /**
  * @author Daan van Yperen
  */
-public class MirrorOperationTest {
+public class UnpooledMirrorOperationTest {
 
 	private Entity entity;
-	private MirrorableTestComponent component;
-	private MirrorOperation mirrorOperation;
+	private UnpooledMirrorOperation unpooledMirrorOperation;
 
 	@Test
 	public void test_process_adds_missing_component() {
-		mirrorOperation.setup(new MirrorableTestComponent(5));
-		mirrorOperation.process(0, entity);
+		unpooledMirrorOperation.setup(new MirrorableTestComponent(5));
+		unpooledMirrorOperation.process(0, entity);
 
 		Assert.assertEquals(5, entity.getComponent(MirrorableTestComponent.class).val);
 	}
@@ -30,8 +29,8 @@ public class MirrorOperationTest {
 
 		MirrorableTestComponent component = entity.edit().create(MirrorableTestComponent.class);
 
-		mirrorOperation.setup(new MirrorableTestComponent(5));
-		mirrorOperation.process(0, entity);
+		unpooledMirrorOperation.setup(new MirrorableTestComponent(5));
+		unpooledMirrorOperation.process(0, entity);
 
 		Assert.assertEquals(5, component.val);
 	}
@@ -40,7 +39,6 @@ public class MirrorOperationTest {
 	public void setup() {
 		World world = new World(new WorldConfigurationBuilder().dependsOn(ExtendedComponentMapperPlugin.class).build());
 		entity = world.createEntity();
-		component = new MirrorableTestComponent(0);
-		mirrorOperation = new MirrorOperation();
+		unpooledMirrorOperation = new UnpooledMirrorOperation();
 	}
 }
