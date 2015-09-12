@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.operation;
 
 import com.artemis.Component;
-import net.mostlyoriginal.api.operation.basic.AddOperation;
+import net.mostlyoriginal.api.operation.basic.LegacyAddOperation;
 import net.mostlyoriginal.api.operation.common.Operation;
 import net.mostlyoriginal.api.operation.common.TestOperation;
 import net.mostlyoriginal.api.operation.flow.OperationTest;
@@ -29,15 +29,15 @@ public class OperationIntegrationTest extends OperationTest {
 
 		DelayOperation delayOperation = delay(1);
 		Operation deleteFromWorldOperation = deleteFromWorld();
-		AddOperation addOperation = add(new TestComponent());
+		LegacyAddOperation legacyAddOperation = add(new TestComponent());
 
-		SequenceOperation sequenceOperation = sequence(delayOperation, deleteFromWorldOperation, addOperation);
+		SequenceOperation sequenceOperation = sequence(delayOperation, deleteFromWorldOperation, legacyAddOperation);
 		ParallelOperation parallelOperation = parallel(sequenceOperation);
 
 		// set all completed as an easy test to see if reset.
 		delayOperation.setCompleted(true);
 		deleteFromWorldOperation.setCompleted(true);
-		addOperation.setCompleted(true);
+		legacyAddOperation.setCompleted(true);
 		sequenceOperation.setCompleted(true);
 		parallelOperation.setCompleted(true);
 
@@ -45,7 +45,7 @@ public class OperationIntegrationTest extends OperationTest {
 
 		Assert.assertFalse(delayOperation.isCompleted());
 		Assert.assertFalse(deleteFromWorldOperation.isCompleted());
-		Assert.assertFalse(addOperation.isCompleted());
+		Assert.assertFalse(legacyAddOperation.isCompleted());
 		Assert.assertFalse(sequenceOperation.isCompleted());
 		Assert.assertFalse(parallelOperation.isCompleted());
 	}

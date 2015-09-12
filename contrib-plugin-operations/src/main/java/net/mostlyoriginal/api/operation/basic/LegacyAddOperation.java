@@ -6,15 +6,19 @@ import net.mostlyoriginal.api.component.Schedule;
 import net.mostlyoriginal.api.operation.common.BasicOperation;
 
 /**
- * Add component to aen
+ * Add component to entity.
+ *
+ * Not compatible with pooled components.
+ * Do not use this if you want to avoid GC!
  *
  * @author Daan van Yperen
  * @see Schedule
  */
-public class AddOperation extends BasicOperation {
+@Deprecated
+public class LegacyAddOperation extends BasicOperation {
 
     public Component component;
-    public AddOperation() {}
+    public LegacyAddOperation() {}
 
     @Override
     public void process(Entity e) {

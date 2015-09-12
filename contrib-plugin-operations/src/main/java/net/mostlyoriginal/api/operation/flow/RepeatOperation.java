@@ -2,6 +2,7 @@ package net.mostlyoriginal.api.operation.flow;
 
 import com.artemis.Entity;
 import net.mostlyoriginal.api.operation.common.Operation;
+import net.mostlyoriginal.api.utils.Preconditions;
 
 /**
  * Repeat nested operation one or more times.
@@ -23,7 +24,7 @@ public class RepeatOperation extends Operation {
 	 */
 	public void setup( Operation operation, int desiredRepetitions )
 	{
-		this.operation = operation;
+		this.operation = Preconditions.checkNotNull(operation);
 		this.desiredRepetitions = desiredRepetitions;
 	}
 
