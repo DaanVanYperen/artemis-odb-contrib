@@ -17,7 +17,7 @@ import net.mostlyoriginal.api.utils.Preconditions;
  * Target state is not pooled, and will be garbage collected.
  *
  * For performance reasons it is best to subclass
- * {@see MirrorOperation} to manage state.
+ * {@see SetOperation} to manage state.
  *
  * @author Daan van Yperen
  * @see Tweenable

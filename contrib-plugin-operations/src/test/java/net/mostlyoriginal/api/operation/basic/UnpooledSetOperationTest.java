@@ -11,7 +11,7 @@ import org.junit.Test;
 /**
  * @author Daan van Yperen
  */
-public class UnpooledMirrorOperationTest {
+public class UnpooledSetOperationTest {
 
 	private Entity entity;
 	private UnpooledMirrorOperation unpooledMirrorOperation;

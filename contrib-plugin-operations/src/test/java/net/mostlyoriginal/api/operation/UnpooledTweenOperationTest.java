@@ -3,7 +3,7 @@ package net.mostlyoriginal.api.operation;
 import com.artemis.Entity;
 import com.artemis.World;
 import com.badlogic.gdx.math.Interpolation;
-import net.mostlyoriginal.api.operation.temporal.ManagedTweenOperation;
+import net.mostlyoriginal.api.operation.temporal.UnpooledTweenOperation;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin;
 import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
 import org.junit.Assert;
@@ -13,34 +13,30 @@ import org.junit.Test;
 /**
  * @author Daan van Yperen
  */
-public class ManagedTweenOperationTest {
+public class UnpooledTweenOperationTest {
 
 	public static final float FLOAT_MAX_DELTA = 0.02f;
 	private Entity entity;
 	private TweenableTestComponent component;
-	private ManagedTweenOperation<TweenableTestComponent> step;
+	private UnpooledTweenOperation step;
 
 	@Test
 	public void ensure_tweening_at_start_time_matches_starting_tween() {
-		step.setup(Interpolation.linear, 1f);
-		step.getFrom().val=-10;
-		step.getTo().val=10;
+		step.setup(new TweenableTestComponent(-10), new TweenableTestComponent(10), Interpolation.linear, 1f);
 		step.process(0, entity);
-		Assert.assertEquals(-10f, component.val, FLOAT_MAX_DELTA);
+		Assert.assertEquals(-10f, component.val,  FLOAT_MAX_DELTA);
 	}
 
 	@Test
 	public void ensure_tweening_at_end_time_matches_ending_tween() {
-		step.setup(Interpolation.linear, 1f);
-		step.getFrom().val=-10;
-		step.getTo().val=10;
+		step.setup(new TweenableTestComponent(-10), new TweenableTestComponent(10), Interpolation.linear, 1f);
 		step.process(1f,entity);
 		Assert.assertEquals(10f, component.val,  FLOAT_MAX_DELTA);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void illegal_duration_exception() {
-		step.setup(Interpolation.linear, 0);
+		step.setup(new TweenableTestComponent(0), new TweenableTestComponent(0), Interpolation.linear, 0);
 	}
 
 	@Before
@@ -49,7 +45,7 @@ public class ManagedTweenOperationTest {
 		entity = world.createEntity();
 		component = new TweenableTestComponent(5);
 		entity.edit().add(component);
-		step= new ManagedTweenOperation<>(TweenableTestComponent.class);
+		step = new UnpooledTweenOperation();
 	}
 
 }

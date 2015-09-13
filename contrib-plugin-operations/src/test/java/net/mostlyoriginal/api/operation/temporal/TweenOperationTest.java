@@ -1,9 +1,9 @@
-package net.mostlyoriginal.api.operation;
+package net.mostlyoriginal.api.operation.temporal;
 
 import com.artemis.Entity;
 import com.artemis.World;
 import com.badlogic.gdx.math.Interpolation;
-import net.mostlyoriginal.api.operation.temporal.TweenOperation;
+import net.mostlyoriginal.api.operation.TweenableTestComponent;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin;
 import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
 import org.junit.Assert;
@@ -18,25 +18,29 @@ public class TweenOperationTest {
 	public static final float FLOAT_MAX_DELTA = 0.02f;
 	private Entity entity;
 	private TweenableTestComponent component;
-	private TweenOperation step;
+	private TweenOperation<TweenableTestComponent> step;
 
 	@Test
 	public void ensure_tweening_at_start_time_matches_starting_tween() {
-		step.setup(new TweenableTestComponent(-10), new TweenableTestComponent(10), Interpolation.linear, 1f);
+		step.setup(Interpolation.linear, 1f);
+		step.getFrom().val=-10;
+		step.getTo().val=10;
 		step.process(0, entity);
-		Assert.assertEquals(-10f, component.val,  FLOAT_MAX_DELTA);
+		Assert.assertEquals(-10f, component.val, FLOAT_MAX_DELTA);
 	}
 
 	@Test
 	public void ensure_tweening_at_end_time_matches_ending_tween() {
-		step.setup(new TweenableTestComponent(-10), new TweenableTestComponent(10), Interpolation.linear, 1f);
+		step.setup(Interpolation.linear, 1f);
+		step.getFrom().val=-10;
+		step.getTo().val=10;
 		step.process(1f,entity);
 		Assert.assertEquals(10f, component.val,  FLOAT_MAX_DELTA);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void illegal_duration_exception() {
-		step.setup(new TweenableTestComponent(0), new TweenableTestComponent(0), Interpolation.linear, 0);
+		step.setup(Interpolation.linear, 0);
 	}
 
 	@Before
@@ -45,7 +49,14 @@ public class TweenOperationTest {
 		entity = world.createEntity();
 		component = new TweenableTestComponent(5);
 		entity.edit().add(component);
-		step = new TweenOperation();
+		step= new TweenableTestOperation();
 	}
 
+
+	private static class TweenableTestOperation extends TweenOperation<TweenableTestComponent> {
+
+		public TweenableTestOperation() {
+			super(TweenableTestComponent.class);
+		}
+	}
 }

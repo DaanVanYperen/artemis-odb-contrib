@@ -15,7 +15,7 @@ import net.mostlyoriginal.api.operation.flow.ParallelOperation;
 import net.mostlyoriginal.api.operation.flow.RepeatOperation;
 import net.mostlyoriginal.api.operation.flow.SequenceOperation;
 import net.mostlyoriginal.api.operation.temporal.DelayOperation;
-import net.mostlyoriginal.api.operation.temporal.TweenOperation;
+import net.mostlyoriginal.api.operation.temporal.UnpooledTweenOperation;
 import net.mostlyoriginal.api.utils.Preconditions;
 
 /**
@@ -247,7 +247,7 @@ public class OperationFactory {
 	 * @param b component b starting state.
 	 * @param duration duration of tween, in seconds.
 	 */
-	public static <T extends Component & Tweenable<T>> TweenOperation tween(T a, T b, float duration)
+	public static <T extends Component & Tweenable<T>> UnpooledTweenOperation tween(T a, T b, float duration)
 	{
 		return tween(a,b,duration,Interpolation.linear);
 	}
@@ -262,9 +262,9 @@ public class OperationFactory {
 	 * @param duration duration of tween, in seconds.
 	 * @param interpolation method of interpolation.
 	 */
-	public static <T extends Component & Tweenable<T>> TweenOperation tween(T a, T b, float duration, Interpolation interpolation)
+	public static <T extends Component & Tweenable<T>> UnpooledTweenOperation tween(T a, T b, float duration, Interpolation interpolation)
 	{
-		final TweenOperation operation = Operation.prepare(TweenOperation.class);
+		final UnpooledTweenOperation operation = Operation.prepare(UnpooledTweenOperation.class);
 		operation.setup(a,b,interpolation,duration);
 		return operation;
 	}

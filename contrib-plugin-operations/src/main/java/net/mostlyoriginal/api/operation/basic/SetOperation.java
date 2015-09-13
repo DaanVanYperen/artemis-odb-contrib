@@ -17,12 +17,12 @@ import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
  *
  * @author Daan van Yperen
  */
-public abstract class MirrorOperation<T extends Component & Mirrorable> extends BasicOperation {
+public abstract class SetOperation<T extends Component & Mirrorable> extends BasicOperation {
 
 	protected final Component a;
 	protected M m;
 
-	public MirrorOperation(Class<T> type) {
+	public SetOperation(Class<T> type) {
 		try {
 			a = ClassReflection.newInstance(type);
 		} catch (ReflectionException e) {

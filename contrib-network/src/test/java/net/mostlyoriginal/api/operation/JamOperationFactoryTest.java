@@ -71,7 +71,7 @@ public class JamOperationFactoryTest {
 		assertValidPos(JamOperationFactory.moveTo(new Vector2(0,1)));
 	}
 
-	protected void assertValidPos(MirrorPosOperation pos) {
+	protected void assertValidPos(SetPosOperation pos) {
 		Assert.assertEquals(0f, pos.get().xy.x, 0.001f);
 		Assert.assertEquals(1f, pos.get().xy.y, 0.001f);
 	}

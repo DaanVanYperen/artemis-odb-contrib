@@ -92,8 +92,8 @@ public class JamOperationFactory {
 	/**
 	 * Set Pos.
 	 */
-	public static MirrorPosOperation moveTo(float x, float y) {
-		final MirrorPosOperation operation = Operation.prepare(MirrorPosOperation.class);
+	public static SetPosOperation moveTo(float x, float y) {
+		final SetPosOperation operation = Operation.prepare(SetPosOperation.class);
 		operation.get().set(x, y);
 		return operation;
 	}
@@ -101,14 +101,14 @@ public class JamOperationFactory {
 	/**
 	 * Set pos by {@see Pos}.
 	 */
-	public static MirrorPosOperation moveTo(Pos pos) {
+	public static SetPosOperation moveTo(Pos pos) {
 		return moveTo(pos.xy.x, pos.xy.y);
 	}
 
 	/**
 	 * Set pos by {@see com.badlogic.gdx.math.Vector2}.
 	 */
-	public static MirrorPosOperation moveTo(Vector2 v) {
+	public static SetPosOperation moveTo(Vector2 v) {
 		return moveTo(v.x, v.y);
 	}
 
@@ -142,8 +142,8 @@ public class JamOperationFactory {
 	/**
 	 * Set Scale.
 	 */
-	public static MirrorScaleOperation scaleTo(float scale) {
-		final MirrorScaleOperation operation = Operation.prepare(MirrorScaleOperation.class);
+	public static SetScaleOperation scaleTo(float scale) {
+		final SetScaleOperation operation = Operation.prepare(SetScaleOperation.class);
 		operation.get().scale = scale;
 		return operation;
 	}
