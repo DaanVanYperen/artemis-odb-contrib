@@ -10,7 +10,7 @@ public abstract class TemporalOperation extends Operation {
 
 	protected float runtime;
 	protected float duration;
-	protected Interpolation interpolation;
+	protected Interpolation interpolation = Interpolation.linear;
 
 	protected boolean started;
 
