@@ -7,6 +7,7 @@ import com.artemis.World;
 import net.mostlyoriginal.api.component.basic.Angle;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
+import net.mostlyoriginal.api.component.basic.Scale;
 import net.mostlyoriginal.api.component.graphics.Anim;
 import net.mostlyoriginal.api.component.graphics.Renderable;
 import net.mostlyoriginal.api.component.graphics.Tint;
@@ -25,9 +26,15 @@ public abstract class EntityEditor<T extends EntityEditor> {
 	private Entity entity;
 
 	@SuppressWarnings("unchecked")
-	public T edit(Entity entity) {
+	protected T editEntity(Entity entity) {
 		this.entity = entity;
 		this.edit = entity.edit();
+		return (T) this;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected final T createEntity(World world) {
+		editEntity(world.createEntity());
 		return (T) this;
 	}
 
@@ -96,12 +103,6 @@ public abstract class EntityEditor<T extends EntityEditor> {
 		entity = null;
 		edit = null;
 		return tmp;
-	}
-
-	@SuppressWarnings("unchecked")
-	public final T create(World world) {
-		edit(world.createEntity());
-		return (T) this;
 	}
 
 	/**
@@ -211,4 +212,12 @@ public abstract class EntityEditor<T extends EntityEditor> {
 		font.fontName = name;
 		return (T) this;
 	}
+
+	@SuppressWarnings("unchecked")
+	public final T scale(float scale) {
+		final Scale scaleComponent = add(Scale.class);
+		scaleComponent.scale = scale;
+		return (T) this;
+	}
+
 }
