@@ -15,7 +15,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <asm.version>4.1</asm.version>
-        <artemis-odb.version>0.13.0-SNAPSHOT</artemis-odb.version>
+        <artemis-odb.version>0.12.1</artemis-odb.version>
         <libgdx.version>1.6.5</libgdx.version>
     </properties>
 
@@ -183,6 +183,7 @@
                         </executions>
                         <configuration>
                             <failOnError>false</failOnError>
+                            <additionalparam>-Xdoclint:none</additionalparam>
                         </configuration>
                     </plugin>
                     <plugin>
