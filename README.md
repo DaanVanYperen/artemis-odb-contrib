@@ -3,8 +3,8 @@ artemis-odb-contrib
 
 [![Build Status](https://travis-ci.org/DaanVanYperen/artemis-odb-contrib.svg)](https://travis-ci.org/DaanVanYperen/artemis-odb-contrib)
 
-Drop-in extensions for artemis-odb. Event bus, deferred systems, prefab
-systems, components and networking. Well, eventually anyway.
+Drop-in extensions for artemis-odb. Event bus, scheduled operations, deferred systems, profiler, abstract and prefab
+systems, plugin api, components and networking. Well, eventually anyway.
 
 ### When to use this
 If you want to quickly prototype a game without getting bogged down by the
