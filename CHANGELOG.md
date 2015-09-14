@@ -2,7 +2,7 @@
 
 ## Version: 1.0.0
 
-- Build against artemis-odb 0.11, LibGDX 1.6.5
+- Build against artemis-odb 0.13.0, LibGDX 1.6.5
 - [ODB plugin API](https://github.com/DaanVanYperen/artemis-odb-contrib/wiki/Plugin)
   - [Smart Component Mapper Plugin](https://github.com/DaanVanYperen/artemis-odb-contrib/wiki/Extended-Component-Mappers) - Alter components with less code. `all platforms`
   - [Profiler Plugin](https://github.com/DaanVanYperen/artemis-odb-contrib/wiki/Profiler-Plugin) - profile system performance. `all platforms` `requires libgdx`
