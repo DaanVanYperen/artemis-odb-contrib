@@ -21,7 +21,7 @@ import net.mostlyoriginal.plugin.ProfilerPlugin;
 @Wire
 public class ProfilerSystem extends BaseSystem {
 
-	public static final int TOGGLE_PROFILER_KEY = Input.Keys.F3;
+	public static final int TOGGLE_PROFILER_KEY = Input.Keys.P;
 
 	OrthographicCamera camera;
 	ShapeRenderer renderer;
