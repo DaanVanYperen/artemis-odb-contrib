@@ -1,12 +1,8 @@
 package net.mostlyoriginal.api.plugin.extendedcomponentmapper;
 
-import com.artemis.Aspect;
-import com.artemis.BaseSystem;
-import com.artemis.Entity;
-import com.artemis.World;
+import com.artemis.*;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
-import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 

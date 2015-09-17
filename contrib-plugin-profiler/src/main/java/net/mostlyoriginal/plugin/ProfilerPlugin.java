@@ -1,7 +1,7 @@
 package net.mostlyoriginal.plugin;
 
-import net.mostlyoriginal.api.plugin.common.ArtemisPlugin;
-import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
+import com.artemis.ArtemisPlugin;
+import com.artemis.WorldConfigurationBuilder;
 import net.mostlyoriginal.plugin.profiler.ProfilerInvocationStrategy;
 import net.mostlyoriginal.plugin.profiler.ProfilerSystem;
 

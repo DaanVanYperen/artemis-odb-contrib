@@ -2,7 +2,7 @@ package net.mostlyoriginal.api.plugin.extendedcomponentmapper;
 
 import com.artemis.Entity;
 import com.artemis.World;
-import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
+import com.artemis.WorldConfigurationBuilder;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,7 +1,6 @@
 package net.mostlyoriginal.api.event.common;
 
 import com.artemis.BaseSystem;
-import com.artemis.Manager;
 import net.mostlyoriginal.api.event.dispatcher.FastEventDispatcher;
 
 import java.util.List;
@@ -41,7 +40,6 @@ public class EventSystem extends BaseSystem {
     protected void initialize() {
         // register events for all systems and managers.
         registerAllSystemEvents();
-        registerAllManagerEvents();
     }
 
     /** Resolve all listeners. */
@@ -91,14 +89,6 @@ public class EventSystem extends BaseSystem {
     {
         for (BaseSystem entitySystem : world.getSystems()) {
             registerEvents(entitySystem);
-        }
-    }
-
-    /** Register all managers in this world. */
-    private void registerAllManagerEvents( )
-    {
-        for (Manager manager : world.getManagers()) {
-            registerEvents(manager);
         }
     }
 

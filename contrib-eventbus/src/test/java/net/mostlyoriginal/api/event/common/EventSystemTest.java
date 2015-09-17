@@ -68,8 +68,8 @@ public class EventSystemTest {
     public void Initialization_ManagerListeners_AllListenersAutoRegistered() {
         SimpleManager m1 = new SimpleManager();
         SimpleManager m2 = new SimpleManager();
-        config.setManager(m1);
-        config.setManager(m2);
+        config.setSystem(m1);
+        config.setSystem(m2);
         final World w = new World(config);
         w.getSystem(EventSystem.class).dispatch(new SimpleEvent());
 
@@ -97,7 +97,7 @@ public class EventSystemTest {
             protected void processSystem() {
             }
         });
-        config.setManager(new Manager() {
+        config.setSystem(new Manager() {
         });
         final World w = new World(config);
         w.getSystem(EventSystem.class).registerEvents(new Object() {});
