@@ -1,6 +1,9 @@
 package net.mostlyoriginal.api.plugin.extendedcomponentmapper;
 
-import com.artemis.*;
+import com.artemis.Component;
+import com.artemis.ComponentMapper;
+import com.artemis.Entity;
+import com.artemis.World;
 import com.artemis.utils.reflect.ClassReflection;
 import net.mostlyoriginal.api.component.common.Mirrorable;
 
@@ -14,18 +17,11 @@ import net.mostlyoriginal.api.component.common.Mirrorable;
 public class M<A extends Component> {
 
 	private final ComponentMapper<A> mapper;
-	private final EntityTransmuter createTransmuter;
-	private final EntityTransmuter removeTransmuter;
-	private final Entity flyweight;
 	private final boolean isMirrorable;
 
 	@SuppressWarnings("unchecked")
 	public M( Class<? extends Component> type, World world) {
 		this.mapper = (ComponentMapper<A>) world.getMapper(type);
-		flyweight = Entity.createFlyweight(world);
-		createTransmuter = new EntityTransmuterFactory(world).add(type).build();
-		removeTransmuter = new EntityTransmuterFactory(world).remove(type).build();
-
 		isMirrorable = ClassReflection.isAssignableFrom(net.mostlyoriginal.api.component.common.Mirrorable.class, type);
 	}
 
@@ -55,7 +51,7 @@ public class M<A extends Component> {
 	 * @return the instance of the component
 	 */
 	public A getSafe(Entity entity, A fallback) {
-		return getSafe(entity.getId(), fallback);
+		return mapper.getSafe(entity.getId(), fallback);
 	}
 
 	/**
@@ -66,12 +62,7 @@ public class M<A extends Component> {
 	 * @return the instance of the component.
 	 */
 	public A create(int entityId) {
-		A component = getSafe(entityId);
-		if (component == null) {
-			createTransmuter.transmute(asFlyweight(entityId));
-			component = get(entityId);
-		}
-		return component;
+		return mapper.create(entityId);
 	}
 
 	/**
@@ -84,12 +75,7 @@ public class M<A extends Component> {
 	 * @return the instance of the component, or {@code null} if removed.
 	 */
 	public A set(int entityId, boolean value) {
-		if ( value ) {
-			return create(entityId);
-		} else {
-			remove(entityId);
-			return null;
-		}
+		return mapper.set(entityId, value);
 	}
 
 	/**
@@ -145,17 +131,7 @@ public class M<A extends Component> {
 	 * @return the instance of the component, or {@code null} if removed.
 	 */
 	public A set(Entity entity, boolean value) {
-		return set(entity.getId(), value);
-	}
-
-	/**
-	 * Setup flyweight with ID and return.
-	 * Cannot count on just created entities being resolvable
-	 * in world, which can break transmuters.
-	 */
-	private Entity asFlyweight(int entityId) {
-		flyweight.id = entityId;
-		return flyweight;
+		return mapper.set(entity.getId(), value);
 	}
 
 	/**
@@ -165,10 +141,7 @@ public class M<A extends Component> {
 	 * @param entityId
 	 */
 	public void remove(int entityId) {
-		if ( has(entityId) )
-		{
-			removeTransmuter.transmute(asFlyweight(entityId));
-		}
+		mapper.remove(entityId);
 	}
 
 	/**
@@ -189,7 +162,7 @@ public class M<A extends Component> {
 	 * @return the instance of the component.
 	 */
 	public A create(Entity entity) {
-		return create(entity.getId());
+		return mapper.create(entity.getId());
 	}
 
 	public A get(Entity e) throws ArrayIndexOutOfBoundsException {
