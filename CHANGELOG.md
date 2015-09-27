@@ -4,7 +4,8 @@
 
 - Upgraded for Artemis-odb 1.0.0, LibGDX 1.7.0.
 - Now using version ranges for odb and libGDX dependencies.
-- Plugin API and `WorldConfigurationBuilder` now part of odb!
+- Plugin API and `WorldConfigurationBuilder` now integrated with odb itself!
+- Moved to MIT license.
 
 ## Version: 1.0.0
 

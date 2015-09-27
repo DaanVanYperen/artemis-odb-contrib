@@ -21,7 +21,8 @@ with all fancy features, check out these instead:
 Artemis-odb 1.0.x, (Optional) LibGDX 1.6+, tested with 1.7.
 
 ### License
-The primary license for this code is CC0.
+The primary license for this code is MIT. 
+Some stubs from LibGDX are licensed under Apache 2.0.
 
 ### Download
 
