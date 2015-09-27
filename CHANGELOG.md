@@ -1,8 +1,14 @@
 # Changelog
 
+## Version: 1.1.0
+
+- Upgraded for Artemis-odb 1.0.0, LibGDX 1.7.0.
+- Now using version ranges for odb and libGDX dependencies.
+- Plugin API and `WorldConfigurationBuilder` now part of odb!
+
 ## Version: 1.0.0
 
-- Build against artemis-odb 0.13.0, LibGDX 1.6.5
+- Tested with artemis-odb 0.13.0, LibGDX 1.6.5
 - [ODB plugin API](https://github.com/DaanVanYperen/artemis-odb-contrib/wiki/Plugin)
   - [Smart Component Mapper Plugin](https://github.com/DaanVanYperen/artemis-odb-contrib/wiki/Extended-Component-Mappers) - Alter components with less code. `all platforms`
   - [Profiler Plugin](https://github.com/DaanVanYperen/artemis-odb-contrib/wiki/Profiler-Plugin) - profile system performance. `all platforms` `requires libgdx`

@@ -47,7 +47,7 @@ public abstract class DualEntitySystem extends BaseSystem implements EntitySubsc
 	}
 
 	public EntitySubscription getSubscription(Aspect.Builder aspectA) {
-		final AspectSubscriptionManager sm = world.getManager(AspectSubscriptionManager.class);
+		final AspectSubscriptionManager sm = world.getSystem(AspectSubscriptionManager.class);
 		return sm.get(aspectA);
 	}
 

@@ -59,7 +59,7 @@ public abstract class AssetManager<A extends Component, B extends Component> ext
 	 * Cause cleanup of asset reference without asset metadata.
 	 */
 	private void listenForCleanupJobs() {
-		world.getManager(AspectSubscriptionManager.class).get(Aspect.all(referenceType).exclude(metadataType))
+		world.getSystem(AspectSubscriptionManager.class).get(Aspect.all(referenceType).exclude(metadataType))
 				.addSubscriptionListener(new EntitySubscription.SubscriptionListener() {
 					@Override
 					public void inserted(IntBag entities) {
@@ -79,7 +79,7 @@ public abstract class AssetManager<A extends Component, B extends Component> ext
 	 * Cause population of missing references.
 	 */
 	private void listenForResolveJobs() {
-		world.getManager(AspectSubscriptionManager.class).get(Aspect.all(metadataType).exclude(referenceType))
+		world.getSystem(AspectSubscriptionManager.class).get(Aspect.all(metadataType).exclude(referenceType))
 				.addSubscriptionListener(new EntitySubscription.SubscriptionListener() {
 					@Override
 					public void inserted(IntBag entities) {

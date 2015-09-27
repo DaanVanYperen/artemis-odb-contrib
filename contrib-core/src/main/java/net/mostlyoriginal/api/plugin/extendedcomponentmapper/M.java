@@ -194,7 +194,7 @@ public class M<A extends Component> {
 	}
 
 	public static <T extends Component> M<T> getFor(Class<T> type, World world) {
-		return world.getManager(ExtendedComponentMapperManager.class).getFor(type);
+		return world.getSystem(ExtendedComponentMapperManager.class).getFor(type);
 	}
 
 	public A get(Entity e, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException {
