@@ -2,8 +2,7 @@ package net.mostlyoriginal.api.system.core;
 
 
 import com.artemis.Aspect;
-import com.artemis.Entity;
-import com.artemis.EntitySystem;
+import com.artemis.BaseEntitySystem;
 import com.artemis.World;
 import com.artemis.utils.IntBag;
 
@@ -23,14 +22,13 @@ import com.artemis.utils.IntBag;
  * @author Adrian Papari
  * @author Daan van Yperen
  */
-public abstract class SpreadProcessingSystem extends EntitySystem {
+public abstract class SpreadProcessingSystem extends BaseEntitySystem {
 
 
 	protected int index;
 	protected float roundTripTime;
 	protected float entitiesToProcess=0;
 	protected int lastProcessedEntityId =-1;
-	protected Entity flyweight;
 
 	/**
 	 * Creates a new SpreadProcessingSystem.
@@ -46,15 +44,14 @@ public abstract class SpreadProcessingSystem extends EntitySystem {
 	@Override
 	protected void setWorld(World world) {
 		super.setWorld(world);
-		flyweight = createFlyweightEntity();
 	}
 
 	/**
 	 * Process a entity this system is interested in.
 	 *
-	 * @param e the entity to process
+	 * @param entityId entity id to process
 	 */
-	protected abstract void process(Entity e);
+	protected abstract void process(int entityId);
 
 	@Override
 	protected void processSystem() {
@@ -80,17 +77,14 @@ public abstract class SpreadProcessingSystem extends EntitySystem {
 
 	protected void processEntities(int entitiesToProcess, int[] entities, int size) {
 
-		flyweight.id=-1;
-
 		// process up to array size.
 		int lastIndex = index + entitiesToProcess;
 		for (int s = Math.min(size, lastIndex); s > index; index++) {
-			flyweight.id = entities[index];
-			process(flyweight);
+			lastProcessedEntityId = entities[index];
+			process(lastProcessedEntityId);
 		}
 
 		if (lastIndex < size) {
-			lastProcessedEntityId = flyweight.id;
 			return;
 		}
 
@@ -98,12 +92,9 @@ public abstract class SpreadProcessingSystem extends EntitySystem {
 		index = 0;
 		lastIndex = lastIndex % size;
 		for (int s = Math.min(size, lastIndex); s > index; index++) {
-			flyweight.id = entities[index];
-			process(flyweight);
+			lastProcessedEntityId = entities[index];
+			process(lastProcessedEntityId);
 		}
-
-		// keep track of processed entity.
-		lastProcessedEntityId = flyweight.id;
 	}
 
 

@@ -1,8 +1,7 @@
 package net.mostlyoriginal.api.system.delegate;
 
 import com.artemis.Aspect;
-import com.artemis.Entity;
-import com.artemis.EntitySystem;
+import com.artemis.BaseEntitySystem;
 
 /**
  * Actor for a principal system.
@@ -24,7 +23,7 @@ import com.artemis.EntitySystem;
  * @see net.mostlyoriginal.api.system.delegate.EntityProcessAgent
  * @see EntityProcessPrincipal
  */
-public abstract class DeferredEntityProcessingSystem extends EntitySystem {
+public abstract class DeferredEntityProcessingSystem extends BaseEntitySystem {
 
     private final Aspect.Builder aspect;
     private final EntityProcessPrincipal principal;
@@ -49,7 +48,7 @@ public abstract class DeferredEntityProcessingSystem extends EntitySystem {
    	 * @param e
    	 *			the entity to process
    	 */
-   	protected abstract void process(Entity e);
+   	protected abstract void process(int e);
 
     @Override
     protected void removed(int entityId) {
@@ -89,7 +88,7 @@ public abstract class DeferredEntityProcessingSystem extends EntitySystem {
         }
 
         @Override
-        public void process(Entity e) {
+        public void process(int e) {
             DeferredEntityProcessingSystem.this.process(e);
         }
     };

@@ -5,7 +5,6 @@ package net.mostlyoriginal.api.system.render;
  */
 
 import com.artemis.Aspect;
-import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -62,16 +61,16 @@ public class LabelRenderSystem extends DeferredEntityProcessingSystem {
         return true;
     }
 
-    protected void process(final Entity entity) {
+    protected void process(final int e) {
 
-        final Label label = mLabel.get(entity);
-        final Pos pos = mPos.get(entity);
+        final Label label = mLabel.get(e);
+        final Pos pos = mPos.get(e);
 
         if (label.text != null) {
 
-            final BitmapFont font = mBitmapFontAsset.get(entity).bitmapFont;
+            final BitmapFont font = mBitmapFontAsset.get(e).bitmapFont;
 
-            batch.setColor(mTint.getSafe(entity, Tint.WHITE).color);
+            batch.setColor(mTint.getSafe(e, Tint.WHITE).color);
 
             switch ( label.align ) {
                 case LEFT:

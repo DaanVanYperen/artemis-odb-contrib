@@ -234,7 +234,7 @@ public class ExtendedComponentMapperPluginTest {
 			@Override
 			protected void process(Entity e) {
 				final Entity t1 = world.createEntity();
-				Pos c1 = mPos.create(t1.id);
+				Pos c1 = mPos.create(t1.getId());
 				Assert.assertNotNull(c1);
 			}
 		}
@@ -249,7 +249,7 @@ public class ExtendedComponentMapperPluginTest {
 			@Override
 			protected void process(Entity e) {
 				final Entity t1 = world.createEntity();
-				mPos.remove(t1.id);
+				mPos.remove(t1.getId());
 			}
 		}
 		createAndProcessWorld(new TestSystem());

@@ -51,7 +51,29 @@ public class EventSystemTest {
         }
     }
 
+    public static class SimpleManager2 extends Manager {
+        public int count;
+
+        @Subscribe
+        public void testListener(BasicEvent event) {
+            count++;
+        }
+    }
+
     public static class SimpleEntitySystem extends BaseSystem {
+        public int count;
+
+        @Subscribe
+        public void testListener(BasicEvent event) {
+            count++;
+        }
+
+        @Override
+        protected void processSystem() {
+        }
+    }
+
+    public static class SimpleEntitySystem2 extends BaseSystem {
         public int count;
 
         @Subscribe
@@ -67,7 +89,7 @@ public class EventSystemTest {
     @Test
     public void Initialization_ManagerListeners_AllListenersAutoRegistered() {
         SimpleManager m1 = new SimpleManager();
-        SimpleManager m2 = new SimpleManager();
+        SimpleManager2 m2 = new SimpleManager2();
         config.setSystem(m1);
         config.setSystem(m2);
         final World w = new World(config);
@@ -80,7 +102,7 @@ public class EventSystemTest {
     @Test
     public void Initialization_SystemListeners_AllListenersAutoRegistered() {
         SimpleEntitySystem es1 = new SimpleEntitySystem();
-        SimpleEntitySystem es2 = new SimpleEntitySystem();
+        SimpleEntitySystem2 es2 = new SimpleEntitySystem2();
         config.setSystem(es1);
         config.setSystem(es2);
         final World w = new World(config);

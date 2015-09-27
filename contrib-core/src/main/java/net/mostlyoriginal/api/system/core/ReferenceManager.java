@@ -26,7 +26,7 @@ public class ReferenceManager extends PassiveSystem {
 	/** Return entity reference of entity, which will expire when entity gets deleted from the world. */
 	public EntityReference of( Entity entity )
 	{
-		return new EntityReferenceImpl(entity);
+		return new EntityReferenceImpl(entity, uem);
 	}
 
 	/** REturn entity reference that resolves by tag. */
@@ -51,20 +51,23 @@ public class ReferenceManager extends PassiveSystem {
 
 	    private UUID uuid;
 	    private transient Entity entity;
+		private transient UuidEntityManager uuidEntityManager;
 
 		public EntityReferenceImpl() {
 			this.uuid = null;
 			this.entity = null;
+			this.uuidEntityManager = null;
 		}
 
-		public EntityReferenceImpl(Entity entity) {
+		public EntityReferenceImpl(Entity entity, UuidEntityManager uuidEntityManager) {
 	        this.entity = entity;
-	        this.uuid = entity.getUuid();
+			this.uuidEntityManager = uuidEntityManager;
+			this.uuid = uuidEntityManager.getUuid(entity);
 	    }
 
 		@Override
 	    public Entity get() {
-			return entity != null && entity.getUuid().equals(uuid) ? entity : null;
+			return entity != null && uuidEntityManager.getUuid(entity).equals(uuid) ? entity : null;
 	    }
 	}
 

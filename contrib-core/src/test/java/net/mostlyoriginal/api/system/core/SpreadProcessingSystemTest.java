@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.system.core;
 
 import com.artemis.Aspect;
-import com.artemis.Entity;
+import com.artemis.ComponentMapper;
 import com.artemis.World;
 import com.artemis.WorldConfiguration;
 import net.mostlyoriginal.api.common.Penguin;
@@ -141,6 +141,7 @@ public class SpreadProcessingSystemTest extends PenguinTest {
 
 	private class MySpreadProcessingSystem extends SpreadProcessingSystem {
 
+		ComponentMapper<Penguin> mPenguin;
 		private int penguins;
 
 		public MySpreadProcessingSystem(int penguins, float roundTripTime) {
@@ -155,8 +156,8 @@ public class SpreadProcessingSystemTest extends PenguinTest {
 		}
 
 		@Override
-		protected void process(Entity e) {
-			e.getComponent(Penguin.class).pokes++;
+		protected void process(int e) {
+			mPenguin.get(e).pokes++;
 		}
 
 		private void addPenguins(int count, World world) {

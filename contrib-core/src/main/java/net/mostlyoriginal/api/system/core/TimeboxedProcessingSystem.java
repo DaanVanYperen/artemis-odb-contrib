@@ -2,8 +2,7 @@ package net.mostlyoriginal.api.system.core;
 
 
 import com.artemis.Aspect;
-import com.artemis.Entity;
-import com.artemis.EntitySystem;
+import com.artemis.BaseEntitySystem;
 import com.artemis.World;
 import com.artemis.utils.IntBag;
 
@@ -27,10 +26,9 @@ import com.artemis.utils.IntBag;
  * @author Daan van Yperen
  * @author Adrian Papari
  */
-public abstract class TimeboxedProcessingSystem extends EntitySystem {
+public abstract class TimeboxedProcessingSystem extends BaseEntitySystem {
 
 	public static final float MILLISECONDS_PER_SECOND = 1000;
-	private Entity flyweight;
 
 	/** Last index processed */
 	public int index;
@@ -50,16 +48,15 @@ public abstract class TimeboxedProcessingSystem extends EntitySystem {
 	@Override
 	protected void setWorld(World world) {
 		super.setWorld(world);
-		flyweight = createFlyweightEntity();
 	}
 
 	/**
 	 * Process a entity this system is interested in.
 	 *
-	 * @param e
+	 * @param entityId
 	 *			the entity to process
 	 */
-	protected abstract void process(Entity e);
+	protected abstract void process(int entityId);
 
 	/**
 	 * @return alloted time in seconds.
@@ -75,8 +72,6 @@ public abstract class TimeboxedProcessingSystem extends EntitySystem {
 	@Override
 	protected final void processSystem() {
 
-		flyweight.id=-1;
-
 		final IntBag actives = subscription.getEntities();
 		final int[] array = actives.getData();
 
@@ -89,16 +84,14 @@ public abstract class TimeboxedProcessingSystem extends EntitySystem {
 
 			index = index % size; // avoid breakage upon subscription changes.
 			while ((processed < size) && (time < deadline)) {
-				flyweight.id = array[index];
-				process(flyweight);
+				lastProcessedEntityId = array[index];
+				process(lastProcessedEntityId);
 				index = ++index % size;
 				processed++;
 				time = getTime();
 			}
 		}
 		processedEntities = processed;
-
-		lastProcessedEntityId = flyweight.id;
 	}
 
 	@Override

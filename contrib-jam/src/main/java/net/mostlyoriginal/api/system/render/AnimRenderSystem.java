@@ -5,7 +5,6 @@ package net.mostlyoriginal.api.system.render;
  */
 
 import com.artemis.Aspect;
-import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -63,16 +62,16 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
         batch.end();
     }
 
-    protected void process(final Entity entity) {
+    protected void process(final int e) {
 
-        final Anim anim   = mAnim.get(entity);
-        final Pos pos     = mPos.get(entity);
-        final Angle angle = mAngle.getSafe(entity, Angle.NONE);
-        final float scale = mScale.getSafe(entity, Scale.DEFAULT).scale;
+        final Anim anim   = mAnim.get(e);
+        final Pos pos     = mPos.get(e);
+        final Angle angle = mAngle.getSafe(e, Angle.NONE);
+        final float scale = mScale.getSafe(e, Scale.DEFAULT).scale;
 
         anim.age += world.delta * anim.speed;
 
-        batch.setColor(mTint.getSafe(entity, Tint.WHITE).color);
+        batch.setColor(mTint.getSafe(e, Tint.WHITE).color);
 
         if ( anim.id != null ) drawAnimation(anim, angle, pos, anim.id,scale);
         if ( anim.id2 != null ) drawAnimation(anim, angle, pos, anim.id2,scale);

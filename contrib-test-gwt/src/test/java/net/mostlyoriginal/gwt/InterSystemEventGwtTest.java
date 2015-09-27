@@ -6,6 +6,7 @@ import com.google.gwt.junit.client.GWTTestCase;
 import net.mostlyoriginal.api.event.common.EventSystem;
 import net.mostlyoriginal.gwt.system.DispatchTestSystem;
 import net.mostlyoriginal.gwt.system.ReceiveTestSystem;
+import net.mostlyoriginal.gwt.system.ReceiveTestSystem2;
 
 /**
  * Test event dispatching between systems on GWT.
@@ -49,7 +50,7 @@ public class InterSystemEventGwtTest  extends GWTTestCase {
         config.setSystem(eventManager);
         ReceiveTestSystem s1 = new ReceiveTestSystem();
         config.setSystem(s1);
-        ReceiveTestSystem s2 = new ReceiveTestSystem();
+        ReceiveTestSystem2 s2 = new ReceiveTestSystem2();
         config.setSystem(s2);
         config.setSystem(new DispatchTestSystem());
 

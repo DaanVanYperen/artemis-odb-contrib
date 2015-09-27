@@ -1,6 +1,6 @@
 package net.mostlyoriginal.api.network.system;
 
-import com.artemis.systems.VoidEntitySystem;
+import com.artemis.BaseSystem;
 import com.esotericsoftware.minlog.Log;
 import net.mostlyoriginal.api.network.marshal.common.MarshalDictionary;
 import net.mostlyoriginal.api.network.marshal.common.MarshalObserver;
@@ -12,7 +12,7 @@ import net.mostlyoriginal.api.network.marshal.common.MarshalStrategy;
  *
  * @author Daan van Yperen
  */
-public class MarshalSystem extends VoidEntitySystem implements MarshalObserver {
+public class MarshalSystem extends BaseSystem implements MarshalObserver {
 
     private final MarshalStrategy marshal;
     private int establishedConnections;
