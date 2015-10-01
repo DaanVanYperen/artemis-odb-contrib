@@ -1,6 +1,6 @@
 package net.mostlyoriginal.api.system.core;
 
-import com.artemis.BaseSystem;import java.lang.Override;
+import com.artemis.BaseSystem;
 
 /**
  * Headless system.
@@ -12,7 +12,7 @@ import com.artemis.BaseSystem;import java.lang.Override;
 public class PassiveSystem extends BaseSystem {
 
     public PassiveSystem() {
-        setPassive(true);
+        setEnabled(false);
     }
 
     @Override

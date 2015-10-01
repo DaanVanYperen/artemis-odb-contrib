@@ -33,7 +33,7 @@ public class DeferredEntityProcessingSystemTest {
 		EntityProcessPrincipal principal = mock(EntityProcessPrincipal.class);
 
 		final WorldConfiguration config = new WorldConfiguration();
-		config.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal), true);
+		config.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal));
 		// setup world and single entity.
 		World w = new World(config);
 
@@ -51,7 +51,7 @@ public class DeferredEntityProcessingSystemTest {
 
 		// setup world and single entity.
 		WorldConfiguration config = new WorldConfiguration();
-		config.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal), true);
+		config.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal));
 		World w = new World(config);
 		Entity myEntity = new EntityBuilder(w).with(EmptyComponent.class).build();
 		w.process();

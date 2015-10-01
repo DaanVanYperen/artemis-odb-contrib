@@ -38,12 +38,9 @@ public class ProfilerInvocationStrategy extends SystemInvocationStrategy {
 	private void processProfileSystems(Bag<BaseSystem> systems) {
 		final Object[] systemsData = systems.getData();
 		for (int i = 0; i < systems.size(); i++) {
-			updateEntityStates();
-
 			final BaseSystem system = (BaseSystem)systemsData[i];
-			if (!system.isPassive()) {
-				processProfileSystem(profilers[i], system);
-			}
+			processProfileSystem(profilers[i], system);
+			updateEntityStates();
 		}
 	}
 
@@ -53,7 +50,7 @@ public class ProfilerInvocationStrategy extends SystemInvocationStrategy {
 		if (profiler != null) profiler.stop();
 	}
 
-	private void initialize() {
+	protected void initialize() {
 		createFrameProfiler();
 		createSystemProfilers();
 	}
