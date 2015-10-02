@@ -1,12 +1,8 @@
 package net.mostlyoriginal.api.plugin.extendedcomponentmapper;
 
-import com.artemis.Aspect;
-import com.artemis.BaseSystem;
-import com.artemis.Entity;
-import com.artemis.World;
+import com.artemis.*;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
-import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -238,7 +234,7 @@ public class ExtendedComponentMapperPluginTest {
 			@Override
 			protected void process(Entity e) {
 				final Entity t1 = world.createEntity();
-				Pos c1 = mPos.create(t1.id);
+				Pos c1 = mPos.create(t1.getId());
 				Assert.assertNotNull(c1);
 			}
 		}
@@ -253,7 +249,7 @@ public class ExtendedComponentMapperPluginTest {
 			@Override
 			protected void process(Entity e) {
 				final Entity t1 = world.createEntity();
-				mPos.remove(t1.id);
+				mPos.remove(t1.getId());
 			}
 		}
 		createAndProcessWorld(new TestSystem());

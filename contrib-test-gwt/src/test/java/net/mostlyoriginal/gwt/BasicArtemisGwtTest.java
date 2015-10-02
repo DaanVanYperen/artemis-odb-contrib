@@ -26,7 +26,7 @@ public class BasicArtemisGwtTest extends GWTTestCase {
 
     public void test_runartemis_processsimplesystem_noexceptions() throws Exception {
         WorldConfiguration config = new WorldConfiguration();
-        config.setManager(new TagManager());
+        config.setSystem(new TagManager());
 
         CountingTestSystem s = new CountingTestSystem();
         config.setSystem(s);

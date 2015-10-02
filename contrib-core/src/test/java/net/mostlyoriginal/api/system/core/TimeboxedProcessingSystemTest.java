@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.system.core;
 
 import com.artemis.Aspect;
-import com.artemis.Entity;
+import com.artemis.ComponentMapper;
 import com.artemis.World;
 import net.mostlyoriginal.api.common.Penguin;
 import net.mostlyoriginal.api.common.PenguinTest;
@@ -132,6 +132,7 @@ public class TimeboxedProcessingSystemTest extends PenguinTest {
 
 	private class MyTimeboxedProcessingSystem extends TimeboxedProcessingSystem {
 
+		protected ComponentMapper<Penguin> mPenguin;
 		private int penguins;
 		private float allottedTime;
 		private float pokeSpeed;
@@ -153,8 +154,8 @@ public class TimeboxedProcessingSystemTest extends PenguinTest {
 		}
 
 		@Override
-		protected void process(Entity e) {
-			e.getComponent(Penguin.class).pokes++;
+		protected void process(int e) {
+			mPenguin.get(e).pokes++;
 			fakeTime += pokeSpeed * MILLISECONDS_PER_SECOND;
 		}
 

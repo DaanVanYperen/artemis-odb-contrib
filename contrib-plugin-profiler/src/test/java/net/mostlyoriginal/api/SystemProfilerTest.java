@@ -1,12 +1,12 @@
 package net.mostlyoriginal.api;
 
 import com.artemis.World;
+import com.artemis.WorldConfigurationBuilder;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.graphics.GL20;
-import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
 import net.mostlyoriginal.plugin.profiler.ProfilerSystem;
 import net.mostlyoriginal.plugin.profiler.SystemProfiler;
 

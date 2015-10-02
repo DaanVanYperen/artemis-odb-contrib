@@ -2,8 +2,8 @@ package net.mostlyoriginal.api.operation.flow;
 
 import com.artemis.Entity;
 import com.artemis.World;
+import com.artemis.WorldConfigurationBuilder;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin;
-import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
 import org.junit.Before;
 
 /**

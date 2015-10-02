@@ -1,7 +1,8 @@
 package net.mostlyoriginal.api.network.common;
 
+import com.artemis.Aspect;
+import com.artemis.BaseEntitySystem;
 import com.artemis.Entity;
-import com.artemis.Manager;
 import com.artemis.utils.Bag;
 import com.artemis.utils.ImmutableBag;
 import com.artemis.utils.IntBag;
@@ -16,14 +17,19 @@ import java.util.Map;
  * @param <T> Type of subscriber.
  * @author Daan van Yperen
  */
-public class SubscriptionManager<T> extends Manager {
+public class SubscriptionManager<T> extends BaseEntitySystem {
 
     private final Bag<Bag<T>> entitySubscribers;
     private final Map<T, IntBag> subscriberEntities;
 
     public SubscriptionManager() {
+        super(Aspect.all());
         subscriberEntities = new HashMap<>();
         entitySubscribers = new Bag<>();
+    }
+
+    @Override
+    protected void processSystem() {
     }
 
     /**
@@ -169,8 +175,7 @@ public class SubscriptionManager<T> extends Manager {
      * Unsubscribe deleted entities from manager.
      */
     @Override
-    public void deleted(int entityId) {
+    protected void removed(int entityId) {
         unsubscribeFromAll(entityId);
     }
-
 }

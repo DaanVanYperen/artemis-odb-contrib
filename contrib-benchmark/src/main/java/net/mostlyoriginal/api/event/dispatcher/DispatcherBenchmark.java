@@ -221,8 +221,8 @@ public abstract class DispatcherBenchmark extends MyBenchmark {
 		em = new EventSystem(instanceDispatcher(), new SubscribeAnnotationFinder());
 		config.setSystem(em);
 		activeEventHandlers = new ActiveEventHandlers();
-		config.setManager(activeEventHandlers);
-		config.setManager(new PaddingHandlers());
+		config.setSystem(activeEventHandlers);
+		config.setSystem(new PaddingHandlers());
 
 		World w = new World(config);
 	}

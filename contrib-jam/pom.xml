@@ -5,7 +5,7 @@
     <parent>
         <groupId>net.mostlyoriginal.artemis-odb</groupId>
         <artifactId>contrib-parent</artifactId>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
     </parent>
     <artifactId>contrib-jam</artifactId>
     <packaging>jar</packaging>
@@ -31,6 +31,7 @@
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
             <version>${libgdx.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

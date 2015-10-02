@@ -1,9 +1,9 @@
 package net.mostlyoriginal.plugin;
 
-import net.mostlyoriginal.api.plugin.common.ArtemisPlugin;
+import com.artemis.ArtemisPlugin;
+import com.artemis.WorldConfigurationBuilder;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.ExtendedComponentMapperPlugin;
 import net.mostlyoriginal.api.system.SchedulerSystem;
-import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
 
 /**
  * Scheduled operations on entities and components.

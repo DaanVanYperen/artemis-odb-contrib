@@ -23,7 +23,7 @@ public class DeferredEntityProcessingSystemTest {
 		}
 
 		@Override
-		protected void process(Entity e) {
+		protected void process(int e) {
 		}
 	}
 
@@ -33,7 +33,7 @@ public class DeferredEntityProcessingSystemTest {
 		EntityProcessPrincipal principal = mock(EntityProcessPrincipal.class);
 
 		final WorldConfiguration config = new WorldConfiguration();
-		config.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal), true);
+		config.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal));
 		// setup world and single entity.
 		World w = new World(config);
 
@@ -41,7 +41,7 @@ public class DeferredEntityProcessingSystemTest {
 		w.process();
 
 		// ensure it gets registered with the principal
-		verify(principal, times(1)).registerAgent(eq(myEntity.id), any(EntityProcessAgent.class));
+		verify(principal, times(1)).registerAgent(eq(myEntity.getId()), any(EntityProcessAgent.class));
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public class DeferredEntityProcessingSystemTest {
 
 		// setup world and single entity.
 		WorldConfiguration config = new WorldConfiguration();
-		config.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal), true);
+		config.setSystem(new TestDeferredSystem(Aspect.all(EmptyComponent.class), principal));
 		World w = new World(config);
 		Entity myEntity = new EntityBuilder(w).with(EmptyComponent.class).build();
 		w.process();
@@ -59,6 +59,6 @@ public class DeferredEntityProcessingSystemTest {
 		w.process();
 
 		// ensure it gets registered with the principal
-		verify(principal, times(1)).unregisterAgent(eq(myEntity.id), any(EntityProcessAgent.class));
+		verify(principal, times(1)).unregisterAgent(eq(myEntity.getId()), any(EntityProcessAgent.class));
 	}
 }

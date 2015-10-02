@@ -1,7 +1,5 @@
 package net.mostlyoriginal.api.system.delegate;
 
-import com.artemis.Entity;
-
 /**
  * Delegated processing is achieved by implementing
  * the EntityProcessAgent interface.
@@ -17,6 +15,6 @@ public interface EntityProcessAgent {
     public void end();
 
     /** Process the entity. */
-    public void process(Entity e);
+    public void process(int e);
 
 }

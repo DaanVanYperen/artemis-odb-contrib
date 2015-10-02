@@ -42,6 +42,18 @@ public class InterSystemEventTest {
             count++;
         }
     }
+    public static class ReceiveSystem2  extends BaseSystem {
+        public int count = 0;
+
+        @Override
+        protected void processSystem() {
+        }
+
+        @Subscribe
+        public void testEvent(MyEvent event) {
+            count++;
+        }
+    }
 
     @Test
     public void Dispatch_OneListeningSystem_SystemReceivesEvent() {
@@ -74,7 +86,7 @@ public class InterSystemEventTest {
         config.setSystem(eventManager);
         ReceiveSystem s1 = new ReceiveSystem();
         config.setSystem(s1);
-        ReceiveSystem s2 = new ReceiveSystem();
+        ReceiveSystem2 s2 = new ReceiveSystem2();
         config.setSystem(s2);
         config.setSystem(new DispatchSystem());
 

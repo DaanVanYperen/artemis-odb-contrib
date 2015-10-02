@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.plugin.extendedcomponentmapper;
 
-import net.mostlyoriginal.api.plugin.common.ArtemisPlugin;
-import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
+import com.artemis.ArtemisPlugin;
+import com.artemis.WorldConfigurationBuilder;
 
 /**
  * Plugin that adds support for extended component mappers.

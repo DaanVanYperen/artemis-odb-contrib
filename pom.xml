@@ -5,7 +5,7 @@
 
     <groupId>net.mostlyoriginal.artemis-odb</groupId>
     <artifactId>contrib-parent</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>pom</packaging>
     <name>contrib-parent</name>
     <description>Drop-in extensions for artemis-odb. Prefab systems, components, networking, events!
@@ -15,8 +15,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <asm.version>4.1</asm.version> 
-        <artemis-odb.version>0.13.0</artemis-odb.version>
-        <libgdx.version>1.6.5</libgdx.version>
+        <artemis-odb.version>[1.0.0,2.0.0)</artemis-odb.version>
+        <libgdx.version>[1.6.0,2.0.0)</libgdx.version>
     </properties>
 
     <scm>
@@ -85,6 +85,7 @@
                 <groupId>com.badlogicgames.gdx</groupId>
                 <artifactId>gdx</artifactId>
                 <version>${libgdx.version}</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

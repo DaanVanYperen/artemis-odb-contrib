@@ -27,7 +27,7 @@ public class SubscriptionManagerTest {
     @Before
     public void setUp() throws Exception {
         subscriptionManager = new DeltaSubscriptionManager();
-        world = new World(new WorldConfiguration().setManager(subscriptionManager));
+        world = new World(new WorldConfiguration().setSystem(subscriptionManager));
         entity = new EntityBuilder(world).build();
         entity2 = new EntityBuilder(world).build();
     }
