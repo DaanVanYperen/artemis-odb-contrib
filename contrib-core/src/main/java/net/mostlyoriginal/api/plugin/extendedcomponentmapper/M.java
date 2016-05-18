@@ -169,14 +169,22 @@ public class M<A extends Component> {
 		return mapper.get(e);
 	}
 
+	@Deprecated
 	public A getSafe(Entity e, boolean forceNewInstance) {
-		return mapper.getSafe(e, forceNewInstance);
+		A component = mapper.getSafe(e);
+		
+		if(component == null && forceNewInstance) {
+			component = mapper.create(e);
+		}
+		
+		return component;
 	}
 
 	public A get(int entityId) throws ArrayIndexOutOfBoundsException {
 		return mapper.get(entityId);
 	}
 
+	@Deprecated
 	public A getSafe(int entityId) {
 		return mapper.getSafe(entityId);
 	}
@@ -185,6 +193,7 @@ public class M<A extends Component> {
 		return mapper.has(e);
 	}
 
+	@Deprecated
 	public A getSafe(Entity e) {
 		return mapper.getSafe(e);
 	}
@@ -198,14 +207,33 @@ public class M<A extends Component> {
 	}
 
 	public A get(Entity e, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException {
-		return mapper.get(e, forceNewInstance);
+		A component = mapper.get(e);
+		
+		if(component == null && forceNewInstance) {
+			component = mapper.create(e);
+		}
+		
+		return component;
 	}
 
 	public A get(int entityId, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException {
-		return mapper.get(entityId, forceNewInstance);
+		A component = mapper.get(entityId);
+		
+		if(component == null && forceNewInstance) {
+			component = mapper.create(entityId);
+		}
+		
+		return component;
 	}
 
+	@Deprecated
 	public A getSafe(int entityId, boolean forceNewInstance) {
-		return mapper.getSafe(entityId, forceNewInstance);
+		A component = mapper.getSafe(entityId);
+		
+		if(component == null && forceNewInstance) {
+			component = mapper.create(entityId);
+		}
+		
+		return component;
 	}
 }
