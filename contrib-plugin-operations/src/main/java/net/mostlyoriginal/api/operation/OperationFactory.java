@@ -1,7 +1,6 @@
 package net.mostlyoriginal.api.operation;
 
 import com.artemis.Component;
-import com.artemis.PackedComponent;
 import com.artemis.PooledComponent;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
@@ -218,7 +217,6 @@ public class OperationFactory {
 	{
 		Preconditions.checkNotNull(component);
 		Preconditions.checkArgument(!ClassReflection.isAssignableFrom(PooledComponent.class, component.getClass()), "Does not support Pooled components.");
-		Preconditions.checkArgument(!ClassReflection.isAssignableFrom(PackedComponent.class, component.getClass()), "Does not support Packed components.");
 		final LegacyAddOperation operation = Operation.prepare(LegacyAddOperation.class);
 		operation.component = component;
 		return operation;

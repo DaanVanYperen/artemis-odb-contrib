@@ -12,11 +12,17 @@ import com.artemis.BaseSystem;
 public class PassiveSystem extends BaseSystem {
 
     public PassiveSystem() {
-        setEnabled(false);
+        
     }
 
     @Override
     protected void processSystem() {
 	    // do nothing!
+    }
+    
+    @Override
+    protected boolean checkProcessing() {
+    	setEnabled(false);
+    	return false;
     }
 }
