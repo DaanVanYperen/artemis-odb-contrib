@@ -11,7 +11,8 @@ import com.artemis.BaseSystem;
  */
 public class PassiveSystem extends BaseSystem {
 
-    public PassiveSystem() {
+    @Override
+    protected void initialize() {
         setEnabled(false);
     }
 
