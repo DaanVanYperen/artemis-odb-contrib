@@ -32,13 +32,13 @@ Some stubs from LibGDX are licensed under Apache 2.0.
 <dependency>
   <groupId>net.mostlyoriginal.artemis-odb</groupId>
   <artifactId>contrib-core</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
 </dependency>
 
 <dependency>
   <groupId>net.mostlyoriginal.artemis-odb</groupId>
   <artifactId>contrib-eventbus</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
 </dependency>
 ```
 
@@ -46,7 +46,7 @@ Some stubs from LibGDX are licensed under Apache 2.0.
 
 ```groovy
 dependencies { 
-    compile "net.mostlyoriginal.artemis-odb:contrib-core:1.2.0"
-    compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:1.2.0"
+    compile "net.mostlyoriginal.artemis-odb:contrib-core:1.2.1"
+    compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:1.2.1"
 }
 ```

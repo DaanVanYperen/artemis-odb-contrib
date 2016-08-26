@@ -171,7 +171,7 @@ public class M<A extends Component> {
 
 	@Deprecated
 	public A getSafe(Entity e, boolean forceNewInstance) {
-		A component = mapper.getSafe(e);
+		A component = mapper.get(e);
 		
 		if(component == null && forceNewInstance) {
 			component = mapper.create(e);
@@ -233,7 +233,7 @@ public class M<A extends Component> {
 
 	@Deprecated
 	public A getSafe(int entityId, boolean forceNewInstance) {
-		A component = mapper.getSafe(entityId);
+		A component = mapper.get(entityId);
 		
 		if(component == null && forceNewInstance) {
 			component = mapper.create(entityId);
