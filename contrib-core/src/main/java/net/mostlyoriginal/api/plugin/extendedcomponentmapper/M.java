@@ -169,6 +169,17 @@ public class M<A extends Component> {
 		return mapper.get(e);
 	}
 
+	@Deprecated
+	public A getSafe(Entity e, boolean forceNewInstance) {
+		A component = mapper.getSafe(e);
+		
+		if(component == null && forceNewInstance) {
+			component = mapper.create(e);
+		}
+		
+		return component;
+	}
+
 	public A get(int entityId) throws ArrayIndexOutOfBoundsException {
 		return mapper.get(entityId);
 	}
@@ -198,5 +209,36 @@ public class M<A extends Component> {
 
 	public static <T extends Component> M<T> getFor(Class<T> type, World world) {
 		return world.getSystem(ExtendedComponentMapperManager.class).getFor(type);
+	}
+
+	public A get(Entity e, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException {
+		A component = mapper.get(e);
+		
+		if(component == null && forceNewInstance) {
+			component = mapper.create(e);
+		}
+		
+		return component;
+	}
+
+	public A get(int entityId, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException {
+		A component = mapper.get(entityId);
+		
+		if(component == null && forceNewInstance) {
+			component = mapper.create(entityId);
+		}
+		
+		return component;
+	}
+
+	@Deprecated
+	public A getSafe(int entityId, boolean forceNewInstance) {
+		A component = mapper.getSafe(entityId);
+		
+		if(component == null && forceNewInstance) {
+			component = mapper.create(entityId);
+		}
+		
+		return component;
 	}
 }
