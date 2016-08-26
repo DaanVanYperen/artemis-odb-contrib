@@ -25,10 +25,10 @@ public class CollisionSystem extends BaseSystem {
 
     public final boolean overlaps( final Entity a, final Entity b)
     {
-        final Bounds b1 = bm.getSafe(a);
-        final Pos p1 =  pm.getSafe(a);
-        final Bounds b2 = bm.getSafe(b);
-        final Pos p2 =  pm.getSafe(b);
+        final Bounds b1 = bm.get(a);
+        final Pos p1 =  pm.get(a);
+        final Bounds b2 = bm.get(b);
+        final Pos p2 =  pm.get(b);
 
         if ( b1==null || p1 ==null || b2==null || p2==null)
             return false;

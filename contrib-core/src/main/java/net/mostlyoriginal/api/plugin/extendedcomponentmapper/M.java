@@ -171,7 +171,7 @@ public class M<A extends Component> {
 
 	@Deprecated
 	public A getSafe(Entity e, boolean forceNewInstance) {
-		A component = mapper.getSafe(e);
+		A component = mapper.get(e);
 		
 		if(component == null && forceNewInstance) {
 			component = mapper.create(e);
@@ -184,18 +184,23 @@ public class M<A extends Component> {
 		return mapper.get(entityId);
 	}
 
+	/**
+	 * @deprecated as of odb version 2.0.0 {@see #get} is as safe as getSafe.
+	 */
 	@Deprecated
 	public A getSafe(int entityId) {
-		return mapper.getSafe(entityId);
+		return mapper.get(entityId);
 	}
 
 	public boolean has(Entity e) throws ArrayIndexOutOfBoundsException {
 		return mapper.has(e);
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated as of odb version 2.0.0 {@see #get} is as safe as getSafe.
+	 */
 	public A getSafe(Entity e) {
-		return mapper.getSafe(e);
+		return mapper.get(e);
 	}
 
 	public boolean has(int entityId) {
@@ -228,7 +233,7 @@ public class M<A extends Component> {
 
 	@Deprecated
 	public A getSafe(int entityId, boolean forceNewInstance) {
-		A component = mapper.getSafe(entityId);
+		A component = mapper.get(entityId);
 		
 		if(component == null && forceNewInstance) {
 			component = mapper.create(entityId);

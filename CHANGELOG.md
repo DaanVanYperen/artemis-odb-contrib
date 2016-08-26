@@ -1,5 +1,9 @@
 # Changelog
 
+## Version: 1.2.0-SNAPSHOT
+
+- Upgraded for Artemis-odb 2.0.0, LibGDX 1.9.4
+
 ## Version: 1.1.0
 
 - Upgraded for Artemis-odb 1.0.0, LibGDX 1.7.0.
