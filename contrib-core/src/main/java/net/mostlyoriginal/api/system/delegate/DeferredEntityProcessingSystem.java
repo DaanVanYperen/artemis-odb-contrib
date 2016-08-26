@@ -28,6 +28,11 @@ public abstract class DeferredEntityProcessingSystem extends BaseEntitySystem {
     private final Aspect.Builder aspect;
     private final EntityProcessPrincipal principal;
 
+    @Override
+    protected void initialize() {
+        setEnabled(false);
+    }
+
     /**
      * Creates an entity system that uses the specified aspect as a matcher
      * against entities.
@@ -39,7 +44,6 @@ public abstract class DeferredEntityProcessingSystem extends BaseEntitySystem {
         super(aspect);
         this.aspect = aspect;
         this.principal = principal;
-        setEnabled(false);
     }
 
     /**

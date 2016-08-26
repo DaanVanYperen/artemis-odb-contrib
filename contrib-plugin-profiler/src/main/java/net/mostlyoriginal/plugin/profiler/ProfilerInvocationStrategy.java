@@ -22,7 +22,7 @@ public class ProfilerInvocationStrategy extends SystemInvocationStrategy {
 	protected SystemProfiler[] profilers;
 
 	@Override
-	protected void process (Bag<BaseSystem> systems) {
+	protected void process () {
 
 		if ( !initialized )
 		{

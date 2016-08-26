@@ -169,24 +169,27 @@ public class M<A extends Component> {
 		return mapper.get(e);
 	}
 
-	public A getSafe(Entity e, boolean forceNewInstance) {
-		return mapper.getSafe(e, forceNewInstance);
-	}
-
 	public A get(int entityId) throws ArrayIndexOutOfBoundsException {
 		return mapper.get(entityId);
 	}
 
+	/**
+	 * @deprecated as of odb version 2.0.0 {@see #get} is as safe as getSafe.
+	 */
+	@Deprecated
 	public A getSafe(int entityId) {
-		return mapper.getSafe(entityId);
+		return mapper.get(entityId);
 	}
 
 	public boolean has(Entity e) throws ArrayIndexOutOfBoundsException {
 		return mapper.has(e);
 	}
 
+	/**
+	 * @deprecated as of odb version 2.0.0 {@see #get} is as safe as getSafe.
+	 */
 	public A getSafe(Entity e) {
-		return mapper.getSafe(e);
+		return mapper.get(e);
 	}
 
 	public boolean has(int entityId) {
@@ -195,17 +198,5 @@ public class M<A extends Component> {
 
 	public static <T extends Component> M<T> getFor(Class<T> type, World world) {
 		return world.getSystem(ExtendedComponentMapperManager.class).getFor(type);
-	}
-
-	public A get(Entity e, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException {
-		return mapper.get(e, forceNewInstance);
-	}
-
-	public A get(int entityId, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException {
-		return mapper.get(entityId, forceNewInstance);
-	}
-
-	public A getSafe(int entityId, boolean forceNewInstance) {
-		return mapper.getSafe(entityId, forceNewInstance);
 	}
 }

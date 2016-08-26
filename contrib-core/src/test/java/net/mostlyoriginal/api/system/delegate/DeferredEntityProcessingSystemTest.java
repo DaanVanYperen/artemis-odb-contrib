@@ -55,7 +55,7 @@ public class DeferredEntityProcessingSystemTest {
 		World w = new World(config);
 		Entity myEntity = new EntityBuilder(w).with(EmptyComponent.class).build();
 		w.process();
-		myEntity.edit().deleteEntity();
+		w.deleteEntity(myEntity);
 		w.process();
 
 		// ensure it gets registered with the principal
