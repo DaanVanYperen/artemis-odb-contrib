@@ -9,6 +9,8 @@ import com.artemis.Component;
  * @see net.mostlyoriginal.api.system.script.EntitySpawnerSystem
  */
 public class EntitySpawner extends Component {
+    public EntitySpawner() {
+    }
 
     public String[] entityIds;
 

@@ -28,4 +28,7 @@ public class Physics extends Component implements Serializable {
 
     // Maximum travel distance in units (typically pixels) per second.
     public float maxVelocity = Float.MAX_VALUE;
+
+    public Physics() {
+    }
 }

@@ -10,4 +10,6 @@ import java.io.Serializable;
  * @author Daan van Yperen
  */
 public class MouseCursor extends Component implements Serializable {
+    public MouseCursor() {
+    }
 }

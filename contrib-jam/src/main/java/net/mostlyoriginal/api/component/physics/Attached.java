@@ -27,6 +27,9 @@ public class Attached extends Component {
     // Tension on the spring to return to its original state. 1= really slow.
     public float tension = 30;
 
+    public Attached() {
+    }
+
     public Attached(EntityReference parent) {
         this.parent = parent;
     }

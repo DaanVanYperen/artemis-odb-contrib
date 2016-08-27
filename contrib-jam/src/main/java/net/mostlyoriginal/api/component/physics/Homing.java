@@ -20,4 +20,7 @@ public class Homing extends Component {
     public Homing(EntityReference target) {
         this.target = target;
     }
+
+    public Homing() {
+    }
 }

@@ -8,4 +8,6 @@ import com.artemis.Component;
  * @author Daan van Yperen
  */
 public class Invisible extends Component {
+    public Invisible() {
+    }
 }

@@ -14,4 +14,7 @@ public class Focus extends Component {
     public Focus(EntityReference entity) {
         this.entity = entity;
     }
+
+    public Focus() {
+    }
 }

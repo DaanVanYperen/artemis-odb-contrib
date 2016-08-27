@@ -12,4 +12,6 @@ import java.io.Serializable;
  * @see net.mostlyoriginal.api.system.physics.PhysicsSystem
  */
 public class Frozen extends Component implements Serializable {
+    public Frozen() {
+    }
 }

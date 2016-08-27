@@ -20,4 +20,7 @@ public class BitmapFontAsset extends ExtendedComponent<BitmapFontAsset> {
 	protected void reset() {
 		bitmapFont = null;
 	}
+
+	public BitmapFontAsset() {
+	}
 }

@@ -30,4 +30,7 @@ public class Inbetween extends Component {
         this.b = b;
         this.tween = tween;
     }
+
+    public Inbetween() {
+    }
 }

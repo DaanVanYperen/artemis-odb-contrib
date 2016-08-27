@@ -29,4 +29,7 @@ public class ColorAnimation extends Component {
         this.duration = duration;
         this.speed.set(speed,speed,speed,speed);
     }
+
+    public ColorAnimation() {
+    }
 }

@@ -26,4 +26,6 @@ public class Font extends ExtendedComponent<Font> {
 		fontName = null;
 		scale = 1f;
 	}
+
+
 }
