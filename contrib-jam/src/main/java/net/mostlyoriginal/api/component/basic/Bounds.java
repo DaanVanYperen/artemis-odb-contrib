@@ -2,6 +2,7 @@ package net.mostlyoriginal.api.component.basic;
 
 import com.artemis.Component;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import net.mostlyoriginal.api.component.common.ExtendedComponent;
 
 import java.io.Serializable;
 
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * @author Daan van Yperen
  * @see net.mostlyoriginal.api.system.physics.PhysicsSystem
  */
-public class Bounds extends Component implements Serializable {
+public class Bounds extends ExtendedComponent<Bounds> implements Serializable {
 
     public static final Bounds NONE = new Bounds(0,0,0,0);
 
@@ -19,6 +20,9 @@ public class Bounds extends Component implements Serializable {
     public float miny;
     public float maxx;
     public float maxy;
+
+    public Bounds() {
+    }
 
     public Bounds(final float width, final float height) {
         this.minx =this.miny =0;
@@ -39,7 +43,12 @@ public class Bounds extends Component implements Serializable {
         this.maxy = region.getRegionHeight();
     }
 
-    public Bounds() {
+    @Override
+    protected void reset() {
+        this.minx = 0;
+        this.miny = 0;
+        this.maxx = 0;
+        this.maxy = 0;
     }
 
     public void set(final float minx, final float miny, final float maxx, final float maxy) {
@@ -53,4 +62,10 @@ public class Bounds extends Component implements Serializable {
     public float cx() { return minx + (maxx - minx)/2; }
     /** Center Y */
     public float cy() { return miny + (maxy - miny)/2; }
+
+    @Override
+    public Bounds set(Bounds bounds) {
+        set(bounds.minx, bounds.miny, bounds.maxx, bounds.maxy);
+        return this;
+    }
 }

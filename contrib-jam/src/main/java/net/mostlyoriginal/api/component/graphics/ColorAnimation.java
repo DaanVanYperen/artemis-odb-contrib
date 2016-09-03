@@ -4,7 +4,9 @@ import com.artemis.Component;
 
 /**
  * @author Daan van Yperen
+ * @deprecated use {@see net.mostlyoriginal.api.operation.TweenTintOperation} instead.
  */
+@Deprecated
 public class ColorAnimation extends Component {
 
     public Tint startTint;

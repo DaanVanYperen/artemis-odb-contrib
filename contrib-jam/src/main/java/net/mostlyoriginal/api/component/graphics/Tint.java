@@ -16,6 +16,7 @@ import net.mostlyoriginal.api.component.common.Tweenable;
 public class Tint extends ExtendedComponent<Tint> implements Tweenable<Tint> {
 
 	public static final Tint WHITE = new Tint(Color.WHITE);
+	public static final Tint TRANSPARENT = new Tint("ffffff00");
 
 	public Color color = new Color();
 
