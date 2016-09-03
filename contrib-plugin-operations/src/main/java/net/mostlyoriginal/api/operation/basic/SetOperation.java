@@ -13,7 +13,7 @@ import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
  * <p/>
  * Creates component if missing. Calls {@see Mirrorable#set} on target component.
  * <p/>
- * State is owned by this class, safe from garbage collection.
+ * Fully pooled; state container is preserved when returned to pool.
  *
  * @author Daan van Yperen
  */
