@@ -38,7 +38,7 @@ public class M<A extends Component> {
 	 * @return the instance of the component
 	 */
 	public A getSafe(int entityId, A fallback) {
-		final A c = getSafe(entityId);
+		final A c = get(entityId);
 		return (c != null) ? c : fallback;
 	}
 
@@ -96,7 +96,7 @@ public class M<A extends Component> {
 			throw new RuntimeException("Component does not extend ExtendedComponent<T> or just Mirrorable<T>, required for #set.");
 		}
 
-		final A source = getSafe(sourceId);
+		final A source = get(sourceId);
 		if ( source != null ) {
 			return (A) ((Mirrorable)create(targetId)).set(source);
 		} else {
@@ -169,17 +169,6 @@ public class M<A extends Component> {
 		return mapper.get(e);
 	}
 
-	@Deprecated
-	public A getSafe(Entity e, boolean forceNewInstance) {
-		A component = mapper.get(e);
-		
-		if(component == null && forceNewInstance) {
-			component = mapper.create(e);
-		}
-		
-		return component;
-	}
-
 	public A get(int entityId) throws ArrayIndexOutOfBoundsException {
 		return mapper.get(entityId);
 	}
@@ -194,13 +183,6 @@ public class M<A extends Component> {
 
 	public boolean has(Entity e) throws ArrayIndexOutOfBoundsException {
 		return mapper.has(e);
-	}
-
-	/**
-	 * @deprecated as of odb version 2.0.0 {@see #get} is as safe as getSafe.
-	 */
-	public A getSafe(Entity e) {
-		return mapper.get(e);
 	}
 
 	public boolean has(int entityId) {

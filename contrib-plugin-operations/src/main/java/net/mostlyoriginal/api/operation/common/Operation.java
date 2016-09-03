@@ -1,6 +1,7 @@
 package net.mostlyoriginal.api.operation.common;
 
 import com.artemis.Entity;
+import com.artemis.World;
 import com.badlogic.gdx.utils.Pool;
 import com.badlogic.gdx.utils.Pools;
 import net.mostlyoriginal.api.component.Schedule;
@@ -79,5 +80,30 @@ public abstract class Operation implements Pool.Poolable, Serializable {
 
 	public void setCompleted(boolean completed) {
 		this.completed = completed;
+	}
+
+	/**
+	 * Add operation to empty entity in world.
+	 * @param world
+	 */
+	public void on(World world) {
+		world.createEntity().edit().create(Schedule.class).add(this);
+	}
+
+	/**
+	 * Add operation to entity.
+	 * @param e Apply script to passed entity.
+	 * @see net.mostlyoriginal.api.operation.flow.ParallelOperation
+	 * @see net.mostlyoriginal.api.operation.flow.SequenceOperation
+	 */
+	public void on(Entity e) {
+		e.edit().create(Schedule.class).add(this);
+	}
+
+	/**
+	 * Add operation to entity by id.
+	 */
+	public void on(World w, int entityId) {
+		on(w.getEntity(entityId));
 	}
 }

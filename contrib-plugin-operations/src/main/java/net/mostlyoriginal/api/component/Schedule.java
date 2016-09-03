@@ -27,4 +27,8 @@ public class Schedule extends PooledComponent {
 	public Schedule(Operation operation) {
 		this.operation.add(operation);
 	}
+
+	public void add(Operation operation) {
+		this.operation.add(operation);
+	}
 }
