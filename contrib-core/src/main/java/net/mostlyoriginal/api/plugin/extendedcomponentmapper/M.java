@@ -189,8 +189,15 @@ public class M<A extends Component> {
 		return mapper.has(entityId);
 	}
 
+	/** Get instance of M for passed component type. moderately efficient. */
 	public static <T extends Component> M<T> getFor(Class<T> type, World world) {
 		return world.getSystem(ExtendedComponentMapperManager.class).getFor(type);
+	}
+
+	/** Get instance of M for passed component. moderately efficient. */
+	@SuppressWarnings("unchecked")
+	public static <T extends Component> M<T> getFor(T component, World world) {
+		return getFor((Class<T>)component.getClass(), world);
 	}
 
 	public A get(Entity e, boolean forceNewInstance) throws ArrayIndexOutOfBoundsException {

@@ -42,6 +42,13 @@ public class Bounds extends Component implements Serializable {
     public Bounds() {
     }
 
+    public void set(final int minx, final int miny, final int maxx, final int maxy) {
+        this.minx = minx;
+        this.miny = miny;
+        this.maxx = maxx;
+        this.maxy = maxy;
+    }
+
     /** Center X */
     public int cx() { return minx + (maxx - minx)/2; }
     /** Center Y */
