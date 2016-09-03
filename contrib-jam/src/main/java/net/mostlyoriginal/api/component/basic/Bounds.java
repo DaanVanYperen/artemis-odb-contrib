@@ -15,18 +15,18 @@ public class Bounds extends Component implements Serializable {
 
     public static final Bounds NONE = new Bounds(0,0,0,0);
 
-    public int minx;
-    public int miny;
-    public int maxx;
-    public int maxy;
+    public float minx;
+    public float miny;
+    public float maxx;
+    public float maxy;
 
-    public Bounds(final int width, final int height) {
+    public Bounds(final float width, final float height) {
         this.minx =this.miny =0;
         this.maxx =width;
         this.maxy =height;
     }
 
-    public Bounds(final int minx, final int miny, final int maxx, final int maxy) {
+    public Bounds(final float minx, final float miny, final float maxx, final float maxy) {
         this.minx = minx;
         this.miny = miny;
         this.maxx = maxx;
@@ -42,7 +42,7 @@ public class Bounds extends Component implements Serializable {
     public Bounds() {
     }
 
-    public void set(final int minx, final int miny, final int maxx, final int maxy) {
+    public void set(final float minx, final float miny, final float maxx, final float maxy) {
         this.minx = minx;
         this.miny = miny;
         this.maxx = maxx;
@@ -50,7 +50,7 @@ public class Bounds extends Component implements Serializable {
     }
 
     /** Center X */
-    public int cx() { return minx + (maxx - minx)/2; }
+    public float cx() { return minx + (maxx - minx)/2; }
     /** Center Y */
-    public int cy() { return miny + (maxy - miny)/2; }
+    public float cy() { return miny + (maxy - miny)/2; }
 }
