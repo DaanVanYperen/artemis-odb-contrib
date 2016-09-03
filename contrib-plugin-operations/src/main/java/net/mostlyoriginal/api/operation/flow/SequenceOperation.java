@@ -34,7 +34,7 @@ public class SequenceOperation extends OperationFlow {
 
 	protected void nextOperation(float delta, Entity e, Operation operation) {
 		Preconditions.checkArgument(!operation.isCompleted(), "Operation should never be completed before the first process.");
-		if (operation.process(delta, e)) {
+		if ( e.isActive() && operation.process(delta, e)) {
 			index++;
 		}
 	}

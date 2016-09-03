@@ -17,13 +17,11 @@ public class ParallelOperation extends OperationFlow {
 
 		boolean operationsRemain = false;
 		for (int i = 0; i < operations.size; i++) {
-
+			if (!e.isActive()) break;
 			final Operation operation = operations.get(i);
 			if (!operation.process(delta, e)) {
 				operationsRemain = true;
 			}
-
-			if (!e.isActive()) break;
 		}
 
 		completed = !operationsRemain;
