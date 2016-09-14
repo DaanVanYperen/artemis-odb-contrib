@@ -1,5 +1,6 @@
 package net.mostlyoriginal.api.component.basic;
 
+import com.artemis.annotations.Fluid;
 import com.badlogic.gdx.math.Interpolation;
 import net.mostlyoriginal.api.component.common.ExtendedComponent;
 import net.mostlyoriginal.api.component.common.Tweenable;
@@ -27,6 +28,12 @@ public class Scale extends ExtendedComponent<Scale> implements Tweenable<Scale> 
 		this.scale = scale.scale;
 		return this;
 	}
+
+	public Scale set(float scale) {
+		this.scale = scale;
+		return this;
+	}
+
 
 	@Override
 	public Scale tween(Scale a, Scale b, float value) {
