@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.component.interact;
 
 import com.artemis.Component;
-import net.mostlyoriginal.api.utils.reference.EntityReference;
+import com.artemis.annotations.EntityId;
 
 /**
  * Entity aims at target entity.
@@ -9,9 +9,11 @@ import net.mostlyoriginal.api.utils.reference.EntityReference;
  * @author Daan van Yperen
  */
 public class Aim extends Component {
-    public EntityReference at;
 
-    public Aim(EntityReference at) {
+    @EntityId
+    public int at;
+
+    public Aim(int at) {
         this.at = at;
     }
 

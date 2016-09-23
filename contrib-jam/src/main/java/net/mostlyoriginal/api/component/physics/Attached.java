@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.component.physics;
 
 import com.artemis.Component;
-import net.mostlyoriginal.api.utils.reference.EntityReference;
+import com.artemis.annotations.EntityId;
 
 /**
  * Attach entity to parent entity.
@@ -10,7 +10,8 @@ import net.mostlyoriginal.api.utils.reference.EntityReference;
  */
 public class Attached extends Component {
 
-    public EntityReference parent;
+    @EntityId
+    public int parent;
 
     // xo + parent x = entity x
     public int xo;
@@ -30,7 +31,7 @@ public class Attached extends Component {
     public Attached() {
     }
 
-    public Attached(EntityReference parent) {
+    public Attached(int parent) {
         this.parent = parent;
     }
 
@@ -39,7 +40,7 @@ public class Attached extends Component {
      * @param xo X offset relative to parent X.
      * @param yo Y offset relative to parent Y.
      */
-    public Attached(EntityReference parent, int xo, int yo) {
+    public Attached(int parent, int xo, int yo) {
         this.parent = parent;
         this.xo = xo;
         this.yo = yo;

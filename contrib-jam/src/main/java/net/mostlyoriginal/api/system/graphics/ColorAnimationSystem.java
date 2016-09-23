@@ -14,7 +14,7 @@ import net.mostlyoriginal.api.component.graphics.Tint;
  * @author Daan van Yperen
  * @see net.mostlyoriginal.api.component.graphics.ColorAnimation
  */
-@Wire
+@Deprecated
 public class ColorAnimationSystem extends EntityProcessingSystem {
 
     protected ComponentMapper<Tint> mColor;

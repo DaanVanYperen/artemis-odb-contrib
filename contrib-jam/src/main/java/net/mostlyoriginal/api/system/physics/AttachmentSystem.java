@@ -5,6 +5,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.physics.Attached;
@@ -17,7 +18,7 @@ import net.mostlyoriginal.api.component.physics.Attached;
  * @see net.mostlyoriginal.api.component.physics.Attached
  */
 @Wire
-public class AttachmentSystem extends EntityProcessingSystem {
+public class AttachmentSystem extends IteratingSystem {
 
     private ComponentMapper<Pos> pm;
     private ComponentMapper<Attached> am;
@@ -29,11 +30,11 @@ public class AttachmentSystem extends EntityProcessingSystem {
     Vector2 vTmp = new Vector2();
 
     @Override
-    protected void process(Entity e) {
+    protected void process(int e) {
         final Attached attached = am.get(e);
 
-	    final Entity parent = attached.parent.get();
-	    if (parent != null) {
+	    final int parent = attached.parent;
+	    if (parent != -1) {
 
             // move attachment to absolute position, adjusted with slack.
             Pos pos = pm.get(e);
@@ -44,7 +45,7 @@ public class AttachmentSystem extends EntityProcessingSystem {
             updateSlack(attached);
         } else {
             // parent gone? we gone!
-            e.deleteFromWorld();
+            world.delete(e);
         }
     }
 
