@@ -21,12 +21,14 @@ import net.mostlyoriginal.plugin.ProfilerPlugin;
 @Wire
 public class ProfilerSystem extends BaseSystem {
 
-	public static final int TOGGLE_PROFILER_KEY = Input.Keys.P;
+	public static final int DEFAULT_PROFILER_KEY = Input.Keys.P;
 
 	OrthographicCamera camera;
 	ShapeRenderer renderer;
 	Stage stage;
 	Skin skin;
+
+	private int key = DEFAULT_PROFILER_KEY;
 
 	SystemProfilerGUI gui;
 	private boolean f3ButtonDown;
@@ -78,7 +80,7 @@ public class ProfilerSystem extends BaseSystem {
 	}
 
 	private void checkActivationButton() {
-		if ( Gdx.input.isKeyPressed(TOGGLE_PROFILER_KEY) ) {
+		if ( Gdx.input.isKeyPressed(key) ) {
 			if ( !f3ButtonDown ) {
 				if (!SystemProfiler.isRunning()) {
 					gui.setHeight(Gdx.graphics.getHeight()/2);
@@ -112,5 +114,13 @@ public class ProfilerSystem extends BaseSystem {
 	@Override
 	protected void dispose() {
 		SystemProfiler.dispose();
+	}
+
+	public int getKey() {
+		return key;
+	}
+
+	public void setKey(int key) {
+		this.key = key;
 	}
 }
