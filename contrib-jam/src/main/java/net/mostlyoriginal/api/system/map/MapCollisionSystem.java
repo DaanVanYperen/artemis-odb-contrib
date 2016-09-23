@@ -5,6 +5,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.systems.IteratingSystem;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.map.MapSolid;
@@ -26,7 +27,7 @@ import net.mostlyoriginal.api.utils.MapMask;
  * @see net.mostlyoriginal.api.component.map.MapSolid
  */
 @Wire
-public class MapCollisionSystem extends EntityProcessingSystem {
+public class MapCollisionSystem extends IteratingSystem {
 
     private TiledMapSystem mapSystem;
     private CameraSystem cameraSystem;
@@ -55,7 +56,7 @@ public class MapCollisionSystem extends EntityProcessingSystem {
     }
 
     @Override
-    protected void process(Entity e) {
+    protected void process(int e) {
         final Physics physics = ym.get(e);
         final Pos pos = pm.get(e);
         final Bounds bounds = bm.get(e);

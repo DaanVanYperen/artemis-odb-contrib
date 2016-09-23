@@ -5,6 +5,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.systems.IteratingSystem;
 import net.mostlyoriginal.api.component.physics.Gravity;
 import net.mostlyoriginal.api.component.physics.Physics;
 
@@ -15,7 +16,7 @@ import net.mostlyoriginal.api.component.physics.Physics;
  * @see net.mostlyoriginal.api.component.physics.Gravity
  */
 @Wire
-public class GravitySystem extends EntityProcessingSystem {
+public class GravitySystem extends IteratingSystem {
 
     public static final int GRAVITY_FACTOR = 50;
 
@@ -27,7 +28,7 @@ public class GravitySystem extends EntityProcessingSystem {
     }
 
     @Override
-    protected void process(Entity e) {
+    protected void process(int e) {
         final Physics physics = pm.get(e);
         final Gravity gravity = gm.get(e);
 
