@@ -306,4 +306,28 @@ public class ExtendedComponentMapperPluginTest {
 		createAndProcessWorld(new TestSystem());
 	}
 
+	@Test
+	public void Regression_When_superMapper_plugin_in_use_Should_not_break_regular_object_inection() {
+
+		class Injectable {}
+		class TestSystem extends BaseSystem {
+
+			private M<TestMarker> mTest;
+			@Wire Injectable injectable;
+
+			@Override
+			protected void processSystem() {
+				Assert.assertNotNull(injectable);
+			}
+		}
+
+		WorldConfiguration configuration = new WorldConfigurationBuilder()
+				.dependsOn(ExtendedComponentMapperPlugin.class)
+				.with(new TestSystem())
+				.build();
+
+		configuration.register(new Injectable());
+
+		new World(configuration).process();
+	}
 }
