@@ -3,6 +3,7 @@ package net.mostlyoriginal.api.utils.quadtree;
 import com.artemis.*;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.systems.IteratingSystem;
 import com.artemis.utils.EntityBuilder;
 import com.artemis.utils.IntBag;
 import com.badlogic.gdx.Game;
@@ -17,7 +18,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.utils.QuadTree;
-import net.mostlyoriginal.api.utils.builder.WorldConfigurationBuilder;
 
 /**
  * Integration test for {@link QuadTree}
@@ -52,7 +52,7 @@ public class QuadTreeIntegrationTest extends Game {
 	}
 
 	@Wire
-	public static class QuadTreeSystem extends EntityProcessingSystem {
+	public static class QuadTreeSystem extends IteratingSystem {
 		private ComponentMapper<Bounds> mBounds;
 		QuadTree qt;
 
@@ -70,9 +70,9 @@ public class QuadTreeIntegrationTest extends Game {
 			qt.insert(entityId, b.x, b.y, b.width, b.height);
 		}
 
-		@Override protected void process (Entity e) {
-			Rectangle b = mBounds.get(e).rect;
-			qt.update(e.id, b.x, b.y, b.width, b.height);
+		@Override protected void process (int entityId) {
+			Rectangle b = mBounds.get(entityId).rect;
+			qt.update(entityId, b.x, b.y, b.width, b.height);
 		}
 
 		@Override protected void removed (int entityId) {
@@ -86,16 +86,19 @@ public class QuadTreeIntegrationTest extends Game {
 
 	public static class Position extends Component {
 		public Vector2 pos = new Vector2();
+		public Position() {}
 		public Position (float x, float y) {pos.set(x, y);}
 	}
 
 	public static class Velocity extends Component {
 		public Vector2 vel = new Vector2();
+		public Velocity () {}
 		public Velocity (float x, float y) {vel.set(x, y);}
 	}
 
 	public static class Bounds extends Component {
 		public Rectangle rect = new Rectangle();
+		public Bounds() {}
 		public Bounds (float w, float h) {rect.setSize(w, h);}
 	}
 
