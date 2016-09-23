@@ -24,4 +24,6 @@ public class Gravity extends Component implements Serializable {
     public Gravity(float y) {
         this.y = y;
     }
+
+    public void set(float x, float y) { this.x=x; this.y=y;}
 }

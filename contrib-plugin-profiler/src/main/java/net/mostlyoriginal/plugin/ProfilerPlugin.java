@@ -13,7 +13,7 @@ import net.mostlyoriginal.plugin.profiler.ProfilerSystem;
  *
  * Does not require {@see @com.artemis.annotations.Profile} on systems.
  *
- * Open/Close with F3.
+ * Open/Close with P by default.
  *
  * @author piotr-j (Plugin)
  * @author Daan van Yperen (Integration)

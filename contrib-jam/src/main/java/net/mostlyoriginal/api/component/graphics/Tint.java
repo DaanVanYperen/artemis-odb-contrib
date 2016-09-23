@@ -1,5 +1,6 @@
 package net.mostlyoriginal.api.component.graphics;
 
+import com.artemis.annotations.Fluid;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import net.mostlyoriginal.api.component.common.ExtendedComponent;
@@ -13,6 +14,7 @@ import net.mostlyoriginal.api.component.common.Tweenable;
  * @see Color
  * @author Daan van Yperen
  */
+@Fluid(swallowGettersWithParameters=true)
 public class Tint extends ExtendedComponent<Tint> implements Tweenable<Tint> {
 
 	public static final Tint WHITE = new Tint(Color.WHITE);

@@ -53,6 +53,9 @@ public class Pos extends ExtendedComponent<Pos> implements Tweenable<Pos> {
         return xy.y;
     }
 
+    public void setY( float y ) { xy.y = y; }
+    public void setX( float x ) { xy.x = x; }
+
     @Override
     public Pos tween(Pos a, Pos b, float value) {
 

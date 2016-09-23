@@ -33,4 +33,9 @@ public class Renderable extends ExtendedComponent<Renderable> {
 		layer = renderable.layer;
 		return this;
 	}
+
+	public Renderable set(int layer) {
+		this.layer = layer;
+		return this;
+	}
 }
