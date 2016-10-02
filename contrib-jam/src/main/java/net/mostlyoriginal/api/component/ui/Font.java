@@ -16,9 +16,8 @@ public class Font extends ExtendedComponent<Font> {
 	}
 
 	@Override
-	public Font set(Font font) {
+	public void set(Font font) {
 		fontName = font.fontName;
-		return this;
 	}
 
 	@Override

@@ -52,38 +52,34 @@ public class Tint extends ExtendedComponent<Tint> implements Tweenable<Tint> {
 	/**
 	 * Set color to hex, RRGGBBAA.
 	 */
-	public Tint setHex(String hex) {
+	public void setHex(String hex) {
 		set((float) Integer.valueOf(hex.substring(0, 2), 16) / 255.0F,
 				(float) Integer.valueOf(hex.substring(2, 4), 16) / 255.0F,
 				(float) Integer.valueOf(hex.substring(4, 6), 16) / 255.0F,
 				(float) (hex.length() != 8 ? 255 : Integer.valueOf(hex.substring(6, 8), 16)) / 255.0F);
-		return this;
 	}
 
-	public Tint set(Color color) {
+	public void set(Color color) {
 		this.color.set(color);
-		return this;
 	}
 
-	public Tint set(float r, float g, float b, float a) {
+	public void set(float r, float g, float b, float a) {
 		this.color.r = r;
 		this.color.g = g;
 		this.color.b = b;
 		this.color.a = a;
-		return this;
 	}
 
 	@Override
-	public Tint set(Tint tint) {
+	public void set(Tint tint) {
 		this.color.r = tint.color.r;
 		this.color.g = tint.color.g;
 		this.color.b = tint.color.b;
 		this.color.a = tint.color.a;
-		return this;
 	}
 
 	@Override
-	public Tint tween(Tint a, Tint b, float value) {
+	public void tween(Tint a, Tint b, float value) {
 
 		final Interpolation linear = Interpolation.linear;
 
@@ -94,7 +90,5 @@ public class Tint extends ExtendedComponent<Tint> implements Tweenable<Tint> {
 		color.g = linear.apply(colorA.g, colorB.g, value);
 		color.b = linear.apply(colorA.b, colorB.b, value);
 		color.a = linear.apply(colorA.a, colorB.a, value);
-
-		return this;
 	}
 }

@@ -3,23 +3,23 @@ package net.mostlyoriginal.api.component.graphics;
 import net.mostlyoriginal.api.component.common.ExtendedComponent;
 
 /**
- * Indicate this entity is renderable.
+ * Indicate this entity requires rendering.
  * <p/>
  * Combine with specialized renderables, like Anim or Label.
  *
  * @author Daan van Yperen
  * @see Anim
  */
-public class Renderable extends ExtendedComponent<Renderable> {
+@Deprecated
+public class Render extends ExtendedComponent<Render> {
 
 	/**
 	 * target layer, higher is in front, lower is behind.
 	 */
 	public int layer = 0;
 
-	public Renderable() {
-	}
-	public Renderable(int layer) {
+	public Render() {}
+	public Render(int layer) {
 		this.layer = layer;
 	}
 
@@ -29,13 +29,11 @@ public class Renderable extends ExtendedComponent<Renderable> {
 	}
 
 	@Override
-	public Renderable set(Renderable renderable) {
-		layer = renderable.layer;
-		return this;
+	public void set(Render render) {
+		layer = render.layer;
 	}
 
-	public Renderable set(int layer) {
+	public void set(int layer) {
 		this.layer = layer;
-		return this;
 	}
 }

@@ -9,7 +9,7 @@ import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.basic.Scale;
 import net.mostlyoriginal.api.component.graphics.Anim;
-import net.mostlyoriginal.api.component.graphics.Renderable;
+import net.mostlyoriginal.api.component.graphics.Render;
 import net.mostlyoriginal.api.component.graphics.Tint;
 import net.mostlyoriginal.api.component.physics.Physics;
 import net.mostlyoriginal.api.component.ui.Font;
@@ -76,8 +76,8 @@ public abstract class EntityEditor<T extends EntityEditor> {
 
 	@SuppressWarnings("unchecked")
 	public final T renderable(int layer) {
-		final Renderable renderable = add(Renderable.class);
-		renderable.layer = layer;
+		final Render render = add(Render.class);
+		render.layer = layer;
 		return (T) this;
 	}
 

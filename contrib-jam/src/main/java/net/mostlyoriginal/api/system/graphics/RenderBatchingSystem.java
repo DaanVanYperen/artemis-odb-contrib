@@ -9,7 +9,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.World;
 import com.artemis.annotations.Wire;
 import com.artemis.utils.Bag;
-import net.mostlyoriginal.api.component.graphics.Renderable;
+import net.mostlyoriginal.api.component.graphics.Render;
 import net.mostlyoriginal.api.system.delegate.EntityProcessAgent;
 import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
 import net.mostlyoriginal.api.utils.BagUtils;
@@ -29,7 +29,7 @@ import net.mostlyoriginal.api.utils.BagUtils;
 @Wire
 public class RenderBatchingSystem extends BaseSystem implements EntityProcessPrincipal {
 
-	protected ComponentMapper<Renderable> mRenderable;
+	protected ComponentMapper<Render> mRenderable;
 
 	protected final Bag<Job> sortedJobs = new Bag<>();
 	public boolean sortedDirty = false;

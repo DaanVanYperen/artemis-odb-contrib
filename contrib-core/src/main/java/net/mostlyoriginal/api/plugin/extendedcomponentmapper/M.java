@@ -98,7 +98,9 @@ public class M<A extends Component> {
 
 		final A source = get(sourceId);
 		if ( source != null ) {
-			return (A) ((Mirrorable)create(targetId)).set(source);
+			Mirrorable mirrorable = (Mirrorable) create(targetId);
+			mirrorable.set(source);
+			return (A) mirrorable;
 		} else {
 			remove(targetId);
 			return null;

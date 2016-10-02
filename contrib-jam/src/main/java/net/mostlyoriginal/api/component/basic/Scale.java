@@ -7,7 +7,8 @@ import net.mostlyoriginal.api.component.common.Tweenable;
 
 /**
  * @author Daan van Yperen
- */
+ * @deprecated behaviour not clearly defined at this time, avoid.*/
+@Deprecated
 public class Scale extends ExtendedComponent<Scale> implements Tweenable<Scale> {
 
 	public static final Scale DEFAULT = new Scale(1);
@@ -24,20 +25,17 @@ public class Scale extends ExtendedComponent<Scale> implements Tweenable<Scale> 
 	}
 
 	@Override
-	public Scale set(Scale scale) {
+	public void set(Scale scale) {
 		this.scale = scale.scale;
-		return this;
 	}
 
-	public Scale set(float scale) {
+	public void set(float scale) {
 		this.scale = scale;
-		return this;
 	}
 
 
 	@Override
-	public Scale tween(Scale a, Scale b, float value) {
+	public void tween(Scale a, Scale b, float value) {
 		scale = Interpolation.linear.apply(a.scale, b.scale, value);
-		return this;
 	}
 }

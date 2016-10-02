@@ -1,4 +1,4 @@
-package net.mostlyoriginal.api.screen.core;
+ package net.mostlyoriginal.api.screen.core;
 
 import com.artemis.World;
 import com.badlogic.gdx.Screen;

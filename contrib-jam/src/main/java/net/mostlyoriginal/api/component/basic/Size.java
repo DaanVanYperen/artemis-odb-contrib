@@ -7,23 +7,16 @@ import net.mostlyoriginal.api.component.common.ExtendedComponent;
 import net.mostlyoriginal.api.component.common.Tweenable;
 
 /**
- * World anchor for both 2d and 3d coordinate systems.
- *
- * By default Pos is the bottom-left point. {@Origin} to override.
- * Use bounds to determine the center.
- *
  * @author Daan van Yperen
- * @see Origin to override anchor point.
- * @see Bounds to provide a bounding box.
  */
-public class Pos extends ExtendedComponent<Pos> implements Tweenable<Pos> {
+public class Size extends ExtendedComponent<Size> implements Tweenable<Size> {
     public Vector3 xy = new Vector3();
 
-    public Pos() {}
-    public Pos(float x, float y) {
+    public Size() {}
+    public Size(float x, float y) {
         set(x, y);
     }
-    public Pos(float x, float y, float z) {
+    public Size(float x, float y, float z) {
         set(x, y, z);
     }
 
@@ -35,10 +28,10 @@ public class Pos extends ExtendedComponent<Pos> implements Tweenable<Pos> {
     }
 
     @Override
-    public void set(Pos pos) {
-        xy.x=pos.xy.x;
-        xy.y=pos.xy.y;
-        xy.z=pos.xy.z;
+    public void set(Size size) {
+        xy.x=size.xy.x;
+        xy.y=size.xy.y;
+        xy.z=size.xy.z;
     }
 
     public void set(float x, float y)
@@ -85,7 +78,7 @@ public class Pos extends ExtendedComponent<Pos> implements Tweenable<Pos> {
     public void setZ( float z ) { xy.z = z; }
 
     @Override
-    public void tween(Pos a, Pos b, float value) {
+    public void tween(Size a, Size b, float value) {
         xy.x = Interpolation.linear.apply(a.xy.x, b.xy.x, value);
         xy.y = Interpolation.linear.apply(a.xy.y, b.xy.y, value);
         xy.z = Interpolation.linear.apply(a.xy.z, b.xy.z, value);

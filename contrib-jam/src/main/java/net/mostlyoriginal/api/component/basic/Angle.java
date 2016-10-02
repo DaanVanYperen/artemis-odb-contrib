@@ -1,6 +1,9 @@
 package net.mostlyoriginal.api.component.basic;
 
 import com.artemis.Component;
+import com.badlogic.gdx.math.Interpolation;
+import net.mostlyoriginal.api.component.common.ExtendedComponent;
+import net.mostlyoriginal.api.component.common.Tweenable;
 
 import java.io.Serializable;
 
@@ -9,7 +12,8 @@ import java.io.Serializable;
  * @see net.mostlyoriginal.api.system.render.AnimRenderSystem
  * @todo turn into Matrix?
  */
-public class Angle extends Component implements Serializable {
+public class Angle extends ExtendedComponent<Angle> implements Tweenable<Angle> {
+
     public static final int ORIGIN_AUTO = Integer.MIN_VALUE;
     public static final Angle NONE = new Angle();
 
@@ -32,5 +36,20 @@ public class Angle extends Component implements Serializable {
     }
 
     public Angle() {
+    }
+
+    @Override
+    protected void reset() {
+        rotation=0;
+    }
+
+    @Override
+    public void set(Angle angle) {
+        this.rotation = angle.rotation;
+    }
+
+    @Override
+    public void tween(Angle a, Angle b, float value) {
+        rotation = Interpolation.linear.apply(a.rotation, b.rotation, value);
     }
 }

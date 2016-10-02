@@ -14,34 +14,14 @@ import java.io.Serializable;
  */
 public class Bounds extends ExtendedComponent<Bounds> implements Serializable {
 
-    public static final Bounds NONE = new Bounds(0,0,0,0);
+    public static final Bounds NONE = new Bounds();
 
     public float minx;
     public float miny;
     public float maxx;
     public float maxy;
 
-    public Bounds() {
-    }
-
-    public Bounds(final float width, final float height) {
-        this.minx =this.miny =0;
-        this.maxx =width;
-        this.maxy =height;
-    }
-
-    public Bounds(final float minx, final float miny, final float maxx, final float maxy) {
-        this.minx = minx;
-        this.miny = miny;
-        this.maxx = maxx;
-        this.maxy = maxy;
-    }
-
-    public Bounds(TextureRegion region) {
-        this.minx = this.maxx =0;
-        this.maxx = region.getRegionWidth();
-        this.maxy = region.getRegionHeight();
-    }
+    public Bounds() {}
 
     @Override
     protected void reset() {
@@ -64,8 +44,7 @@ public class Bounds extends ExtendedComponent<Bounds> implements Serializable {
     public float cy() { return miny + (maxy - miny)/2; }
 
     @Override
-    public Bounds set(Bounds bounds) {
+    public void set(Bounds bounds) {
         set(bounds.minx, bounds.miny, bounds.maxx, bounds.maxy);
-        return this;
     }
 }
