@@ -5,6 +5,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.physics.Inbetween;
@@ -16,7 +17,7 @@ import net.mostlyoriginal.api.component.physics.Inbetween;
  * @see net.mostlyoriginal.api.component.physics.Inbetween
  */
 @Wire
-public class InbetweenSystem extends EntityProcessingSystem {
+public class InbetweenSystem extends IteratingSystem {
 
     ComponentMapper<Inbetween> dm;
     ComponentMapper<Pos> pm;
@@ -29,13 +30,13 @@ public class InbetweenSystem extends EntityProcessingSystem {
     Vector2 tmp = new Vector2();
 
     @Override
-    protected void process(Entity e) {
+    protected void process(int e) {
 
         final Inbetween inbetween = dm.get(e);
 
-	    final Entity entityA = inbetween.a.get();
-	    final Entity entityB = inbetween.b.get();
-	    if ( entityA == null || entityB == null ) return;
+	    final int entityA = inbetween.a;
+	    final int entityB = inbetween.b;
+	    if ( entityA == -1 || entityB == -1 ) return;
 
         Pos pos1 = pm.get(entityA);
         Pos pos2 = pm.get(entityB);

@@ -14,5 +14,5 @@ public interface Mirrorable<T extends Component & Mirrorable> {
 	 * @param t component to mirror
 	 * @return {@code this}
 	 */
-	 T set(T t);
+	 void set(T t);
 }

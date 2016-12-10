@@ -77,11 +77,12 @@ public class AbstractAssetSystem extends BaseSystem {
     }
 
     public void playSfx(String name) {
-        if (sfxVolume > 0 )
-        {
+        if (sfxVolume > 0) {
             Sound sfx = getSfx(name);
-            sfx.stop();
-            sfx.play(sfxVolume, MathUtils.random(1f, 1.04f), 0);
+            if (sfx != null) {
+                sfx.stop();
+                sfx.play(sfxVolume, MathUtils.random(1f, 1.04f), 0);
+            }
         }
     }
 

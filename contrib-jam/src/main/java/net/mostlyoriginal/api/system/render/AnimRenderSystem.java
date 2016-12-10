@@ -13,7 +13,7 @@ import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.basic.Scale;
 import net.mostlyoriginal.api.component.graphics.Anim;
 import net.mostlyoriginal.api.component.graphics.Invisible;
-import net.mostlyoriginal.api.component.graphics.Renderable;
+import net.mostlyoriginal.api.component.graphics.Render;
 import net.mostlyoriginal.api.component.graphics.Tint;
 import net.mostlyoriginal.api.manager.AbstractAssetSystem;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
@@ -42,7 +42,7 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
     protected SpriteBatch batch;
 
     public AnimRenderSystem(EntityProcessPrincipal principal) {
-        super(Aspect.all(Pos.class, Anim.class, Renderable.class).exclude(Invisible.class), principal);
+        super(Aspect.all(Pos.class, Anim.class, Render.class).exclude(Invisible.class), principal);
     }
 
     @Override

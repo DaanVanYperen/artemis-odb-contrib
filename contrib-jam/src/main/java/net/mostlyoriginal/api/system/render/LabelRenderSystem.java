@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.graphics.Invisible;
-import net.mostlyoriginal.api.component.graphics.Renderable;
+import net.mostlyoriginal.api.component.graphics.Render;
 import net.mostlyoriginal.api.component.graphics.Tint;
 import net.mostlyoriginal.api.component.ui.BitmapFontAsset;
 import net.mostlyoriginal.api.component.ui.Label;
@@ -40,7 +40,7 @@ public class LabelRenderSystem extends DeferredEntityProcessingSystem {
     private GlyphLayout glyphLayout = new GlyphLayout();
 
     public LabelRenderSystem(EntityProcessPrincipal principal) {
-        super(Aspect.all(Pos.class, Label.class, Renderable.class, BitmapFontAsset.class).exclude(Invisible.class), principal);
+        super(Aspect.all(Pos.class, Label.class, Render.class, BitmapFontAsset.class).exclude(Invisible.class), principal);
         batch = new SpriteBatch(1000);
     }
 

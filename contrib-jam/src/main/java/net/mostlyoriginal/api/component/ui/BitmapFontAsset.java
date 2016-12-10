@@ -11,13 +11,15 @@ public class BitmapFontAsset extends ExtendedComponent<BitmapFontAsset> {
 	public BitmapFont bitmapFont;
 
 	@Override
-	public BitmapFontAsset set(BitmapFontAsset asset) {
+	public void set(BitmapFontAsset asset) {
 		bitmapFont = asset.bitmapFont;
-		return this;
 	}
 
 	@Override
 	protected void reset() {
 		bitmapFont = null;
+	}
+
+	public BitmapFontAsset() {
 	}
 }

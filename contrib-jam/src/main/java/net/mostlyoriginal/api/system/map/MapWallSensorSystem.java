@@ -5,6 +5,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.systems.IteratingSystem;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.map.MapWallSensor;
@@ -21,7 +22,7 @@ import net.mostlyoriginal.api.utils.MapMask;
  * @see net.mostlyoriginal.api.component.map.MapWallSensor
  */
 @Wire
-public class MapWallSensorSystem extends EntityProcessingSystem {
+public class MapWallSensorSystem extends IteratingSystem {
 
     public static final String MASK_SOLID_ID = "solid";
 
@@ -52,7 +53,7 @@ public class MapWallSensorSystem extends EntityProcessingSystem {
     }
 
     @Override
-    protected void process(Entity e) {
+    protected void process(int e) {
         final Pos pos = pm.get(e);
         final Bounds bounds = bm.get(e);
 

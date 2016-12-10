@@ -5,6 +5,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.component.basic.Angle;
 import net.mostlyoriginal.api.component.basic.Pos;
@@ -24,7 +25,7 @@ import net.mostlyoriginal.api.component.physics.Physics;
  */
 
 @Wire
-public class PhysicsSystem extends EntityProcessingSystem {
+public class PhysicsSystem extends IteratingSystem {
 
     public static final float AIR_FRICTION = 0.25f;
     public static final int FLOOR_FRICTION = 1;
@@ -49,7 +50,7 @@ public class PhysicsSystem extends EntityProcessingSystem {
         }
     }
 
-    public void clampVelocity(Entity entity, float minSpeed, float maxSpeed) {
+    public void clampVelocity(int entity, float minSpeed, float maxSpeed) {
         if (ym.has(entity)) {
             final Physics physics = ym.get(entity);
             clampVelocity(physics, minSpeed, maxSpeed);
@@ -63,7 +64,7 @@ public class PhysicsSystem extends EntityProcessingSystem {
     }
 
     @Override
-    protected void process(Entity e) {
+    protected void process(int e) {
         final Physics physics = ym.get(e);
         final Pos pos = pm.get(e);
 

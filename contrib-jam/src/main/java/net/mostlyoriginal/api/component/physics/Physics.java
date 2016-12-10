@@ -1,6 +1,7 @@
 package net.mostlyoriginal.api.component.physics;
 
 import com.artemis.Component;
+import com.artemis.annotations.Fluid;
 
 import java.io.Serializable;
 
@@ -11,6 +12,7 @@ import java.io.Serializable;
  * @author Daan van Yperen
  * @see net.mostlyoriginal.api.system.physics.PhysicsSystem
  */
+@Fluid(swallowGettersWithParameters = true)
 public class Physics extends Component implements Serializable {
 
     // velocityX in units per second.
@@ -28,4 +30,14 @@ public class Physics extends Component implements Serializable {
 
     // Maximum travel distance in units (typically pixels) per second.
     public float maxVelocity = Float.MAX_VALUE;
+
+    public Physics() {
+    }
+
+    public Physics velocity(float vx, float vy, float friction) {
+        this.vx = vx;
+        this.vy = vy;
+        this.friction = friction;
+        return this;
+    }
 }

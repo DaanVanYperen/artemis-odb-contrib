@@ -24,9 +24,8 @@ public class Pos extends ExtendedComponent<Pos> {
 	}
 
 	@Override
-	public Pos set(Pos pos) {
+	public void set(Pos pos) {
 		x = pos.x;
 		y = pos.y;
-		return this;
 	}
 }

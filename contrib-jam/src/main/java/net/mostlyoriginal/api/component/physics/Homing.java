@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.component.physics;
 
 import com.artemis.Component;
-import net.mostlyoriginal.api.utils.reference.EntityReference;
+import com.artemis.annotations.EntityId;
 
 /**
  * Accelerate entity towards target entity in a straight path.
@@ -10,14 +10,17 @@ import net.mostlyoriginal.api.utils.reference.EntityReference;
  */
 public class Homing extends Component {
 
-    public EntityReference target;
+    @EntityId
+    public int target;
 
     public float speedFactor = 5f;
 
     // Distance within which this entity will accelerate.
     public float maxDistance = 999999f;
 
-    public Homing(EntityReference target) {
+    public Homing(int target) {
         this.target = target;
+    }
+    public Homing() {
     }
 }

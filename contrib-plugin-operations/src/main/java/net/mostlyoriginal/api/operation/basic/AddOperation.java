@@ -8,17 +8,18 @@ import net.mostlyoriginal.api.operation.common.BasicOperation;
 /**
  * Add component to entity.
  *
- * Not compatible with pooled components.
- * Do not use this if you want to avoid GC!
+ * Does not support pooled components. Use {@see CreateOperation} or
+ * {@see SetOperation} instead.
  *
  * @author Daan van Yperen
  * @see Schedule
  */
-@Deprecated
-public class LegacyAddOperation extends BasicOperation {
+public class AddOperation extends BasicOperation {
 
+    // not managed.
     public Component component;
-    public LegacyAddOperation() {}
+
+    public AddOperation() {}
 
     @Override
     public void process(Entity e) {

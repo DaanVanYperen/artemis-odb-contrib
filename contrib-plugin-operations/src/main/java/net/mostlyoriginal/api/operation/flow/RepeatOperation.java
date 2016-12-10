@@ -40,7 +40,7 @@ public class RepeatOperation extends Operation {
 
 	@Override
 	public boolean process(float delta, Entity e) {
-		if (!completed) {
+		if (!completed && e.isActive()) {
 			if ( operation.process(delta,e) ) {
 				completed = (desiredRepetitions != UNLIMITED) && (++repetition >= desiredRepetitions);
 				if ( !completed ) {

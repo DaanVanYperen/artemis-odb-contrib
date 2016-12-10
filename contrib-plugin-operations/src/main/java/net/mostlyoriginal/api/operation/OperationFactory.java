@@ -5,10 +5,7 @@ import com.artemis.PooledComponent;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.utils.reflect.ClassReflection;
 import net.mostlyoriginal.api.component.common.Tweenable;
-import net.mostlyoriginal.api.operation.basic.DeleteFromWorldOperation;
-import net.mostlyoriginal.api.operation.basic.LegacyAddOperation;
-import net.mostlyoriginal.api.operation.basic.RemoveOperation;
-import net.mostlyoriginal.api.operation.basic.UnpooledMirrorOperation;
+import net.mostlyoriginal.api.operation.basic.*;
 import net.mostlyoriginal.api.operation.common.Operation;
 import net.mostlyoriginal.api.operation.flow.ParallelOperation;
 import net.mostlyoriginal.api.operation.flow.RepeatOperation;
@@ -206,19 +203,34 @@ public class OperationFactory {
 	/**
 	 * Add component instance to entity.
 	 *
-	 * Not compatible with pooled components. Do not use this if you want to avoid GC!
+	 * Does not support pooled components. Use {@see #create} or
+	 * extend {@see SetOperation} instead.
 	 *
 	 * @see UnpooledMirrorOperation for a poolable solution.
 	 * @param component
-	 * @return {@see LegacyAddOperation}
+	 * @return {@see AddOperation}
 	 */
-	@Deprecated
-	public static LegacyAddOperation add(Component component)
+	public static AddOperation add(Component component)
 	{
 		Preconditions.checkNotNull(component);
-		Preconditions.checkArgument(!ClassReflection.isAssignableFrom(PooledComponent.class, component.getClass()), "Does not support Pooled components.");
-		final LegacyAddOperation operation = Operation.prepare(LegacyAddOperation.class);
+		Preconditions.checkArgument(!ClassReflection.isAssignableFrom(PooledComponent.class, component.getClass()), "Does not support Pooled components. Use CreateOperation or extend AddOperation.");
+		final AddOperation operation = Operation.prepare(AddOperation.class);
 		operation.component = component;
+		return operation;
+	}
+
+	/**
+	 * Add class to entity.
+	 *
+	 * @param componentClass component to add.
+	 * @return {@see CreateOperation}
+	 * @see AddOperation extend for pooled solutions.
+	 */
+	public static CreateOperation add(Class<? extends Component> componentClass)
+	{
+		Preconditions.checkNotNull(componentClass);
+		final CreateOperation operation = Operation.prepare(CreateOperation.class);
+		operation.componentClass = componentClass;
 		return operation;
 	}
 

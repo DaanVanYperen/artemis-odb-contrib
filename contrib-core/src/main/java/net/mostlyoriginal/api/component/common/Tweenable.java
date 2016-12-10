@@ -17,5 +17,5 @@ public interface Tweenable<T extends Component & Tweenable<T>> {
 	 * @param value tween (0..1)
 	 * @return {@code this}
 	 */
-	 T tween(T a, T b, float value);
+	 void tween(T a, T b, float value);
 }

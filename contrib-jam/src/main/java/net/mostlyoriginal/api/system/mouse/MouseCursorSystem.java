@@ -5,6 +5,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import net.mostlyoriginal.api.component.basic.Pos;
@@ -18,7 +19,7 @@ import net.mostlyoriginal.api.system.camera.CameraSystem;
  * @see net.mostlyoriginal.api.component.mouse.MouseCursor
  */
 @Wire
-public class MouseCursorSystem extends EntityProcessingSystem {
+public class MouseCursorSystem extends IteratingSystem {
 
     private ComponentMapper<Pos> pm;
     private ComponentMapper<MouseCursor> am;
@@ -32,7 +33,7 @@ public class MouseCursorSystem extends EntityProcessingSystem {
     private Vector3 aimAtTmp = new Vector3();
 
     @Override
-    protected void process(Entity e) {
+    protected void process(int e) {
 
         final Pos pos = pm.get(e);
 

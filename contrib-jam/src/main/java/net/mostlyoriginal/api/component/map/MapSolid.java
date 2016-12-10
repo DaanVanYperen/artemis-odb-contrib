@@ -11,4 +11,6 @@ import java.io.Serializable;
  * @see net.mostlyoriginal.api.system.map.MapCollisionSystem
  */
 public class MapSolid extends Component implements Serializable {
+    public MapSolid() {
+    }
 }

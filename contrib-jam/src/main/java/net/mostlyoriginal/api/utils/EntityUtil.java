@@ -27,7 +27,7 @@ public class EntityUtil {
         final Pos pb = (Pos)b.getComponent(Pos.class);
 
         return tmp.set(pb.xy.x, pb.xy.y).sub(pa.xy.x, pa.xy.y).angle();
-   }
+    }
 
     public static float distance( final Entity a, final Entity b)
     {

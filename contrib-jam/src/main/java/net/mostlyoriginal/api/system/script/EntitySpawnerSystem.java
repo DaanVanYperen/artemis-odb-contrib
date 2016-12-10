@@ -5,6 +5,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.basic.Bounds;
@@ -20,7 +21,7 @@ import net.mostlyoriginal.api.manager.AbstractEntityFactorySystem;
  * @see net.mostlyoriginal.api.component.script.EntitySpawner
  */
 @Wire
-public class EntitySpawnerSystem extends EntityProcessingSystem {
+public class EntitySpawnerSystem extends IteratingSystem {
 
     public static final MapProperties EMPTY_MAP_PROPERTIES = new MapProperties();
     private ComponentMapper<EntitySpawner> sm;
@@ -35,7 +36,7 @@ public class EntitySpawnerSystem extends EntityProcessingSystem {
     }
 
     @Override
-    protected void process(Entity e) {
+    protected void process(int e) {
 
         final EntitySpawner spawner = sm.get(e);
 

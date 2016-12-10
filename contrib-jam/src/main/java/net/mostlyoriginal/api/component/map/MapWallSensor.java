@@ -20,4 +20,7 @@ public class MapWallSensor extends Component implements Serializable {
     public boolean onAnySurface() {
         return onHorizontalSurface || onVerticalSurface;
     }
+
+    public MapWallSensor() {
+    }
 }

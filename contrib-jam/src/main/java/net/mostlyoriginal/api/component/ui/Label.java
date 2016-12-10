@@ -22,10 +22,9 @@ public class Label extends ExtendedComponent<Label> {
 	}
 
 	@Override
-	public Label set(Label label) {
+	public void set(Label label) {
 		text = label.text;
 		align = label.align;
-		return this;
 	}
 
 	public enum Align {

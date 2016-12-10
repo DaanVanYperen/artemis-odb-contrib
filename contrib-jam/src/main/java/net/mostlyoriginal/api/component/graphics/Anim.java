@@ -1,12 +1,14 @@
 package net.mostlyoriginal.api.component.graphics;
 
 import com.artemis.Component;
+import com.artemis.annotations.Fluid;
 
 /**
  * Animations.
  *
  * @author Daan van Yperen
  */
+@Fluid(swallowGettersWithParameters = true)
 public class Anim extends Component {
 
     public boolean flippedX; // flip animation, should not affect rotation.
@@ -29,5 +31,11 @@ public class Anim extends Component {
     }
 
     public Anim() {
+    }
+
+    public Anim set( String id)
+    {
+        this.id = id;
+        return this;
     }
 }

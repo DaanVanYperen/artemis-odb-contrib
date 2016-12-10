@@ -60,6 +60,12 @@ public abstract class TweenOperation<T extends Component & Tweenable> extends Te
 		return this;
 	}
 
+	@Override
+	public void reset() {
+		super.reset();
+		m = null; // might be after world reset.
+	}
+
 	@SuppressWarnings("unchecked")
 	public final T getFrom() {
 		return (T) a;

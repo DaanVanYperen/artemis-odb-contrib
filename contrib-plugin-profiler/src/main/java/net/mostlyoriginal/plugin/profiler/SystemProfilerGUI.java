@@ -287,7 +287,7 @@ public class SystemProfilerGUI extends Window {
 
 		public void init (final SystemProfiler profiler) {
 			this.profiler = profiler;
-			draw.removeListener(listener);
+			if ( listener != null ) draw.removeListener(listener);
 			draw.setChecked(profiler.getDrawGraph());
 			draw.addListener(listener = new ChangeListener() {
 				@Override public void changed (ChangeEvent event, Actor actor) {

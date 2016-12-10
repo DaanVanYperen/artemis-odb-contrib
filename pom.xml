@@ -5,7 +5,7 @@
 
     <groupId>net.mostlyoriginal.artemis-odb</groupId>
     <artifactId>contrib-parent</artifactId>
-    <version>1.2.1</version>
+    <version>2.1.0</version>
     <packaging>pom</packaging>
     <name>contrib-parent</name>
     <description>Drop-in extensions for artemis-odb. Prefab systems, components, networking, events!
@@ -16,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <asm.version>4.1</asm.version> 
         <artemis-odb.version>[2.0.0,3.0.0)</artemis-odb.version>
-        <libgdx.version>[1.9.0,2.0.0)</libgdx.version>
+        <libgdx.version>[1.9.0,1.9.4]</libgdx.version>
     </properties>
 
     <scm>

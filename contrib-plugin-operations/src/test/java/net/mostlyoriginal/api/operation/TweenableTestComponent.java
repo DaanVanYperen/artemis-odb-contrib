@@ -19,8 +19,7 @@ public class TweenableTestComponent extends Component implements Tweenable<Tween
 	}
 
 	@Override
-	public TweenableTestComponent tween(TweenableTestComponent a, TweenableTestComponent b, float value) {
+	public void tween(TweenableTestComponent a, TweenableTestComponent b, float value) {
 		this.val = Interpolation.linear.apply(a.val, b.val, value);
-		return this;
 	}
 }

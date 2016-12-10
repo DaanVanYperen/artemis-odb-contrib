@@ -5,6 +5,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.math.MathUtils;
 import net.mostlyoriginal.api.component.basic.Bounds;
 import net.mostlyoriginal.api.component.basic.Pos;
@@ -22,7 +23,7 @@ import net.mostlyoriginal.api.component.physics.Physics;
  * @see net.mostlyoriginal.api.component.basic.Bounds
  */
 @Wire(injectInherited = true)
-public class ClampedSystem extends EntityProcessingSystem {
+public class ClampedSystem extends IteratingSystem {
 
     private ComponentMapper<Pos> pm;
     private ComponentMapper<Bounds> bm;
@@ -39,7 +40,7 @@ public class ClampedSystem extends EntityProcessingSystem {
     }
 
     @Override
-    protected void process(Entity e) {
+    protected void process(int e) {
         final Pos pos = pm.get(e);
         final Bounds bounds = bm.has(e) ? bm.get(e) : Bounds.NONE;
         final Clamped clamped = cm.get(e);

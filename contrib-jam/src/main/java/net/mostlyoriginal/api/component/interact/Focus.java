@@ -1,7 +1,7 @@
 package net.mostlyoriginal.api.component.interact;
 
 import com.artemis.Component;
-import net.mostlyoriginal.api.utils.reference.EntityReference;
+import com.artemis.annotations.EntityId;
 
 /**
  * Focus of entity (for example, focus for aggression).
@@ -9,9 +9,14 @@ import net.mostlyoriginal.api.utils.reference.EntityReference;
  * @author Daan van Yperen
  */
 public class Focus extends Component {
-    public EntityReference entity;
 
-    public Focus(EntityReference entity) {
+    @EntityId
+    public int entity;
+
+    public Focus(int entity) {
         this.entity = entity;
+    }
+
+    public Focus() {
     }
 }

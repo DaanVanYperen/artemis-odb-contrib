@@ -5,6 +5,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.Entity;
 import com.artemis.annotations.Wire;
 import com.artemis.systems.EntityProcessingSystem;
+import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.physics.Attached;
@@ -19,7 +20,7 @@ import net.mostlyoriginal.api.utils.EntityUtil;
  * @see net.mostlyoriginal.api.component.physics.Homing
  */
 @Wire
-public class HomingSystem extends EntityProcessingSystem {
+public class HomingSystem extends IteratingSystem {
 
     ComponentMapper<Homing> hm;
     ComponentMapper<Pos> pm;
@@ -33,13 +34,13 @@ public class HomingSystem extends EntityProcessingSystem {
     private static final Vector2 tmp = new Vector2();
 
     @Override
-    protected void process(Entity e) {
+    protected void process(int e) {
 
         final Homing homing = hm.get(e);
-	    final Entity homingTarget = homing.target.get();
-	    if (homingTarget != null) {
+	    final int homingTarget = homing.target;
+	    if (homingTarget != -1) {
 
-            final float distance = EntityUtil.distance(e, homingTarget);
+            final float distance = distance(e, homingTarget);
             if (distance < homing.maxDistance) {
 
                 final Pos myPos = pm.get(e);
@@ -62,6 +63,15 @@ public class HomingSystem extends EntityProcessingSystem {
                 }
             }
 
-        } else homing.target = null;
+        } else homing.target = -1;
     }
+
+    public float distance( final int a, final int b)
+    {
+        final Pos pa = pm.get(a);
+        final Pos pb = pm.get(b);
+
+        return tmp.set(pa.xy.x, pa.xy.y).dst(pb.xy.x, pb.xy.y);
+    }
+
 }

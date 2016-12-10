@@ -18,8 +18,7 @@ public class MirrorableTestComponent extends Component implements Mirrorable<Mir
 	}
 
 	@Override
-	public MirrorableTestComponent set(MirrorableTestComponent monkey) {
+	public void set(MirrorableTestComponent monkey) {
 		this.val = monkey.val;
-		return this;
 	}
 }
