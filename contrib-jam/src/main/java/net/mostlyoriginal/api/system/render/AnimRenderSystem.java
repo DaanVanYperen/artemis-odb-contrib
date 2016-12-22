@@ -88,7 +88,7 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
         // don't support backwards yet.
         if ( animation.age < 0 ) return;
 
-        final com.badlogic.gdx.graphics.g2d.Animation gdxanim = abstractAssetSystem.get(id);
+        final com.badlogic.gdx.graphics.g2d.Animation<TextureRegion> gdxanim = abstractAssetSystem.get(id);
         if ( gdxanim == null) return;
 
         final TextureRegion frame = gdxanim.getKeyFrame(animation.age, animation.loop);
