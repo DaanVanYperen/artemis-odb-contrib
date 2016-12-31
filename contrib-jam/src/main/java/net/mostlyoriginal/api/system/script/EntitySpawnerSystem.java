@@ -21,6 +21,7 @@ import net.mostlyoriginal.api.manager.AbstractEntityFactorySystem;
  * @see net.mostlyoriginal.api.component.script.EntitySpawner
  */
 @Wire
+@Deprecated
 public class EntitySpawnerSystem extends IteratingSystem {
 
     public static final MapProperties EMPTY_MAP_PROPERTIES = new MapProperties();

@@ -7,8 +7,10 @@ import com.artemis.annotations.Fluid;
  * Animations.
  *
  * @author Daan van Yperen
+ * @deprecated use Animation instead.
  */
 @Fluid(swallowGettersWithParameters = true)
+@Deprecated
 public class Anim extends Component {
 
     public boolean flippedX; // flip animation, should not affect rotation.
