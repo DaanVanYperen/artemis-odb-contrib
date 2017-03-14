@@ -17,10 +17,19 @@ public class PollingEventDispatcher extends FastEventDispatcher {
 	@Override
 	public void process() {
 		Object[] eventsToDispatch = eventQueue.getData();
-		
-		for (int i = 0, s = eventQueue.size(); i < s; i++) {
-			Event event = (Event) eventsToDispatch[i];
-			super.dispatch(event);
+
+		int i = 0;
+		int s = eventQueue.size();
+
+		while (i < s) {
+			for (; i < s; i++) {
+				Event event = (Event) eventsToDispatch[i];
+				super.dispatch(event);
+			}
+
+			// we may end up having more events to dispatch at this point
+			//  - some event handlers could dispatch more events
+			s = eventQueue.size();
 		}
 		
 		eventQueue.clear();
