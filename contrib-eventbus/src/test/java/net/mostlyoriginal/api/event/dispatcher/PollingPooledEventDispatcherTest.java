@@ -5,6 +5,9 @@ import net.mostlyoriginal.api.event.common.EventDispatchStrategy;
 import org.junit.Test;
 
 public class PollingPooledEventDispatcherTest extends AbstractEventDispatcherTest {
+	private boolean isProcessing = false;
+
+
 	@Override
 	protected EventDispatchStrategy createDispatcherInstance() {
 		return new PollingPooledEventDispatcher();
@@ -21,8 +24,14 @@ public class PollingPooledEventDispatcherTest extends AbstractEventDispatcherTes
 	protected void dispatch(Event event) {
 		try {
 			dispatcher.dispatch(event.getClass());
+
 			// this dispatcher processes after a world tick.
-			dispatcher.process();
+			if (!isProcessing) {
+				// prevent call of process() in subsequent event
+				isProcessing = true;
+				dispatcher.process();
+				isProcessing = false;
+			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

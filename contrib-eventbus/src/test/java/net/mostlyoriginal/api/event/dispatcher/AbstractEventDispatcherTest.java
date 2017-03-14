@@ -223,4 +223,46 @@ public abstract class AbstractEventDispatcherTest {
 		assertEquals(1, pojo.calledCancelled);
 	}
 
+	public static class UnrelatedEvent1 implements Event {}
+	public static class UnrelatedEvent2 implements Event {}
+	public static class UnrelatedEvent3 implements Event {}
+
+	@Test
+	public void Dispatch_SeveralEventHandlers_CorrectlyCascadedEventDispatch() {
+		class MultiEventHandler {
+			boolean handler1Called = false;
+			boolean handler2Called = false;
+			boolean handler3Called = false;
+
+			@Subscribe()
+			public void handler1(UnrelatedEvent1 evt) {
+				handler1Called = true;
+				dispatch(new UnrelatedEvent2());
+			}
+
+			@Subscribe()
+			public void handler2(UnrelatedEvent2 evt) {
+				handler2Called = true;
+				dispatch(new UnrelatedEvent3());
+			}
+
+			@Subscribe()
+			public void handler3(UnrelatedEvent3 evt) {
+				handler3Called = true;
+			}
+		}
+
+		final MultiEventHandler handler = new MultiEventHandler();
+		final List<EventListener> listeners = new SubscribeAnnotationFinder().resolve(handler);
+
+		for (EventListener listener : listeners) {
+			dispatcher.register(listener);
+		}
+		dispatch(new UnrelatedEvent1());
+
+		// expect that all event handlers were called in cascade aftet dispatch the first one
+		assert(handler.handler1Called);
+		assert(handler.handler2Called);
+		assert(handler.handler3Called);
+	}
 }
