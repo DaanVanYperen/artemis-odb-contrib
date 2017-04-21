@@ -32,13 +32,13 @@ Some stubs from LibGDX are licensed under Apache 2.0.
 <dependency>
   <groupId>net.mostlyoriginal.artemis-odb</groupId>
   <artifactId>contrib-core</artifactId>
-  <version>2.1</version>
+  <version>2.1.0</version>
 </dependency>
 
 <dependency>
   <groupId>net.mostlyoriginal.artemis-odb</groupId>
   <artifactId>contrib-eventbus</artifactId>
-  <version>2.1</version>
+  <version>2.1.0</version>
 </dependency>
 ```
 
