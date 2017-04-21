@@ -5,7 +5,7 @@
 
     <groupId>net.mostlyoriginal.artemis-odb</groupId>
     <artifactId>contrib-parent</artifactId>
-    <version>2.2.0-SNAPSHOT</version>
+    <version>2.2.0</version>
     <packaging>pom</packaging>
     <name>contrib-parent</name>
     <description>Drop-in extensions for artemis-odb. Prefab systems, components, networking, events!
@@ -15,8 +15,8 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <asm.version>4.1</asm.version> 
-        <artemis-odb.version>2.2.0-SNAPSHOT</artemis-odb.version>
-        <libgdx.version>1.9.6-SNAPSHOT</libgdx.version>
+        <artemis-odb.version>2.1.0</artemis-odb.version>
+        <libgdx.version>1.9.6</libgdx.version>
     </properties>
 
     <scm>
@@ -194,7 +194,7 @@
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
-                                <phase>verify</phase>
+                                 <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
@@ -217,7 +217,7 @@
               <configuration>
                 <serverId>ossrh</serverId>
                 <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                <autoReleaseAfterClose>true</autoReleaseAfterClose>
               </configuration>
             </plugin>
 
