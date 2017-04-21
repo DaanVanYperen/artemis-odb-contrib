@@ -6,6 +6,7 @@ package net.mostlyoriginal.api.system.render;
 
 import com.artemis.Aspect;
 import com.artemis.annotations.Wire;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import net.mostlyoriginal.api.component.basic.Angle;
@@ -88,7 +89,7 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
         // don't support backwards yet.
         if ( animation.age < 0 ) return;
 
-        final com.badlogic.gdx.graphics.g2d.Animation gdxanim = abstractAssetSystem.get(id);
+        final Animation<TextureRegion> gdxanim = (Animation<TextureRegion>) abstractAssetSystem.get(id);
         if ( gdxanim == null) return;
 
         final TextureRegion frame = gdxanim.getKeyFrame(animation.age, animation.loop);
