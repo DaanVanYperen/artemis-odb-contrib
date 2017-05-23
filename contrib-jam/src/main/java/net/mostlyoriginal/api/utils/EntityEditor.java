@@ -20,6 +20,7 @@ import net.mostlyoriginal.api.component.ui.Label;
  *
  * @author Daan van Yperen
  */
+@Deprecated
 public abstract class EntityEditor<T extends EntityEditor> {
 
 	private EntityEdit edit;

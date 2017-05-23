@@ -6,50 +6,63 @@ package net.mostlyoriginal.api.system.render;
 
 import com.artemis.Aspect;
 import com.artemis.annotations.Wire;
+<<<<<<< .mine
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+=======
+import com.badlogic.gdx.graphics.g2d.*;
+
+
+>>>>>>> .theirs
 import net.mostlyoriginal.api.component.basic.Angle;
+import net.mostlyoriginal.api.component.basic.Origin;
 import net.mostlyoriginal.api.component.basic.Pos;
 import net.mostlyoriginal.api.component.basic.Scale;
-import net.mostlyoriginal.api.component.graphics.Anim;
-import net.mostlyoriginal.api.component.graphics.Invisible;
-import net.mostlyoriginal.api.component.graphics.Render;
-import net.mostlyoriginal.api.component.graphics.Tint;
-import net.mostlyoriginal.api.manager.AbstractAssetSystem;
+import net.mostlyoriginal.api.component.graphics.*;
+import net.mostlyoriginal.api.component.graphics.Animation;
 import net.mostlyoriginal.api.plugin.extendedcomponentmapper.M;
 import net.mostlyoriginal.api.system.camera.CameraSystem;
 import net.mostlyoriginal.api.system.delegate.DeferredEntityProcessingSystem;
 import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
 
 /**
- * Render and progress animations.
- *
+ * Render animations.
  * @author Daan van Yperen
- * @see net.mostlyoriginal.api.component.graphics.Anim
  */
 @Wire
 public class AnimRenderSystem extends DeferredEntityProcessingSystem {
 
+    public static final int DEFAULT_SPRITEBATCH_SIZE = 2000;
+
     protected M<Pos> mPos;
-    protected M<Anim> mAnim;
+    protected M<Origin> mOrigin;
+    protected M<AnimationAsset> mAnimationAsset;
+    protected M<Animation> mAnimation;
     protected M<Tint> mTint;
     protected M<Angle> mAngle;
     protected M<Scale> mScale;
 
     protected CameraSystem cameraSystem;
-    protected AbstractAssetSystem abstractAssetSystem;
 
     protected SpriteBatch batch;
+    private int spriteBatchSize;
 
     public AnimRenderSystem(EntityProcessPrincipal principal) {
-        super(Aspect.all(Pos.class, Anim.class, Render.class).exclude(Invisible.class), principal);
+        this(principal, DEFAULT_SPRITEBATCH_SIZE);
+    }
+
+    @SuppressWarnings("unchecked")
+    public AnimRenderSystem(EntityProcessPrincipal principal, int spriteBatchSize) {
+        super(Aspect.all(Pos.class, Animation.class, AnimationAsset.class, Render.class).exclude(Invisible.class), principal);
+        this.spriteBatchSize = spriteBatchSize;
     }
 
     @Override
     protected void initialize() {
         super.initialize();
-        batch = new SpriteBatch(2000);
+        spriteBatchSize = 2000;
+        batch = new SpriteBatch(spriteBatchSize);
     }
 
     @Override
@@ -65,71 +78,38 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
 
     protected void process(final int e) {
 
-        final Anim anim   = mAnim.get(e);
-        final Pos pos     = mPos.get(e);
-        final Angle angle = mAngle.getSafe(e, Angle.NONE);
-        final float scale = mScale.getSafe(e, Scale.DEFAULT).scale;
+        final Animation animation = mAnimation.get(e);
+        final AnimationAsset asset = mAnimationAsset.get(e);
+        animation.age += world.delta;
 
-        anim.age += world.delta * anim.speed;
+        renderKeyframe(e, asset.asset.getKeyFrame(Math.abs(animation.age)));
+    }
+
+    private void renderKeyframe(int e, TextureRegion frame) {
 
         batch.setColor(mTint.getSafe(e, Tint.WHITE).color);
 
-        if ( anim.id != null ) drawAnimation(anim, angle, pos, anim.id,scale);
-        if ( anim.id2 != null ) drawAnimation(anim, angle, pos, anim.id2,scale);
-    }
-
-    /** Pixel perfect aligning. */
-    private float roundToPixels(final float val) {
-        // since we use camera zoom rounding to integers doesn't work properly.
-        return ((int)(val * cameraSystem.zoom)) / (float)cameraSystem.zoom;
-    }
-
-    private void drawAnimation(final Anim animation, final Angle angle, final Pos position, String id, float scale) {
-
-        // don't support backwards yet.
-        if ( animation.age < 0 ) return;
+        final float scale = mScale.getSafe(e, Scale.DEFAULT).scale;
+        float width = frame.getRegionWidth() * scale;
+        float height = frame.getRegionHeight() * scale;
 
         final Animation<TextureRegion> gdxanim = (Animation<TextureRegion>) abstractAssetSystem.get(id);
         if ( gdxanim == null) return;
-
-        final TextureRegion frame = gdxanim.getKeyFrame(animation.age, animation.loop);
-
-        if ( animation.flippedX)
-        {
-            // mirror
-            batch.draw(frame.getTexture(),
-                    roundToPixels(position.xy.x),
-                    roundToPixels(position.xy.y),
-                    angle.ox == Angle.ORIGIN_AUTO ? frame.getRegionWidth() * scale * 0.5f : angle.ox,
-                    angle.oy == Angle.ORIGIN_AUTO ? frame.getRegionHeight() * scale * 0.5f : angle.oy,
-                    frame.getRegionWidth() * scale,
-                    frame.getRegionHeight() * scale,
-                    1f,
-                    1f,
-                    angle.rotation,
-                    frame.getRegionX(),
-                    frame.getRegionY(),
-                    frame.getRegionWidth(),
-                    frame.getRegionHeight(),
-                    true,
-                    false);
-
-        } else if ( angle.rotation != 0 )
-        {
             batch.draw(frame,
-                    roundToPixels(position.xy.x),
-                    roundToPixels(position.xy.y),
-                    angle.ox == Angle.ORIGIN_AUTO ? frame.getRegionWidth() * scale * 0.5f : angle.ox,
-                    angle.oy == Angle.ORIGIN_AUTO ? frame.getRegionHeight() * scale * 0.5f : angle.oy,
-                    frame.getRegionWidth() * scale,
-                    frame.getRegionHeight() * scale, 1, 1,
+                    pos.xy.x,
+                    pos.xy.y,
+                    width * origin.getX(),
+                    height * origin.getY(),
+                    width,
+                    height, 1, 1,
                     angle.rotation);
         } else {
             batch.draw(frame,
-                    roundToPixels(position.xy.x),
-                    roundToPixels(position.xy.y),
-                    frame.getRegionWidth() * scale,
-                    frame.getRegionHeight() * scale);
+                    pos.xy.x,
+                    pos.xy.y,
+                    width,
+                    height);
         }
     }
+
 }

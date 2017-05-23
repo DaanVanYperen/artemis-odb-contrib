@@ -14,7 +14,9 @@ import java.util.HashMap;
  * Basic asset system for serving images from a single texture.
  *
  * @author Daan van Yperen
+ * @deprecated implement AbstractAssetManager instead
  */
+@Deprecated
 public class AbstractAssetSystem extends BaseSystem {
     public Texture tileset;
     public HashMap<String, Animation> sprites = new HashMap<String, Animation>();
