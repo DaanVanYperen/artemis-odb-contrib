@@ -22,7 +22,7 @@ public class ExtendedComponentMapperFieldResolver implements FieldResolver, UseI
 	}
 
 	@Override
-	public Object resolve(Class<?> fieldType, Field field) {
+	public Object resolve(Object target,Class<?> fieldType, Field field) {
 		if ( fieldType.equals(M.class) ) {
 			return getMapper(field);
 		}
