@@ -6,15 +6,8 @@ package net.mostlyoriginal.api.system.render;
 
 import com.artemis.Aspect;
 import com.artemis.annotations.Wire;
-<<<<<<< .mine
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-=======
-import com.badlogic.gdx.graphics.g2d.*;
-
-
->>>>>>> .theirs
 import net.mostlyoriginal.api.component.basic.Angle;
 import net.mostlyoriginal.api.component.basic.Origin;
 import net.mostlyoriginal.api.component.basic.Pos;
@@ -28,6 +21,7 @@ import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
 
 /**
  * Render animations.
+ *
  * @author Daan van Yperen
  */
 @Wire
@@ -93,8 +87,11 @@ public class AnimRenderSystem extends DeferredEntityProcessingSystem {
         float width = frame.getRegionWidth() * scale;
         float height = frame.getRegionHeight() * scale;
 
-        final Animation<TextureRegion> gdxanim = (Animation<TextureRegion>) abstractAssetSystem.get(id);
-        if ( gdxanim == null) return;
+        final Pos pos = mPos.get(e);
+        final Angle angle = mAngle.getSafe(e, Angle.NONE);
+        if (angle.rotation != 0) {
+            final Origin origin = mOrigin.getSafe(e, Origin.DEFAULT);
+
             batch.draw(frame,
                     pos.xy.x,
                     pos.xy.y,
