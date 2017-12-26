@@ -45,6 +45,9 @@ public abstract class TimeboxedProcessingSystem extends BaseEntitySystem {
 		super(aspect);
 	}
 
+	public TimeboxedProcessingSystem() {
+	}
+
 	@Override
 	protected void setWorld(World world) {
 		super.setWorld(world);

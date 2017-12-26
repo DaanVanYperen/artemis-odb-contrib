@@ -25,7 +25,6 @@ import com.artemis.BaseEntitySystem;
  */
 public abstract class DeferredEntityProcessingSystem extends BaseEntitySystem {
 
-    private final Aspect.Builder aspect;
     private final EntityProcessPrincipal principal;
 
     /**
@@ -37,10 +36,13 @@ public abstract class DeferredEntityProcessingSystem extends BaseEntitySystem {
      */
     public DeferredEntityProcessingSystem(Aspect.Builder aspect, EntityProcessPrincipal principal) {
         super(aspect);
-        this.aspect = aspect;
         this.principal = principal;
     }
-    
+
+    public DeferredEntityProcessingSystem(EntityProcessPrincipal principal) {
+        this.principal = principal;
+    }
+
     @Override
     protected void initialize() {
     	super.initialize();
