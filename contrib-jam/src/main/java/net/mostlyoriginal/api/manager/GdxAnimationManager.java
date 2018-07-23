@@ -41,7 +41,7 @@ public class GdxAnimationManager extends AssetManager<Animation, AnimationAsset>
     }
 
     @Override
-    protected void setup(Entity e, Animation anim, AnimationAsset animAsset) {
+    protected void setup(int e, Animation anim, AnimationAsset animAsset) {
         animAsset.asset = library.get(anim.id);
 
         if (animAsset.asset == null) {

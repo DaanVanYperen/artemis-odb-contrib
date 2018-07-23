@@ -29,7 +29,7 @@ public class SpriteManager extends AssetManager<Sprite, SpriteAsset> {
     private com.badlogic.gdx.assets.AssetManager manager = new com.badlogic.gdx.assets.AssetManager();
 
     @Override
-    protected void setup(Entity e, Sprite sprite, SpriteAsset spriteAsset) {
+    protected void setup(int e, Sprite sprite, SpriteAsset spriteAsset) {
         spriteAsset.asset = new Texture(sprite.id);
 
         // set size to asset.

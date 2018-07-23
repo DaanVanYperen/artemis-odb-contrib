@@ -35,7 +35,7 @@ public class AssetManagerTest {
 			}
 
 			@Override
-			protected void setup(Entity entity, Sound sound, SoundReference soundReference) {
+			protected void setup(int entity, Sound sound, SoundReference soundReference) {
 				Assert.assertNotNull(sound);
 				Assert.assertNotNull(soundReference);
 			}
@@ -57,7 +57,7 @@ public class AssetManagerTest {
 			}
 
 			@Override
-			protected void setup(Entity entity, Sound sound, SoundReference soundReference) {
+			protected void setup(int entity, Sound sound, SoundReference soundReference) {
 				count++;
 			}
 		}
@@ -82,7 +82,7 @@ public class AssetManagerTest {
 			}
 
 			@Override
-			protected void setup(Entity entity, Sound sound, SoundReference soundReference) {
+			protected void setup(int entity, Sound sound, SoundReference soundReference) {
 				count++;
 			}
 		}
@@ -106,7 +106,7 @@ public class AssetManagerTest {
 				super(Sound.class, SoundReference.class);
 			}
 			@Override
-			protected void setup(Entity entity, Sound sound, SoundReference soundReference) {
+			protected void setup(int entity, Sound sound, SoundReference soundReference) {
 			}
 		}
 

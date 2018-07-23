@@ -22,7 +22,7 @@ public class FontManager extends AssetManager<Font, BitmapFontAsset> {
 	}
 
 	@Override
-	protected void setup(Entity entity, Font font, BitmapFontAsset bitmapFontAsset) {
+	protected void setup(int entity, Font font, BitmapFontAsset bitmapFontAsset) {
 		if (font.fontName == null ) {
 			throw new RuntimeException("FontManager: font.fontName is null.");
 		}
