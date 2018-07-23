@@ -18,7 +18,7 @@ with all fancy features, check out these instead:
 - [playn-artemis-quickstart](https://github.com/DaanVanYperen/playn-artemis-quickstart)
 
 ### Library Versions
-Artemis-odb 2.2.0-SNAPSHOT, (Optional) LibGDX 1.9.8.
+Artemis-odb 3.0.0-SNAPSHOT, (Optional) LibGDX 1.9.8.
 
 ### License
 The primary license for this code is MIT. 
