@@ -10,23 +10,16 @@
         <version>3.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>contrib-plugin-query-dsl</artifactId>
-    <description>Experimental query DSL for entities.</description>
+    <artifactId>contrib-plugin-logging-api</artifactId>
+    <description>
+        Logging API to hook up logging to your systems.  See contrib-plugging-logging-libgdx for an implementation!
+    </description>
 
     <dependencies>
         <dependency>
             <groupId>net.onedaybeard.artemis</groupId>
             <artifactId>artemis-odb</artifactId>
         </dependency>
-        <dependency>
-            <groupId>net.mostlyoriginal.artemis-odb</groupId>
-            <artifactId>contrib-core</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
+
 </project>

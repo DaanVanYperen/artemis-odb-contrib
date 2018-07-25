@@ -1,0 +1,3 @@
+<module rename-to="net.mostlyoriginal.ContribPluginLoggingApi">
+    <source path="api"/>
+</module>
