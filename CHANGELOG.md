@@ -1,6 +1,22 @@
 # Changelog
 
-## Version: 1.2.0-SNAPSHOT
+## Version: 2.3.0-SNAPSHOT
+
+- Targets Libgdx 1.9.9, Artemis-odb 2.2.0-SNAPSHOT, GWT 2.8.0.
+
+## Version: 2.2.0
+
+- Supports LibGDX 1.9.6
+- #114 fix(eventBus): support cascade event dispatching with polling strategy
+- #115 deps: upgrade libgdx to 1.9.5 by fixing Animation typin
+- Upgraded web target to GWT 2.8.0
+- #112: Removed non-deterministic dependencies (leading to unstable builds).
+
+## Version: 2.1.0
+
+- Upgraded for Artemis-odb 2.1.0 and fluid entity support!
+
+## Version: 1.2.0
 
 - Upgraded for Artemis-odb 2.0.0, LibGDX 1.9.4
 

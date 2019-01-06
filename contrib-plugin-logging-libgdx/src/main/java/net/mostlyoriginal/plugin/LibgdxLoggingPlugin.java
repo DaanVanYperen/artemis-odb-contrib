@@ -17,7 +17,7 @@ import static com.badlogic.gdx.Application.LOG_INFO;
  * 1. Add {@see net.mostlyoriginal.api.Log} to your systems for logging.
  *
  * @author Daan van Yperen
- * @since 3.0.0
+ * @since 2.3.0
  */
 public class LibgdxLoggingPlugin extends LoggingPlugin {
 

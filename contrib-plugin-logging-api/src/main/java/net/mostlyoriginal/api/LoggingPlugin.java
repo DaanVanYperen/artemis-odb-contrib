@@ -17,7 +17,7 @@ import com.artemis.utils.reflect.Field;
  *
  * @author Daan van Yperen
  * @see net.mostlyoriginal.plugin.LibgdxLoggingPlugin
- * @since 3.0.0
+ * @since 2.3.0
  */
 public abstract class LoggingPlugin implements ArtemisPlugin {
 

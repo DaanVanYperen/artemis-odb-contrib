@@ -6,7 +6,7 @@ package net.mostlyoriginal.api;
  * Add this class to your system, the DI will initialize it with registered implementations.
  *
  * @author Daan van Yperen
- * @since 3.0.0
+ * @since 2.3.0
  */
 public interface Log {
     /**

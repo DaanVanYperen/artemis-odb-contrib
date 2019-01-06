@@ -18,7 +18,7 @@ with all fancy features, check out these instead:
 - [playn-artemis-quickstart](https://github.com/DaanVanYperen/playn-artemis-quickstart)
 
 ### Library Versions
-Artemis-odb 3.0.0-SNAPSHOT, (Optional) LibGDX 1.9.8.
+Artemis-odb 2.2.0-SNAPSHOT, (Optional) LibGDX 1.9.9.
 
 ### License
 The primary license for this code is MIT. 
@@ -32,13 +32,13 @@ Some stubs from LibGDX are licensed under Apache 2.0.
 <dependency>
   <groupId>net.mostlyoriginal.artemis-odb</groupId>
   <artifactId>contrib-core</artifactId>
-  <version>2.2.0</version>
+  <version>2.3.0</version>
 </dependency>
 
 <dependency>
   <groupId>net.mostlyoriginal.artemis-odb</groupId>
   <artifactId>contrib-eventbus</artifactId>
-  <version>2.2.0</version>
+  <version>2.3.0</version>
 </dependency>
 ```
 
@@ -46,7 +46,7 @@ Some stubs from LibGDX are licensed under Apache 2.0.
 
 ```groovy
 dependencies { 
-    compile "net.mostlyoriginal.artemis-odb:contrib-core:2.2.0"
-    compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:2.2.0"
+    compile "net.mostlyoriginal.artemis-odb:contrib-core:2.3.0"
+    compile "net.mostlyoriginal.artemis-odb:contrib-eventbus:2.3.0"
 }
 ```
