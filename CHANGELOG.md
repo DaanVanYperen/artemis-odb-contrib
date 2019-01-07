@@ -2,7 +2,14 @@
 
 ## Version: 2.4.0
 
-- Targets Libgdx 1.9.9, Artemis-odb 2.2.0, GWT 2.8.0.
+**BREAKING CHANGES**
+- Requires artemis-odb 2.2.0.
+- Requires libgdx 1.9.9 (GWT 2.8.0).
+
+**OTHER**
+ 
+- #119 Add Shareable logging API and example logging implementation (libGDX).
+- **Fix** #118: AssetManager still uses Entity.
 
 ## Version: 2.2.0
 
