@@ -4,7 +4,7 @@
 
     <groupId>net.mostlyoriginal.artemis-odb</groupId>
     <artifactId>contrib-parent</artifactId>
-    <version>2.4.0</version>
+    <version>2.4.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>contrib-parent</name>
     <description>Drop-in extensions for artemis-odb. Prefab systems, components, networking, events!
@@ -22,7 +22,7 @@
         <url>https://github.com/DaanVanYperen/artemis-odb-contrib</url>
         <connection>scm:git:git@github.com:DaanVanYperen/artemis-odb-contrib.git</connection>
         <developerConnection>scm:git:git@github.com:DaanVanYperen/artemis-odb-contrib.git</developerConnection>
-        <tag>artemis-odb-contrib-2.4.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <licenses>
