@@ -42,7 +42,7 @@ public abstract class AssetManager<A extends Component, B extends Component> ext
 	 * @param a Existing asset identifying component.
 	 * @param b New asset reference component to setup.
 	 */
-	protected abstract void setup(Entity entity, A a, B b);
+	protected abstract void setup(int entity, A a, B b);
 
 	@Override
 	protected void setWorld(World world) {
@@ -96,7 +96,7 @@ public abstract class AssetManager<A extends Component, B extends Component> ext
 	}
 
 	protected void create(int entityId) {
-		setup(world.getEntity(entityId), mMetadataType.get(entityId), mReferenceType.create(entityId));
+		setup(entityId, mMetadataType.get(entityId), mReferenceType.create(entityId));
 	}
 
 	protected void remove(int entityId) {

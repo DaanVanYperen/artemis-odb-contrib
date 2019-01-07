@@ -32,7 +32,7 @@ public class TerrainManager extends AssetManager<Terrain, TerrainAsset> {
     }
 
     @Override
-    protected void setup(Entity e, Terrain terrain, TerrainAsset asset) {
+    protected void setup(int e, Terrain terrain, TerrainAsset asset) {
         if (terrain.id == null ) {
             throw new RuntimeException("TerrainManager: terrain.id is null.");
         }

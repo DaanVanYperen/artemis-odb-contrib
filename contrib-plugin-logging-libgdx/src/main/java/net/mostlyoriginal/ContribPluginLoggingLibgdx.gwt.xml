@@ -1,0 +1,3 @@
+<module rename-to="net.mostlyoriginal.ContribPluginLoggingLibgdx">
+    <source path="plugin"/>
+</module>
