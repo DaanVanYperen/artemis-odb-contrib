@@ -14,7 +14,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <asm.version>4.1</asm.version> 
+        <asm.version>4.1</asm.version>
         <artemis-odb.version>2.2.0</artemis-odb.version>
         <libgdx.version>1.9.9</libgdx.version>
     </properties>
@@ -47,10 +47,10 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-              <groupId>org.mockito</groupId>
-              <artifactId>mockito-all</artifactId>
-              <version>1.9.5</version>
-              <scope>test</scope>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>1.9.5</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -196,7 +196,7 @@
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
-                                 <phase>verify</phase>
+                                <phase>verify</phase>
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
@@ -212,15 +212,28 @@
 
         <plugins>
             <plugin>
-              <groupId>org.sonatype.plugins</groupId>
-              <artifactId>nexus-staging-maven-plugin</artifactId>
-              <version>1.6.2</version>
-              <extensions>true</extensions>
-              <configuration>
-                <serverId>ossrh</serverId>
-                <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                <autoReleaseAfterClose>true</autoReleaseAfterClose>
-              </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
+                    <goals>deploy</goals>
+                    <tagNameFormat>artemis-odb-contrib-@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.2</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
             </plugin>
 
             <plugin>
