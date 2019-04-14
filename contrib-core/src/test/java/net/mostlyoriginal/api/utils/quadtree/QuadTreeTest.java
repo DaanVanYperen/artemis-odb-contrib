@@ -14,8 +14,7 @@ public class QuadTreeTest {
     @Test
     public void get_inexact_test() {
         IntBag fill = new IntBag();
-        QuadTree.MAX_IN_BUCKET = 1;
-        QuadTree tree = new QuadTree(-8, -8, 8, 8);
+        QuadTree tree = new QuadTree(-8, -8, 8, 8, 1, 8);
         fill.clear();
         tree.get(fill, -2.5f, -2.5f, 5, 5);
         Assert.assertEquals(fill.size(), 0);
@@ -72,8 +71,7 @@ public class QuadTreeTest {
     @Test
     public void get_exact_test() {
         IntBag fill = new IntBag();
-        QuadTree.MAX_IN_BUCKET = 1;
-        QuadTree tree = new QuadTree(-8, -8, 8, 8);
+        QuadTree tree = new QuadTree(-8, -8, 8, 8, 1, 8);
         fill.clear();
         tree.getExact(fill, -2.5f, -2.5f, 5, 5);
         Assert.assertEquals(fill.size(), 0);
@@ -131,8 +129,7 @@ public class QuadTreeTest {
     @Test
     public void complex_get_test() {
         IntBag fill = new IntBag();
-        QuadTree.MAX_IN_BUCKET = 1;
-        QuadTree tree = new QuadTree(-8, -8, 8, 8);
+        QuadTree tree = new QuadTree(-8, -8, 8, 8, 1, 8);
         fill.clear();
         tree.get(fill, -3, -3, 6, 6);
         Assert.assertEquals(fill.size(), 0);

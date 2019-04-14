@@ -12,18 +12,6 @@ import net.mostlyoriginal.api.utils.pooling.Pools;
  * @author Piotr-J
  */
 public class QuadTree implements Poolable {
-    /**
-     * Max count of containers in a tree before it is split
-     * <p>
-     * Should be tweaked for best performance
-     */
-    public static int MAX_IN_BUCKET = 16;
-    /**
-     * Max count of splits, tree start at depth = 0
-     * <p>
-     * Should be tweaked for best performance
-     */
-    public static int MAX_DEPTH = 8;
 
     private static ObjectPool<QuadTree> qtPool = Pools.getPool(QuadTree.class);
     private static ObjectPool<Container> cPool = Pools.getPool(Container.class);
@@ -41,6 +29,20 @@ public class QuadTree implements Poolable {
     protected QuadTree parent;
 
     /**
+     * Max count of containers in a tree before it is split
+     * <p>
+     * Should be tweaked for best performance
+     */
+    protected int maxInBucket;
+
+    /**
+     * Max count of splits, tree start at depth = 0
+     * <p>
+     * Should be tweaked for best performance
+     */
+    protected int maxDepth;
+
+    /**
      * Public constructor for {@link ObjectPool} use only
      */
     public QuadTree() {
@@ -53,8 +55,19 @@ public class QuadTree implements Poolable {
      * Specify max tree bounds
      */
     public QuadTree(float x, float y, float width, float height) {
+        this(x, y, width, height, 16, 8);
+    }
+
+    /**
+     * Public constructor for initial {@link QuadTree}
+     * <p>
+     * Specify max tree bounds, bucket capacity and max depth
+     */
+    public QuadTree(float x, float y, float width, float height, int capacity, int depth) {
         bounds = new Container();
-        containers = new Bag<>(MAX_IN_BUCKET);
+        maxInBucket = capacity;
+        maxDepth = depth;
+        containers = new Bag<>(maxInBucket);
         nodes = new QuadTree[4];
         init(0, x, y, width, height, null);
     }
@@ -106,7 +119,7 @@ public class QuadTree implements Poolable {
         idToContainer.set(c.eid, c);
         containers.add(c);
 
-        if (containers.size() > MAX_IN_BUCKET && depth < MAX_DEPTH) {
+        if (containers.size() > maxInBucket && depth < maxDepth) {
             if (nodes[0] == null) {
                 float halfWidth = bounds.width / 2;
                 float halfHeight = bounds.height / 2;
