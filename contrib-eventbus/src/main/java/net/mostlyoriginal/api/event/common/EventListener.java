@@ -6,13 +6,15 @@ import net.mostlyoriginal.api.utils.ReflectionHelper;
 
 /**
  * @author Daan van Yperen
+ * @author Greg Hibberd
  * @todo GWT provide method support.
  */
 public class EventListener implements Comparable<EventListener> {
 
     protected final Object object;
     protected final Method method;
-	protected final Class parameterType;
+	protected final Class[] parameterTypes;
+	protected final int assignedParameter;
 	protected final int priority;
 	protected final boolean skipCancelledEvents;
 
@@ -36,22 +38,41 @@ public class EventListener implements Comparable<EventListener> {
 	 * @param priority Precedence over other handlers. Higher values get called first.
 	 * @param skipCancelledEvents if <code>true</code>, cancelled events skip this event listener. <code>false</code>
 	 */
-    public EventListener(Object object, Method method, int priority, boolean skipCancelledEvents) {
-	    this.priority = priority;
-	    this.skipCancelledEvents = skipCancelledEvents;
-	    if (object == null) throw new NullPointerException("Object cannot be null.");
-        if (method == null) throw new NullPointerException("Method cannot be null.");
-        method.setAccessible(true);
-        if ( method.getParameterTypes().length != 1 ) throw new IllegalArgumentException("Listener methods must have exactly one parameter.");
-	    this.parameterType = ReflectionHelper.getFirstParameterType(method);
-	    if ( parameterType == Event.class ) throw new IllegalArgumentException("Parameter class cannot be Event, must be subclass.");
-	    if ( !ClassReflection.isAssignableFrom(Event.class, parameterType)) throw new IllegalArgumentException("Invalid parameter class. Listener method parameter must extend "+ Event.class.getName()+".");
-        this.object = object;
-        this.method = method;
-    }
+    protected EventListener(Object object, Method method, int priority, boolean skipCancelledEvents) {
+		if (object == null) throw new NullPointerException("Object cannot be null.");
+		if (method == null) throw new NullPointerException("Method cannot be null.");
+		method.setAccessible(true);
+		int parameters = method.getParameterTypes().length;
+		if (parameters < 1) throw new IllegalArgumentException("Listener methods must have at least one parameter.");
+		int assigned = -1;
+		parameterTypes = new Class[parameters];
+		for(int i = 0; i < parameters; i++) {
+			parameterTypes[i] = ReflectionHelper.getParameterType(method, i);
+			if(parameterTypes[i] == Event.class) {
+				throw new IllegalArgumentException("Parameter class cannot be Event, must be subclass.");
+			}
+			if (ClassReflection.isAssignableFrom(Event.class, parameterTypes[i])) {
+				assigned = i;
+			}
+		}
+		if (assigned == -1) throw new IllegalArgumentException("Invalid parameter class. At least one listener method parameter must extend "+ Event.class.getName()+".");
+		this.priority = priority;
+		this.skipCancelledEvents = skipCancelledEvents;
+		this.assignedParameter = assigned;
+		this.object = object;
+		this.method = method;
+	}
 
-    public void handle(Event event) {
-        if (event == null) throw new NullPointerException("Event required.");
+    public void handle(Object... args) {
+    	Object event = args[assignedParameter];
+		if (event == null) throw new NullPointerException("Event required.");
+
+		for (int i = 0; i < args.length; i++) {
+			Class obj = args[i].getClass();
+			if(obj.isPrimitive() && !parameterTypes[i].isInstance(obj)) {
+				throw new IllegalArgumentException("Invalid argument " + obj.getName() + ". Expected " + parameterTypes[i].getName() + ".");
+			}
+		}
 
 	    if (skipCancelledEvents)
 	    {
@@ -63,7 +84,7 @@ public class EventListener implements Comparable<EventListener> {
 	    }
 
         try {
-            method.invoke(object, event);
+            method.invoke(object, args);
         } catch (Exception e) {
             throw new RuntimeException("Could not call event.", e);
         }
@@ -81,7 +102,17 @@ public class EventListener implements Comparable<EventListener> {
 
 	/** Type of method parameter. */
 	public Class getParameterType() {
-		return parameterType;
+		return parameterTypes[assignedParameter];
+	}
+
+	/** Type of all method parameters. */
+	public Class[] getParameterTypes() {
+		return parameterTypes;
+	}
+
+	/** Index of the parameter assigned for Event. */
+	public int getAssignedParameter() {
+		return assignedParameter;
 	}
 
 	/**

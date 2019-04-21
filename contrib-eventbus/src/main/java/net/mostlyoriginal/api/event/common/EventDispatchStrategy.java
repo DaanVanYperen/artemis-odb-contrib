@@ -19,7 +19,7 @@ public interface EventDispatchStrategy {
     /**
      * Dispatch event to registered listeners.
      */
-    public void dispatch( Event event );
+    public void dispatch(Object... args);
     
     /** 
      * Dispatch event of given type to registered listeners.

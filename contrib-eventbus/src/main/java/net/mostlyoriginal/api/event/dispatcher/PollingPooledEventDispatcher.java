@@ -36,8 +36,8 @@ public class PollingPooledEventDispatcher extends FastEventDispatcher {
 		eventQueue.clear();
 	}
 
-
-	public void dispatch(Event event) {
+	@Override
+	public void dispatch(Object... args) {
 		throw new UnsupportedOperationException("This dispatcher manages its own events. Use dispatch(Class<T> type) instead!");
 	}
 

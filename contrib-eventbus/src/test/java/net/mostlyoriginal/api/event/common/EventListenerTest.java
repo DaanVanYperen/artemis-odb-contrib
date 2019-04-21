@@ -3,8 +3,6 @@ package net.mostlyoriginal.api.event.common;
 import com.artemis.utils.reflect.ClassReflection;
 import com.artemis.utils.reflect.Method;
 import com.artemis.utils.reflect.ReflectionException;
-import net.mostlyoriginal.api.event.common.Event;
-import net.mostlyoriginal.api.event.common.EventListener;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -75,14 +73,14 @@ public class EventListenerTest {
     }
 
 
-    @Test(expected = IllegalArgumentException.class)
-    public void Instance_MethodWithTooManyEventParameters_AbortWithException() throws ReflectionException {
+    @Test(expected = ReflectionException.class)
+    public void Instance_MethodWithWrongEventParameters_AbortWithException() throws ReflectionException {
         class ListenerPojo {
             public void invalidListener(BasicEvent o, Object o2) {
             }
         }
         ListenerPojo pojo = new ListenerPojo();
-        new EventListener(pojo, findMethod(pojo, "invalidListener", BasicEvent.class, Object.class));
+        new EventListener(pojo, findMethod(pojo, "invalidListener", Object.class, BasicEvent.class));
     }
 
 	@Test

@@ -57,9 +57,9 @@ public class EventSystem extends BaseSystem {
     /**
      * Dispatch event to registered listeners.
      */
-	public void dispatch( Event event )
+	public void dispatch(Object... args)
 	{
-		dispatcherStrategy.dispatch(event);
+		dispatcherStrategy.dispatch(args);
 	}
 
     /**

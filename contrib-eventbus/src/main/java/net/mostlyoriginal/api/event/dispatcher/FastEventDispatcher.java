@@ -121,8 +121,9 @@ public class FastEventDispatcher implements EventDispatchStrategy {
 	 * Events are called on the call stack, avoid deeply nested or circular event calls.
 	 */
 	@Override
-	public void dispatch(Event event) {
-		if ( event == null ) throw new NullPointerException("Event required.");
+	public void dispatch(Object... args) {
+		Object event = args[0];
+		if (!(event instanceof Event)) throw new NullPointerException("Event required.");
 
 		final Bag<EventListener> listeners = getListenersForHierarchical(event.getClass());
 

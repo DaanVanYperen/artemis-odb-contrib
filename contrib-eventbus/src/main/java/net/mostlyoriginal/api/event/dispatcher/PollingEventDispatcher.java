@@ -8,12 +8,12 @@ import com.artemis.utils.reflect.ReflectionException;
 
 /**
  * Polling event dispatcher.
- * 
+ *
  * @author Namek
  */
 public class PollingEventDispatcher extends FastEventDispatcher {
 	private final Bag<Event> eventQueue = new Bag<Event>();
-	
+
 	@Override
 	public void process() {
 		Object[] eventsToDispatch = eventQueue.getData();
@@ -31,14 +31,16 @@ public class PollingEventDispatcher extends FastEventDispatcher {
 			//  - some event handlers could dispatch more events
 			s = eventQueue.size();
 		}
-		
+
 		eventQueue.clear();
 	}
-	
-	public void dispatch(Event event) {
-		eventQueue.add(event);
+
+	public void dispatch(Object... args) {
+		Object event = args[0];
+		if (!(event instanceof Event)) throw new NullPointerException("Event required.");
+		eventQueue.add((Event) event);
 	}
-	
+
 	@Override
 	public <T extends Event> T dispatch(Class<T> type) {
 		T event;
@@ -50,7 +52,7 @@ public class PollingEventDispatcher extends FastEventDispatcher {
 			String error = "Couldn't instantiate object of type " + type.getName();
 			throw new RuntimeException(error, e);
 		}
-		
+
 		return event;
 	}
 }

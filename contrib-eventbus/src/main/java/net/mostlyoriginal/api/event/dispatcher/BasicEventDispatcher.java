@@ -39,12 +39,13 @@ public class BasicEventDispatcher implements EventDispatchStrategy {
      * Events are called on the call stack, avoid deeply nested or circular event calls.
      */
     @Override
-    public void dispatch( Event event )
+    public void dispatch(Object... args)
     {
-        if ( event == null ) throw new NullPointerException("Event required.");
+        Object event = args[0];
+        if (!(event instanceof Event)) throw new NullPointerException("Event required.");
 
         // fetch relevant listeners, sorted by order.
-        final ImmutableBag<EventListener> relevantListeners = getRelevantListeners(event);
+        final ImmutableBag<EventListener> relevantListeners = getRelevantListeners((Event) event);
 
         // iterate over applicable listeners.
         for(int i=0, s=relevantListeners.size(); i<s; i++ )
