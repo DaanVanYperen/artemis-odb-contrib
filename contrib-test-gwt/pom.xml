@@ -7,7 +7,6 @@
         <version>2.5.0-SNAPSHOT</version>
     </parent>
     <artifactId>contrib-test-gwt</artifactId>
-  <version>2.3.0</version>
     <packaging>war</packaging>
     <name>contrib-test-gwt</name>
     <description>Test contrib functionality under gwt.</description>
@@ -22,28 +21,35 @@
         <dependency>
             <groupId>net.mostlyoriginal.artemis-odb</groupId>
             <artifactId>contrib-core</artifactId>
-            <version>2.5.0-SNAPSHOT</version>
+            <version>${project.version}</version>
             <classifier>sources</classifier>
         </dependency>
 
         <dependency>
             <groupId>net.mostlyoriginal.artemis-odb</groupId>
             <artifactId>contrib-jam</artifactId>
-            <version>2.5.0-SNAPSHOT</version>
+            <version>${project.version}</version>
             <classifier>sources</classifier>
         </dependency>
 
         <dependency>
             <groupId>net.mostlyoriginal.artemis-odb</groupId>
             <artifactId>contrib-eventbus</artifactId>
-            <version>2.5.0-SNAPSHOT</version>
+            <version>${project.version}</version>
+            <classifier>sources</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>net.mostlyoriginal.artemis-odb</groupId>
+            <artifactId>contrib-plugin-singleton</artifactId>
+            <version>${project.version}</version>
             <classifier>sources</classifier>
         </dependency>
 
         <dependency>
             <groupId>net.mostlyoriginal.artemis-odb</groupId>
             <artifactId>contrib-jam</artifactId>
-            <version>2.5.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

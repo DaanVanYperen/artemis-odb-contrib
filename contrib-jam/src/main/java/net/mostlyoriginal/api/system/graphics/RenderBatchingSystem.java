@@ -5,11 +5,13 @@ package net.mostlyoriginal.api.system.graphics;
  */
 
 import com.artemis.BaseSystem;
+import com.artemis.BaseSystem;
 import com.artemis.ComponentMapper;
 import com.artemis.World;
 import com.artemis.annotations.Wire;
 import com.artemis.utils.Bag;
 import net.mostlyoriginal.api.component.graphics.Render;
+import net.mostlyoriginal.api.component.graphics.RendererSingleton;
 import net.mostlyoriginal.api.system.delegate.EntityProcessAgent;
 import net.mostlyoriginal.api.system.delegate.EntityProcessPrincipal;
 import net.mostlyoriginal.api.utils.BagUtils;
@@ -29,10 +31,9 @@ import net.mostlyoriginal.api.utils.BagUtils;
 @Wire
 public class RenderBatchingSystem extends BaseSystem implements EntityProcessPrincipal {
 
+	protected RendererSingleton rendererSingleton;
 	protected ComponentMapper<Render> mRenderable;
-
 	protected final Bag<Job> sortedJobs = new Bag<>();
-	public boolean sortedDirty = false;
 
 	@Override
 	protected void setWorld(World world) {
@@ -54,7 +55,7 @@ public class RenderBatchingSystem extends BaseSystem implements EntityProcessPri
 			throw new RuntimeException("RenderBatchingSystem requires agents entities to have component Renderable.");
 		// register new job. this will influence sorting order.
 		sortedJobs.add(new Job(entityId, agent));
-		sortedDirty = true;
+		rendererSingleton.sortedDirty = true;
 	}
 
 	/**
@@ -74,7 +75,7 @@ public class RenderBatchingSystem extends BaseSystem implements EntityProcessPri
 			final Job e2 = (Job) data[i];
 			if (e2.entityId == entityId && e2.agent == agent) {
 				sortedJobs.remove(i);
-				sortedDirty = true;
+				rendererSingleton.sortedDirty = true;
 				break;
 			}
 		}
@@ -83,9 +84,9 @@ public class RenderBatchingSystem extends BaseSystem implements EntityProcessPri
 	@Override
 	protected void processSystem() {
 
-		if (sortedDirty) {
+		if (rendererSingleton.sortedDirty) {
 			// sort our jobs (by layer).
-			sortedDirty = false;
+			rendererSingleton.sortedDirty = false;
 			BagUtils.sort(sortedJobs);
 		}
 

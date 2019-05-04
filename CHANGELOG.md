@@ -3,6 +3,9 @@
 ## Version: 2.5.0
 
 - Targets Libgdx 1.9.9, Artemis-odb 2.3.0-SNASPHOT, GWT 2.8.0
+- *New module `contrib-plugin-singleton`*
+  - Allows for singleton components that are easy to access.
+  - Makes it easier to separate behaviour and data.
 
 ## Version: 2.4.0
 

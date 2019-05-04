@@ -10,7 +10,6 @@ import net.mostlyoriginal.api.component.common.ExtendedComponent;
  * @author Daan van Yperen
  * @see Anim
  */
-@Deprecated
 public class Render extends ExtendedComponent<Render> {
 
 	/**

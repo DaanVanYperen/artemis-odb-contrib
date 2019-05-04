@@ -6,6 +6,7 @@
     <inherits name='com.badlogic.gdx.backends.gdx_backends_gwt'/>
     <inherits name="net.mostlyoriginal.ContribJam"/>
     <inherits name="net.mostlyoriginal.ContribEventBus"/>
+    <inherits name="net.mostlyoriginal.ContribPluginSingleton"/>
 
     <source path='gwt'/>
 
