@@ -1,0 +1,3 @@
+<module rename-to="net.mostlyoriginal.ContribPluginDebug">
+    <source path="plugin"/>
+</module>
