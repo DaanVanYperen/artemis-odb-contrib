@@ -1,6 +1,7 @@
 package net.mostlyoriginal.plugin;
 
 import com.artemis.ArtemisPlugin;
+import com.artemis.LifecycleListenerPlugin;
 import com.artemis.WorldConfigurationBuilder;
 import com.artemis.annotations.UnstableApi;
 
@@ -18,8 +19,6 @@ import com.artemis.annotations.UnstableApi;
  *    WorldConfigurationBuilder.with(new DebugPlugin(new MyDebugLogStrategy()));
  * }
  * </pre>
- * <p>
- * You can also register {@code DebugSystem} directly into your system hierarchy if you want more control.
  * <p>
  * Example output:
  * <pre>
@@ -42,9 +41,11 @@ import com.artemis.annotations.UnstableApi;
 public class DebugPlugin implements ArtemisPlugin {
 
     private DebugLogStrategy logStrategy;
+    private boolean enabled = true;
 
     /**
      * Produce configured DebugPlugin that only reports errors (interactions with deleted entities).
+     *
      * @param packages One or more packages that you want in the stacktrace.
      *                 Stack lines not containing one of these packages are hidden.
      *                 Typically this is your systems package. For example: my.game.systems
@@ -54,8 +55,23 @@ public class DebugPlugin implements ArtemisPlugin {
         return new DebugPlugin(new SystemOutDebugLogStrategy(packages).logErrorsOnly(true));
     }
 
+
+    /**
+     * Enable or disable this plugin?
+     *
+     * When disable, there is zero performance cost. Must be called after creation.
+     *
+     * @param enabled {@code true} debugging enabled {@code false} debugging disabled.
+     * @return this
+     */
+    public DebugPlugin enable(boolean enabled) {
+        this.enabled = enabled;
+        return this;
+    }
+
     /**
      * Produce configured DebugPlugin that only reports create/delete and errors.
+     *
      * @param packages One or more packages that you want in the stacktrace.
      *                 Stack lines not containing one of these packages are hidden.
      *                 Typically this is your systems package. For example: my.game.systems
@@ -93,7 +109,10 @@ public class DebugPlugin implements ArtemisPlugin {
 
     @Override
     public void setup(WorldConfigurationBuilder b) {
-        b.with(WorldConfigurationBuilder.Priority.LOWEST, new DebugSystem(logStrategy));
+        if (enabled) {
+            b.dependsOn(LifecycleListenerPlugin.class)
+                    .with(WorldConfigurationBuilder.Priority.LOWEST, new DebugSystem(logStrategy));
+        }
     }
 
 }

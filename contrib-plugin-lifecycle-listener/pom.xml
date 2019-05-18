@@ -8,11 +8,11 @@
         <version>2.5.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>contrib-plugin-debug</artifactId>
+    <artifactId>contrib-plugin-lifecycle-listener</artifactId>
     <packaging>jar</packaging>
     <description>
-        Can log entity lifecycle events like create, delete.
-        Can also log errors (accessing/deleting already deleted entities) and report a stacktrace to the cause.
+	    Provides listener interface with callbacks for lifecycle of entities, components and world. 
+		Intended to augment editors and debuggers. Can be disabled. No performance impact when disabled.
     </description>
 
     <dependencies>
@@ -20,25 +20,14 @@
             <groupId>net.onedaybeard.artemis</groupId>
             <artifactId>artemis-odb</artifactId>
         </dependency>
-        <dependency>
-            <groupId>net.mostlyoriginal.artemis-odb</groupId>
-            <artifactId>contrib-plugin-lifecycle-listener</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
+
 
     <build>
         <plugins>

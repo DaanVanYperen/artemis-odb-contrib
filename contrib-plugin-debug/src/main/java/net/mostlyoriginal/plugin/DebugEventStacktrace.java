@@ -3,15 +3,27 @@ package net.mostlyoriginal.plugin;
 import com.artemis.annotations.UnstableApi;
 
 /**
+ * Data structure for a single artemis-odb debug event.
+ *
  * @author Daan van Yperen
  */
 @UnstableApi
 public class DebugEventStacktrace {
-    public final Type type; // type of event.
-    public final int entityId; // odb entity id.
-    public final String entityDebugName; // human readable name consistent during the entity lifecycle.
-    public final StackTraceElement[] stacktrace; // stacktrace of the event.
-    public final DebugEventStacktrace cause; // stacktrace that contains origin of error, if any.ss
+
+    /** type of event. */
+    public final Type type;
+
+    /** odb entity id. ODB recycles ids over time so be careful. */
+    public final int entityId;
+
+    /** human readable name consistent during the entity lifecycle. */
+    public final String entityDebugName;
+
+    /** Stacktrace of the event. Typically a stub as deep stacktraces are too expensive to generate. */
+    public final StackTraceElement[] stacktrace;
+
+    /** stacktrace that contains origin of error, if any. */
+    public final DebugEventStacktrace cause;
 
     public DebugEventStacktrace(Type type, int entityId, String entityDebugName, StackTraceElement[] stacktrace) {
         this(type, entityId, entityDebugName, stacktrace, null);
@@ -31,15 +43,44 @@ public class DebugEventStacktrace {
     }
 
     public enum Type {
-        CREATE(false), // entity was created.
-        ERROR_ATTEMPT_TO_DELETE_DELETED_ENTITY(true),
+
+        /** Triggered just after entity is created. */
+        ENTITY_CREATE,
+
+        /** Triggered just before component is retrieved, via {@code ComponentMapper} or otherwise. */
+        COMPONENT_GET,
+
+        /** Triggered just before component is checked, via {@code ComponentMapper} or otherwise. */
+        COMPONENT_HAS,
+
+        /** Triggered just before component is removed, via {@code ComponentMapper} or otherwise. */
+        COMPONENT_REMOVE,
+
+        /** Triggered just before component is removed internally, via {@code ComponentMapper} or otherwise. */
+        COMPONENT_INTERNAL_REMOVE,
+
+        /** Triggered just before component is created, via {@code ComponentMapper} or otherwise. */
+        COMPONENT_CREATE,
+
+        /** Triggered just before component is created internally, via {@code ComponentMapper} or otherwise. */
+        COMPONENT_INTERNAL_CREATE,
+
+        /** Triggered just before entity is deleted. */
+        ENTITY_DELETE, // entity delete order issued (but not finally deleted).
+        UNKNOWN,
+
+        /** Triggered whenever the engine attempts to access an entity that has been deleted or never existed. */
         ERROR_ATTEMPT_TO_ACCESS_DELETED_ENTITY(true),
-        DELETE(false); // entity delete order issued (but not finally deleted).
+        ;
 
         private final boolean error;
 
         Type(boolean error) {
             this.error = error;
+        }
+
+        Type() {
+            this.error = false;
         }
 
         public boolean isError() {

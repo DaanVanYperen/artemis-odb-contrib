@@ -6,6 +6,8 @@
 - *New plugin `contrib-plugin-singleton`*
   - Allows for singleton components that are easy to access.
   - Makes it easier to separate behaviour and data.
+- *New plugin `contrib-plugin-lifecycle-listener`*
+  - Allows listening to odb component, entity and other lifecycle events.
 - *New plugin `contrib-plugin-debug`*
   - Allows debugging those nasty 'entity id' issues.
   - Can log entity lifecycle events like create, delete.

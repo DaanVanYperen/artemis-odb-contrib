@@ -110,6 +110,7 @@
         <module>contrib-plugin-profiler</module>
         <module>contrib-plugin-operations</module>
         <module>contrib-plugin-singleton</module>
+        <module>contrib-plugin-lifecycle-listener</module>
         <module>contrib-plugin-debug</module>
         <module>contrib-plugin-logging-api</module>
         <module>contrib-plugin-logging-libgdx</module>
@@ -242,8 +243,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
