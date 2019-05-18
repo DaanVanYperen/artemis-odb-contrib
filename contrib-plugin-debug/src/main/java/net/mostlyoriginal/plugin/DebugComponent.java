@@ -23,6 +23,9 @@ public class DebugComponent extends Component {
     // @todo decouple name generation from component.
     public String name = AnimalNameGenerator.random();
 
+    /** tracks if deletion has been finalized by the engine. */
+    public boolean entityDeletionFinalized =false;
+
     public boolean isEntityDeleted() {
         return deletionStacktrace != null;
     }

@@ -1,6 +1,7 @@
 package net.mytest;
 
 import com.artemis.*;
+import com.artemis.annotations.DelayedComponentRemoval;
 import com.artemis.utils.Bag;
 import net.mostlyoriginal.plugin.DebugEventStacktrace;
 import net.mostlyoriginal.plugin.DebugLogStrategy;
@@ -12,6 +13,7 @@ import org.mockito.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import static net.mostlyoriginal.plugin.DebugEventStacktrace.Type.BAD_PRACTICE_ADDING_COMPONENTS_TO_DELETED_ENTITY;
 import static net.mostlyoriginal.plugin.DebugEventStacktrace.Type.ERROR_ATTEMPT_TO_ACCESS_DELETED_ENTITY;
 
 /**
@@ -36,6 +38,7 @@ public class DebugPluginReportIllegalAccessTest {
     }
 
     public ComponentMapper tmpCm;
+    public ComponentMapper tmpCmd;
     public int tmpId;
     public Entity tmpEntity;
 
@@ -199,6 +202,64 @@ public class DebugPluginReportIllegalAccessTest {
         assertErrorAfterUpdateEntityStates((w) -> tmpCm.internalCreate(tmpId), ERROR_ATTEMPT_TO_ACCESS_DELETED_ENTITY);
     }
 
+    /**
+     * Compomentmapper deleted entity tests - DELAYED REMOVAL ANNOTATION.
+     *
+     * Delayed removal annotation means the component lingers until deletion is finalized. The debugger
+     * shouldn't report accesses as an error.
+     */
+
+    @Test
+    public void When_componentmapper_for_delayed_component_get_On_deleted_entity() {
+        assertNoErrorRightAfterDeletion((w) -> tmpCmd.get(tmpId));
+    }
+
+    @Test
+    public void When_componentmapper_for_delayed_component_get_On_deleted_entity_after_updateentitystates() {
+        assertErrorAfterUpdateEntityStates((w) -> tmpCmd.get(tmpId), ERROR_ATTEMPT_TO_ACCESS_DELETED_ENTITY);
+    }
+
+    @Test
+    public void When_componentmapper_for_delayed_component_has_On_deleted_entity() {
+        assertNoErrorRightAfterDeletion((w) -> tmpCmd.has(tmpId));
+    }
+
+    @Test
+    public void When_componentmapper_for_delayed_component_has_On_deleted_entity_after_updateentitystates() {
+        assertErrorAfterUpdateEntityStates((w) -> tmpCmd.has(tmpId), ERROR_ATTEMPT_TO_ACCESS_DELETED_ENTITY);
+    }
+
+
+    @Test
+    public void When_componentmapper_for_delayed_component_remove_On_entity() {
+        assertNoErrorRightAfterDeletion((w) -> tmpCmd.remove(tmpId));
+    }
+
+    @Test
+    public void When_componentmapper_for_delayed_component_remove_On_deleted_entity_after_updateentitystates() {
+        assertErrorAfterUpdateEntityStates((w) -> tmpCmd.remove(tmpId), ERROR_ATTEMPT_TO_ACCESS_DELETED_ENTITY);
+    }
+
+
+    @Test
+    public void When_componentmapper_for_delayed_component_create_On_deleted_entity() {
+        assertErrorRightAfterDeletion((w) -> tmpCmd.create(tmpId), BAD_PRACTICE_ADDING_COMPONENTS_TO_DELETED_ENTITY);
+    }
+
+    @Test
+    public void When_componentmapper_for_delayed_component_create_On_deleted_entity_after_updateentitystates() {
+        assertErrorAfterUpdateEntityStates((w) -> tmpCmd.create(tmpId), ERROR_ATTEMPT_TO_ACCESS_DELETED_ENTITY);
+    }
+
+    @Test
+    public void When_componentmapper_for_delayed_component_internalCreate_On_deleted_entity() {
+        assertNoErrorRightAfterDeletion((w) -> tmpCmd.internalCreate(tmpId));
+    }
+
+    @Test
+    public void When_componentmapper_for_delayed_component_internalCreate_On_deleted_entity_after_updateentitystates() {
+        assertErrorAfterUpdateEntityStates((w) -> tmpCmd.internalCreate(tmpId), ERROR_ATTEMPT_TO_ACCESS_DELETED_ENTITY);
+    }
 
     /** Entity obj deleted entity tests */
     /**
@@ -299,10 +360,15 @@ public class DebugPluginReportIllegalAccessTest {
     public static class TestComponent extends Component {
     }
 
+    @DelayedComponentRemoval
+    public static class DelayedTestComponent extends Component {
+    }
+
     private BaseSystem baseSystem(BiConsumer<World, Integer> logic) {
         return new BaseSystem() {
             int invocations = 0;
             ComponentMapper<TestComponent> cm;
+            ComponentMapper<DelayedTestComponent> cmd;
 
             @Override
             protected void initialize() {
@@ -313,6 +379,7 @@ public class DebugPluginReportIllegalAccessTest {
             protected void processSystem() {
                 try {
                     tmpCm = cm;
+                    tmpCmd = cmd;
                     logic.accept(world, invocations++);
                 } catch (Exception ignore) {
                     ignore.printStackTrace();
@@ -341,6 +408,17 @@ public class DebugPluginReportIllegalAccessTest {
         }, expectedType);
     }
 
+    private void assertNoErrorRightAfterDeletion(Consumer<World> consumer) {
+        run((w) -> {
+            tmpEntity = w.createEntity();
+            tmpId = tmpEntity.getId();
+            w.delete(tmpId);
+            consumer.accept(w);
+        }, null);
+
+        assertNoError();
+    }
+
     private void assertNoErrorWhenNoDelete(Consumer<World> consumer) {
         run((w) -> {
             tmpEntity = w.createEntity();
@@ -348,6 +426,10 @@ public class DebugPluginReportIllegalAccessTest {
             consumer.accept(w);
         },null);
 
+        assertNoError();
+    }
+
+    private void assertNoError() {
         Mockito.verify(logStrategy, Mockito.never()).log(Matchers.argThat(new ArgumentMatcher<DebugEventStacktrace>() {
             @Override
             public boolean matches(Object argument) {

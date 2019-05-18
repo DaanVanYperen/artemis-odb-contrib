@@ -33,9 +33,10 @@ public class LifecycleListenerPlugin implements ArtemisPlugin {
     private class LifecycleListenerManager extends BaseSystem implements ArtemisPhaseListener {
 
         @Override
-        public void onPhase(Phase phase) {
+        public void onPhase(World w, Phase phase) {
             if (phase == Phase.PRE_INITIALIZE) {
-                registerEntityLifecycleListeners(world.getSystems());
+                // world on system isn't available at this point in the lifecycle.
+                registerEntityLifecycleListeners(w.getSystems());
             }
         }
 

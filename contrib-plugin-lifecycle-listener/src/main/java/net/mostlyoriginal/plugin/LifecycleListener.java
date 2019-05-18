@@ -17,6 +17,9 @@ public interface LifecycleListener {
         /** Triggered when the entity is scheduled for deletion */
         ENTITY_DELETE_PLANNED,
 
+        /** Triggered when the entity is actually deleted. */
+        ENTITY_DELETE_FINALIZED,
+
         /** Triggered just after entity is created. */
         ENTITY_CREATE_POST,
 
@@ -35,25 +38,25 @@ public interface LifecycleListener {
         /** Triggers just before entity is checked for activity. */
         ENTITY_ISACTIVE_CHECK_PRE,
 
-        /** Triggers just before component gets fetched. */
+        /** Triggers just before component gets fetched. {@code OptionalArg=ComponentType}. */
         COMPONENT_GET_PRE,
 
-        /** Triggers just before component check. */
+        /** Triggers just before component check. {@code OptionalArg=ComponentType}. */
         COMPONENT_HAS_PRE,
 
-        /** Triggers just before attempted component removal. */
+        /** Triggers just before attempted component removal. {@code OptionalArg=ComponentType}. */
         COMPONENT_REMOVE_PRE,
 
-        /** Triggers just before attempted component removal (called by odb internally. */
+        /** Triggers just before attempted component removal (called by odb internally.)  {@code OptionalArg=ComponentType}. */
         COMPONENT_INTERNAL_REMOVE_PRE,
 
-        /** Triggers just before attempted component creation. */
+        /** Triggers just before attempted component creation. {@code OptionalArg=ComponentType}. */
         COMPONENT_CREATE_PRE,
 
-        /** Triggers just before component is created. (called by odb internally.). */
+        /** Triggers just before component is created. (called by odb internally.).  {@code OptionalArg=ComponentType} */
         COMPONENT_INTERNAL_CREATE_PRE,
 
-        /** Triggers at the start of componentmanager clean call. */
+        /** Triggers at the start of componentmanager clean call.*/
         COMPONENTMANAGER_CLEAN_PRE,
         /** Triggers at the end of componentmanager clean call. */
         COMPONENTMANAGER_CLEAN_POST

@@ -26,6 +26,10 @@ class LifecycleListenerComponentManager extends ComponentManager {
 
     @Override
     void clean(IntBag pendingPurge) {
+        for (int i = 0, s = pendingPurge.size(); i < s; i++) {
+            // must run /after/ COMPONENTMANAGER_CLEAN_PRE
+            listener.onLifecycleEvent(LifecycleListener.Type.ENTITY_DELETE_FINALIZED, pendingPurge.get(i), null);
+        }
         listener.onLifecycleEvent(LifecycleListener.Type.COMPONENTMANAGER_CLEAN_PRE, -1, null);
         super.clean(pendingPurge);
         listener.onLifecycleEvent(LifecycleListener.Type.COMPONENTMANAGER_CLEAN_POST, -1, null);

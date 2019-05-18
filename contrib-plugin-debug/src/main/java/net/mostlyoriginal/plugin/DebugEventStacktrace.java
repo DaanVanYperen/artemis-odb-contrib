@@ -1,6 +1,7 @@
 package net.mostlyoriginal.plugin;
 
 import com.artemis.annotations.UnstableApi;
+import org.omg.CORBA.UNKNOWN;
 
 /**
  * Data structure for a single artemis-odb debug event.
@@ -65,12 +66,20 @@ public class DebugEventStacktrace {
         /** Triggered just before component is created internally, via {@code ComponentMapper} or otherwise. */
         COMPONENT_INTERNAL_CREATE,
 
-        /** Triggered just before entity is deleted. */
-        ENTITY_DELETE, // entity delete order issued (but not finally deleted).
+        /** Triggered just before entity is scheduled for deletion. */
+        ENTITY_DELETE,
+
+        /** Triggered just before the entity is actually deleted. */
+        ENTITY_DELETE_FINALIZED,
+
+        /** Should never trigger. */
         UNKNOWN,
 
         /** Triggered whenever the engine attempts to access an entity that has been deleted or never existed. */
         ERROR_ATTEMPT_TO_ACCESS_DELETED_ENTITY(true),
+
+        /** Triggered whenever the engine attempts to alter an entity composition after it has been deleted. */
+        BAD_PRACTICE_ADDING_COMPONENTS_TO_DELETED_ENTITY(true)
         ;
 
         private final boolean error;
