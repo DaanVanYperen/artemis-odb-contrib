@@ -16,6 +16,7 @@
        `WorldConfigurationBuilder.with(DebugPlugin.thatLogsErrorsIn("net.mostlyoriginal"))`
        `WorldConfigurationBuilder.with(DebugPlugin.thatLogsEverythingIn("net.mostlyoriginal"))`
        `WorldConfigurationBuilder.with(new DebugPlugin(new MyDebugLogStrategy()));`
+- *Fix* SchedulerSystem accesses component after entity deletion. 
    
 ## Version: 2.4.0
 

@@ -26,9 +26,8 @@ public class SchedulerSystem extends EntityProcessingSystem {
     @Override
     protected void process(Entity e) {
         ParallelOperation operation = mSchedule.get(e).operation;
-        if ( operation.process(world.delta, e) ) {
-            // Done. return schedule to pool.
+        if ( operation.isCompleted() ) {
             mSchedule.remove(e);
-        }
+        } else operation.process(world.delta, e);
     }
 }
