@@ -60,11 +60,11 @@ public class SystemOutDebugLogStrategy implements DebugLogStrategy {
                         if (debugEventStacktrace.hasCause()) {
                             log("*********************");
                         }
-
-                        log(prefix + " @ " + callsiteSummary);
+                        log(prefix);
+                        log("\tat " + callsiteSummary);
                     } else {
                         // beyond first line.
-                        log("       .. " + callsiteSummary);
+                        log("\tat " + callsiteSummary);
                     }
                     matched = true;
                 } else if (matched) {
