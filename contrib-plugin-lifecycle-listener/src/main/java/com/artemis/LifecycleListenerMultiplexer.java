@@ -1,5 +1,6 @@
 package com.artemis;
 
+import com.artemis.utils.Bag;
 import net.mostlyoriginal.plugin.LifecycleListener;
 
 /**
@@ -8,16 +9,24 @@ import net.mostlyoriginal.plugin.LifecycleListener;
  * @author Daan van Yperen
  */
 class LifecycleListenerMultiplexer implements LifecycleListener {
-    private final LifecycleListener[] listeners;
+    private final Bag<LifecycleListener> listeners = new Bag<>(LifecycleListener.class);
 
     public LifecycleListenerMultiplexer(LifecycleListener[] listeners) {
-        this.listeners = listeners;
+        for (int i = 0; i < listeners.length; i++) {
+            addListener(listeners[i]);
+        }
+    }
+
+    public LifecycleListenerMultiplexer() {}
+
+    public void addListener(LifecycleListener listener) {
+        listeners.add(listener);
     }
 
     @Override
     public void onLifecycleEvent(Type event, int entityId, Object optionalArg) {
-        for (int i = 0; i < listeners.length; i++) {
-            listeners[i].onLifecycleEvent(event, entityId, optionalArg);
+        for (int i = 0, s = listeners.size(); i < s; i++) {
+            listeners.get(i).onLifecycleEvent(event, entityId, optionalArg);
         }
     }
 }

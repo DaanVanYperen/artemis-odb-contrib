@@ -111,6 +111,7 @@
         <module>contrib-plugin-operations</module>
         <module>contrib-plugin-singleton</module>
         <module>contrib-plugin-lifecycle-listener</module>
+        <module>contrib-plugin-lifecycle-transplants</module>
         <module>contrib-plugin-debug</module>
         <module>contrib-plugin-logging-api</module>
         <module>contrib-plugin-logging-libgdx</module>
