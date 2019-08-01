@@ -10,7 +10,7 @@ import net.onedaybeard.graftt.Graft;
  */
 @SuppressWarnings("InfiniteRecursion")
 @Graft.Recipient(EntityManager.class)
-class LifecycleListenerEntityManager {
+class EntityManagerTransplant {
     @Graft.Mock
     private WorldTransplant world;
 

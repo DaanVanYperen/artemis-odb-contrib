@@ -11,8 +11,7 @@
     <artifactId>contrib-plugin-lifecycle-transplants</artifactId>
     <packaging>jar</packaging>
     <description>
-	    Provides listener interface with callbacks for lifecycle of entities, components and world. 
-		Intended to augment editors and debuggers. Can be disabled. No performance impact when disabled.
+	    Provides transplants for injecting additional lifecycle callbacks into artemis
     </description>
 
     <properties>

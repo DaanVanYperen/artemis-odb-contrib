@@ -11,7 +11,7 @@ import net.onedaybeard.graftt.Graft;
  */
 @SuppressWarnings("InfiniteRecursion")
 @Graft.Recipient(ComponentMapper.class)
-class LifecycleListenerComponentMapper<A extends Component> {
+class ComponentMapperTransplant<A extends Component> {
 
     @SuppressWarnings("WeakerAccess")
     public LifecycleListener listener;

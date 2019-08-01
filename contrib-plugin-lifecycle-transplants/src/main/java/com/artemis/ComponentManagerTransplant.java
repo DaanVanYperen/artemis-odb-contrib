@@ -12,16 +12,16 @@ import net.onedaybeard.graftt.Graft;
  */
 @SuppressWarnings("InfiniteRecursion")
 @Graft.Recipient(ComponentManager.class)
-class LifecycleListenerComponentManager  {
+class ComponentManagerTransplant {
     @Graft.Mock
     private WorldTransplant world;
 
     @Graft.Mock
-    private Bag<LifecycleListenerComponentMapper> mappers;
+    private Bag<ComponentMapperTransplant> mappers;
 
     // see note in this::registerComponentType
     protected void initialize() {
-        for (LifecycleListenerComponentMapper cm : mappers) {
+        for (ComponentMapperTransplant cm : mappers) {
             cm.listener = world.lifecycleListener;
         }
     }

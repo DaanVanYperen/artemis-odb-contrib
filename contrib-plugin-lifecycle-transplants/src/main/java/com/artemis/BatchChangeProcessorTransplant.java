@@ -10,7 +10,7 @@ import net.onedaybeard.graftt.Graft;
  */
 @SuppressWarnings("InfiniteRecursion")
 @Graft.Recipient(BatchChangeProcessor.class)
-class LifecycleListenerBatchChangeProcessorTransplant {
+class BatchChangeProcessorTransplant {
     @Graft.Mock
     private WorldTransplant world;
 
