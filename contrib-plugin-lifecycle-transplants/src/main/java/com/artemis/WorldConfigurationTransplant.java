@@ -2,6 +2,7 @@ package com.artemis;
 
 import com.artemis.injection.Injector;
 import com.artemis.utils.Bag;
+import net.mostlyoriginal.plugin.LifecycleListener;
 import net.onedaybeard.graftt.Graft;
 
 @SuppressWarnings("InfiniteRecursion")
@@ -16,15 +17,25 @@ class WorldConfigurationTransplant {
                     Injector injector,
                     AspectSubscriptionManager asm) {
 
-        for (BaseSystem system : systems) {
-            if (!(system instanceof LifecycleListenerManager))
-                continue;
+        LifecycleListenerManager llm = system(LifecycleListenerManager.class);
+        world.lifecycleListener = llm.lifecycleListener();
 
-            LifecycleListenerManager llm = (LifecycleListenerManager) system;
-            world.lifecycleListener = llm.lifecycleListener();
-            break;
+        for (BaseSystem system : systems) {
+            if (system instanceof LifecycleListener) {
+                llm.addListener((LifecycleListener) system);
+            }
         }
 
         initialize(world, injector, asm);
+    }
+
+    private <T extends BaseSystem> T system(Class<T> s) {
+        for (BaseSystem system : systems) {
+            if (s.isInstance(system))
+                return (T) system;
+        }
+
+        throw new RuntimeException(
+            "LifecycleListenerManager not registered with world");
     }
 }
