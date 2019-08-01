@@ -19,8 +19,7 @@ class LifecycleListenerComponentManager  {
     @Graft.Mock
     private Bag<LifecycleListenerComponentMapper> mappers;
 
-
-    // see note in registerComponentType
+    // see note in this::registerComponentType
     protected void initialize() {
         for (LifecycleListenerComponentMapper cm : mappers) {
             cm.listener = world.lifecycleListener;
