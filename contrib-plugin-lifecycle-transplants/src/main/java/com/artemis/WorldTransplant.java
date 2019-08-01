@@ -7,7 +7,4 @@ import net.onedaybeard.graftt.Graft;
 class WorldTransplant {
     // set during WorldConfiguration::initialize
     public LifecycleListener lifecycleListener;
-
-    @Graft.Mock
-    public ComponentManager getComponentManager() { return null; }
 }
