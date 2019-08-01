@@ -38,6 +38,6 @@ class WorldConfigurationTransplant {
         }
 
         throw new RuntimeException(
-            "LifecycleListenerManager not registered with world");
+            s.getSimpleName() + " not registered with world");
     }
 }
