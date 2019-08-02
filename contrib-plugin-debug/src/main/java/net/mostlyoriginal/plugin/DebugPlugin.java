@@ -40,6 +40,17 @@ import com.artemis.annotations.UnstableApi;
 @UnstableApi
 public class DebugPlugin implements ArtemisPlugin {
 
+    /**
+     * Indicates whether artemis has been injected with additional
+     * debugging capabilities. This requires starting java with
+     * {@code -javaagent:<graftt-agent>=cp:<path-to-transplants>}.
+     *
+     * @return true if artemis is transformed with full debugging support.
+     */
+    public static boolean isArtemisTransformedForDebugging() {
+        return false;
+    }
+
     private DebugLogStrategy logStrategy;
     private boolean enabled = true;
 
