@@ -10,7 +10,7 @@
     </parent>
 
     <properties>
-        <graftt.version>0.1.0-SNAPSHOT</graftt.version>
+        <graftt.version>0.1.1</graftt.version>
         <graftt.agent>${project.build.directory}/agent.jar</graftt.agent>
         <graftt.transplants>
             ${project.basedir}/../contrib-plugin-lifecycle-transplants/target/classes/
