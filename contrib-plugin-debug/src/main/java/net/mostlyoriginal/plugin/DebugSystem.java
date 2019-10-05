@@ -5,7 +5,6 @@ import com.artemis.Component;
 import com.artemis.ComponentType;
 import com.artemis.annotations.DelayedComponentRemoval;
 import com.artemis.annotations.UnstableApi;
-import sun.misc.SharedSecrets;
 
 import java.util.HashMap;
 
@@ -202,16 +201,25 @@ public class DebugSystem extends BaseSystem implements LifecycleListener {
 
     // we only care about part of the stacktrace. stacktraces are expensive so don't overdo it.
     private StackTraceElement[] createStacktraceStub(int maxDepth) {
-        Exception e = new Exception();
-        int ignoredDepth = 2;
-        int depth = Math.min(maxDepth + ignoredDepth, SharedSecrets.getJavaLangAccess().getStackTraceDepth(e));
+        return new StackTracer(maxDepth).getStackTrace();
+    }
 
-        StackTraceElement[] result = new StackTraceElement[depth - ignoredDepth];
-        for (int frame = ignoredDepth; frame < depth; frame++) {
-            // expensive
-            result[frame - ignoredDepth] = SharedSecrets.getJavaLangAccess().getStackTraceElement(e, frame);
+    private static class StackTracer extends Throwable {
+        private static final int FRAME_SKIP_OFFSET = 2;
+        private int maxDepth;
+
+        StackTracer(int maxDepth) {
+            this.maxDepth = maxDepth;
         }
 
-        return result;
+        @Override
+        public StackTraceElement[] getStackTrace() {
+            StackTraceElement[] trace = super.getStackTrace();
+
+            StackTraceElement[] trimmed = new StackTraceElement[trace.length - FRAME_SKIP_OFFSET];
+            System.arraycopy(trace, FRAME_SKIP_OFFSET, trimmed, 0, trimmed.length);
+
+            return trimmed;
+        }
     }
 }

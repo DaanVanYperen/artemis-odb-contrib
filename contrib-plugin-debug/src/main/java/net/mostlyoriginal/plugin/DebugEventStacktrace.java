@@ -1,7 +1,6 @@
 package net.mostlyoriginal.plugin;
 
 import com.artemis.annotations.UnstableApi;
-import org.omg.CORBA.UNKNOWN;
 
 /**
  * Data structure for a single artemis-odb debug event.

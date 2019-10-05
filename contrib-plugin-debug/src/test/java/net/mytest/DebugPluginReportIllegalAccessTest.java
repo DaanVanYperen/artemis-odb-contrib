@@ -15,6 +15,7 @@ import java.util.function.Consumer;
 
 import static net.mostlyoriginal.plugin.DebugEventStacktrace.Type.BAD_PRACTICE_ADDING_COMPONENTS_TO_DELETED_ENTITY;
 import static net.mostlyoriginal.plugin.DebugEventStacktrace.Type.ERROR_ATTEMPT_TO_ACCESS_DELETED_ENTITY;
+import static org.junit.Assert.assertTrue;
 
 /**
  * All of these Should_report_ERROR_ATTEMPT_TO_ACCESS_DELETED_ENTITY
@@ -42,6 +43,11 @@ public class DebugPluginReportIllegalAccessTest {
     public int tmpId;
     public Entity tmpEntity;
 
+
+    @Test
+    public void Ensure_bytecode_transplants_done() {
+        assertTrue(DebugPlugin.isArtemisTransformedForDebugging());
+    }
 
     @Test
     public void When_world_edit_On_deleted_entity() {
