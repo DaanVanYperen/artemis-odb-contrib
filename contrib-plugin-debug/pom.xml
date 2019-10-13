@@ -10,7 +10,7 @@
     </parent>
 
     <properties>
-        <graftt.version>0.1.3</graftt.version>
+        <graftt.version>0.2.0-SNAPSHOT</graftt.version>
         <graftt.agent>${project.build.directory}/agent.jar</graftt.agent>
         <graftt.transplants>
             ${project.basedir}/../contrib-plugin-lifecycle-transplants/target/classes/
@@ -80,7 +80,7 @@
                                     <artifactId>agent</artifactId>
                                     <version>${graftt.version}</version>
                                     <type>jar</type>
-                                    <overWrite>false</overWrite>
+                                    <overWrite>true</overWrite>
                                     <outputDirectory>${project.build.directory}</outputDirectory>
                                     <destFileName>agent.jar</destFileName>
                                 </artifactItem>

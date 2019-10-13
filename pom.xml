@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <asm.version>4.1</asm.version>
         <artemis-odb.version>2.3.0-SNAPSHOT</artemis-odb.version>
-        <libgdx.version>1.9.9</libgdx.version>
+        <libgdx.version>1.9.10</libgdx.version>
     </properties>
 
     <scm>
@@ -117,7 +117,7 @@
         <module>contrib-plugin-logging-libgdx</module>
         <module>contrib-jam</module>
         <module>contrib-eventbus</module>
-        <!--<module>contrib-test-gwt</module>-->
+        <module>contrib-test-gwt</module>
         <module>contrib-benchmark</module>
         <module>contrib-network</module>
     </modules>

@@ -28,7 +28,7 @@ public class SingletonPlugin implements ArtemisPlugin {
     /**
      * Resolves singleton fields in systems.
      */
-    private static class SingletonFieldResolver implements FieldResolver {
+    public static class SingletonFieldResolver implements FieldResolver {
 
         private HashMap<Class<?>, Component> cachedSingletons;
         private EntityEdit singletonContainerEntity;
