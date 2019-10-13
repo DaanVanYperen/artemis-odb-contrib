@@ -1,12 +1,10 @@
 package net.mostlyoriginal.api.manager;
 
 import com.artemis.BaseSystem;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 
 import java.util.HashMap;
 
@@ -14,14 +12,12 @@ import java.util.HashMap;
  * Basic asset system for serving images from a single texture.
  *
  * @author Daan van Yperen
- * @deprecated implement AbstractAssetManager instead
+ * @deprecated implement AbstractAssetManager instead. Homebrew sound systems.
  */
 @Deprecated
 public class AbstractAssetSystem extends BaseSystem {
     public Texture tileset;
-    public HashMap<String, Animation> sprites = new HashMap<String, Animation>();
-    public HashMap<String, Sound> sounds = new HashMap<String, Sound>();
-    protected float sfxVolume = 0.2f;
+    public HashMap<String, Animation> sprites = new HashMap<>();
 
     public AbstractAssetSystem() {
         this("tiles.png");
@@ -33,10 +29,6 @@ public class AbstractAssetSystem extends BaseSystem {
 
     public Animation get(final String identifier) {
         return sprites.get(identifier);
-    }
-
-    public Sound getSfx(final String identifier) {
-        return sounds.get(identifier);
     }
 
     public Animation add(final String identifier, int x1, int y1, int w, int h, int repeatX) {
@@ -70,22 +62,6 @@ public class AbstractAssetSystem extends BaseSystem {
 
     @Override
     protected void processSystem() {
-    }
-
-    protected void loadSounds(String[] soundnames) {
-        for (String identifier : soundnames) {
-            sounds.put(identifier, Gdx.audio.newSound(Gdx.files.internal("sfx/" + identifier + ".mp3")));
-        }
-    }
-
-    public void playSfx(String name) {
-        if (sfxVolume > 0) {
-            Sound sfx = getSfx(name);
-            if (sfx != null) {
-                sfx.stop();
-                sfx.play(sfxVolume, MathUtils.random(1f, 1.04f), 0);
-            }
-        }
     }
 
     public void dispose() {
