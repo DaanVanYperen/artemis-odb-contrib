@@ -1,12 +1,16 @@
 package net.mostlyoriginal.api;
 
 import com.artemis.*;
+import com.artemis.EntitySubscription.SubscriptionListener;
 import com.artemis.annotations.UnstableApi;
 import com.artemis.injection.FieldResolver;
+import com.artemis.utils.IntBag;
 import com.artemis.utils.reflect.ClassReflection;
 import com.artemis.utils.reflect.Field;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.artemis.utils.reflect.ClassReflection.isAnnotationPresent;
 
@@ -21,9 +25,25 @@ import static com.artemis.utils.reflect.ClassReflection.isAnnotationPresent;
  */
 @UnstableApi
 public class SingletonPlugin implements ArtemisPlugin {
+
+    private final boolean strict;
+
+    public SingletonPlugin() {
+        this(false);
+    }
+
+    public SingletonPlugin(boolean strict) {
+        this.strict = strict;
+    }
+
     @Override
     public void setup(WorldConfigurationBuilder b) {
-        b.register(new SingletonFieldResolver());
+        SingletonFieldResolver singletonResolver = new SingletonFieldResolver();
+        b.register(singletonResolver);
+
+        if (strict) {
+            b.with(new SingletonValidationSystem(singletonResolver));
+        }
     }
 
     /**
@@ -56,4 +76,42 @@ public class SingletonPlugin implements ArtemisPlugin {
             return cachedSingletons.get(component);
         }
     }
+
+    public static class SingletonValidationSystem extends BaseSystem implements SubscriptionListener {
+
+        private final SingletonFieldResolver singletonResolver;
+        private final Set<Class<? extends Component>> singletonComponents;
+
+        private AspectSubscriptionManager asm;
+
+        public SingletonValidationSystem(SingletonFieldResolver singletonResolver) {
+            this.singletonResolver = singletonResolver;
+            this.singletonComponents = new HashSet<>();
+        }
+
+        @Override
+        protected void initialize() {
+            setEnabled(false);
+
+            if (singletonResolver.cachedSingletons.size() > 0) {
+                this.singletonComponents.addAll(singletonResolver.cachedSingletons.keySet());
+                asm.get(Aspect.one(singletonComponents)).addSubscriptionListener(this);
+            }
+        }
+
+        @Override
+        protected void processSystem() {
+        }
+
+        @Override
+        public void inserted(IntBag entities) {
+            throw new SingletonException(singletonComponents);
+        }
+
+        @Override
+        public void removed(IntBag entities) {
+        }
+
+    }
+
 }

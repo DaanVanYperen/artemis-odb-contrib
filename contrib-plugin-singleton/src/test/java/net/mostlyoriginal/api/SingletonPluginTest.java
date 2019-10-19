@@ -30,6 +30,45 @@ public class SingletonPluginTest {
 
         new World(config);
     }
+    
+    @Test(expected = SingletonException.class)
+    public void testStrictMode() {
+        WorldConfiguration config = new WorldConfigurationBuilder()
+                .with(new SingletonPlugin(true))
+                .with(new SomeComponentSystem())
+                .build();
+
+        World world = new World(config);
+        int entity = world.create();
+        world.getMapper(SomeComponent.class).create(entity);
+        world.process();
+    }
+
+    @Test(expected = Test.None.class)
+    public void testNonStrictMode() {
+        WorldConfiguration config = new WorldConfigurationBuilder()
+                .with(new SingletonPlugin())
+                .with(new SomeComponentSystem())
+                .build();
+
+        World world = new World(config);
+        int entity = world.create();
+        world.getMapper(SomeComponent.class).create(entity);
+        world.process();
+    }
+
+    @Test(expected = Test.None.class)
+    public void testNonStrictModeExplicit() {
+        WorldConfiguration config = new WorldConfigurationBuilder()
+                .with(new SingletonPlugin(false))
+                .with(new SomeComponentSystem())
+                .build();
+
+        World world = new World(config);
+        int entity = world.create();
+        world.getMapper(SomeComponent.class).create(entity);
+        world.process();
+    }
 
     public static class SomeComponentSystem extends BaseSystem {
         private SomeComponent someComponent;
