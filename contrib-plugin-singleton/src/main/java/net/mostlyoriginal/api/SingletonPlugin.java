@@ -30,7 +30,7 @@ public class SingletonPlugin implements ArtemisPlugin {
      */
     public static class SingletonFieldResolver implements FieldResolver {
 
-        private HashMap<Class<?>, Component> cachedSingletons;
+        private HashMap<Class<? extends Component>, Component> cachedSingletons;
         private EntityEdit singletonContainerEntity;
 
         @Override
@@ -42,7 +42,7 @@ public class SingletonPlugin implements ArtemisPlugin {
 
         @Override
         public Object resolve(Object target, Class<?> fieldType, Field field) {
-            if (isAnnotationPresent(fieldType, Singleton.class)) {
+            if (isAnnotationPresent(fieldType, Singleton.class) && Component.class.isAssignableFrom(fieldType)) {
                 return getCreateSingletonComponent((Class<Component>) fieldType);
             }
             return null;
