@@ -146,4 +146,67 @@ public class QuadTreeTest {
         tree.insert(8, -4, -4, 2, 2); // fully inside
 
     }
+    
+    @Test
+    public void inexact_point_single_entity_test() {
+        IntBag fill = new IntBag();
+        QuadTree tree = new QuadTree(-8, -8, 8, 8, 1, 8);
+        fill.clear();
+        tree.get(fill, -2.5f, -2.5f, 5, 5);
+        Assert.assertEquals(fill.size(), 0);
+        
+        tree.insert(1, -1, -1, 2, 2);
+        
+        fill.clear();
+        tree.get(fill, 0, 0);
+        Assert.assertEquals(fill.size(), 1);
+    }
+
+    @Test
+    public void inexact_point_test() {
+        IntBag fill = new IntBag();
+        QuadTree tree = new QuadTree(-8, -8, 8, 8, 1, 8);
+        fill.clear();
+        tree.get(fill, -2.5f, -2.5f, 5, 5);
+        Assert.assertEquals(fill.size(), 0);
+
+        tree.insert(1, -1, -1, 2, 2);
+        tree.insert(2, -1, -1, 2, 2);
+
+        fill.clear();
+        tree.get(fill, 0, 0);
+        Assert.assertEquals(fill.size(), 2);
+    }
+
+    @Test
+    public void exact_point_single_entity_test() {
+        IntBag fill = new IntBag();
+        QuadTree tree = new QuadTree(-8, -8, 8, 8, 1, 8);
+        fill.clear();
+        tree.get(fill, -2.5f, -2.5f, 5, 5);
+        Assert.assertEquals(fill.size(), 0);
+
+        tree.insert(1, -1, -1, 2, 2);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0);
+        Assert.assertEquals(fill.size(), 1);
+    }
+
+    @Test
+    public void exact_point_test() {
+        IntBag fill = new IntBag();
+        QuadTree tree = new QuadTree(-8, -8, 8, 8, 1, 8);
+        fill.clear();
+        tree.get(fill, -2.5f, -2.5f, 5, 5);
+        Assert.assertEquals(fill.size(), 0);
+
+        tree.insert(1, -1, -1, 2, 2);
+        tree.insert(2, -1, -1, 2, 2);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0);
+        Assert.assertEquals(fill.size(), 2);
+    }
+
 }
