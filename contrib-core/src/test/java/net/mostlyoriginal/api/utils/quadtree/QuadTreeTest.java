@@ -125,7 +125,6 @@ public class QuadTreeTest {
         Assert.assertEquals(fill.size(), 0);
     }
 
-
     @Test
     public void complex_get_test() {
         IntBag fill = new IntBag();
@@ -146,7 +145,7 @@ public class QuadTreeTest {
         tree.insert(8, -4, -4, 2, 2); // fully inside
 
     }
-    
+
     @Test
     public void inexact_point_single_entity_test() {
         IntBag fill = new IntBag();
@@ -154,9 +153,9 @@ public class QuadTreeTest {
         fill.clear();
         tree.get(fill, -2.5f, -2.5f, 5, 5);
         Assert.assertEquals(fill.size(), 0);
-        
+
         tree.insert(1, -1, -1, 2, 2);
-        
+
         fill.clear();
         tree.get(fill, 0, 0);
         Assert.assertEquals(fill.size(), 1);
@@ -212,7 +211,7 @@ public class QuadTreeTest {
     @Test
     public void next_flag_test() {
         QuadTree tree = new QuadTree(-8, -8, 8, 8, 1, 8);
-        
+
         Assert.assertEquals(1L, tree.nextFlag());
         Assert.assertEquals(2L, tree.nextFlag());
         Assert.assertEquals(4L, tree.nextFlag());
@@ -337,6 +336,93 @@ public class QuadTreeTest {
         fill.clear();
         tree.getExact(fill, 0, 0, 2L);
         Assert.assertEquals(fill.size(), 3);
+    }
+
+    @Test
+    public void upsert_updates_position_test() {
+        IntBag fill = new IntBag();
+        QuadTree tree = new QuadTree(-8, -8, 8, 8, 1, 8);
+        fill.clear();
+        tree.getExact(fill, -2.5f, -2.5f, 5, 5);
+        Assert.assertEquals(fill.size(), 0);
+
+        // matching
+        tree.upsert(1, -1, -1, 2, 2);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0);
+        Assert.assertEquals(fill.size(), 1);
+
+        // not matching
+        tree.upsert(1, 1, 1, 2, 2);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0);
+        Assert.assertEquals(fill.size(), 0);
+    }
+
+    @Test
+    public void upsert_updates_flags_test() {
+        IntBag fill = new IntBag();
+        QuadTree tree = new QuadTree(-8, -8, 8, 8, 1, 8);
+        fill.clear();
+        tree.getExact(fill, -2.5f, -2.5f, 5, 5);
+        Assert.assertEquals(fill.size(), 0);
+
+        // flag 1
+        tree.upsert(1, 1L, -1, -1, 2, 2);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0, 1L);
+        Assert.assertEquals(fill.size(), 1);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0, 2L);
+        Assert.assertEquals(fill.size(), 0);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0, 4L);
+        Assert.assertEquals(fill.size(), 0);
+
+        // flag 1 + 2
+        tree.upsert(1, 2L, -1, -1, 2, 2);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0, 1L);
+        Assert.assertEquals(fill.size(), 1);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0, 2L);
+        Assert.assertEquals(fill.size(), 1);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0, 4L);
+        Assert.assertEquals(fill.size(), 0);
+
+        // flag 1 + 2 (upserting flags 3L changes nothing)
+        tree.upsert(1, 3L, -1, -1, 2, 2);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0, 1L);
+        Assert.assertEquals(fill.size(), 1);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0, 2L);
+        Assert.assertEquals(fill.size(), 1);
+
+        fill.clear();
+        tree.getExact(fill, 0, 0, 4L);
+        Assert.assertEquals(fill.size(), 0);
+    }
+
+    @Test(expected = Test.None.class)
+    public void upsert_throws_no_exception_on_high_entity_ids() {
+        QuadTree tree = new QuadTree(-8, -8, 8, 8, 1, 8);
+
+        tree.upsert(0, 0, 0, 1, 1);
+        tree.upsert(10, 0, 0, 1, 1);
+        tree.upsert(100, 0, 0, 1, 1);
+        tree.upsert(1000, 0, 0, 1, 1);
     }
 
 }

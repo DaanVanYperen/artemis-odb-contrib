@@ -13,9 +13,8 @@ import net.mostlyoriginal.api.utils.pooling.Pools;
  */
 public class QuadTree implements Poolable {
 
-    private static ObjectPool<QuadTree> qtPool = Pools.getPool(QuadTree.class);
-    private static ObjectPool<Container> cPool = Pools.getPool(Container.class);
-    private static Bag<Container> idToContainer = new Bag<>();
+    private static final ObjectPool<QuadTree> qtPool = Pools.getPool(QuadTree.class);
+    private static final ObjectPool<Container> cPool = Pools.getPool(Container.class);
 
     public final static int OUTSIDE = -1;
     public final static int SW = 0;
@@ -23,6 +22,7 @@ public class QuadTree implements Poolable {
     public final static int NW = 2;
     public final static int NE = 3;
     protected int depth;
+    private Bag<Container> idToContainer;
     protected Bag<Container> containers;
     protected Container bounds;
     protected QuadTree[] nodes;
@@ -77,6 +77,8 @@ public class QuadTree implements Poolable {
         this.depth = depth;
         bounds.set(x, y, width, height);
         this.parent = parent;
+        this.idToContainer = parent != null ? parent.idToContainer : new Bag<>();
+
         return this;
     }
 
@@ -100,7 +102,7 @@ public class QuadTree implements Poolable {
         }
         return OUTSIDE;
     }
-    
+
     /**
      * Returns a unique flag for inserting and querying this quad tree.
      * 
@@ -109,8 +111,33 @@ public class QuadTree implements Poolable {
     public long nextFlag() {
         long flag = nextFlag;
         nextFlag = nextFlag << 1;
-        
+
         return flag;
+    }
+
+    /**
+     * Upserts the given entity id to the tree with the bounds, updating its position if it's already been added, inserting it otherwise.
+     * 
+     * <p>Use {@link #update(int, float, float, float, float)} instead if you know the entity is already contained.</p>
+     */
+    public void upsert(int eid, float x, float y, float width, float height) {
+        upsert(eid, 0, x, y, width, height);
+    }
+
+    /**
+     * Upserts the given entity id to the tree with the bounds, updating its flags and position if it's already been added, inserting it otherwise.
+     * 
+     * <p>Use {@link #update(int, float, float, float, float)} instead if you know the entity is already contained and would use {@code 0} for {@code flags}.</p>
+     */
+    public void upsert(int eid, long flags, float x, float y, float width, float height) {
+        Container c = eid < idToContainer.size() ? idToContainer.get(eid) : null;
+        if (c != null) {
+            c.flags |= flags;
+            update(eid, x, y, width, height);
+            return;
+        }
+
+        insert(eid, flags, x, y, width, height);
     }
 
     /**
@@ -144,9 +171,12 @@ public class QuadTree implements Poolable {
                 float halfWidth = bounds.width / 2;
                 float halfHeight = bounds.height / 2;
                 nodes[SW] = qtPool.obtain().init(depth + 1, bounds.x, bounds.y, halfWidth, halfHeight, this);
-                nodes[SE] = qtPool.obtain().init(depth + 1, bounds.x + halfWidth, bounds.y, halfWidth, halfHeight, this);
-                nodes[NW] = qtPool.obtain().init(depth + 1, bounds.x, bounds.y + halfHeight, halfWidth, halfHeight, this);
-                nodes[NE] = qtPool.obtain().init(depth + 1, bounds.x + halfWidth, bounds.y + halfHeight, halfWidth, halfHeight, this);
+                nodes[SE] = qtPool.obtain().init(depth + 1, bounds.x + halfWidth, bounds.y, halfWidth, halfHeight,
+                        this);
+                nodes[NW] = qtPool.obtain().init(depth + 1, bounds.x, bounds.y + halfHeight, halfWidth, halfHeight,
+                        this);
+                nodes[NE] = qtPool.obtain().init(depth + 1, bounds.x + halfWidth, bounds.y + halfHeight, halfWidth,
+                        halfHeight, this);
             }
 
             Object[] items = containers.getData();
@@ -192,7 +222,7 @@ public class QuadTree implements Poolable {
         if (flags == 0L) {
             return get(fill, x, y);
         }
-        
+
         if (bounds.contains(x, y)) {
             if (nodes[0] != null) {
                 int index = indexOf(x, y, 0, 0);
@@ -230,7 +260,7 @@ public class QuadTree implements Poolable {
         }
         return fill;
     }
-    
+
     /**
      * Returns entity ids of entities that bounds contain given point and have the given flags set
      * 
@@ -240,7 +270,7 @@ public class QuadTree implements Poolable {
         if (flags == 0L) {
             return getExact(fill, x, y);
         }
-        
+
         if (bounds.contains(x, y)) {
             if (nodes[0] != null) {
                 int index = indexOf(x, y, 0, 0);
@@ -283,7 +313,7 @@ public class QuadTree implements Poolable {
         }
         return fill;
     }
-    
+
     /**
      * Returns entity ids of entities that are inside {@link QuadTree}s that overlap given bounds and have the given flags set
      * <p>
@@ -295,7 +325,7 @@ public class QuadTree implements Poolable {
         if (flags == 0L) {
             return get(fill, x, y, width, height);
         }
-       
+
         if (bounds.overlaps(x, y, width, height)) {
             if (nodes[0] != null) {
                 int index = indexOf(x, y, width, height);
@@ -343,7 +373,7 @@ public class QuadTree implements Poolable {
         }
         return fill;
     }
-    
+
     /**
      * Returns entity ids of entities that overlap given bounds and have the given flags set
      * 
@@ -353,7 +383,7 @@ public class QuadTree implements Poolable {
         if (flags == 0L) {
             return getExact(fill, x, y, width, height);
         }
-        
+
         if (bounds.overlaps(x, y, width, height)) {
             if (nodes[0] != null) {
                 int index = indexOf(x, y, width, height);
@@ -495,7 +525,8 @@ public class QuadTree implements Poolable {
             float ymin = oy;
             float ymax = ymin + oheight;
 
-            return ((xmin > x && xmin < x + width) && (xmax > x && xmax < x + width)) && ((ymin > y && ymin < y + height) && (ymax > y && ymax < y + height));
+            return ((xmin > x && xmin < x + width) && (xmax > x && xmax < x + width))
+                    && ((ymin > y && ymin < y + height) && (ymax > y && ymax < y + height));
         }
 
         public boolean contains(Container c) {
