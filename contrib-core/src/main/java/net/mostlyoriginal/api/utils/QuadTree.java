@@ -27,6 +27,7 @@ public class QuadTree implements Poolable {
     protected Container bounds;
     protected QuadTree[] nodes;
     protected QuadTree parent;
+    protected long nextFlag = 1L;
 
     /**
      * Max count of containers in a tree before it is split
@@ -99,12 +100,31 @@ public class QuadTree implements Poolable {
         }
         return OUTSIDE;
     }
+    
+    /**
+     * Returns a unique flag for inserting and querying this quad tree.
+     * 
+     * <p>Using this flag allows for querying only for entities inserted with the same flag set.</p>
+     */
+    public long nextFlag() {
+        long flag = nextFlag;
+        nextFlag = nextFlag << 1;
+        
+        return flag;
+    }
 
     /**
      * Inserts given entity id to tree with given bounds
      */
     public void insert(int eid, float x, float y, float width, float height) {
-        insert(cPool.obtain().set(eid, x, y, width, height));
+        insert(eid, 0, x, y, width, height);
+    }
+
+    /**
+     * Inserts given entity id to tree with given bounds
+     */
+    public void insert(int eid, long flags, float x, float y, float width, float height) {
+        insert(cPool.obtain().set(eid, flags, x, y, width, height));
     }
 
     protected void insert(Container c) {
@@ -162,6 +182,35 @@ public class QuadTree implements Poolable {
     }
 
     /**
+     * Returns entity ids of entities that are inside {@link QuadTree}s that contain given point and have the given flags set
+     * <p>
+     * Returned entities must be filtered further as these results are not exact
+     * 
+     * @see #nextFlag()
+     */
+    public IntBag get(IntBag fill, float x, float y, long flags) {
+        if (flags == 0L) {
+            return get(fill, x, y);
+        }
+        
+        if (bounds.contains(x, y)) {
+            if (nodes[0] != null) {
+                int index = indexOf(x, y, 0, 0);
+                if (index != OUTSIDE) {
+                    nodes[index].get(fill, x, y, 0, 0, flags);
+                }
+            }
+            for (int i = 0; i < containers.size(); i++) {
+                Container c = containers.get(i);
+                if ((c.flags & flags) > 0) {
+                    fill.add(c.eid);
+                }
+            }
+        }
+        return fill;
+    }
+
+    /**
      * Returns entity ids of entities that bounds contain given point
      */
     public IntBag getExact(IntBag fill, float x, float y) {
@@ -175,6 +224,33 @@ public class QuadTree implements Poolable {
             for (int i = 0; i < containers.size(); i++) {
                 Container c = containers.get(i);
                 if (c.contains(x, y)) {
+                    fill.add(c.eid);
+                }
+            }
+        }
+        return fill;
+    }
+    
+    /**
+     * Returns entity ids of entities that bounds contain given point and have the given flags set
+     * 
+     * @see #nextFlag()
+     */
+    public IntBag getExact(IntBag fill, float x, float y, long flags) {
+        if (flags == 0L) {
+            return getExact(fill, x, y);
+        }
+        
+        if (bounds.contains(x, y)) {
+            if (nodes[0] != null) {
+                int index = indexOf(x, y, 0, 0);
+                if (index != OUTSIDE) {
+                    nodes[index].getExact(fill, x, y, 0, 0, flags);
+                }
+            }
+            for (int i = 0; i < containers.size(); i++) {
+                Container c = containers.get(i);
+                if ((c.flags & flags) > 0 && c.contains(x, y)) {
                     fill.add(c.eid);
                 }
             }
@@ -207,6 +283,40 @@ public class QuadTree implements Poolable {
         }
         return fill;
     }
+    
+    /**
+     * Returns entity ids of entities that are inside {@link QuadTree}s that overlap given bounds and have the given flags set
+     * <p>
+     * Returned entities must be filtered further as these results are not exact
+     * 
+     * @see #nextFlag()
+     */
+    public IntBag get(IntBag fill, float x, float y, float width, float height, long flags) {
+        if (flags == 0L) {
+            return get(fill, x, y, width, height);
+        }
+       
+        if (bounds.overlaps(x, y, width, height)) {
+            if (nodes[0] != null) {
+                int index = indexOf(x, y, width, height);
+                if (index != OUTSIDE) {
+                    nodes[index].get(fill, x, y, width, height, flags);
+                } else {
+                    // if test bounds don't fully fit inside a node, we need to check them all
+                    for (int i = 0; i < nodes.length; i++) {
+                        nodes[i].get(fill, x, y, width, height, flags);
+                    }
+                }
+            }
+            for (int i = 0; i < containers.size(); i++) {
+                Container c = containers.get(i);
+                if ((c.flags & flags) > 0) {
+                    fill.add(c.eid);
+                }
+            }
+        }
+        return fill;
+    }
 
     /**
      * Returns entity ids of entities that overlap given bounds
@@ -233,13 +343,45 @@ public class QuadTree implements Poolable {
         }
         return fill;
     }
+    
+    /**
+     * Returns entity ids of entities that overlap given bounds and have the given flags set
+     * 
+     * @see #nextFlag()
+     */
+    public IntBag getExact(IntBag fill, float x, float y, float width, float height, long flags) {
+        if (flags == 0L) {
+            return getExact(fill, x, y, width, height);
+        }
+        
+        if (bounds.overlaps(x, y, width, height)) {
+            if (nodes[0] != null) {
+                int index = indexOf(x, y, width, height);
+                if (index != OUTSIDE) {
+                    nodes[index].getExact(fill, x, y, width, height, flags);
+                } else {
+                    // if test bounds don't fully fit inside a node, we need to check them all
+                    for (int i = 0; i < nodes.length; i++) {
+                        nodes[i].getExact(fill, x, y, width, height, flags);
+                    }
+                }
+            }
+            for (int i = 0; i < containers.size(); i++) {
+                Container c = containers.get(i);
+                if ((c.flags & flags) > 0 && c.overlaps(x, y, width, height)) {
+                    fill.add(c.eid);
+                }
+            }
+        }
+        return fill;
+    }
 
     /**
      * Update position for this id with new one
      */
     public void update(int id, float x, float y, float width, float height) {
         Container c = idToContainer.get(id);
-        c.set(id, x, y, width, height);
+        c.set(id, c.flags, x, y, width, height);
 
         QuadTree qTree = c.parent;
         qTree.containers.remove(c);
@@ -310,6 +452,7 @@ public class QuadTree implements Poolable {
      */
     public static class Container implements Poolable {
         private int eid;
+        private long flags;
         private float x;
         private float y;
         private float width;
@@ -319,8 +462,9 @@ public class QuadTree implements Poolable {
         public Container() {
         }
 
-        public Container set(int eid, float x, float y, float width, float height) {
+        public Container set(int eid, long flags, float x, float y, float width, float height) {
             this.eid = eid;
+            this.flags = flags;
             this.x = x;
             this.y = y;
             this.width = width;
