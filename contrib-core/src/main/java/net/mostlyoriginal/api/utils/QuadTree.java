@@ -341,7 +341,7 @@ public class QuadTree implements Poolable {
         }
 
         public boolean overlaps(float x, float y, float width, float height) {
-            return this.x < x + width && this.x + this.width > x && this.y < y + height && this.y + this.height > y;
+            return this.x < x + width && this.x + this.width >= x && this.y < y + height && this.y + this.height >= y;
         }
 
         public boolean contains(float ox, float oy, float owidth, float oheight) {
