@@ -1,5 +1,6 @@
 package net.mostlyoriginal.api;
 
+import com.artemis.Component;
 import com.artemis.annotations.UnstableApi;
 
 import java.lang.annotation.ElementType;
@@ -8,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Marks component as a singleton.
+ * Marks component as a singleton. Annotated classes must extend {@link Component}.
  *
  * SingletonPlugin will inject singleton dependencies into systems, handling singleton lifecycle.
  *

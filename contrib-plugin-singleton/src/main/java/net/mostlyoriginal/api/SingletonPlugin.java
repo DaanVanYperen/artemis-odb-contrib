@@ -3,6 +3,7 @@ package net.mostlyoriginal.api;
 import com.artemis.*;
 import com.artemis.annotations.UnstableApi;
 import com.artemis.injection.FieldResolver;
+import com.artemis.utils.reflect.ClassReflection;
 import com.artemis.utils.reflect.Field;
 
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class SingletonPlugin implements ArtemisPlugin {
      */
     public static class SingletonFieldResolver implements FieldResolver {
 
-        private HashMap<Class<?>, Component> cachedSingletons;
+        private HashMap<Class<? extends Component>, Component> cachedSingletons;
         private EntityEdit singletonContainerEntity;
 
         @Override
@@ -42,7 +43,7 @@ public class SingletonPlugin implements ArtemisPlugin {
 
         @Override
         public Object resolve(Object target, Class<?> fieldType, Field field) {
-            if (isAnnotationPresent(fieldType, Singleton.class)) {
+            if (isAnnotationPresent(fieldType, Singleton.class) && ClassReflection.isAssignableFrom(Component.class, fieldType)) {
                 return getCreateSingletonComponent((Class<Component>) fieldType);
             }
             return null;
