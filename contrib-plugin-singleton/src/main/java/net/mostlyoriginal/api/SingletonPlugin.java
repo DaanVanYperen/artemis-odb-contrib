@@ -29,7 +29,7 @@ public class SingletonPlugin implements ArtemisPlugin {
     private final boolean strict;
 
     public SingletonPlugin() {
-        this(false);
+        this(true);
     }
 
     public SingletonPlugin(boolean strict) {

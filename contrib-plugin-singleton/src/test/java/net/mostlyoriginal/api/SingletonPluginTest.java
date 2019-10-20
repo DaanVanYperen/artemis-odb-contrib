@@ -32,9 +32,9 @@ public class SingletonPluginTest {
     }
     
     @Test(expected = SingletonException.class)
-    public void testStrictMode() {
+    public void testStrictModeImplicit() {
         WorldConfiguration config = new WorldConfigurationBuilder()
-                .with(new SingletonPlugin(true))
+                .with(new SingletonPlugin())
                 .with(new SomeComponentSystem())
                 .build();
 
@@ -43,11 +43,11 @@ public class SingletonPluginTest {
         world.getMapper(SomeComponent.class).create(entity);
         world.process();
     }
-
-    @Test(expected = Test.None.class)
-    public void testNonStrictMode() {
+    
+    @Test(expected = SingletonException.class)
+    public void testStrictModeExplicit() {
         WorldConfiguration config = new WorldConfigurationBuilder()
-                .with(new SingletonPlugin())
+                .with(new SingletonPlugin(true))
                 .with(new SomeComponentSystem())
                 .build();
 
