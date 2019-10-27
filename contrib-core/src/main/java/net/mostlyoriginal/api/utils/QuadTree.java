@@ -131,7 +131,7 @@ public class QuadTree implements Poolable {
      */
     public void upsert(int eid, long flags, float x, float y, float width, float height) {
         Container c = eid < idToContainer.size() ? idToContainer.get(eid) : null;
-        if (c != null) {
+        if (c != null && c.eid != -1) {
             c.flags |= flags;
             update(eid, x, y, width, height);
             return;
@@ -431,6 +431,7 @@ public class QuadTree implements Poolable {
         if (c.parent != null) {
             c.parent.containers.remove(c);
         }
+        idToContainer.set(id, null);
         cPool.free(c);
     }
 
@@ -536,6 +537,7 @@ public class QuadTree implements Poolable {
         @Override
         public void reset() {
             eid = -1;
+            flags = 0L;
             x = 0;
             y = 0;
             width = 0;

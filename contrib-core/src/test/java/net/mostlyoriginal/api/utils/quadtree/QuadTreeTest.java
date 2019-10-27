@@ -1,9 +1,11 @@
 package net.mostlyoriginal.api.utils.quadtree;
 
-import com.artemis.utils.IntBag;
-import net.mostlyoriginal.api.utils.QuadTree;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.artemis.utils.IntBag;
+
+import net.mostlyoriginal.api.utils.QuadTree;
 
 /**
  * Tests for {@link net.mostlyoriginal.api.utils.QuadTree}
@@ -423,6 +425,22 @@ public class QuadTreeTest {
         tree.upsert(10, 0, 0, 1, 1);
         tree.upsert(100, 0, 0, 1, 1);
         tree.upsert(1000, 0, 0, 1, 1);
+    }
+
+    @Test(expected = Test.None.class)
+    public void upsert_after_remove_inserts() {
+        IntBag fill = new IntBag();
+        QuadTree tree = new QuadTree(-8, -8, 8, 8, 1, 8);
+
+        tree.upsert(0, 1L, 0, 0, 1, 1);
+        tree.remove(0);
+        tree.upsert(0, 2L, 0, 0, 1, 1);
+        
+        tree.getExact(fill, 0, 0, 1L);
+        Assert.assertEquals(fill.size(), 0);
+        
+        tree.getExact(fill, 0, 0, 2L);
+        Assert.assertEquals(fill.size(), 1);
     }
 
 }
