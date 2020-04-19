@@ -20,6 +20,10 @@ public class MapMask {
     private final Array<TiledMapTileLayer> layers;
     private final String propertyKey;
 
+    public MapMask(int height, int width, int tileWidth, int tileHeight) {
+        this(height,width,tileWidth,tileHeight,null,null);
+    }
+
     public MapMask(int height, int width, int tileWidth, int tileHeight, Array<TiledMapTileLayer> layers, String propertyKey) {
         this.height = height;
         this.width = width;
@@ -32,7 +36,13 @@ public class MapMask {
     }
 
     public void refresh() {
+        if ( layers != null )
         generate(this.layers, this.propertyKey);
+    }
+
+    public void set(final int x, final int y, boolean value) {
+        if (x >= width || x < 0 || y < 0 || y >= height) return;
+        v[y][x] = value;
     }
 
     /**
@@ -59,11 +69,7 @@ public class MapMask {
     }
 
     public void generate(Array<TiledMapTileLayer> layers, String propertyKey) {
-        for (int ty = 0; ty < height; ty++) {
-            for (int tx = 0; tx < width; tx++) {
-                v[ty][tx] = false;
-            }
-        }
+        clear();
         for (TiledMapTileLayer layer : layers) {
             for (int ty = 0; ty < height; ty++) {
                 for (int tx = 0; tx < width; tx++) {
@@ -72,6 +78,14 @@ public class MapMask {
                         v[ty][tx] = true;
                     }
                 }
+            }
+        }
+    }
+
+    public void clear() {
+        for (int ty = 0; ty < height; ty++) {
+            for (int tx = 0; tx < width; tx++) {
+                v[ty][tx] = false;
             }
         }
     }

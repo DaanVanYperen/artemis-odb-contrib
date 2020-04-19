@@ -25,7 +25,7 @@ public interface Log {
      * @param args    arguments
      * @throws java.util.IllegalFormatException If a format string contains an illegal syntax, a format specifier that is incompatible with the given arguments, insufficient arguments given the format string, or other illegal conditions. For specification of all possible formatting errors, see the Details section of the formatter class specification.
      */
-    void info(String message, Object... args);
+    void    info(String message, Object... args);
 
     /**
      * Log an error.

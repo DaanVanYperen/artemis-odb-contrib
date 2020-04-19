@@ -1,0 +1,3 @@
+<module rename-to="net.mostlyoriginal.ContribPluginSingleton">
+    <source path="api"/>
+</module>

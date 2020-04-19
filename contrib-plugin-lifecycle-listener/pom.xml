@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>net.mostlyoriginal.artemis-odb</groupId>
+        <artifactId>contrib-parent</artifactId>
+        <version>2.5.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>contrib-plugin-lifecycle-listener</artifactId>
+    <packaging>jar</packaging>
+    <description>
+	    Provides listener interface with callbacks for lifecycle of entities, components and world. 
+		Intended to augment editors and debuggers. Can be disabled. No performance impact when disabled.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.onedaybeard.artemis</groupId>
+            <artifactId>artemis-odb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

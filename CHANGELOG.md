@@ -1,5 +1,23 @@
 # Changelog
 
+## Version: 2.5.0
+
+- Targets Libgdx 1.9.10, Artemis-odb 2.3.0, GWT 2.8.2
+- *New plugin `contrib-plugin-singleton`*
+  - Allows for singleton components that are easy to access.
+  - Makes it easier to separate behaviour and data.
+- *New plugin `contrib-plugin-lifecycle-listener`*
+  - Allows listening to odb component, entity and other lifecycle events.
+- *New plugin `contrib-plugin-debug`*
+  - Allows debugging those nasty 'entity id' issues.
+  - Can log entity lifecycle events like create, delete.
+  - Can also log errors (accessing/deleting already deleted entities) and report a stacktrace to the cause.
+  - Usage (pick one you like):
+       `WorldConfigurationBuilder.with(DebugPlugin.thatLogsErrorsIn("net.mostlyoriginal"))`
+       `WorldConfigurationBuilder.with(DebugPlugin.thatLogsEverythingIn("net.mostlyoriginal"))`
+       `WorldConfigurationBuilder.with(new DebugPlugin(new MyDebugLogStrategy()));`
+- *Fix* SchedulerSystem accesses component after entity deletion. 
+   
 ## Version: 2.4.0
 
 **BREAKING CHANGES**

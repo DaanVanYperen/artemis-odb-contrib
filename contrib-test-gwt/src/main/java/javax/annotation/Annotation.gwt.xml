@@ -1,0 +1,7 @@
+<module>
+    <!-- Workaround for compiling on GWT 2.8.2 -->
+    <source path="">
+        <include name="**/Nonnull.java" />
+        <include name="**/meta/**"/>
+    </source>
+</module>
