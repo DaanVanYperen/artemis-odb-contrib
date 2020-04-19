@@ -10,7 +10,7 @@
     </parent>
 
     <properties>
-        <graftt.version>0.2.0-SNAPSHOT</graftt.version>
+        <graftt.version>0.3.0</graftt.version>
         <graftt.agent>${project.build.directory}/agent.jar</graftt.agent>
         <graftt.transplants>
             ${project.basedir}/../contrib-plugin-lifecycle-transplants/target/classes/
@@ -93,7 +93,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
-                    <argLine>-javaagent:${graftt.agent}=cp:${graftt.transplants}</argLine>
+                    <argLine>-javaagent:${graftt.agent}=cp=${graftt.transplants}</argLine>
                     <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
             </plugin>
