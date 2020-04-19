@@ -2,7 +2,7 @@
 
 ## Version: 2.5.0
 
-- Targets Libgdx 1.9.10, Artemis-odb 2.3.0, GWT 2.8.0
+- Targets Libgdx 1.9.10, Artemis-odb 2.3.0, GWT 2.8.2
 - *New plugin `contrib-plugin-singleton`*
   - Allows for singleton components that are easy to access.
   - Makes it easier to separate behaviour and data.
