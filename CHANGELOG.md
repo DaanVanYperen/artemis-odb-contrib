@@ -1,5 +1,9 @@
 # Changelog
 
+## Version: 2.6.0-SNAPSHOT
+
+- Targets Libgdx 1.9.14, Artemis-odb 2.4.0-SNAPSHOT
+
 ## Version: 2.5.0
 
 - Targets Libgdx 1.9.10, Artemis-odb 2.3.0, GWT 2.8.2
