@@ -27,9 +27,7 @@
 
     <licenses>
         <license>
-            <name>Creative Commons Zero (CC0) License (Version 1.0)</name>
-            <url>http://creativecommons.org/publicdomain/zero/1.0/legalcode</url>
-            <distribution>repo</distribution>
+            <name>MIT and Apache-2.0</name>
         </license>
     </licenses>
 
